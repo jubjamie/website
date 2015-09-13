@@ -123,7 +123,7 @@
         </p>
         <p>
             <div class="btn-group">
-                <a class="btn btn-danger" href="{{ route('training.skills.index') }}">
+                <a class="btn btn-danger" href="{{ URL::previous() }}" onclick="window.history.back();">
                     <span class="fa fa-long-arrow-left"></span>
                     <span>Back</span>
                 </a>
