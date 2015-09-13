@@ -45,9 +45,9 @@
                             </div>
                         @endif
                         <div class="quote-actions">
-                            <span class="fa fa-thumbs-up" title="Like this quote"></span>
-                            <span class="fa fa-thumbs-down" title="Dislike this quote"></span>
-                            <span class="fa fa-flag" title="Mark this as inappropriate"></span>
+                            {{--<span class="fa fa-thumbs-up" title="Like this quote"></span>--}}
+                            {{--<span class="fa fa-thumbs-down" title="Dislike this quote"></span>--}}
+                            {{--<span class="fa fa-flag" title="Mark this as inappropriate"></span>--}}
                             <button class="btn btn-link" name="deleteQuote" title="Delete this quote" value="{{ $quote->id }}">
                                 <span class="fa fa-trash"></span>
                             </button>
