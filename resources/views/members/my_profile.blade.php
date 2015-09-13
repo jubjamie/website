@@ -152,9 +152,16 @@
                                         </div>
                                     </div>
                                     {{-- Buttons --}}
-                                    <div class="form-group">
-                                        <div class="col-md-4"></div>
-                                        <div class="col-md-8">
+                                    <div class="form-group text-center">
+                                        <div class="btn-group">
+                                            <a class="btn btn-success"
+                                               data-toggle="modal"
+                                               data-target="#modal"
+                                               data-modal-template="password"
+                                               data-modal-class="modal-sm">
+                                                <span class="fa fa-key"></span>
+                                                <span>Change my password</span>
+                                            </a>
                                             <a class="btn btn-primary" href="{{ route('members.profile', $user->username) }}" target="_blank">
                                                 <span class="fa fa-external-link"></span>
                                                 <span>See what this looks like</span>
@@ -183,6 +190,29 @@
 
 @section('modal')
     @include('users.modal.profile_pic', ['ownProfile' => true])
+    <div data-type="modal-template" data-id="password">
+        <div class="modal-header">
+            <h1>Change your password</h1>
+        </div>
+        {!! Form::open() !!}
+        <div class="modal-body">
+            <div class="form-group">
+                {!! Form::label('password', 'Password:', ['class' => 'control-label']) !!}
+                {!! Form::password('password', ['class' => 'form-control']) !!}
+            </div>
+            <div class="form-group">
+                {!! Form::label('password_confirmation', 'Confirm:', ['class' => 'control-label']) !!}
+                {!! Form::password('password_confirmation', ['class' => 'form-control']) !!}
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('members.myprofile.password') }}" type="button">
+                <span class="fa fa-check"></span>
+                <span>Update</span>
+            </button>
+        </div>
+        {!! Form::close() !!}
+    </div>
     <div data-type="data-toggle-template" data-toggle-id="privacy" data-value="true">
         @include('members.partials.privacy_enabled')
     </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Http\Requests\GenericRequest;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -148,6 +149,30 @@ class MembersController extends Controller
 
 		// Set a default return should the request not be recognised
 		App::abort(404);
+	}
+
+	/**
+	 * @param \App\Http\Requests\GenericRequest $request
+	 * @return mixed
+	 */
+	public function updatePassword(GenericRequest $request)
+	{
+		// Validate the input
+		$this->validate($request, [
+			'password' => 'required|min:5|confirmed',
+		], [
+			'password.required'  => 'Please enter your new password',
+			'password.min'       => 'Please use at least 5 characters',
+			'password.confirmed' => 'The password confirmation doesn\'t match',
+		]);
+
+		// Update
+		$this->user->update([
+			'password' => bcrypt($request->get('password')),
+		]);
+		Flash::success('Password updated');
+
+		return \Illuminate\Support\Facades\Response::json(true);
 	}
 
 	/**

@@ -256,6 +256,10 @@ Route::group([
 		'as'   => 'members.myprofile.do',
 		'uses' => 'MembersController@postMyProfile',
 	]);
+	Route::post('my-profile/password', [
+		'as'   => 'members.myprofile.password',
+		'uses' => 'MembersController@updatePassword',
+	]);
 });
 
 // SU dashboard
