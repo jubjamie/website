@@ -106,7 +106,9 @@ class ViewServiceProvider extends ServiceProvider
 						        ->add(route('su.dash'), 'View SU Area')
 						        ->raw('', null, ['class' => 'divider']);
 					}
-					$members->add(route('contact.accident'), 'Report an Accident');
+					$members->add(route('contact.accident'), 'Report an Accident')
+					        ->raw('', null, ['class' => 'divider'])
+					        ->add(route('auth.logout'), 'Logout');
 
 					// Build the profile sub-menu
 					$menu->find('members.profile')
