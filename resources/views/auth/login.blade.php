@@ -1,11 +1,11 @@
 @extends('app')
 
-@section('title', 'Login')
+@section('title', 'Log In')
 
 @section('content')
-        <h1 class="page-header">Login</h1>
+        <h1 class="page-header">@yield('title')</h1>
         <p>To access the members' area you need a username and password; these are provided once you have attended our induction. If you have attended this
-            induction but have not received your login details please <a href="mailto:sec@bts-crew.com">contact the secretary</a>.</p>
+            induction but have not received your log in details please <a href="mailto:sec@bts-crew.com">contact the secretary</a>.</p>
 
     {!! Form::open(['style' => 'margin-top:2.5em;max-width:400px;']) !!}
 

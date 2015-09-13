@@ -108,7 +108,7 @@ class ViewServiceProvider extends ServiceProvider
 					}
 					$members->add(route('contact.accident'), 'Report an Accident')
 					        ->raw('', null, ['class' => 'divider'])
-					        ->add(route('auth.logout'), 'Logout');
+					        ->add(route('auth.logout'), 'Log out');
 
 					// Build the profile sub-menu
 					$menu->find('members.profile')
