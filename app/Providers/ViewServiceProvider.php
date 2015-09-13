@@ -316,16 +316,21 @@ class ViewServiceProvider extends ServiceProvider
 			]);
 
 			// Create the list of skills
-			$skills = [];
+			$skills = $awardSkills = [];
+			$user   = Auth::user();
 			foreach($categories as $category) {
-				$skills[$category->name] = [];
+				$skills[$category->name] = $awardSkills[$category->name] = [];
 				foreach($category->skills as $skill) {
 					$skills[$category->name][$skill->id] = $skill->name;
+					if($user->isAdmin() || ($user->hasSkill($skill) && $user->getSkill($skill)->level == 3)) {
+						$awardSkills[$category->name][$skill->id] = $skill->name;
+					}
 				}
 			}
 
 			$view->with([
 				'skillCategories' => $categories,
+				'awardSkills'     => $awardSkills,
 				'skillList'       => $skills,
 			]);
 		});

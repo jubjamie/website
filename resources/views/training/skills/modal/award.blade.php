@@ -4,7 +4,7 @@
         <p style="margin-top:0;">If you are an admin, or are <strong>{{ \App\TrainingSkill::$LevelNames[3] }}</strong> in {{ isset($skill) ? 'this' : 'a' }} skill, you can award it to any other member.</p>
 
         {{-- Skill --}}
-        @include('training.skills.modal._skill_list')
+        @include('training.skills.modal._skill_list', ['listName' => 'awardSkills'])
 
         {{-- Member --}}
         <div class="form-group">

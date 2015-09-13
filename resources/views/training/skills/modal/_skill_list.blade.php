@@ -3,6 +3,6 @@
         {!! Form::input('hidden', 'skill_id', $skill->id) !!}
     @else
         {!! Form::label('skill_id', 'Skill:', ['class' => 'control-label']) !!}
-        {!! Form::select('skill_id', $skillList, null, ['class' => 'form-control']) !!}
+        {!! Form::select('skill_id', isset($listName) ? $$listName : $skillList, null, ['class' => 'form-control']) !!}
     @endif
 </div>
