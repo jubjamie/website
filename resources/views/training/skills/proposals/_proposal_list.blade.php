@@ -16,7 +16,7 @@
                             @if($proposal->awarded_level == $proposal->proposed_level)
                                 <span class="fa fa-check success" title="Awarded"></span>
                             @elseif($proposal->awarded_level > 0)
-                                <span class="fa fa-exclamation-triangle warning" title="Awarded a lower skill level"></span>
+                                <span class="fa fa-exclamation warning" title="Awarded a lower skill level"></span>
                             @else
                                 <span class="fa fa-remove danger" title="Not awarded"></span>
                             @endif

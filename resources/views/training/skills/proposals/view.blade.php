@@ -15,7 +15,7 @@
         <div class="form-group">
             {!! Form::label('user', 'Member:', ['class' => 'col-sm-4 control-label']) !!}
             <div class="col-sm-8">
-                <p class="form-control-static">{{ $proposal->user->name }} ({{ $proposal->user->username }})</p>
+                <p class="form-control-static"><a class="grey" href="{{ route('members.profile', ['username' => $proposal->user->username, 'tab' => 'training']) }}" target="_blank">{{ $proposal->user->name }}</a> ({{ $proposal->user->username }})</p>
             </div>
         </div>
 
@@ -83,30 +83,32 @@
         <div class="form-group">
             <div class="col-sm-4"></div>
             <div class="col-sm-8">
-                @if($proposal->isAwarded())
-                    <a class="btn btn-success" href="{{ route('training.skills.proposal.index') }}">
-                        <span class="fa fa-long-arrow-left"></span>
-                        <span>Back</span>
-                    </a>
-                @else
-                    <button class="btn btn-success" disable-submit="Processing ...">
-                        <span class="fa fa-check"></span>
-                        <span>Submit</span>
-                    </button>
-                    <a class="btn btn-danger" href="{{ route('training.skills.proposal.index') }}">
-                        <span class="fa fa-undo"></span>
-                        <span>Cancel</span>
-                    </a>
-                    <a class="btn btn-primary"
-                       data-toggle="modal"
-                       data-target="#modal"
-                       data-modal-template="skill_details"
-                       data-modal-title="Skill Details"
-                       href="#">
-                        <span class="fa fa-question"></span>
-                        <span>Skill details</span>
-                    </a>
-                @endif
+                <div class="btn-group">
+                    @if($proposal->isAwarded())
+                        <a class="btn btn-success" href="{{ route('training.skills.proposal.index') }}">
+                            <span class="fa fa-long-arrow-left"></span>
+                            <span>Back</span>
+                        </a>
+                    @else
+                        <button class="btn btn-success" disable-submit="Processing ...">
+                            <span class="fa fa-check"></span>
+                            <span>Submit</span>
+                        </button>
+                        <a class="btn btn-danger" href="{{ route('training.skills.proposal.index') }}">
+                            <span class="fa fa-undo"></span>
+                            <span>Cancel</span>
+                        </a>
+                        <a class="btn btn-primary"
+                           data-toggle="modal"
+                           data-target="#modal"
+                           data-modal-template="skill_details"
+                           data-modal-title="Skill Details"
+                           href="#">
+                            <span class="fa fa-question"></span>
+                            <span>Skill details</span>
+                        </a>
+                    @endif
+                </div>
             </div>
         </div>
 
