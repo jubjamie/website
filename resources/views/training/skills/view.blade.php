@@ -16,6 +16,9 @@
                       data-edit-url="{{ route('training.skills.update', $skill->id) }}"
                       data-control-name="name"
                       role="button">{{ $skill->name }}</span>
+                @if($activeUser->hasProposalPending($skill))
+                <span class="badge">proposal pending</span>
+                @endif
             </h2>
             <h4 class="category">
                 <span data-editable="true"
@@ -34,7 +37,11 @@
                       role="button">{!! nl2br($skill->description) !!}</div>
             </div>
         @else
-            <h2>{{ $skill->name }}</h2>
+            <h2>{{ $skill->name }}
+                @if($activeUser->hasProposalPending($skill))
+                    <span class="badge">proposal pending</span>
+                @endif
+            </h2>
             <h4 class="category">[{{ $skill->category ? $skill->category->name : 'Uncategorised' }}]</h4>
             <div class="description">{!! nl2br($skill->description) !!}</div>
         @endif
@@ -87,7 +94,7 @@
         </div>
         <p style="margin-top:3em;">
             <div class="btn-group">
-                @if($activeUser->isMember() && (!$awardedSkill || $awardedSkill->level < 3))
+                @if($activeUser->isMember() && (!$awardedSkill || $awardedSkill->level < 3) && !$activeUser->hasProposalPending($skill))
                     <a class="btn btn-success"
                        data-target="#modal"
                        data-toggle="modal"

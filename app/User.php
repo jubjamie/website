@@ -675,4 +675,17 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			$this->skills()->create($data);
 		}
 	}
+
+	/**
+	 * Check if the user has a proposal for an event pending.
+	 * @param \App\TrainingSkill $skill
+	 * @return bool
+	 */
+	public function hasProposalPending(TrainingSkill $skill)
+	{
+		return TrainingSkillProposal::notAwarded()
+		                            ->where('user_id', $this->id)
+		                            ->where('skill_id', $skill->id)
+		                            ->count() > 0;
+	}
 }

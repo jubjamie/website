@@ -24,6 +24,11 @@
                                             <td class="skill-name">
                                                 <a class="grey" href="{{ route('training.skills.view', $skill->id) }}">{{ $skill->name }}</a>
                                             </td>
+                                            <td class="skill-proposal">
+                                                @if($user->hasProposalPending($skill))
+                                                    <span class="fa fa-refresh success" title="You have a proposal pending for this skill"></span>
+                                                @endif
+                                            </td>
                                             <td class="skill-level">
                                                 @if($user->hasSkill($skill))
                                                     {!! \App\TrainingSkill::getProficiencyHtml($user->getSkill($skill)->level) !!}
