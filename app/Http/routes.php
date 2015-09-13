@@ -243,15 +243,16 @@ Route::group([
 		'uses' => 'MembersController@dash',
 	]);
 	// Profile
-	Route::get('profile/{username}', [
+	Route::get('profile/{username}/{tab?}', [
 		'as'   => 'members.profile',
 		'uses' => 'MembersController@profile',
-	])->where('username', '[\w]+');
+	])->where('username', '[\w]+')
+	     ->where('tab', 'profile|events|training');
 	// My profile
-	Route::get('my-profile', [
+	Route::get('my-profile/{tab?}', [
 		'as'   => 'members.myprofile',
 		'uses' => 'MembersController@getMyProfile',
-	]);
+	])->where('tab', 'profile|events|training');
 	Route::post('my-profile', [
 		'as'   => 'members.myprofile.do',
 		'uses' => 'MembersController@postMyProfile',

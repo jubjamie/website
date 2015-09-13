@@ -18,7 +18,7 @@
         <div class="tabpanel" id="profileTab">
             {!! $menu !!}
             <div class="tab-content">
-                <div class="tab-pane active">
+                <div class="tab-pane{{ $tab == 'profile' ? ' active' : '' }}">
                     {!! Form::open(['class' => 'form-horizontal']) !!}
                     <div class="container-fluid">
                         <div class="row">
@@ -177,10 +177,10 @@
                     </div>
                     {!! Form::close() !!}
                 </div>
-                <div class="tab-pane">
+                <div class="tab-pane{{ $tab == 'events' ? ' active' : '' }}">
                     @include('members.partials.events', ['user' => $user])
                 </div>
-                <div class="tab-pane">
+                <div class="tab-pane{{ $tab == 'training' ? ' active' : '' }}">
                     @include('members.partials.skills', ['user' => $user])
                 </div>
             </div>

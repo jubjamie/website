@@ -64,23 +64,31 @@ class MembersController extends Controller
 
 	/**
 	 * Display a member's profile page.
-	 * @param $username
-	 * @return Response
+	 * @param        $username
+	 * @param string $tab
+	 * @return \Illuminate\Http\Response
 	 */
-	public function profile($username)
+	public function profile($username, $tab = 'profile')
 	{
 		$user = User::where('username', $username)->active()->member()->firstOrFail();
 
-		return View::make('members.profile')->with('user', $user);
+		return View::make('members.profile')->with([
+			'user' => $user,
+			'tab'  => $tab,
+		]);
 	}
 
 	/**
 	 * Display the current user's profile page.
-	 * @return Response
+	 * @param string $tab
+	 * @return \Illuminate\Http\Response
 	 */
-	public function getMyProfile()
+	public function getMyProfile($tab = 'profile')
 	{
-		return View::make('members.my_profile')->with('user', $this->user);
+		return View::make('members.my_profile')->with([
+			'user' => $this->user,
+			'tab'  => $tab,
+		]);
 	}
 
 	/**

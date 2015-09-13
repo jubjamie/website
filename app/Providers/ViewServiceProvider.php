@@ -112,8 +112,8 @@ class ViewServiceProvider extends ServiceProvider
 
 					// Build the profile sub-menu
 					$menu->find('members.profile')
-					     ->add(route('members.myprofile') . '#training', 'My training')
-					     ->add(route('members.myprofile') . '#events', 'My events');
+					     ->add(route('members.myprofile', 'events'), 'My events')
+					     ->add(route('members.myprofile', 'training'), 'My training');
 
 					// Build the events sub-menu
 					$events = $menu->find('members.events');
@@ -215,9 +215,9 @@ class ViewServiceProvider extends ServiceProvider
 		View::composer('members.profile', function ($view) {
 			$username = $view->getData()['user']->username;
 			$menu     = Menu::handler('profileMenu');
-			$menu->add(route('members.profile', $username), 'Details', null, [], ['id' => 'profileTab'])
-			     ->add(route('members.profile', $username) . '#events', 'Events', null, [], ['id' => 'eventsTab'])
-			     ->add(route('members.profile', $username) . '#training', 'Training', null, [], ['id' => 'trainingTab']);
+			$menu->add(route('members.profile', $username), 'Details')
+			     ->add(route('members.profile', ['username' => $username, 'tab' => 'events']), 'Events')
+			     ->add(route('members.profile', ['username' => $username, 'tab' => 'training']), 'Training');
 			$menu->addClass('nav nav-tabs');
 			$view->with('menu', $menu->render());
 		});
@@ -225,9 +225,9 @@ class ViewServiceProvider extends ServiceProvider
 		// Compose the 'my profile' sub-menu
 		View::composer('members.my_profile', function ($view) {
 			$menu = Menu::handler('profileMenu');
-			$menu->add(route('members.myprofile'), 'My Details', null, [], ['id' => 'profileTab'])
-			     ->add(route('members.myprofile') . '#events', 'Events', null, [], ['id' => 'eventsTab'])
-			     ->add(route('members.myprofile') . '#training', 'Training', null, [], ['id' => 'trainingTab']);
+			$menu->add(route('members.myprofile'), 'My Details')
+			     ->add(route('members.myprofile', 'events'), 'Events')
+			     ->add(route('members.myprofile', 'training'), 'Training');
 			$menu->addClass('nav nav-tabs');
 			$view->with('menu', $menu->render());
 		});

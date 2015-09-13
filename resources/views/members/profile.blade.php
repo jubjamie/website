@@ -33,7 +33,7 @@
         <div class="tabpanel" id="profileTab">
             {!! $menu !!}
             <div class="tab-content">
-                <div class="tab-pane active">
+                <div class="tab-pane{{ $tab == 'profile' ? ' active' : '' }}">
                     <div style="margin:0 auto;max-width: 500px;">
                         <div class="row">
                             <div class="col-sm-6 box">
@@ -89,10 +89,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane">
+                <div class="tab-pane{{ $tab == 'events' ? ' active' : '' }}">
                     @include('members.partials.events', ['user' => $user])
                 </div>
-                <div class="tab-pane">
+                <div class="tab-pane{{ $tab == 'training' ? ' active' : '' }}">
                     @include('members.partials.skills', ['user' => $user])
                 </div>
             </div>
