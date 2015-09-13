@@ -22,10 +22,13 @@
                             @endif
                         @endif
                     </td>
-                    <td class="proposal-skill">{{ $proposal->skill->name }}</td>
-                    <td class="proposal-user">
+                    <td class="skill-name">
+                        <div class="name">{{ $proposal->skill->name }}</div>
+                        <div class="category">{{ $proposal->skill->category_id ? $proposal->skill->category->name : "Uncategorised" }}</div>
+                    </td>
+                    <td class="skill-user">
                         <div class="name">{{ $proposal->user->name }}</div>
-                        <div class="username">({{ $proposal->user->username }})</div>
+                        <div class="username">{{ $proposal->user->username }}</div>
                     </td>
                     <td class="skill-level">
                         {!! \App\TrainingSkill::getProficiencyHtml($proposal->proposed_level) !!}

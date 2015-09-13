@@ -28,19 +28,19 @@
                                 <div>{{ $skill->updated_at->format('H:i:s') }}</div>
                             </td>
                             <td class="skill-name">
-                                <div class="name">{{ $skill->skill->name }}</div>
+                                <div class="name"><a class="grey" href="{{ route('training.skills.view', $skill->skill_id) }}" target="_blank">{{ $skill->skill->name }}</a></div>
                                 <div class="category">{{ $skill->skill->category_id ? $skill->skill->category->name : 'Uncategorised' }}</div>
                             </td>
                             <td class="skill-user">
-                                <div class="name">{{ $skill->user->name }}</div>
-                                <div class="username">({{ $skill->user->username }})</div>
+                                <div class="name"><a class="grey" href="{{ route('members.profile', ['username' => $skill->user->username, 'tab' => 'training']) }}" target="_blank">{{ $skill->user->name }}</a></div>
+                                <div class="username">{{ $skill->user->username }}</div>
                             </td>
                             <td class="skill-level text-center">
                                 {!! \App\TrainingSkill::getProficiencyHtml($skill->level) !!}
                             </td>
                             <td class="skill-user">
-                                <div class="name">{{ $skill->awarder->name }}</div>
-                                <div class="username">({{ $skill->awarder->username }})</div>
+                                <div class="name"><a class="grey" href="{{ route('members.profile', ['username' => $skill->awarder->username]) }}" target="_blank">{{ $skill->awarder->name }}</a></div>
+                                <div class="username">{{ $skill->awarder->username }}</div>
                             </td>
                         </tr>
                     @endforeach
