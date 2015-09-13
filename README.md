@@ -20,6 +20,7 @@ If you wish to do so, follow the instructions below.
 ## Installation
 *   Clone the repo using `git clone`
 *   Install the dependencies using `composer install`
+*   Run `npm install` to enable Laravel Elixir (Node.js required)
 *   Create your *.env* file using the included *.env.example* as a template
 
 	> This site requires both `mysql` and `smtp` settings  
