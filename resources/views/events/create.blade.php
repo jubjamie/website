@@ -155,14 +155,16 @@
             <div class="form-group">
                 <div class="col-md-3"></div>
                 <div class="col-md-9">
-                    <button class="btn btn-success" disable-submit="Adding event ...">
-                        <span class="fa fa-check"></span>
-                        <span>Add event</span>
-                    </button>
-                    <a class="btn btn-danger" href="{{ route('events.diary') }}">
-                        <span class="fa fa-undo"></span>
-                        <span>Cancel</span>
-                    </a>
+                    <div class="btn-group">
+                        <button class="btn btn-success" disable-submit="Adding event ...">
+                            <span class="fa fa-check"></span>
+                            <span>Add event</span>
+                        </button>
+                        <button class="btn btn-success" disable-submit="Adding event ..." name="redirect" value="{{ route('events.add') }}">
+                            <span class="fa fa-plus"></span>
+                            <span>Add another event after</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         {!! Form::close() !!}

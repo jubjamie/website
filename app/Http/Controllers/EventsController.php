@@ -233,10 +233,14 @@ class EventsController extends Controller
 		// Create a flash message and redirect
 		Flash::success('Event created');
 
-		return redirect(route('events.diary', [
-			'year'  => $date_start->year,
-			'month' => $date_start->month,
-		]));
+		if($request->has('redirect')) {
+			return redirect($request->get('redirect'));
+		} else {
+			return redirect(route('events.diary', [
+				'year'  => $date_start->year,
+				'month' => $date_start->month,
+			]));
+		}
 	}
 
 	/**
