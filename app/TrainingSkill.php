@@ -95,10 +95,12 @@ class TrainingSkill extends Model
 	public function getUsersAttribute()
 	{
 		// Get all the users
-		$users = User::select('users.*', 'training_awarded_skills.level')
-		             ->join('training_awarded_skills', 'users.id', '=', 'training_awarded_skills.user_id')
+		$users = User::join('training_awarded_skills', 'users.id', '=', 'training_awarded_skills.user_id')
 		             ->where('training_awarded_skills.skill_id', $this->id)
+		             ->active()
+		             ->member()
 		             ->nameOrder()
+		             ->select('users.*', 'training_awarded_skills.level')
 		             ->get();
 
 		// Sort the users by level
