@@ -26,7 +26,7 @@
                                             </td>
                                             <td class="skill-proposal">
                                                 @if($user->hasProposalPending($skill))
-                                                    <span class="fa fa-refresh success" title="You have a proposal pending for this skill"></span>
+                                                    <span class="fa fa-refresh success" title="Proposal pending"></span>
                                                 @endif
                                             </td>
                                             <td class="skill-level">
