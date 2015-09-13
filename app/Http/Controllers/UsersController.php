@@ -7,6 +7,7 @@ use App\Http\Requests\GenericRequest;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\View;
@@ -334,6 +335,25 @@ class UsersController extends Controller
 					Flash::error("The user's picture is not writeable");
 				}
 			}
+
+			return redirect(route('user.edit', $username));
+		}
+		// When resetting the user's password, hash a
+		// randomly generated string and email it
+		else if($request->get('action') == 'reset-password') {
+			$password = str_random(15);
+			$user->update([
+				'password' => bcrypt($password),
+			]);
+			Flash::success('New password sent');
+
+			Mail::queue('emails.users.reset_password', [
+				'name'     => $user->forename,
+				'password' => $password,
+			], function ($message) use ($user) {
+				$message->subject('Your new password')
+				        ->to($user->email, $user->name);
+			});
 
 			return redirect(route('user.edit', $username));
 		} // Unknown action

@@ -125,27 +125,33 @@
                     <div class="form-group">
                         <div class="col-sm-3"></div>
                         <div class="col-sm-9">
-                            <button class="btn btn-success" disable-submit="Saving changes ..." name="action" value="save">
-                                <span class="fa fa-check"></span>
-                                <span>Save Changes</span>
-                            </button>
-                            @if(!$ownAccount)
-                                @if($user->status)
-                                    <button class="btn btn-warning" disable-submit="Archiving ..." name="action" value="archive">
-                                        <span class="fa fa-archive"></span>
-                                        <span>Archive</span>
-                                    </button>
-                                @else
-                                    <button class="btn btn-success" disable-submit="Unarchiving ..." name="action" value="unarchive">
-                                        <span class="fa fa-archive"></span>
-                                        <span>Unarchive</span>
-                                    </button>
+                            <div class="btn-group">
+                                <button class="btn btn-success" disable-submit="Saving changes ..." name="action" value="save">
+                                    <span class="fa fa-check"></span>
+                                    <span>Save Changes</span>
+                                </button>
+                                <button class="btn btn-primary" disable-submit="Sending password ..." name="action" value="reset-password">
+                                    <span class="fa fa-key"></span>
+                                    <span>Reset password</span>
+                                </button>
+                                @if(!$ownAccount)
+                                    @if($user->status)
+                                        <button class="btn btn-warning" disable-submit="Archiving ..." name="action" value="archive">
+                                            <span class="fa fa-archive"></span>
+                                            <span>Archive</span>
+                                        </button>
+                                    @else
+                                        <button class="btn btn-success" disable-submit="Unarchiving ..." name="action" value="unarchive">
+                                            <span class="fa fa-archive"></span>
+                                            <span>Unarchive</span>
+                                        </button>
+                                    @endif
                                 @endif
-                            @endif
-                            <a class="btn btn-danger" href="{{ route('user.index') }}">
-                                <span class="fa fa-undo"></span>
-                                <span>Cancel</span>
-                            </a>
+                                <a class="btn btn-danger" href="{{ route('user.index') }}">
+                                    <span class="fa fa-undo"></span>
+                                    <span>Cancel</span>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
