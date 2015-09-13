@@ -3,7 +3,6 @@ Homestead.yaml
 .env
 .env.bts
 /.idea/
-/app/Http/routes_migrate.php
 /storage/framework/cache/*
 /storage/framework/sessions/*
 /storage/framework/views/*
