@@ -90,9 +90,12 @@ var $btns;
 		});
 	});
 	$modal.on('submit', 'form', function(event) {
-		event.preventDefault();
-		event.stopPropagation();
-		$(this).find('button,input[type="button"],input[type="submit"]').first().trigger('click');
+		var btn = $(this).find('button,input[type="button"],input[type="submit"]').first();
+		if(btn.data('type') == 'submit-modal') {
+			event.preventDefault();
+			event.stopPropagation();
+			btn.trigger('click');
+		}
 	});
 
 })(jQuery);
