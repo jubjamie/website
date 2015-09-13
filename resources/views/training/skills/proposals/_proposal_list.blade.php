@@ -12,8 +12,15 @@
             @foreach($proposals as $proposal)
                 <tr onclick="window.location='{{ route('training.skills.proposal.view', $proposal->id) }}';">
                     <td class="proposal-status">
-                                            <span class="fa fa-{{ $proposal->isAwarded() ? 'check success' : 'remove danger' }}"
-                                                  title="{{ $proposal->isAwarded() ? 'Reviewed' : 'Not Reviewed' }}"></span>
+                        @if($proposal->isAwarded())
+                            @if($proposal->awarded_level == $proposal->proposed_level)
+                                <span class="fa fa-check success" title="Awarded"></span>
+                            @elseif($proposal->awarded_level > 0)
+                                <span class="fa fa-exclamation-triangle warning" title="Awarded a lower skill level"></span>
+                            @else
+                                <span class="fa fa-remove danger" title="Not awarded"></span>
+                            @endif
+                        @endif
                     </td>
                     <td class="proposal-skill">{{ $proposal->skill->name }}</td>
                     <td class="proposal-user">

@@ -18,12 +18,14 @@ strong, .strong, .bold {
 .success {
 	color: #3e8f3e;
 }
-
+.warning {
+	color: darken(#fcf8e3, 25%);
+}
 .danger {
 	color: #b92c28;
 }
 
-// Anchors
+// Anchors§
 a, a:visited {
 	&:not(.btn) {
 		color: $btsyellow;
