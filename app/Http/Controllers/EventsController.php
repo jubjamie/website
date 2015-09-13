@@ -183,11 +183,11 @@ class EventsController extends Controller
 				'description_public' => $request->get('desc_public') ? $request->stripped('description') : '',
 				'crew_list_status'   => 1,
 				'paperwork'          => [
-					'risk_assessment'  => false,
-					'insurance'        => false,
-					'finance_em'       => false,
-					'finance_treas'    => false,
-					'event_report'     => false,
+					'risk_assessment' => false,
+					'insurance'       => false,
+					'finance_em'      => false,
+					'finance_treas'   => false,
+					'event_report'    => false,
 				],
 			]);
 
@@ -214,21 +214,20 @@ class EventsController extends Controller
 
 		// Send the email to alison if the event is non-SU and off-campus
 		if($event->client_type > 1 && $event->venue_type == 2) {
-			// TODO: uncomment
-			//Mail::queue('emails.events.notify_alison', [
-			//	'event_name'  => $event->name,
-			//	'event_dates' => $event->start_date . ($request->has('one_day') ? '' : (' &ndash; ' . $event->end_date)),
-			//	'em'          => $event->em_id ? $event->em->name : '<em>&ndash; not yet decided &ndash;</em>',
-			//	'client'      => $event->client,
-			//	'venue'       => $event->venue,
-			//	'venue_type'  => Event::$VenueTypes[$event->venue_type],
-			//	'description' => $event->description,
-			//], function ($message) {
-			//	$message->subject('Backstage External Off-Campus Event')
-			//	        ->to('a.j.fleet@bath.ac.uk')
-			//	        ->cc('bts@bath.ac.uk')
-			//	        ->from('pm@bts-crew.com');
-			//});
+			Mail::queue('emails.events.notify_alison', [
+				'event_name'  => $event->name,
+				'event_dates' => $event->start_date . ($request->has('one_day') ? '' : (' &ndash; ' . $event->end_date)),
+				'em'          => $event->em_id ? $event->em->name : '<em>&ndash; not yet decided &ndash;</em>',
+				'client'      => $event->client,
+				'venue'       => $event->venue,
+				'venue_type'  => Event::$VenueTypes[$event->venue_type],
+				'description' => $event->description,
+			], function ($message) {
+				$message->subject('Backstage External Off-Campus Event')
+				        ->to('a.j.fleet@bath.ac.uk')
+				        ->cc('bts@bath.ac.uk')
+				        ->from('pm@bts-crew.com');
+			});
 		}
 
 		// Create a flash message and redirect

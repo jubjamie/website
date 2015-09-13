@@ -47,7 +47,7 @@ class ContactController extends Controller
 	{
 		// Strip tags and create array of necessary data
 		$forename = explode(' ', $request->get('name'));
-		$data = $request->only('name', 'email', 'phone') + [
+		$data     = $request->only('name', 'email', 'phone') + [
 				'content'  => $request->stripped('message'),
 				'forename' => array_shift($forename),
 			];
@@ -180,13 +180,12 @@ class ContactController extends Controller
 			'person_type', 'person_type_other');
 
 		// Send the email
-		// TODO: Uncomment SU emails
 		Mail::queue('emails.contact.accident', $data, function ($message) use ($data) {
 			$message->to('safety@bts-crew.com')
 			        ->to('bts@bath.ac.uk')
-				//->to('P.Hawker@bath.ac.uk')
-				//->to('A.J.Fleet@bath.ac.uk')
-				    ->subject('** BTS Accident Report **')
+			        ->to('P.Hawker@bath.ac.uk')
+			        ->to('A.J.Fleet@bath.ac.uk')
+			        ->subject('** BTS Accident Report **')
 			        ->from($data['contact_email'], $data['contact_name']);
 
 		});
