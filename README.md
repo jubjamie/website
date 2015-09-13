@@ -12,24 +12,6 @@ This website would be `Version 4` to avoid confusion over a `Version 3` planned 
 
 This is the `git` repository of this newer website.
 
-## Migration
-While the functionality will remain the same, this newer website will adjust the database structure slightly for 2 reasons:
-
-1. General database structure improvements
-2. Preparation for future improvements
-
-As a result the site cannot simply use the current database, meaning that the data will need to be automatically migrated over. This will require that the current site is LOCKED and SHUTDOWN for a period of time whilst the database is migrated and the migration is tested.
-
-The migration will take place during a time of low-activity to reduce its impact on our clients and a clear warning will be provided for a significant amount of time leading up to this process.
-
-## Development issues
-The re-development was originally planned to be completed in time for the new Semester in October 2015. This would have allowed the switch to take place during the holiday, which is when the site's usage is at its lowest.
-
-Unfortunately development issues resulted in a change of framework, to [Laravel 5](http://laravel.com/). This meant that a significant amount of code would need to be re-worked and the deadline would be pushed back by at least several months.
-
-## Completion date
-There is currently no concrete release date. However it is hoped that the newer site can be implemented during 'Inter-Semester Break' after the January 2016 exams, as this is another period of low-activity for the website.
-
 # Development
 A huge bonus of using `git` to manage the website is that anyone can clone the repository and work on a feature.
 
