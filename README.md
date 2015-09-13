@@ -1,5 +1,5 @@
 # About
-The original Backstage website (known as `version 2`) was developed by Lee Stone several years ago. It has been well used by the membership, and has been continually improved by several members resulting in a feature-rich system.
+The original Backstage website (known as `version 2`) was developed by Colin Paxton several years ago and later maintained by Lee Stone. It has been well used by the membership, and has been continually improved by several members resulting in a feature-rich system.
 
 Unfortunately this site was built on some best practices which are now outdated. This means that the site uses some deprecated and insecure PHP functionality and the mixing of PHP and HTML makes both the file structure and website's styling almost impossible to manage. 
 
