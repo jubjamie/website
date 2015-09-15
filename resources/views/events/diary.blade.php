@@ -55,7 +55,7 @@
                     <span class="cell blank" style="width: {{ $blank_before * 100 / 7 }}%"></span>
                 @endif
                 @for($i = 1; $i <= $date->daysInMonth; $i++)
-                    <div class="cell day">
+                    <div class="cell day{{ \Carbon\Carbon::createFromDate($date->year, $date->month, $i)->isToday() ? ' today' : '' }}">
                         <span class="date">{{ $i }}</span>
                         @if(isset($calendar[$i]) && count($calendar[$i]) > 0)
                             <ul class="event-list">
