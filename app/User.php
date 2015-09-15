@@ -220,7 +220,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function skills()
 	{
-		return $this->hasMany('App\TrainingAwardedSkill');
+		return $this->hasMany('App\TrainingAwardedSkill')
+		            ->where('level', '>', 0);
 	}
 
 	/**
@@ -619,7 +620,9 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function hasSkill(TrainingSkill $skill)
 	{
-		return $this->skills->where('skill_id', $skill->id)->count() == 1;
+		return $this->skills
+			       ->where('skill_id', $skill->id)
+			       ->count() == 1;
 	}
 
 	/**
