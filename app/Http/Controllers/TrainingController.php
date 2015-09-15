@@ -498,7 +498,7 @@ class TrainingController extends Controller
 		]);
 
 		// Update the user's skill level
-		if($request->get('awarded_level') != -1) {
+		if($request->get('awarded_level') > 0) {
 			$proposal->user->setSkillLevel($proposal->skill_id, $request->get('awarded_level'));
 		}
 		Flash::success('Skill proposal processed');
