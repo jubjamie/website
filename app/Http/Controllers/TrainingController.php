@@ -438,8 +438,8 @@ class TrainingController extends Controller
 		                                  ->orderBy('date', 'DESC')
 		                                  ->get();
 		$awarded   = TrainingSkillProposal::awarded()
-		                                  ->orderBy('date', 'DESC')
-		                                  ->paginate(10);
+		                                  ->orderBy('awarded_date', 'DESC')
+		                                  ->paginate(15);
 
 		$this->checkPagination($awarded);
 
