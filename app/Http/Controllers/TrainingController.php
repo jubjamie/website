@@ -479,6 +479,12 @@ class TrainingController extends Controller
 			return redirect(route('training.skills.proposal.view', $id));
 		}
 
+		// Check the user isn't trying to review their own proposal
+		if($proposal->user_id == $this->user->id) {
+			Flash::warning('You can\'t review your own proposal');
+			return redirect(route('training.skills.proposal.index'));
+		}
+
 		// Validate the request
 		$this->validate($request, [
 			'awarded_level'   => 'required|in:0,1,2,3',
