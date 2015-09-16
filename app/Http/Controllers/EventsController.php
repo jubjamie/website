@@ -252,8 +252,8 @@ class EventsController extends Controller
 		if($event->type == Event::TYPE_EVENT) {
 			$fields       = [
 				'data[Event][event_name]'  => $event->name,
-				'data[Event][start_date]'  => $event->start_date,
-				'data[Event][end_date]'    => $event->end_date,
+				'data[Event][start_date]'  => $event->start_date->format('d-m-Y'),
+				'data[Event][end_date]'    => $event->end_date->format('d-m-Y'),
 				'data[Event][verified]'    => 0,
 				'data[Event][bts_crew_id]' => $event->id,
 			];
