@@ -66,11 +66,11 @@ class Event extends Model
 	 * @var array
 	 */
 	public static $Paperwork = [
-		'risk_assessment'  => 'Risk Assessment',
-		'insurance'        => 'Insurance',
-		'finance_em'       => 'EM Finance',
-		'finance_treas'    => 'Treasurer Finance',
-		'event_report'     => 'Event Report',
+		'risk_assessment' => 'Risk Assessment',
+		'insurance'       => 'Insurance',
+		'finance_em'      => 'EM Finance',
+		'finance_treas'   => 'Treasurer Finance',
+		'event_report'    => 'Event Report',
 	];
 
 	/**
@@ -260,7 +260,7 @@ class Event extends Model
 	{
 		$query->select('events.*')
 		      ->join('event_times', 'events.id', '=', 'event_times.event_id')
-		      ->where('event_times.end', '<', Carbon::now()->setTime(23, 59, 59)->toDateTimeString())
+		      ->whereNotIn('events.id', self::activeAndFuture()->lists('id'))
 		      ->distinct();
 	}
 

@@ -14,7 +14,7 @@
                         <td class="event">
                             <div>{!! link_to_route('events.view', $event->name, $event->id) !!}</div>
                             <div>
-                                <span class="event-entry tag success">active</span>
+                                <span class="event-entry tag success">{{ \Carbon\Carbon::createFromFormat('d/m/Y', $event->start_date)->lte(\Carbon\Carbon::now()) ? 'active' : 'future' }}</span>
                                 <span class="event-entry tag {{ $event->type_class }}">{{ $event->type_string }}</span>
                             </div>
                         </td>
