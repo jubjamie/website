@@ -24,6 +24,8 @@ class MembersController extends Controller
 		$this->middleware('auth.permission:member', [
 			'except' => [
 				'dash',
+				'getMyProfile',
+				'postMyProfile'
 			],
 		]);
 
