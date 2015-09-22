@@ -282,6 +282,7 @@ class ViewServiceProvider extends ServiceProvider
 			                      ->get();
 			$events_active = Event::forMember($user)
 			                      ->activeAndFuture()
+			                      ->orderBy('event_times.start', 'DESC')
 			                      ->orderDesc()
 			                      ->distinct()
 			                      ->get();
