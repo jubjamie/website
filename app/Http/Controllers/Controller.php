@@ -66,4 +66,32 @@ abstract class Controller extends BaseController
 	{
 		return ResponseFacade::json(['error' => (string) $errorText], (int) $code);
 	}
+
+	/**
+	 * Get the filter value from the request.
+	 * @param \Illuminate\Http\Request $request
+	 * @return null
+	 */
+	protected function filter(Request $request)
+	{
+		return $request->route()->parameter('modifier') === 'filter'
+			?
+			$request->route()->parameter('term')
+			:
+			null;
+	}
+
+	/**
+	 * Get the search value from the request.
+	 * @param \Illuminate\Http\Request $request
+	 * @return null
+	 */
+	protected function search(Request $request)
+	{
+		return $request->route()->parameter('modifier') === 'search'
+			?
+			$request->route()->parameter('term')
+			:
+			null;
+	}
 }
