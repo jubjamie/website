@@ -76,7 +76,7 @@ abstract class Controller extends BaseController
 	{
 		return $request->route()->parameter('modifier') === 'filter'
 			?
-			$request->route()->parameter('term')
+			trim($request->route()->parameter('term'))
 			:
 			null;
 	}
@@ -90,7 +90,7 @@ abstract class Controller extends BaseController
 	{
 		return $request->route()->parameter('modifier') === 'search'
 			?
-			$request->route()->parameter('term')
+			trim($request->route()->parameter('term'))
 			:
 			null;
 	}
