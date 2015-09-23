@@ -12,7 +12,7 @@
             @yield('styles')
         </style>
     </head>
-    <body{{ app()->isDownForMaintenance() ? ' class=slim-footer' : ''  }}>
+    <body{{ app()->isDownForMaintenance() || isset($slimFooter) ? ' class=slim-footer' : ''  }}>
         <div id="message-centre">
             <ul>
                 @yield('messages')
