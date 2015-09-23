@@ -107,8 +107,7 @@ class ViewServiceProvider extends ServiceProvider
 						        ->raw('', null, ['class' => 'divider']);
 					}
 					$members->add(route('contact.accident'), 'Report an Accident')
-					        ->raw('', null, ['class' => 'divider'])
-					        ->add(route('auth.logout'), 'Log out');
+					        ->raw('', null, ['class' => 'divider']);
 
 					// Build the profile sub-menu
 					$menu->find('members.profile')
@@ -155,6 +154,7 @@ class ViewServiceProvider extends ServiceProvider
 					}
 
 				}
+				$members->add(route('auth.logout'), 'Log out');
 			}
 
 			// Build the resources sub-menu
