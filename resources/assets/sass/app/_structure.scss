@@ -1,9 +1,10 @@
 @import "vars";
 @import "mixins";
 
-html,body {
+html, body {
 	height: 100%;
 }
+
 body {
 	background-color: #000;
 	font-size: 15px;
@@ -61,7 +62,7 @@ div#message-centre {
 		}
 		&:after {
 			content: "";
-			clear:left;
+			clear: left;
 		}
 
 		@media (min-width: 970px) {
@@ -281,7 +282,6 @@ div#nav-wrapper {
 						background: none;
 						display: block;
 
-
 						@media (min-width: 768px) {
 							& > a:before, &:last-of-type > a:after {
 								background: #000;
@@ -332,7 +332,7 @@ div#nav-wrapper {
 						@media (max-width: 768px) {
 							border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
-							&.active  {
+							&.active {
 								& > a {
 									background: rgba(0, 0, 0, 0.1);
 								}
@@ -711,7 +711,7 @@ div#footer {
 			}
 		}
 
-		@media(max-width:768px) {
+		@media(max-width: 768px) {
 			div.container > div:not(:first-child) h1 {
 				margin-top: 1.8em;
 			}
@@ -798,13 +798,6 @@ body.slim-footer {
 		}
 		div#footer, div#main-wrapper:after {
 			height: $dimFooterLowerHeight;
-		}
-	}
-	@media(max-width: 992px) {
-		div#footer{
-			bottom: 0;
-			position: fixed;
-			width: 100%;
 		}
 	}
 	& > div#footer > div.upper {
