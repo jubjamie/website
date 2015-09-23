@@ -66,7 +66,7 @@
                 @endforeach
             @else
                 <tr>
-                    <td colspan="7">Er ... we don't seem to have any user accounts.<br>How are you viewing this?</td>
+                    <td colspan="7">No users matched your query</td>
                 </tr>
             @endif
         </tbody>
@@ -80,5 +80,6 @@
     </div>
 
     {!! Form::close() !!}
+
     @include('partials.app.pagination', ['paginator' => $users])
 @endsection

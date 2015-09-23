@@ -36,15 +36,45 @@ class UsersController extends Controller
 
 	/**
 	 * Display the listing of users.
-	 * @param null $filter
+	 * @param \Illuminate\Http\Request $request
 	 * @return \Illuminate\Http\Response
 	 */
-	public function index($filter = null)
+	public function index(Request $request)
 	{
-		$users = User::nameOrder();
-		$users = $filter == 'all' ? $users->paginate(User::count()) : $users->paginate(15);
+		$filter = $this->filter($request);
+		$search = $this->search($request);
 
-		$this->checkPagination($users);
+		// Initialise query
+		$users = User::nameOrder();
+
+		// Set any filter
+		if($filter == 'all') {
+			$users = $users->get();
+		} else if($filter == 'archived') {
+			$users = $users->where('status', 0)
+			               ->get();
+		} else if($filter == 'active') {
+			$users = $users->where('status', 1)
+			               ->get();
+		} else if(in_array($filter, ['member', 'committee', 'associate', 'su'])) {
+			$users = $users->select('users.*')
+			               ->join('role_user', 'users.id', '=', 'role_user.user_id')
+			               ->join('roles', 'role_user.role_id', '=', 'roles.id')
+			               ->where('roles.name', '=', $filter)
+			               ->get();
+		} else {
+			// we all love katie lots <3
+			if($search) {
+				$users = $users->where('username', 'LIKE', '%' . $search . '%')
+				               ->orWhere('forename', 'LIKE', '%' . $search . '%')
+				               ->orWhere('surname', 'LIKE', '%' . $search . '%')
+				               ->orWhere('email', 'LIKE', '%' . $search . '%');
+			}
+
+			// Paginate results
+			$users = $users->paginate(15);
+			$this->checkPagination($users);
+		}
 
 		return View::make('users.index')->with('users', $users);
 	}
