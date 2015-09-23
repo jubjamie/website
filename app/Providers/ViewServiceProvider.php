@@ -86,12 +86,12 @@ class ViewServiceProvider extends ServiceProvider
 			// Build the members sub-menu
 			if($isRegistered) {
 				$members = $menu->find('members');
+				$members->add(route('members.myprofile'), 'My Profile', Menu::items('members.profile'), [], ['class' => 'profile'])
+				        ->add(route('events.diary'), 'Events Diary', Menu::items('members.events'), [], ['class' => 'events'])
+				        ->activePattern('\/events\/diary');
 
 				if($isMember || $isAdmin) {
-					$members->add(route('members.myprofile'), 'My Profile', Menu::items('members.profile'), [], ['class' => 'profile'])
-					        ->add(route('events.diary'), 'Events Diary', Menu::items('members.events'), [], ['class' => 'events'])
-					        ->activePattern('\/events\/diary')
-					        ->add(route('membership'), 'The Membership', Menu::items('members.users'), [], ['class' => 'admin-users'])
+					$members->add(route('membership'), 'The Membership', Menu::items('members.users'), [], ['class' => 'admin-users'])
 					        ->add(route('quotes.index'), 'Quotes Board')
 					        ->add(route('equipment.dash'), 'Equipment', Menu::items('members.equipment'), [], ['class' => 'equipment'])
 					        ->add(route('training.dash'), 'Training', Menu::items('members.training'), [], ['class' => 'training'])

@@ -21,11 +21,14 @@ class MembersController extends Controller
 	public function __construct()
 	{
 		// Require authentication
+		$this->middleware('auth');
 		$this->middleware('auth.permission:member', [
 			'except' => [
 				'dash',
 				'getMyProfile',
-				'postMyProfile'
+				'postMyProfile',
+				'updatePassword',
+				'dashSU',
 			],
 		]);
 
