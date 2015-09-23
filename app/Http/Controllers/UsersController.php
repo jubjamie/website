@@ -65,10 +65,15 @@ class UsersController extends Controller
 		} else {
 			// we all love katie lots <3
 			if($search) {
-				$users = $users->where('username', 'LIKE', '%' . $search . '%')
-				               ->orWhere('forename', 'LIKE', '%' . $search . '%')
-				               ->orWhere('surname', 'LIKE', '%' . $search . '%')
-				               ->orWhere('email', 'LIKE', '%' . $search . '%');
+				if(stripos($search, ' ')) {
+					$users = $users->where('forename', 'LIKE', '%' . substr($search, 0, stripos($search, ' ')) . '%')
+					               ->where('surname', 'LIKE', '%' . substr($search, stripos($search, ' ') + 1) . '%');
+				} else {
+					$users = $users->where('username', 'LIKE', '%' . $search . '%')
+					               ->orWhere('forename', 'LIKE', '%' . $search . '%')
+					               ->orWhere('surname', 'LIKE', '%' . $search . '%')
+					               ->orWhere('email', 'LIKE', '%' . $search . '%');
+				}
 			}
 
 			// Paginate results
