@@ -561,7 +561,16 @@ Route::group([
 	]);
 });
 
-// Teapot :p
+// Easter eggs
 Route::get('im/a/teapot', function () {
 	App::abort(418);
 });
+Route::get('feeling-happy', [
+	'middleware' => 'auth.permission:member',
+	'uses'       => function () {
+		return View::make('eggs.awesome')->with([
+			'noNav'      => true,
+			'slimFooter' => true,
+		]);
+	},
+]);
