@@ -53,7 +53,7 @@ class ContactAccidentRequest extends Request
 	{
 		return [
 			'location'          => 'required',
-			'date'              => 'required|date_format:d/m/Y',
+			'date'              => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
 			'time'              => 'required|date_format:H:i',
 			'severity'          => 'required|in:' . implode(',', array_keys(self::$Severities)),
 			'absence_details'   => 'required_if:severity,1,2,3',
@@ -76,6 +76,7 @@ class ContactAccidentRequest extends Request
 			'location.required'             => 'Please provide the accident location',
 			'date.required'                 => 'Please provide the date of the accident',
 			'date.date_format'              => 'Please provide the date in the form \'dd/mm/YYY\'',
+			'date.regex'                    => 'Please provide the date in the form \'dd/mm/YYY\'',
 			'time.required'                 => 'Please provide the approximate time of the accident',
 			'time.date_format'              => 'Please provide the time in the form \'hh:mm\'',
 			'severity.required'             => 'Please select the accident severity',

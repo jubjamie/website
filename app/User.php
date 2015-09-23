@@ -59,7 +59,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'username'     => 'required|regex:/[a-zA-Z0-9_]+/|unique:users,username',
 		'email'        => 'required|email|unique:users,email',
 		'phone'        => 'phone',
-		'dob'          => 'date_format:d/m/Y',
+		'dob'          => 'date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
 		'show_email'   => 'boolean',
 		'show_phone'   => 'boolean',
 		'show_address' => 'boolean',
@@ -81,6 +81,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'email.unique'      => 'That email address is already in use by another user',
 		'phone.phone'       => 'Please enter a valid phone number',
 		'dob.date_format'   => 'Please enter your DOB in the format dd/mm/YYYY',
+		'dob.regex'         => 'Please enter your DOB in the format dd/mm/YYYY',
 	];
 
 	/**
@@ -308,7 +309,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			'username'     => 'required|regex:/[a-zA-Z0-9_]+/|unique:users,username,' . $this->id,
 			'email'        => 'required|email|unique:users,email,' . $this->id,
 			'phone'        => 'phone',
-			'dob'          => 'date_format:Y-m-d',
+			'dob'          => 'date_format:Y-m-d|regex:/[0-9]{4}-[0-9]{2}-[0-9]{2}/',
 			'show_email'   => 'boolean',
 			'show_phone'   => 'boolean',
 			'show_address' => 'boolean',
@@ -333,6 +334,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			'email.unique'      => 'That email address is already in use by another user',
 			'phone.phone'       => 'Please enter a valid phone number',
 			'dob.date_format'   => 'Please enter their DOB in the format YYYY-mm-dd',
+			'dob.regex'         => 'Please enter their DOB in the format YYYY-mm-dd',
 		];
 	}
 

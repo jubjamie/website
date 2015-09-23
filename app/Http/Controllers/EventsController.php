@@ -763,13 +763,14 @@ class EventsController extends Controller
 	{
 		$this->validate($request, [
 			'name'       => 'required',
-			'date'       => 'required|date_format:d/m/Y',
+			'date'       => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
 			'start_time' => 'required|date_format:H:i',
 			'end_time'   => 'required|date_format:H:i|after:start_time',
 		], [
 			'name.required'          => 'Please enter a title for the time',
 			'date.required'          => 'Please enter the date',
 			'date.date_format'       => 'Please enter a valid date',
+			'date.regex'             => 'Please enter a valid date',
 			'start_time.required'    => 'Please enter the start time',
 			'start_time.date_format' => 'Please enter a valid time',
 			'end_time.required'      => 'Please enter the end time',
