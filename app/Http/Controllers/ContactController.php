@@ -176,8 +176,7 @@ class ContactController extends Controller
 	public function postAccident(ContactAccidentRequest $request)
 	{
 		// Get data for emails
-		$data = $request->stripped('location', 'date', 'time', 'details', 'severity', 'absence_details', 'contact_name', 'contact_email', 'contact_phone',
-			'person_type', 'person_type_other');
+		$data = $request->stripped('location', 'date', 'time', 'details', 'severity', 'absence_details', 'injured_name', 'contact_name', 'contact_email', 'contact_phone', 'person_type', 'person_type_other');
 
 		// Send the email
 		Mail::queue('emails.contact.accident', $data, function ($message) use ($data) {

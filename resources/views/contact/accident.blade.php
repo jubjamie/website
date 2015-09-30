@@ -55,7 +55,7 @@
                 <div class="form-group @include('partials.form.error-class', ['name' => 'details'])">
                     {!! Form::label('details', 'Details:', ['class' => 'control-label col-sm-3']) !!}
                     <div class="col-sm-9">
-                        {!! Form::textarea('details', null, ['class' => 'form-control', 'rows' => 4, 'placeholder' => 'Brief description of the accident, include the location and any injuries caused']) !!}
+                        {!! Form::textarea('details', null, ['class' => 'form-control', 'rows' => 6, 'placeholder' => 'Brief description of the accident, include the location and any injuries caused']) !!}
                         @include('partials.form.input-error', ['name' => 'details'])
                     </div>
                 </div>
@@ -79,56 +79,73 @@
                 </div>
             </fieldset>
 
-            <fieldset class="col-md-6">
-                <legend>Injured Party Details</legend>
+            <div class="col-md-6">
+                <fieldset>
+                    <legend>Injured Party Details</legend>
 
-                <!-- Name -->
-                <div class="form-group @include('partials.form.error-class', ['name' => 'contact_name'])">
-                    {!! Form::label('contact_name', 'Name:', ['class' => 'control-label col-sm-3']) !!}
-                    <div class="col-sm-9">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="fa fa-user"></span></span>
-                            {!! Form::text('contact_name', null, ['class' => 'form-control', 'placeholder' => 'The name of the injured person']) !!}
+                    <!-- Name -->
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'injured_name'])">
+                        {!! Form::label('injured_name', 'Injured Party:', ['class' => 'control-label col-sm-4']) !!}
+                        <div class="col-sm-8">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                {!! Form::text('injured_name', null, ['class' => 'form-control', 'placeholder' => 'The name of the injured person']) !!}
+                            </div>
+                            @include('partials.form.input-error', ['name' => 'injured_name'])
                         </div>
-                        @include('partials.form.input-error', ['name' => 'contact_name'])
                     </div>
-                </div>
 
-                <!-- Email -->
-                <div class="form-group @include('partials.form.error-class', ['name' => 'contact_email'])">
-                    {!! Form::label('contact_email', 'Email:', ['class' => 'control-label col-sm-3']) !!}
-                    <div class="col-sm-9">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="fa fa-at"></span></span>
-                            {!! Form::text('contact_email', null, ['class' => 'form-control', 'placeholder' => 'Their email address']) !!}
+                    <!-- Person Type -->
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'person_type']) @include('partials.form.error-class', ['name' => 'person_type_other'])">
+                        {!! Form::label('person_type', 'Category:', ['class' => 'control-label col-sm-4']) !!}
+                        <div class="col-sm-8">
+                            {!! Form::select('person_type', \App\Http\Requests\ContactAccidentRequest::$PersonTypes, array_search('Undergraduate', \App\Http\Requests\ContactAccidentRequest::$PersonTypes), ['class' => 'form-control']) !!}
+                            {!! Form::text('person_type_other', null, ['class' => 'form-control', 'placeholder' => 'If other, please specify', 'style' => 'margin-bottom:0.2em;margin-top:0.7em;']) !!}
+                            @include('partials.form.input-error', ['name' => 'person_type'])
+                            @include('partials.form.input-error', ['name' => 'person_type_other'])
                         </div>
-                        @include('partials.form.input-error', ['name' => 'contact_email'])
                     </div>
-                </div>
+                </fieldset>
+                <fieldset>
+                    <legend>Contact Details</legend>
 
-                <!-- Phone -->
-                <div class="form-group @include('partials.form.error-class', ['name' => 'contact_phone'])">
-                    {!! Form::label('contact_phone', 'Phone:', ['class' => 'control-label col-sm-3']) !!}
-                    <div class="col-sm-9">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="fa fa-phone"></span></span>
-                            {!! Form::text('contact_phone', null, ['class' => 'form-control', 'placeholder' => 'Their phone number']) !!}
+                    <!-- Name -->
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'contact_name'])">
+                        {!! Form::label('contact_name', 'Name:', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                {!! Form::text('contact_name', null, ['class' => 'form-control', 'placeholder' => 'The name of the contact']) !!}
+                            </div>
+                            @include('partials.form.input-error', ['name' => 'contact_name'])
                         </div>
-                        @include('partials.form.input-error', ['name' => 'contact_phone'])
                     </div>
-                </div>
 
-                <!-- Person Type -->
-                <div class="form-group @include('partials.form.error-class', ['name' => 'person_type']) @include('partials.form.error-class', ['name' => 'person_type_other'])">
-                    {!! Form::label('person_type', 'Category:', ['class' => 'control-label col-sm-3']) !!}
-                    <div class="col-sm-9">
-                        {!! Form::select('person_type', \App\Http\Requests\ContactAccidentRequest::$PersonTypes, array_search('Undergraduate', \App\Http\Requests\ContactAccidentRequest::$PersonTypes), ['class' => 'form-control']) !!}
-                        {!! Form::text('person_type_other', null, ['class' => 'form-control', 'placeholder' => 'If other, please specify', 'style' => 'margin-bottom:0.2em;margin-top:0.7em;']) !!}
-                        @include('partials.form.input-error', ['name' => 'person_type'])
-                        @include('partials.form.input-error', ['name' => 'person_type_other'])
+                    <!-- Email -->
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'contact_email'])">
+                        {!! Form::label('contact_email', 'Email:', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-at"></span></span>
+                                {!! Form::text('contact_email', null, ['class' => 'form-control', 'placeholder' => 'Their email address']) !!}
+                            </div>
+                            @include('partials.form.input-error', ['name' => 'contact_email'])
+                        </div>
                     </div>
-                </div>
-            </fieldset>
+
+                    <!-- Phone -->
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'contact_phone'])">
+                        {!! Form::label('contact_phone', 'Phone:', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-phone"></span></span>
+                                {!! Form::text('contact_phone', null, ['class' => 'form-control', 'placeholder' => 'Their phone number']) !!}
+                            </div>
+                            @include('partials.form.input-error', ['name' => 'contact_phone'])
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
         </div>
 
         <div class="text-center" style="margin-top: 1em;">

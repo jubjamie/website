@@ -31,6 +31,10 @@
     @endif
     <tr>
         <td><strong>Person injured:</strong></td>
+        <td>{{ $injured_name }}</td>
+    </tr>
+    <tr>
+        <td><strong>Contact person:</strong></td>
         <td>{{ $contact_name }}</td>
     </tr>
     <tr>
