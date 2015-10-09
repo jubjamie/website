@@ -9,6 +9,28 @@
 @section('content')
     <h1 class="page-header">The Membership</h1>
     <div id="viewMembership">
+        <div>
+            @if(Auth::user()->can('admin'))
+                <div class="btn-group">
+                    <a class="btn btn-success" href="{{ route('user.create') }}">
+                        <span class="fa fa-user-plus"></span>
+                        <span>Add more users</span>
+                    </a>
+                    <a class="btn btn-primary" href="{{ route('user.index') }}">
+                        <span class="fa fa-list"></span>
+                        <span>View all users</span>
+                    </a>
+                </div>
+            @endif
+            <div class="pull-right">
+                <input class="form-control input-sm search-input"
+                       data-type="search-input"
+                       data-url-base="{{ route('membership') }}"
+                       placeholder="Search ..."
+                       type="text"
+                       value="{{ $search ?: '' }}">
+            </div>
+        </div>
         <table class="table">
             <thead class="hidden-xs hidden-sm">
                 <tr>
@@ -72,27 +94,5 @@
                 @endif
             </tbody>
         </table>
-        <div>
-            @if(Auth::user()->can('admin'))
-                <div class="btn-group">
-                    <a class="btn btn-success" href="{{ route('user.create') }}">
-                        <span class="fa fa-user-plus"></span>
-                        <span>Add more users</span>
-                    </a>
-                    <a class="btn btn-primary" href="{{ route('user.index') }}">
-                        <span class="fa fa-list"></span>
-                        <span>View all users</span>
-                    </a>
-                </div>
-            @endif
-                <div class="pull-right">
-                    <input class="form-control input-sm search-input"
-                           data-type="search-input"
-                           data-url-base="{{ route('membership') }}"
-                           placeholder="Search ..."
-                           type="text"
-                           value="{{ $search ?: '' }}">
-                </div>
-        </div>
     </div>
 @endsection

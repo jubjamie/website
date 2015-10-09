@@ -593,40 +593,57 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	public function getToolColours()
 	{
-		// Sanitise
+		// Initialise
 		$toolColours = strtolower($this->tool_colours);
-		$toolColours = str_replace('and', '&', $toolColours);
+		$toolColours = str_replace(['and', ';', '&', ','], ' ', $toolColours);
+		$toolColours = trim(preg_replace("/\s+/", ' ', $toolColours));
+		$recognised  = ["red", "blue", "green", "yellow", "white", "black", "brown", "pink", "purple", "grey", "orange", "earth", "rainbow", "turquoise"];
 
-		$recognised = ["red", "blue", "green", "yellow", "white", "black", "brown", "purple", "grey", "earth", "orange"];
-
-		if(!empty(preg_replace("/[,;&]/", '', $toolColours))) {
-			// Initialise
-			$html = '';
-
-			// Look for the separators
-			preg_match_all("/([a-z]+)([,;&]\s?)?/", $toolColours, $matches);
-			if(isset($matches[1]) && is_array($matches[1])) {
-				foreach($matches[1] as $colour) {
-					$c = trim($colour);
-					if($c) {
-						if(!in_array($c, $recognised)) {
-							return $toolColours;
-						}
-
-						$html .= '<span class="tool-colour" title="' . ucfirst($c) . '">';
-						if($c == "earth") {
-							$html .= '<span class="fa fa-wrench green"></span>';
-							$html .= '<span class="fa fa-wrench yellow"></span>';
-						} else {
-							$html .= '<span class="fa fa-wrench ' . $c . '"></span>';
-						}
-						$html .= '</span>';
-					}
-				}
+		if(!empty($toolColours)) {
+			// Look for initials
+			$initials = null;
+			if(preg_match("/(?:with)?\s*initials(\s*\(?([a-z0-9]+)\)?)?/i", $toolColours, $matches)) {
+				$initials    = isset($matches[2]) ? $matches[2] : (substr($this->forename, 0, 1) . substr($this->surname, 0, 1));
+				$toolColours = preg_replace("/with initials(\s*\(?[a-z0-9]+\)?)?/i", '', $toolColours);
 			}
 
-			// Return the string
-			return $html;
+			// Look for colour entries
+			$tool_colours = [];
+			$title = '';
+			preg_match_all("/(light|fluorescent)?\s*([a-z]+)(\s*\([a-z+\s]+\))?/i", $toolColours, $matches);
+			foreach($matches[0] as $i => $full_colour) {
+				if(!in_array($matches[2][$i], $recognised)) {
+					return $this->tool_colours;
+				}
+
+				// Add support for striped colours
+				$shape = 'wrench';
+				$colours = [$matches[2][$i]];
+				switch($matches[2][$i]) {
+					case 'earth':
+						$colours = ['yellow', 'green'];
+						break;
+					case 'rainbow':
+						$colours = ['red', 'orange', 'yellow', 'green', 'blue', 'purple'];
+						break;
+					default:
+				}
+
+				// Build the html entry
+				$title .= ucfirst($matches[2][$i]) . ', ';
+				$tool_colours[$i] = '<span class="tool-colour' . (count($colours) > 1 ? ' striped' : '') . '">';
+				for($j = count($colours) - 1; $j >= 0; $j--) {
+					$tool_colours[$i] .= '<span class="fa fa-' . $shape . ' ' . trim($colours[$j] . ' ' . ($matches[1][$i] ?: '')) . '"></span>';
+				}
+				$tool_colours[$i] .= '</span>';
+			}
+
+			// End
+			$tool_html = '<span class="tool-colours" title="' . trim(rtrim($title, ', ') . ' ' . ($initials ? ((!empty($title) ? 'with ' : '') . 'initials') : '')) . '">' . implode('', $tool_colours);
+			if($initials) $tool_html .= '<span class="initials">(' . trim($initials) . ')</span>';
+			$tool_html .= '</span>';
+
+			return $tool_html;
 		} else {
 			return '';
 		}
