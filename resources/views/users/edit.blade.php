@@ -48,6 +48,18 @@
                         </div>
                     </div>
 
+                    {{-- Nickname --}}
+                    <div class="form-group @include('partials.form.error-class', ['name' => 'nickname'])">
+                        {!! Form::label('name', 'Nickname:', ['class' => 'control-label col-sm-3']) !!}
+                        <div class="col-sm-9">
+                            <div class="input-group">
+                                <span class="input-group-addon"><span class="fa fa-user"></span></span>
+                                {!! Form::text('nickname', null, ['class' => 'form-control']) !!}
+                            </div>
+                            @include('partials.form.input-error', ['name' => 'nickname'])
+                        </div>
+                    </div>
+
                     {{-- Email address --}}
                     <div class="form-group @include('partials.form.error-class', ['name' => 'email'])">
                         {!! Form::label('email', 'Email Address:', ['class' => 'control-label col-sm-3']) !!}

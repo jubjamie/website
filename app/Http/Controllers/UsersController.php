@@ -288,7 +288,7 @@ class UsersController extends Controller
 		// update, setting the account type as necessary. If updating the active
 		// user, the restricted attributes will be set to their current values.
 		if($request->get('action') == 'save') {
-			$data        = $request->stripped('name', 'username', 'email', 'phone', 'dob', 'address', 'tool_colours', 'type') + [
+			$data        = $request->stripped('name', 'username', 'nickname', 'email', 'phone', 'dob', 'address', 'tool_colours', 'type') + [
 					'show_email'   => $request->has('show_email'),
 					'show_phone'   => $request->has('show_phone'),
 					'show_address' => $request->has('show_address'),
