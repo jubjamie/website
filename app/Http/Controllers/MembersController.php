@@ -216,7 +216,7 @@ class MembersController extends Controller
 
 		// Query search
 		if($search) {
-			$members = $members->search($search);
+			$members = $members->search($search)->member();
 		}
 
 		// Get the results
