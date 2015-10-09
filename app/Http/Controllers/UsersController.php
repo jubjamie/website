@@ -61,6 +61,7 @@ class UsersController extends Controller
 			               ->join('role_user', 'users.id', '=', 'role_user.user_id')
 			               ->join('roles', 'role_user.role_id', '=', 'roles.id')
 			               ->where('roles.name', '=', $filter)
+			               ->where('status', 1)
 			               ->get();
 		} else {
 			// we all love katie lots <3
