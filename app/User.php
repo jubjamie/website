@@ -630,7 +630,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 				}
 
 				// Build the html entry
-				$title .= ucfirst($matches[2][$i]) . ', ';
+				$title .= ($matches[1][$i] ? (ucfirst($matches[1][$i] . ' ')) : '') . ucfirst($matches[2][$i]) . ', ';
 				$tool_colours[$i] = '<span class="tool-colour' . (count($colours) > 1 ? ' striped' : '') . '">';
 				for($j = count($colours) - 1; $j >= 0; $j--) {
 					$tool_colours[$i] .= '<span class="fa fa-' . $shape . ' ' . trim($colours[$j] . ' ' . ($matches[1][$i] ?: '')) . '"></span>';

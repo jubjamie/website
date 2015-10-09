@@ -141,12 +141,24 @@ span.tool-colours {
 		& > span.fa {
 			&.red {
 				color: #FF0000;
+
+				&.light {
+					color: lighten(#FF0000, 20%);
+				}
 			}
 			&.blue {
 				color: #007BFF;
+
+				&.light {
+					color: lighten(#007BFF, 15%);
+				}
 			}
 			&.green {
 				color: #008000;
+
+				&.light {
+					color: lighten(#008000, 25%);
+				}
 			}
 			&.yellow {
 				color: #FFFF00;
@@ -164,18 +176,34 @@ span.tool-colours {
 			}
 			&.brown {
 				color: #5e3415;
+
+				&.light {
+					color: lighten(#5e3415, 20%);
+				}
 			}
 			&.purple {
 				color: #973fff;
+
+				&.light {
+					color: lighten(#973fff, 12%);
+				}
 			}
 			&.grey {
 				color: #888;
 			}
 			&.orange {
 				color: #F60;
+
+				&.light {
+					color: lighten(#F60, 15%);
+				}
 			}
 			&.pink {
 				color: #ff36b8;
+
+				&.light {
+					color: lighten(#ff36b8, 10%);
+				}
 			}
 			&.turquoise {
 				color: #34ffb3;
