@@ -304,15 +304,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public function scopeSearch($query, $term)
 	{
 		if(stripos($term, ' ')) {
-			$query->where('forename', 'LIKE', '%' . substr($term, 0, stripos($term, ' ')) . '%')
-			      ->where('surname', 'LIKE', '%' . substr($term, stripos($term, ' ') + 1) . '%')
-			      ->orWhere('nickname', 'LIKE', '%' . $term . '%');
+			$query->where(function($query) use($term) {
+				$query->where('forename', 'LIKE', '%' . substr($term, 0, stripos($term, ' ')) . '%')
+				      ->where('surname', 'LIKE', '%' . substr($term, stripos($term, ' ') + 1) . '%')
+				      ->orWhere('nickname', 'LIKE', '%' . $term . '%');
+			});
 		} else {
-			$query->where('username', 'LIKE', '%' . $term . '%')
-			      ->orWhere('nickname', 'LIKE', '%' . $term . '%')
-			      ->orWhere('forename', 'LIKE', '%' . $term . '%')
-			      ->orWhere('surname', 'LIKE', '%' . $term . '%')
-			      ->orWhere('email', 'LIKE', '%' . $term . '%');
+			$query->where(function ($query) use ($term) {
+				$query->where('username', 'LIKE', '%' . $term . '%')
+				      ->orWhere('nickname', 'LIKE', '%' . $term . '%')
+				      ->orWhere('forename', 'LIKE', '%' . $term . '%')
+				      ->orWhere('surname', 'LIKE', '%' . $term . '%')
+				      ->orWhere('email', 'LIKE', '%' . $term . '%');
+			});
 		}
 	}
 
