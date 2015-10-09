@@ -89,6 +89,11 @@ form {
 	&.input-lg {
 		font-size: 18px;
 	}
+	&.search-input {
+		display: inline-block;
+		height: 2em;
+		width: 10em;
+	}
 }
 
 .form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
@@ -129,17 +134,16 @@ textarea.form-control {
 	}
 }
 
-.form-group.center-block {
-	display: inline-block;
-	width: auto;
-
-	&:after {
-		content: "";
-		display: block;
-	}
-}
-
 .form-group {
+	&.center-block {
+		display: inline-block;
+		width: auto;
+
+		&:after {
+			content: "";
+			display: block;
+		}
+	}
 	&.has-error {
 		.form-control {
 			color: #a94442;

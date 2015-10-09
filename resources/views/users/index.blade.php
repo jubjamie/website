@@ -9,10 +9,31 @@
 @section('content')
     <h1 class="page-header">User Manager</h1>
     <p>This table lists all user accounts entered into the database, including non-members and archived accounts. To ensure that all past events display properly it is not possible to delete users; instead use the archive function to disable their account and remove them from any signup lists.</p>
-    <a class="btn btn-success" href="{{ route('user.create') }}">
-        <span class="fa fa-user-plus"></span>
-        <span>Create a New User</span>
-    </a>
+    <div>
+        <a class="btn btn-success" href="{{ route('user.create') }}">
+            <span class="fa fa-user-plus"></span>
+            <span>Create a New User</span>
+        </a>
+        <div class="pull-right">
+            <span>
+                Filter:
+                <select data-type="filter-select" data-url-base="{{ route('user.index') }}">
+                    <option value="">- no filter -</option>
+                    <option value="all" {{ $filter == 'all' ? 'selected' : '' }}>All users</option>
+                    <option value="archived" {{ $filter == 'archived' ? 'selected' : '' }}>Archived</option>
+                    <option value="active" {{ $filter == 'active' ? 'selected' : '' }}>Active</option>
+                    <option value="member" {{ $filter == 'member' ? 'selected' : '' }}>Members</option>
+                    <option value="committee" {{ $filter == 'committee' ? 'selected' : '' }}>Committee</option>
+                    <option value="associate" {{ $filter == 'associate' ? 'selected' : '' }}>Associates</option>
+                    <option value="su" {{ $filter == 'su' ? 'selected' : '' }}>SU</option>
+                </select>
+                |
+            </span>
+            <span>
+                <input class="form-control input-sm search-input" data-type="search-input" data-url-base="{{ route('user.index') }}" placeholder="Search ..." type="text" value="{{ $search ?: '' }}">
+            </span>
+        </div>
+    </div>
     {!! Form::open(['route' => ['user.index.do'], 'id' => 'listUsers']) !!}
     <table class="table table-condensed">
         <thead>

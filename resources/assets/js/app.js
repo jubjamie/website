@@ -32,3 +32,14 @@ $.ajaxSetup({
 $('select[select2]').each(function () {
 	$(this).select2({placeholder: $(this).attr('select2') || ''})
 });
+$('[data-type="filter-select"]').on('change', function () {
+	var select = $(this);
+	window.location = select.data('urlBase') + (select.val() ? '/filter/' + select.val() : '');
+});
+$('[data-type="search-input"]').on('keypress', function (event) {
+	if(event.which == 13) {
+		var input = $(this);
+		var value = encodeURI(input.val()).trim();
+		window.location = input.data('urlBase') + (value ? '/search/' + value : '');
+	}
+});

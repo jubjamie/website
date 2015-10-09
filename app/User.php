@@ -56,6 +56,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 */
 	protected static $ValidationRules = [
 		'name'         => 'required|name',
+		'nickname'     => 'regex:/[a-zA-Z]+/',
 		'username'     => 'required|regex:/[a-zA-Z0-9_]+/|unique:users,username',
 		'email'        => 'required|email|unique:users,email',
 		'phone'        => 'phone',
@@ -73,6 +74,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected static $ValidationMessages = [
 		'name.required'     => 'Please enter your name',
 		'name.name'         => 'Please enter your forename and surname',
+		'nickname.regex'    => 'Please just use letters',
 		'username.required' => 'Please enter their BUCS username',
 		'username.regex'    => 'Please use only letters and numbers',
 		'username.unique'   => 'A user with that username already exists',
@@ -101,6 +103,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		'forename',
 		'surname',
 		'name', // Pseudo
+		'nickname',
 		'email',
 		'password',
 		'status',
@@ -296,6 +299,21 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}
 
 		return $results_formatted;
+	}
+
+	public function scopeSearch($query, $term)
+	{
+		if(stripos($term, ' ')) {
+			$query->where('forename', 'LIKE', '%' . substr($term, 0, stripos($term, ' ')) . '%')
+			      ->where('surname', 'LIKE', '%' . substr($term, stripos($term, ' ') + 1) . '%')
+			      ->orWhere('nickname', 'LIKE', '%' . $term . '%');
+		} else {
+			$query->where('username', 'LIKE', '%' . $term . '%')
+			      ->orWhere('nickname', 'LIKE', '%' . $term . '%')
+			      ->orWhere('forename', 'LIKE', '%' . $term . '%')
+			      ->orWhere('surname', 'LIKE', '%' . $term . '%')
+			      ->orWhere('email', 'LIKE', '%' . $term . '%');
+		}
 	}
 
 	/**

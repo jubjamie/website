@@ -25,7 +25,7 @@
                 <img class="img-rounded" src="{{ $user->getAvatarUrl() }}">
             </div>
             <div class="col-sm-7">
-                <h1>{{ $user->name }}</h1>
+                <h1>{{ $user->nickname ? sprintf('%s "%s" %s', $user->forename, $user->nickname, $user->surname) : $user->name }}</h1>
 
                 <h3>{{ $user->username }}</h3>
             </div>

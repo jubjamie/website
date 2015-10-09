@@ -274,6 +274,9 @@ Route::get('membership', [
 	'as'   => 'membership',
 	'uses' => 'MembersController@membership',
 ]);
+Route::get('membership/{modifier}/{term}', [
+	'uses' => 'MembersController@membership',
+])->where('modifier', 'search');
 
 // Pages
 Route::group([

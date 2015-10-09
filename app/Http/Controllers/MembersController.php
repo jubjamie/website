@@ -124,7 +124,9 @@ class MembersController extends Controller
 			}
 
 			// Check that the field is allowed
-			if(!in_array($field, ['name', 'email', 'dob', 'phone', 'address', 'tool_colours', 'show_email', 'show_phone', 'show_address', 'show_age',])) {
+			if(!in_array($field,
+				['name', 'nickname', 'email', 'dob', 'phone', 'address', 'tool_colours', 'show_email', 'show_phone', 'show_address', 'show_age',])
+			) {
 				return $this->ajaxError('Unknown field');
 			}
 
@@ -198,17 +200,31 @@ class MembersController extends Controller
 
 	/**
 	 * View the BTS membership list.
-	 * @return Response
+	 * @param \Illuminate\Http\Request $request
+	 * @return \Illuminate\Http\Response
 	 */
-	public function membership()
+	public function membership(Request $request)
 	{
-		// Get all of the active members
+		// Get the search query
+		$search = $this->search($request);
+
+		// Query members
 		$members = User::active()
 		               ->member()
 		               ->orderBy('surname', 'ASC')
-		               ->orderBy('forename', 'ASC')
-		               ->get();
+		               ->orderBy('forename', 'ASC');
 
-		return View::make('members.membership')->with('members', $members);
+		// Query search
+		if($search) {
+			$members = $members->search($search);
+		}
+
+		// Get the results
+		$members = $members->get();
+
+		return View::make('members.membership')->with([
+			'members' => $members,
+			'search'  => $search,
+		]);
 	}
 }

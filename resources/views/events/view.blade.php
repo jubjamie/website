@@ -167,7 +167,9 @@
                                        data-edit-type="textarea"
                                        data-edit-url="{{ route('events.update', ['id' => $event->id, 'action' => 'update-details']) }}"
                                        data-control-name="description_public"
-                                       role="button">{!! nl2br($event->description_public) ?: '<em>&ndash; no public description &ndash;</em>' !!}</p>
+                                       data-config="{{ json_encode(['text' => ['' => '- no public description -']]) }}"
+                                       data-value="{{ $event->description_public }}"
+                                       role="button">{!! nl2br($event->description_public) ?: '- no public description -' !!}</p>
                                 @else
                                     <p class="form-control-static">{!! nl2br($event->description_public) !!}</p>
                                 @endif
@@ -185,7 +187,7 @@
                                     <p class="form-control-static"
                                             data-editable="true"
                                             data-edit-type="toggle"
-                                            data-key="{{ $key }}"
+                                            data-control-name="{{ $key }}"
                                             data-value="{{ !!$event->paperwork[$key] }}"
                                             data-toggle-template="paperwork"
                                             data-edit-url="{{ route('events.update', ['id' => $event->id, 'action' => 'paperwork']) }}"

@@ -65,15 +65,7 @@ class UsersController extends Controller
 		} else {
 			// we all love katie lots <3
 			if($search) {
-				if(stripos($search, ' ')) {
-					$users = $users->where('forename', 'LIKE', '%' . substr($search, 0, stripos($search, ' ')) . '%')
-					               ->where('surname', 'LIKE', '%' . substr($search, stripos($search, ' ') + 1) . '%');
-				} else {
-					$users = $users->where('username', 'LIKE', '%' . $search . '%')
-					               ->orWhere('forename', 'LIKE', '%' . $search . '%')
-					               ->orWhere('surname', 'LIKE', '%' . $search . '%')
-					               ->orWhere('email', 'LIKE', '%' . $search . '%');
-				}
+				$users->search($search);
 			}
 
 			// Paginate results
@@ -81,7 +73,11 @@ class UsersController extends Controller
 			$this->checkPagination($users);
 		}
 
-		return View::make('users.index')->with('users', $users);
+		return View::make('users.index')->with([
+			'filter' => $filter,
+			'search' => $search,
+			'users'  => $users,
+		]);
 	}
 
 	/**

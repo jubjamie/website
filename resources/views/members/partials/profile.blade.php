@@ -15,6 +15,20 @@
                            role="button">{{ $user->name }}</p>
                     </div>
                 </div>
+                {{-- Nickname --}}
+                <div class="form-group">
+                    {!! Form::label('nickname', 'Nickname:', ['class' => 'col-md-4 control-label']) !!}
+                    <div class="col-md-8">
+                        <p class="form-control-static"
+                           data-editable="true"
+                           data-edit-type="text"
+                           data-control-name="nickname"
+                           data-value="{{ $user->nickname }}"
+                           data-config="{{ json_encode(['text' => ['' => '- not set -']]) }}">
+                            {{ $user->nickname ?: '- not set -' }}
+                        </p>
+                    </div>
+                </div>
                 {{-- Email --}}
                 <div class="form-group">
                     {!! Form::label('email', 'Email address:', ['class' => 'col-md-4 control-label']) !!}
@@ -23,21 +37,23 @@
                            data-editable="true"
                            data-edit-type="text"
                            data-control-name="email"
-                           role="button">{{ $user->email }}</p>
-                                            <span class="toggle"
-                                                  data-editable="true"
-                                                  data-edit-type="toggle"
-                                                  data-key="show_email"
-                                                  data-value="{{ $user->show_email }}"
-                                                  data-toggle-template="privacy"
-                                                  data-edit-url="{{ route('members.myprofile.do') }}"
-                                                  role="button">
-                                                @if($user->show_email)
-                                                    @include('members.partials.privacy_enabled')
-                                                @else
-                                                    @include('members.partials.privacy_disabled')
-                                                @endif
-                                            </span>
+                           role="button">
+                            {{ $user->email }}
+                        </p>
+                        <span class="toggle"
+                              data-editable="true"
+                              data-edit-type="toggle"
+                              data-control-name="show_email"
+                              data-value="{{ $user->show_email }}"
+                              data-toggle-template="privacy"
+                              data-edit-url="{{ route('members.myprofile.do') }}"
+                              role="button">
+                            @if($user->show_email)
+                                @include('members.partials.privacy_enabled')
+                            @else
+                                @include('members.partials.privacy_disabled')
+                            @endif
+                        </span>
                     </div>
                 </div>
                 {{-- DOB --}}
@@ -49,21 +65,24 @@
                            data-edit-type="text"
                            data-control-name="dob"
                            data-config="{{ json_encode(['text' => ['' => '- not set -']]) }}"
-                           role="button">{{ $user->dob ? $user->dob->format('d/m/Y') : '- not set -' }}</p>
-                                             <span class="toggle"
-                                                   data-editable="true"
-                                                   data-edit-type="toggle"
-                                                   data-key="show_age"
-                                                   data-value="{{ $user->show_age }}"
-                                                   data-toggle-template="privacy"
-                                                   data-edit-url="{{ route('members.myprofile.do') }}"
-                                                   role="button">
-                                                @if($user->show_age)
-                                                     @include('members.partials.privacy_enabled')
-                                                 @else
-                                                     @include('members.partials.privacy_disabled')
-                                                 @endif
-                                            </span>
+                           data-value="{{ $user->dob }}"
+                           role="button">
+                            {{ $user->dob ? $user->dob->format('d/m/Y') : '- not set -' }}
+                        </p>
+                        <span class="toggle"
+                           data-editable="true"
+                           data-edit-type="toggle"
+                           data-control-name="show_age"
+                           data-value="{{ $user->show_age }}"
+                           data-toggle-template="privacy"
+                           data-edit-url="{{ route('members.myprofile.do') }}"
+                           role="button">
+                            @if($user->show_age)
+                                @include('members.partials.privacy_enabled')
+                            @else
+                                @include('members.partials.privacy_disabled')
+                            @endif
+                        </span>
                     </div>
                 </div>
                 {{-- Phone --}}
@@ -75,21 +94,24 @@
                            data-edit-type="text"
                            data-control-name="phone"
                            data-config="{{ json_encode(['text' => ['' => '- not set -']]) }}"
-                           role="button">{{ $user->phone ?: '- not set -' }}</p>
-                                            <span class="toggle"
-                                                  data-editable="true"
-                                                  data-edit-type="toggle"
-                                                  data-key="show_phone"
-                                                  data-value="{{ $user->show_phone }}"
-                                                  data-toggle-template="privacy"
-                                                  data-edit-url="{{ route('members.myprofile.do') }}"
-                                                  role="button">
-                                                @if($user->show_phone)
-                                                    @include('members.partials.privacy_enabled')
-                                                @else
-                                                    @include('members.partials.privacy_disabled')
-                                                @endif
-                                            </span>
+                           data-value="{{ $user->phone }}"
+                           role="button">
+                            {{ $user->phone ?: '- not set -' }}
+                        </p>
+                        <span class="toggle"
+                              data-editable="true"
+                              data-edit-type="toggle"
+                              data-control-name="show_phone"
+                              data-value="{{ $user->show_phone }}"
+                              data-toggle-template="privacy"
+                              data-edit-url="{{ route('members.myprofile.do') }}"
+                              role="button">
+                            @if($user->show_phone)
+                                @include('members.partials.privacy_enabled')
+                            @else
+                                @include('members.partials.privacy_disabled')
+                            @endif
+                        </span>
                     </div>
                 </div>
                 {{-- Address --}}
@@ -101,21 +123,24 @@
                            data-edit-type="textarea"
                            data-control-name="address"
                            data-config="{{ json_encode(['text' => ['' => '- not set -']]) }}"
-                           role="button">{!! $user->address ? nl2br($user->address) : '- not set -'!!}</p>
-                                            <span class="toggle"
-                                                  data-editable="true"
-                                                  data-edit-type="toggle"
-                                                  data-key="show_address"
-                                                  data-value="{{ $user->show_address }}"
-                                                  data-toggle-template="privacy"
-                                                  data-edit-url="{{ route('members.myprofile.do') }}"
-                                                  role="button">
-                                                @if($user->show_address)
-                                                    @include('members.partials.privacy_enabled')
-                                                @else
-                                                    @include('members.partials.privacy_disabled')
-                                                @endif
-                                            </span>
+                           data-value="{{ $user->address }}"
+                           role="button">
+                            {!! $user->address ? nl2br($user->address) : '- not set -' !!}
+                        </p>
+                        <span class="toggle"
+                              data-editable="true"
+                              data-edit-type="toggle"
+                              data-control-name="show_address"
+                              data-value="{{ $user->show_address }}"
+                              data-toggle-template="privacy"
+                              data-edit-url="{{ route('members.myprofile.do') }}"
+                              role="button">
+                            @if($user->show_address)
+                                @include('members.partials.privacy_enabled')
+                            @else
+                                @include('members.partials.privacy_disabled')
+                            @endif
+                        </span>
                     </div>
                 </div>
                 {{-- Tools --}}
@@ -127,7 +152,10 @@
                            data-edit-type="text"
                            data-control-name="tool_colours"
                            data-config="{{ json_encode(['text' => ['' => '- not set -']]) }}"
-                           role="button">{{ $user->tool_colours ?: '- not set -' }}</p>
+                           data-value="{{ $user->tool_colours }}"
+                           role="button">
+                            {{ $user->tool_colours ?: '- not set -' }}
+                        </p>
                     </div>
                 </div>
                 {{-- Buttons --}}
@@ -142,19 +170,19 @@
                             <span>Change my password</span>
                         </a>
                         @if($user->isMember())
-                        <a class="btn btn-primary" href="{{ route('members.profile', $user->username) }}" target="_blank">
-                            <span class="fa fa-external-link"></span>
-                            <span>See what this looks like</span>
-                        </a>
+                            <a class="btn btn-primary" href="{{ route('members.profile', $user->username) }}" target="_blank">
+                                <span class="fa fa-external-link"></span>
+                                <span>See what this looks like</span>
+                            </a>
                         @endif
                     </div>
                 </div>
             </fieldset>
         </div>
         @if($user->isMember())
-        <div class="col-md-4">
-            @include('users._profile_pic')
-        </div>
+            <div class="col-md-4">
+                @include('users._profile_pic')
+            </div>
         @endif
     </div>
 </div>
