@@ -426,8 +426,13 @@ class EventsController extends Controller
 		// Test if the user is already crew
 		$crew = $event->crew->where('user_id', $this->user->id)->first();
 		if($crew) {
-			$crew->delete();
-			Flash::success('You have unvolunteered');
+			// Only unvolunteer if it's not a social
+			if($event->isSocial()) {
+				Flash::warning("You can't unvolunteer from a social");
+			} else {
+				$crew->delete();
+				Flash::success('You have unvolunteered');
+			}
 		} else {
 			$event->crew()->create([
 				'name'    => null,

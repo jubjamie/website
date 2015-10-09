@@ -43,13 +43,15 @@
 @else
     <p>No one is crewing this event yet</p>
 @endif
-<p>
+<div class="btn-group">
     @if($event->crewListOpen() && !$isEM)
         @if($event->isCrew($user))
-            <button class="btn btn-danger" data-submit-ajax="{{ route('events.volunteer', ['id' => $event->id]) }}" type="button">
-                <span class="fa fa-user-times"></span>
-                <span>Unvolunteer</span>
-            </button>
+            @if(!$event->isSocial())
+                <button class="btn btn-danger" data-submit-ajax="{{ route('events.volunteer', ['id' => $event->id]) }}" type="button">
+                    <span class="fa fa-user-times"></span>
+                    <span>Unvolunteer</span>
+                </button>
+            @endif
         @else
             <button class="btn btn-success" data-submit-ajax="{{ route('events.volunteer', ['id' => $event->id]) }}" type="button">
                 <span class="fa fa-user-plus"></span>
@@ -82,4 +84,4 @@
         </button>
         @endif
     @endif
-</p>
+</div>
