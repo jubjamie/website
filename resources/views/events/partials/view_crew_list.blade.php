@@ -29,11 +29,24 @@
                                data-modal-template="event_crew"
                                data-modal-title="Edit Crew Role"
                                data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-crew']) }}"
-                               data-form-data="{{ json_encode(['id' => $crew->id, 'name' => $crew->name ?: '', 'user' => $crew->user->name, 'em' => $crew->em, 'core' => !is_null($crew->name)]) }}"
+                               data-form-data="{{ json_encode(['id' => $crew->id, 'name' => $crew->name ?: '', 'user' => $crew->user->name, 'em' => $crew->em, 'core' => !is_null($crew->name), 'confirmed' => $crew->confirmed]) }}"
                                data-editable="true"
-                               role="button">{{ $crew->user->name }}</p>
+                               role="button">
+                                {{ $crew->user->name }}
+                                @if($event->isTracked())
+                                    <span class="pull-right">
+                                        @if($crew->confirmed)
+                                            <span class="fa fa-check success" title="{{ $event->isSocial() ? 'Paid' : 'Attended' }}"></span>
+                                        @else
+                                            <span class="fa fa-remove danger" title="{{ $event->isSocial() ? 'Not paid' : 'Not attended' }}"></span>
+                                        @endif
+                                    </span>
+                                @endif
+                            </p>
                         @else
-                            <p class="form-control-static">{{ $crew->user->name }}</p>
+                            <p class="form-control-static">
+                                {{ $crew->user->name }}
+                            </p>
                         @endif
                     @endforeach
                 </div>
