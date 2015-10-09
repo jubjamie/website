@@ -33,7 +33,7 @@
                                data-editable="true"
                                role="button">
                                 {{ $crew->user->name }}
-                                @if($event->isTracked())
+                                @if($event->isSocial() || ($event->isTraining() && !$crew->em))
                                     <span class="pull-right">
                                         @if($crew->confirmed)
                                             <span class="fa fa-check success" title="{{ $event->isSocial() ? 'Paid' : 'Attended' }}"></span>

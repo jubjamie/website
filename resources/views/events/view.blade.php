@@ -32,6 +32,7 @@
                 form.find('p#existingCrewUser').text(btn.data('formData')['user']).show();
                 form.find('#deleteCrew').show();
                 form.find('input[name="core"]').trigger('change');
+                form.find('input[name="em"]').trigger('change');
             }
         }
     });
@@ -44,6 +45,15 @@
             $modal.find('input[name="name"]').val('');
         }
     });
+    @if($event->isTraining())
+    $modal.on('change', 'input[type="checkbox"][name="core"]', function() {
+        if(!$(this).prop('checked')) {
+            $('#crewRoleConfirmed').show();
+        } else {
+            $('#crewRoleConfirmed').hide();
+        }
+    });
+    @endif
 @endsection
 
 @section('content')

@@ -601,7 +601,7 @@ class EventsController extends Controller
 		$crew->update([
 			'name'      => $request->get('core') ? $request->get('name') : null,
 			'em'        => $request->get('core') ? $request->has('em') : false,
-			'confirmed' => $event->isTracked() ? $request->has('confirmed') : false,
+			'confirmed' => $event->isSocial() || ($event->isTraining() && !$request->get('core')) ? $request->has('confirmed') : false,
 		]);
 		Flash::success('Crew role updated');
 

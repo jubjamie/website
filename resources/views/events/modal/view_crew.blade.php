@@ -41,7 +41,7 @@
     </div>
     {{-- Confirmed --}}
     @if($event->isTracked())
-    <div class="form-group">
+     <div class="form-group" id="crewRoleConfirmed">
         <div class="col-xs-12">
             <div class="checkbox">
                 <label>
