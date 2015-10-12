@@ -60,6 +60,6 @@ class Validator extends BaseValidator
 	 */
 	public function validateName($attribute, $value)
 	{
-		return $this->validateRegex($attribute, $value, ["/^[a-zA-Z-]+\s[a-zA-Z-]+$/"]);
+		return $this->validateRegex($attribute, $value, ["/^[a-zA-Z-']+\s[a-zA-Z-']+$/"]);
 	}
 }
