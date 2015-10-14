@@ -46,7 +46,7 @@
         }
     });
     @if($event->isTraining())
-    $modal.on('change', 'input[type="checkbox"][name="core"]', function() {
+    $modal.on('change', 'input[type="checkbox"][name="em"]', function() {
         if(!$(this).prop('checked')) {
             $('#crewRoleConfirmed').show();
         } else {

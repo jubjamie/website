@@ -559,10 +559,12 @@ class EventsController extends Controller
 		}
 
 		// Create
+		$em = $request->get('core') ? $request->has('em') : false;
 		$event->crew()->create([
-			'user_id' => $user->id,
-			'name'    => $request->get('core') ? $request->get('name') : null,
-			'em'      => $request->get('core') ? $request->has('em') : false,
+			'user_id'   => $user->id,
+			'name'      => $request->get('core') ? $request->get('name') : null,
+			'em'        => $em,
+			'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
 		]);
 
 		// Send the email
@@ -598,10 +600,11 @@ class EventsController extends Controller
 		$this->validateCrew($request, false);
 
 		// Update
+		$em = $request->get('core') ? $request->has('em') : false;
 		$crew->update([
 			'name'      => $request->get('core') ? $request->get('name') : null,
-			'em'        => $request->get('core') ? $request->has('em') : false,
-			'confirmed' => $event->isSocial() || ($event->isTraining() && !$request->get('core')) ? $request->has('confirmed') : false,
+			'em'        => $em,
+			'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
 		]);
 		Flash::success('Crew role updated');
 
