@@ -24,6 +24,7 @@ class EventCrew extends Model
 		'name',
 		'em',
 		'confirmed',
+		'guest_name'
 	];
 
 	/**
@@ -51,5 +52,10 @@ class EventCrew extends Model
 	public function user()
 	{
 		return $this->belongsTo('App\User');
+	}
+
+	public function isGuest()
+	{
+		return $this->user_id === NULL;
 	}
 }

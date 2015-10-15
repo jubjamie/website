@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Event;
+use App\EventCrew;
 use App\EventTime;
 use App\Http\Requests;
 use App\Http\Requests\EventRequest;
@@ -550,34 +551,47 @@ class EventsController extends Controller
 	private function update_AddCrew(GenericRequest $request, Event $event)
 	{
 		// Validate
-		$this->validateCrew($request, true);
+		$this->validateCrew($request, $event, true);
 
-		// Check if the user is already crewing
-		$user = User::find($request->get('user_id'));
-		if($event->isCrew($user)) {
-			return $this->ajaxError("That user is already on the crew", 422);
+		// Check if adding a guest user
+		if($event->isSocial() && $request->has('guest')) {
+			$event->crew()->create([
+				'user_id'    => null,
+				'name'       => null,
+				'em'         => false,
+				'confirmed'  => $request->has('confirmed'),
+				'guest_name' => $request->stripped('guest_name'),
+			]);
+
+			Flash::success('Guest added');
+		} else {
+			// Check if the user is already crewing
+			$user = User::find($request->get('user_id'));
+			if($event->isCrew($user)) {
+				return $this->ajaxError("That user is already on the crew", 422);
+			}
+
+			// Create
+			$em = $request->get('core') ? $request->has('em') : false;
+			$event->crew()->create([
+				'user_id'   => $user->id,
+				'name'      => $request->get('core') ? $request->stripped('name') : null,
+				'em'        => $em,
+				'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
+			]);
+
+			// Send the email
+			Mail::queue('emails.events.add_crew', [
+				'event' => $event->name,
+				'user'  => $user->forename,
+				'em'    => $event->em_id ? $event->em->name : '',
+			], function ($message) use ($user, $event) {
+				$message->to($user->email, $user->name)
+				        ->subject("Volunteered to crew event '{$event->name}'");
+			});
+
+			Flash::success('Crew role created');
 		}
-
-		// Create
-		$em = $request->get('core') ? $request->has('em') : false;
-		$event->crew()->create([
-			'user_id'   => $user->id,
-			'name'      => $request->get('core') ? $request->get('name') : null,
-			'em'        => $em,
-			'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
-		]);
-
-		// Send the email
-		Mail::queue('emails.events.add_crew', [
-			'event' => $event->name,
-			'user'  => $user->forename,
-			'em'    => $event->em_id ? $event->em->name : '',
-		], function ($message) use ($user, $event) {
-			$message->to($user->email, $user->name)
-			        ->subject("Volunteered to crew event '{$event->name}'");
-		});
-
-		Flash::success('Crew role created');
 
 		return Response::json(true);
 	}
@@ -591,22 +605,35 @@ class EventsController extends Controller
 	private function update_EditCrew(GenericRequest $request, Event $event)
 	{
 		// Get the event crew
-		$crew = $event->crew()->find($request->get('id'));
+		$crew = EventCrew::where('event_id', $event->id)
+		                 ->where('id', $request->get('id'))
+		                 ->first();
 		if(!$crew) {
 			return $this->ajaxError("Couldn't find the crew entry", 404);
 		}
 
 		// Validate
-		$this->validateCrew($request, false);
+		$this->validateCrew($request, $event, false);
 
 		// Update
-		$em = $request->get('core') ? $request->has('em') : false;
-		$crew->update([
-			'name'      => $request->get('core') ? $request->get('name') : null,
-			'em'        => $em,
-			'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
-		]);
-		Flash::success('Crew role updated');
+		if($event->isSocial() && $request->has('guest')) {
+			$crew->update([
+				'user_id'    => null,
+				'name'       => null,
+				'em'         => false,
+				'confirmed'  => $request->has('confirmed'),
+				'guest_name' => $request->stripped('guest_name'),
+			]);
+			Flash::success('Guest updated');
+		} else {
+			$em = $request->get('core') ? $request->has('em') : false;
+			$crew->update([
+				'name'      => $request->get('core') ? $request->get('name') : null,
+				'em'        => $em,
+				'confirmed' => $event->isSocial() || ($event->isTraining() && !$em) ? $request->has('confirmed') : false,
+			]);
+			Flash::success('Crew role updated');
+		}
 
 		return Response::json(true);
 	}
@@ -620,7 +647,9 @@ class EventsController extends Controller
 	private function update_DeleteCrew(GenericRequest $request, Event $event)
 	{
 		// Get the event crew
-		$crew = $event->crew()->find($request->get('id'));
+		$crew = EventCrew::where('event_id', $event->id)
+		                 ->where('id', $request->get('id'))
+		                 ->first();
 		if(!$crew) {
 			return $this->ajaxError("Couldn't find the crew entry", 404);
 		}
@@ -791,18 +820,27 @@ class EventsController extends Controller
 	/**
 	 * Validate a event crew form submission.
 	 * @param \App\Http\Requests\GenericRequest $request
+	 * @param \App\Event                        $event
 	 * @param bool                              $validateUser
 	 */
-	private function validateCrew(GenericRequest $request, $validateUser = true)
+	private function validateCrew(GenericRequest $request, Event $event, $validateUser = true)
 	{
-		$this->validate($request, [
-			'user_id' => 'required' . ($validateUser ? '|exists:users,id' : ''),
-			'name'    => 'required_if:core,1',
-		], [
-			'user_id.required' => 'Please select a member',
-			'user_id.exists'   => 'Please select a member',
-			'name.required_if' => 'Please enter a role title',
-		]);
+		if($request->has('guest') && $event->isSocial()) {
+			$this->validate($request, [
+				'guest_name' => 'required',
+			], [
+				'guest_name.required' => 'Please enter the guest\'s name',
+			]);
+		} else {
+			$this->validate($request, [
+				'user_id' => 'required' . ($validateUser ? '|exists:users,id' : ''),
+				'name'    => 'required_if:core,1',
+			], [
+				'user_id.required' => 'Please select a member',
+				'user_id.exists'   => 'Please select a member',
+				'name.required_if' => 'Please enter a role title',
+			]);
+		}
 	}
 
 	/**

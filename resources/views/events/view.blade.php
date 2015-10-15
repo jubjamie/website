@@ -17,20 +17,18 @@
 
             if(action == 'update-time') {
                 submitBtn.children('span').eq(1).text('Save');
-                form.find('#deleteTime').show();
             } else if(action == 'add-time') {
                 submitBtn.children('span').eq(1).text('Add Time');
-                form.find('#deleteTime').hide();
+                form.find('#deleteTime').remove();
             } else if(action == 'add-crew') {
                 submitBtn.children('span').eq(1).text('Add Crew');
                 form.find('select[name="user_id"]').parent().show();
-                form.find('p#existingCrewUser').hide();
-                form.find('#deleteCrew').hide();
+                form.find('p#existingCrewUser').remove();
+                form.find('#deleteCrew').remove();
             } else if(action == 'update-crew') {
                 submitBtn.children('span').eq(1).text('Save');
                 form.find('select[name="user_id"]').parent().hide();
                 form.find('p#existingCrewUser').text(btn.data('formData')['user']).show();
-                form.find('#deleteCrew').show();
                 form.find('input[name="core"]').trigger('change');
                 form.find('input[name="em"]').trigger('change');
             }
@@ -248,6 +246,49 @@
         </div>
         <div data-type="modal-template" data-id="event_crew">
             @include('events.modal.view_crew')
+        </div>
+        <div data-type="modal-template" data-id="event_crew_guest">
+            {!! Form::open() !!}
+            <div class="modal-body">
+                {{-- Name --}}
+                <div class="form-group">
+                    {!! Form::label('guest_name', 'Name:', ['class' => 'control-label']) !!}
+                    {!! Form::text('guest_name', null, ['class' => 'form-control']) !!}
+                </div>
+                {{-- Paid --}}
+                <div class="form-group">
+                    <div class="checkbox">
+                        <label>
+                            {!! Form::checkbox('confirmed', 1, null) !!}
+                            This member has paid
+                        </label>
+                    </div>
+                </div>
+                {{-- Crew id --}}
+                {!! Form::input('hidden', 'id', null) !!}
+                {!! Form::input('hidden', 'guest', true) !!}
+            </div>
+            <div class="modal-footer">
+                <div class="btn-group">
+                    <button class="btn btn-success"
+                            data-type="submit-modal"
+                            id="submitCrewModal"
+                            type="button">
+                        <span class="fa fa-check"></span>
+                        <span>Save</span>
+                    </button>
+                    <button class="btn btn-danger"
+                            data-type="submit-modal"
+                            data-submit-confirm="Are you sure you want to delete this crew role?"
+                            data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'delete-crew']) }}"
+                            id="deleteCrew"
+                            type="button">
+                        <span class="fa fa-remove"></span>
+                        <span>Delete</span>
+                    </button>
+                </div>
+            </div>
+            {!! Form::close() !!}
         </div>
         <div data-type="modal-template" data-id="event_emails">
             {!! Form::open() !!}

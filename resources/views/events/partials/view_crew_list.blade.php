@@ -26,13 +26,13 @@
                                data-toggle="modal"
                                data-target="#modal"
                                data-modal-class="modal-sm"
-                               data-modal-template="event_crew"
-                               data-modal-title="Edit Crew Role"
+                               data-modal-template="{{ $crew->isGuest() ? 'event_crew_guest' : 'event_crew' }}"
+                               data-modal-title="{{ $crew->isGuest() ? 'Edit Guest' : 'Edit Crew Role' }}"
                                data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-crew']) }}"
-                               data-form-data="{{ json_encode(['id' => $crew->id, 'name' => $crew->name ?: '', 'user' => $crew->user->name, 'em' => $crew->em, 'core' => !is_null($crew->name), 'confirmed' => $crew->confirmed]) }}"
+                               data-form-data="{{ json_encode($crew->isGuest() ? ['id' => $crew->id, 'guest_name' => $crew->guest_name, 'confirmed' => $crew->confirmed] : ['id' => $crew->id, 'name' => $crew->name ?: '', 'user' => $crew->user->name, 'em' => $crew->em, 'core' => !is_null($crew->name), 'confirmed' => $crew->confirmed]) }}"
                                data-editable="true"
                                role="button">
-                                {{ $crew->user->name }}
+                                {{ !$crew->isGuest() ? $crew->user->name : $crew->guest_name }}
                                 @if($event->isSocial() || ($event->isTraining() && !$crew->em))
                                     <span class="pull-right">
                                         @if($crew->confirmed)
@@ -45,7 +45,7 @@
                             </p>
                         @else
                             <p class="form-control-static">
-                                {{ $crew->user->name }}
+                                {{ !$crew->isGuest() ? $crew->user->name : $crew->guest_name }}
                             </p>
                         @endif
                     @endforeach
@@ -84,6 +84,20 @@
             <span class="fa fa-user-plus"></span>
             <span>Add crew</span>
         </button>
+        @if($event->isSocial())
+        <button class="btn btn-success"
+            data-toggle="modal"
+            data-target="#modal"
+            data-modal-template="event_crew_guest"
+            data-modal-class="modal-sm"
+            data-modal-title="Add Guest"
+            data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'add-crew']) }}"
+            type="button"
+            >
+            <span class="fa fa-user-secret"></span>
+            <span>Add guest</span>
+        </button>
+        @endif
         @if(count($event->crew) > 0)
         <button class="btn btn-success"
                 data-toggle="modal"

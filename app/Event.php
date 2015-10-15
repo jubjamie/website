@@ -187,6 +187,7 @@ class Event extends Model
 	{
 		return $this->hasMany('App\EventCrew')
 		            ->select('event_crew.*')
+		            ->whereNotNull('user_id')
 		            ->join('users', 'event_crew.user_id', '=', 'users.id')
 		            ->orderBy('surname', 'ASC')
 		            ->orderBy('forename', 'ASC');
@@ -336,7 +337,9 @@ class Event extends Model
 	{
 		$core    = [];
 		$general = [];
+		$guest   = [];
 
+		// Get the BTS crew
 		foreach($this->crew()->orderBy('event_crew.name')->get() as $crew) {
 			if($crew->name) {
 				@$core[$crew->name][] = $crew;
@@ -345,7 +348,16 @@ class Event extends Model
 			}
 		}
 
-		return $core + (empty($general) ? [] : ['General Crew' => $general]);
+		// Get any guest crew
+		if($this->isSocial()) {
+			$guest = EventCrew::where('event_id', $this->id)
+			                  ->whereNull('user_id')
+			                  ->get();
+		}
+
+		return $core
+		       + (empty($general) ? [] : ['General Crew' => $general])
+		       + ($guest->count() ? ['Guest' => $guest] : []);
 	}
 
 	/**
