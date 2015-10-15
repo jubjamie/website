@@ -357,7 +357,7 @@ class Event extends Model
 
 		return $core
 		       + (empty($general) ? [] : ['General Crew' => $general])
-		       + ($guest->count() ? ['Guest' => $guest] : []);
+		       + (count($guest) ? ['Guest' => $guest] : []);
 	}
 
 	/**
