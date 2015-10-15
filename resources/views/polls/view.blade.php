@@ -39,7 +39,7 @@
                                  aria-valuemin="0"
                                  aria-valuemax="100"
                                  style="width: {{ $option->percentage() }}%;">
-                                {{ $option->percentage() }}%
+                                {{ number_format($option->percentage(), 1) }}%
                             </div>
                         </div>
                         @endif

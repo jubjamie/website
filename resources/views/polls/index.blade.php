@@ -26,7 +26,7 @@
                         @foreach($poll->options as $option)
                             <li>
                                 <span class="text">{{ $option->text }} &#8211; </span>
-                                <span class="votes">{{ $option->percentage() }}%</span>
+                                <span class="votes">{{ number_format($option->percentage(), 1) }}%</span>
                             </li>
                         @endforeach
                     </ul>
