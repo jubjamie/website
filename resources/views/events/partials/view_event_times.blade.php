@@ -12,13 +12,13 @@
                      data-modal-title="Edit Event Time"
                      data-modal-class="modal-sm"
                      data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-time']) }}"
-                     data-form-data="{{ json_encode(['id' => $time->id, 'name' => $time->name, 'date' => $time->start->format('d/m/Y'), 'start_time' => $time->start->format('H:i'), 'end_time' => $time->end->format('H:i')]) }}"
+                     data-form-data="{{ json_encode(['id' => $time->id, 'name' => $time->name, 'date' => $time->start->format('d/m/Y'), 'start_time' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i'), 'end_time' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i')]) }}"
                      role="button">
                 @else
                     <div class="event-time">
                 @endif
                     <div class="date">{{ $i == 0 ? $date : '&nbsp;' }}</div>
-                    <div class="time">{{ $time->start->format('H:i') }} &ndash; {{ $time->end->format('H:i') }}</div>
+                    <div class="time">{{ $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i') }} &ndash; {{ $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i') }}</div>
                     <div class="name">{{ $time->name }}</div>
                 </div>
             @endforeach

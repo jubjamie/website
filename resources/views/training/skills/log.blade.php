@@ -24,8 +24,8 @@
                     @foreach($skills as $skill)
                         <tr>
                             <td class="skill-date text-center">
-                                <div>{{ $skill->updated_at->format('d/m/Y') }}</div>
-                                <div>{{ $skill->updated_at->format('H:i:s') }}</div>
+                                <div>{{ $skill->updated_at->tz(env('SERVER_TIMEZONE', 'UTC'))->format('d/m/Y') }}</div>
+                                <div>{{ $skill->updated_at->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i:s') }}</div>
                             </td>
                             <td class="skill-name">
                                 <div class="name"><a class="grey" href="{{ route('training.skills.view', $skill->skill_id) }}" target="_blank">{{ $skill->skill->name }}</a></div>

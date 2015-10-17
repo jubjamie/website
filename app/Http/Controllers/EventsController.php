@@ -193,20 +193,19 @@ class EventsController extends Controller
 			]);
 
 		// Set the event time limits
-		$start_time = Carbon::createFromFormat('H:i', $request->get('time_start'));
-		$end_time   = Carbon::createFromFormat('H:i', $request->get('time_end'));
-		$date_start = Carbon::createFromFormat('d/m/Y', $request->get('date_start'))->setTime(0, 0, 0);
-		$date_end   = Carbon::createFromFormat('d/m/Y', $request->get($request->has('one_day') ? 'date_start' : 'date_end'))->setTime(23, 59, 59);
+		$start_time = explode(':', $request->get('time_start'));
+		$end_time   = explode(':', $request->get('time_end'));
+		$date_start = Carbon::createFromFormat('d/m/Y H:i:s', $request->get('date_start') . ' 00:00:00', env('SERVER_TIMEZONE', 'UTC'));
+		$date_end   = Carbon::createFromFormat('d/m/Y H:i:s', $request->get($request->has('one_day') ? 'date_start' : 'date_end') . ' 23:59:59', env('SERVER_TIMEZONE', 'UTC'));
 
 		// Create each event time
-		$date = clone $date_start;
+		$date = $date_start->copy();
 		while($date->lte($date_end)) {
 			$event->times()->save(new EventTime([
 				'name'  => $event->name,
-				'start' => $date->setTime($start_time->hour, $start_time->minute, 0)->toDateTimeString(),
-				'end'   => $date->setTime($end_time->hour, $end_time->minute, 0)->toDateTimeString(),
+				'start' => $date->copy()->setTime($start_time[0], $start_time[1], 0)->tz('UTC'),
+				'end'   => $date->copy()->setTime($end_time[0], $end_time[1], 0)->tz('UTC'),
 			]));
-			$date->setTime(0, 0, 0);
 			$date->day++;
 		}
 
@@ -484,8 +483,9 @@ class EventsController extends Controller
 		// Create the time
 		$event->times()->create([
 			'name'  => $request->get('name'),
-			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time')),
-			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time')),
+			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time'), env('SERVER_TIMEZONE', 'UTC'))
+			                 ->tz('UTC'),
+			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
 		]);
 
 		Flash::success('Event time created');
@@ -513,8 +513,9 @@ class EventsController extends Controller
 		// Update
 		$time->update([
 			'name'  => $request->get('name'),
-			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time')),
-			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time')),
+			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time'), env('SERVER_TIMEZONE', 'UTC'))
+			                 ->tz('UTC'),
+			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
 		]);
 
 		Flash::success('Event time updated');
@@ -749,10 +750,8 @@ class EventsController extends Controller
 	{
 		// Set the previous and next months
 		$date->day = 1;
-		$date_next = clone $date;
-		$date_prev = clone $date;
-		$date_next->addMonth();
-		$date_prev->subMonth();
+		$date_next = $date->copy()->addMonth();
+		$date_prev = $date->copy()->subMonth();
 
 		// Calculate the spacings before and after the calendar
 		$date->day    = 1;
