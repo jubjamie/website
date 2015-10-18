@@ -54,7 +54,7 @@ class QuotesController extends Controller
 
 		// Create the quote
 		Quote::create($request->stripped('culprit', 'quote') + [
-				'date'     => Carbon::createFromFormat("Y-m-d H:i", $request->get('date')),
+				'date'     => Carbon::createFromFormat("Y-m-d H:i", $request->get('date'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
 				'added_by' => $this->user->id,
 			]);
 		Flash::success('Quote created');

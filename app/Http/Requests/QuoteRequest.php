@@ -23,7 +23,7 @@ class QuoteRequest extends Request
 	{
 		return [
 			'culprit' => 'required',
-			'date'    => 'required|date_format:Y-m-d H:i|before:' . Carbon::now()->addMinutes(1)->format("Y-m-d H:i"),
+			'date'    => 'required|date_format:Y-m-d H:i|before:' . Carbon::now()->tz(env('SERVER_TIMEZONE', 'UTC'))->addMinutes(1)->format("Y-m-d H:i"),
 			'quote'   => 'required',
 		];
 	}
