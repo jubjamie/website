@@ -342,6 +342,20 @@ class EventsController extends Controller
 			$mailto_link .= $crew->user->email . ',';
 		}
 
+		// Count the crew
+		$crew_list = EventCrew::where('event_id', $event->id)->get();
+		$crew_count = ['general' => 0, 'core' => 0, 'guest' => 0, 'em' => 0];
+		foreach($crew_list as $crew) {
+			if(is_null($crew['user_id'])) {
+				$crew_count['guest']++;
+			} else {
+				$crew_count[is_null($crew->name) ? 'general' : 'core']++;
+				if($crew->em) {
+					$crew_count['em']++;
+				}
+			}
+		}
+
 		return View::make('events.view')->with([
 			'event'       => $event,
 			'user'        => $this->user,
@@ -352,6 +366,7 @@ class EventsController extends Controller
 			'isEM'        => $event->isEM($this->user),
 			'canEdit'     => $this->user->isAdmin() || $event->isEM($this->user, false),
 			'crew_emails' => $mailto_link,
+			'crew_count'  => $crew_count,
 		]);
 	}
 

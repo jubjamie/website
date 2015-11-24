@@ -1,1 +1,104 @@
-button#newQuoteButton{margin:2em 0 0}h3{font-size:25px;line-height:1.5em}h4{font-size:22px;font-weight:400}div.quote{display:table;margin-top:1em;width:100%}div.quote>div.quote-number{color:#FFCF00;display:table-cell;font-size:1.4em;padding-right:1em;text-align:right;vertical-align:top;width:2em}div.quote>div.quote-details{display:table-cell;padding-top:3px;vertical-align:top}div.quote>div.quote-details>div.quote-content{display:block;font-size:1.1em;line-height:1.5em;padding-left:2.3em;position:relative}div.quote>div.quote-details>div.quote-content:before{color:#444;content:"\275D";font-size:2.4em;line-height:.9em;position:absolute;top:0;left:0}div.quote>div.quote-details>div.quote-date{color:#999;font-size:13px;font-style:italic;margin:1em 0 0}div.quote>div.quote-details>div.quote-actions{-webkit-transition-duration:.1s,.1s,.1s,.1s,.1s;-webkit-transition-property:background-color,border-color,box-shadow,color,opacity;-webkit-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-moz-transition-duration:.1s,.1s,.1s,.1s,.1s;-moz-transition-property:background-color,border-color,box-shadow,color,opacity;-moz-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-o-transition-duration:.1s,.1s,.1s,.1s,.1s;-o-transition-property:background-color,border-color,box-shadow,color,opacity;-o-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-ms-transition-duration:.1s,.1s,.1s,.1s,.1s;-ms-transition-property:background-color,border-color,box-shadow,color,opacity;-ms-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;transition-duration:.1s,.1s,.1s,.1s,.1s;transition-property:background-color,border-color,box-shadow,color,opacity;transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;opacity:0;margin-top:.5em}div.quote>div.quote-details>div.quote-actions span.fa{color:#FFF;font-size:1em;margin-right:.2em}div.quote>div.quote-details>div.quote-actions span.fa.fa-trash:hover{color:#d9534f}div.quote>div.quote-details>div.quote-actions .btn{margin-left:0;margin-right:0;padding:0}div.quote>div.quote-details>div.quote-actions .btn>span.fa{width:auto}div.quote:hover>div.quote-details>div.quote-actions{opacity:1}
+button#newQuoteButton {
+  margin: 2em 0 0 0;
+}
+
+h3 {
+  font-size: 25px;
+  line-height: 1.5em;
+}
+
+h4 {
+  font-size: 22px;
+  font-weight: 400;
+}
+
+div.quote {
+  display: table;
+  margin-top: 1em;
+  width: 100%;
+}
+
+div.quote > div.quote-number {
+  color: #FFCF00;
+  display: table-cell;
+  font-size: 1.4em;
+  padding-right: 1em;
+  text-align: right;
+  vertical-align: top;
+  width: 2em;
+}
+
+div.quote > div.quote-details {
+  display: table-cell;
+  padding-top: 3px;
+  vertical-align: top;
+}
+
+div.quote > div.quote-details > div.quote-content {
+  display: block;
+  font-size: 1.1em;
+  line-height: 1.5em;
+  padding-left: 2.3em;
+  position: relative;
+}
+
+div.quote > div.quote-details > div.quote-content:before {
+  color: #444;
+  content: "\275D";
+  font-size: 2.4em;
+  line-height: 0.9em;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+div.quote > div.quote-details > div.quote-date {
+  color: #999;
+  font-size: 13px;
+  font-style: italic;
+  margin: 1em 0 0 0;
+}
+
+div.quote > div.quote-details > div.quote-actions {
+  -webkit-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -webkit-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -webkit-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -moz-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -moz-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -moz-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -o-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -o-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -o-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -ms-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -ms-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -ms-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  transition-property: background-color, border-color, box-shadow, color, opacity;
+  transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  opacity: 0;
+  margin-top: 0.5em;
+}
+
+div.quote > div.quote-details > div.quote-actions span.fa {
+  color: #FFF;
+  font-size: 1em;
+  margin-right: 0.2em;
+}
+
+div.quote > div.quote-details > div.quote-actions span.fa.fa-trash:hover {
+  color: #d9534f;
+}
+
+div.quote > div.quote-details > div.quote-actions .btn {
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0;
+}
+
+div.quote > div.quote-details > div.quote-actions .btn > span.fa {
+  width: auto;
+}
+
+div.quote:hover > div.quote-details > div.quote-actions {
+  opacity: 1;
+}

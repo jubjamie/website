@@ -1,1 +1,181 @@
-#createPoll{max-width:100%;width:40em}#createPoll div.input-group button{margin:0 -.3em;padding:0 .3em}#createPoll button#addPollOption{margin:0}#createPoll button[name=deleteOption]{line-height:1.4}#viewPoll div.width-wrapper{margin:0 auto;max-width:100%;width:45em}#viewPoll div.width-wrapper>div.poll-details-wrapper{display:table;margin:0 auto;width:100%}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.question-mark{color:#D18800;display:table-cell;vertical-align:top;width:3.5em}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.question-mark span.fa{font-size:3em;margin:0}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details{display:table-cell;vertical-align:top}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details h1{color:#D18800;font-size:2em;margin:.3em 0 0;text-align:left}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details h1:after,#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details h1:before{display:none!important}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details h2{color:#999;margin:1em 0 0}#viewPoll div.width-wrapper>div.answer-wrapper{display:table;margin-top:1em;width:100%}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer{display:table-row}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details,#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-number{display:table-cell;padding-top:20px}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-number{font-size:1.3em;width:1.5em}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details>div.answer-text{font-size:1.3em}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details>div.progress{height:auto;margin:.5em 0}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details>div.progress>div.progress-bar{display:inline-block;font-size:15px;height:2.5em;line-height:2.5em;min-width:2.7em}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details>button{margin-top:.5em}@media (max-width:768px){#viewPoll div.width-wrapper>div.poll-details-wrapper>div.question-mark{display:none}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details>h1{font-size:1.5em}#viewPoll div.width-wrapper>div.poll-details-wrapper>div.poll-details>h2{font-size:1.2em}#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-details>div.answer-text,#viewPoll div.width-wrapper>div.answer-wrapper>div.answer>div.answer-number{font-size:1.1em}}#listPolls div.poll{position:relative}#listPolls div.poll>.btn-actions{-webkit-transition-duration:.1s,.1s,.1s,.1s,.1s;-webkit-transition-property:background-color,border-color,box-shadow,color,opacity;-webkit-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-moz-transition-duration:.1s,.1s,.1s,.1s,.1s;-moz-transition-property:background-color,border-color,box-shadow,color,opacity;-moz-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-o-transition-duration:.1s,.1s,.1s,.1s,.1s;-o-transition-property:background-color,border-color,box-shadow,color,opacity;-o-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-ms-transition-duration:.1s,.1s,.1s,.1s,.1s;-ms-transition-property:background-color,border-color,box-shadow,color,opacity;-ms-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;transition-duration:.1s,.1s,.1s,.1s,.1s;transition-property:background-color,border-color,box-shadow,color,opacity;transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;position:absolute;opacity:0;right:0;top:0}#listPolls div.poll>h3{font-size:1.6em;text-align:left}#listPolls div.poll>div.description{color:#999;font-size:1.2em;margin:0 0 1em}#listPolls div.poll>ul{margin:0;padding:0}#listPolls div.poll>ul li{display:inline-block}#listPolls div.poll>ul li:not(:last-of-type){margin-right:1em}#listPolls div.poll:hover>.btn-actions{opacity:1}
+#createPoll {
+  max-width: 100%;
+  width: 40em;
+}
+
+#createPoll div.input-group button {
+  margin: 0 -0.3em;
+  padding: 0 0.3em;
+}
+
+#createPoll button#addPollOption {
+  margin: 0;
+}
+
+#createPoll button[name=deleteOption] {
+  line-height: 1.4;
+}
+
+#viewPoll div.width-wrapper {
+  margin: 0 auto;
+  max-width: 100%;
+  width: 45em;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper {
+  display: table;
+  margin: 0 auto;
+  width: 100%;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.question-mark {
+  color: #D18800;
+  display: table-cell;
+  vertical-align: top;
+  width: 3.5em;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.question-mark span.fa {
+  font-size: 3em;
+  margin: 0 0 0 0;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details {
+  display: table-cell;
+  vertical-align: top;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details h1 {
+  color: #D18800;
+  font-size: 2em;
+  margin: 0.3em 0 0 0;
+  text-align: left;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details h1:before,
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details h1:after {
+  display: none !important;
+}
+
+#viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details h2 {
+  color: #999;
+  margin: 1em 0 0 0;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper {
+  display: table;
+  margin-top: 1em;
+  width: 100%;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer {
+  display: table-row;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-number,
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details {
+  display: table-cell;
+  padding-top: 20px;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-number {
+  font-size: 1.3em;
+  width: 1.5em;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details > div.answer-text {
+  font-size: 1.3em;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details > div.progress {
+  height: auto;
+  margin: 0.5em 0 0.5em 0;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details > div.progress > div.progress-bar {
+  display: inline-block;
+  font-size: 15px;
+  height: 2.5em;
+  line-height: 2.5em;
+  min-width: 2.7em;
+}
+
+#viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details > button {
+  margin-top: 0.5em;
+}
+
+@media (max-width: 768px) {
+  #viewPoll div.width-wrapper > div.poll-details-wrapper > div.question-mark {
+    display: none;
+  }
+
+  #viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details > h1 {
+    font-size: 1.5em;
+  }
+
+  #viewPoll div.width-wrapper > div.poll-details-wrapper > div.poll-details > h2 {
+    font-size: 1.2em;
+  }
+
+  #viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-number {
+    font-size: 1.1em;
+  }
+
+  #viewPoll div.width-wrapper > div.answer-wrapper > div.answer > div.answer-details > div.answer-text {
+    font-size: 1.1em;
+  }
+}
+
+#listPolls div.poll {
+  position: relative;
+}
+
+#listPolls div.poll > .btn-actions {
+  -webkit-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -webkit-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -webkit-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -moz-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -moz-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -moz-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -o-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -o-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -o-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -ms-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -ms-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -ms-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  transition-property: background-color, border-color, box-shadow, color, opacity;
+  transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  position: absolute;
+  opacity: 0;
+  right: 0;
+  top: 0;
+}
+
+#listPolls div.poll > h3 {
+  font-size: 1.6em;
+  text-align: left;
+}
+
+#listPolls div.poll > div.description {
+  color: #999;
+  font-size: 1.2em;
+  margin: 0 0 1em 0;
+}
+
+#listPolls div.poll > ul {
+  margin: 0;
+  padding: 0;
+}
+
+#listPolls div.poll > ul li {
+  display: inline-block;
+}
+
+#listPolls div.poll > ul li:not(:last-of-type) {
+  margin-right: 1em;
+}
+
+#listPolls div.poll:hover > .btn-actions {
+  opacity: 1;
+}

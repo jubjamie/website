@@ -1,1 +1,33 @@
-#repairsDb table.table td{vertical-align:top}#repairsDb table.table .date,#repairsDb table.table .status{text-align:center;width:8em}#repairsDb table.table td.date{font-size:14px}#repairsDb table.table .item p{margin:0}#repairsDb table.table .item p.name{font-size:1pc}#repairsDb table.table .item p.location{color:#777;font-size:14px}@media (min-width:768px){#repairsDb table.table .comment,#repairsDb table.table .description{width:12em}}
+#repairsDb table.table td {
+  vertical-align: top;
+}
+
+#repairsDb table.table .status,
+#repairsDb table.table .date {
+  text-align: center;
+  width: 8em;
+}
+
+#repairsDb table.table td.date {
+  font-size: 14px;
+}
+
+#repairsDb table.table .item p {
+  margin: 0;
+}
+
+#repairsDb table.table .item p.name {
+  font-size: 16px;
+}
+
+#repairsDb table.table .item p.location {
+  color: #777;
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  #repairsDb table.table .description,
+  #repairsDb table.table .comment {
+    width: 12em;
+  }
+}

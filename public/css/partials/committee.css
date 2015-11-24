@@ -1,1 +1,84 @@
-h4.no-committee{font-size:1.8em;margin:2em auto;text-align:center;width:75%}div.position{position:relative}div.position>a.edit-button{-webkit-transition-duration:.1s,.1s,.1s,.1s,.1s;-webkit-transition-property:background-color,border-color,box-shadow,color,opacity;-webkit-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-moz-transition-duration:.1s,.1s,.1s,.1s,.1s;-moz-transition-property:background-color,border-color,box-shadow,color,opacity;-moz-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-o-transition-duration:.1s,.1s,.1s,.1s,.1s;-o-transition-property:background-color,border-color,box-shadow,color,opacity;-o-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;-ms-transition-duration:.1s,.1s,.1s,.1s,.1s;-ms-transition-property:background-color,border-color,box-shadow,color,opacity;-ms-transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;transition-duration:.1s,.1s,.1s,.1s,.1s;transition-property:background-color,border-color,box-shadow,color,opacity;transition-timing-function:ease-in,ease-in,ease-in,ease-in,ease-in;position:absolute;right:0;top:0;opacity:0}div.position>div.title{color:#D18800;font:700 1.6em Arial;text-align:center}div.position>div.name{color:#FFCF00;font-size:1.3em;padding:.5em 0 0;text-align:center}div.position>div.picture{padding-top:1em;padding-bottom:1em;text-align:center}div.position>div.picture>img{display:inline-block;height:auto;max-width:100%;width:10em}div.position>div.email{text-align:center}div.position>div.email>a{color:#CCC;margin-left:.5em}div.position>div.email>a:hover{color:#D69E00}div.position>div.description{padding-top:1em;padding-bottom:3em}div.position:hover>a.edit-button{opacity:1}hr{margin-top:-1em}
+h4.no-committee {
+  font-size: 1.8em;
+  margin: 2em auto 2em auto;
+  text-align: center;
+  width: 75%;
+}
+
+div.position {
+  position: relative;
+}
+
+div.position > a.edit-button {
+  -webkit-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -webkit-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -webkit-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -moz-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -moz-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -moz-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -o-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -o-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -o-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  -ms-transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  -ms-transition-property: background-color, border-color, box-shadow, color, opacity;
+  -ms-transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  transition-duration: 0.1s, 0.1s, 0.1s, 0.1s, 0.1s;
+  transition-property: background-color, border-color, box-shadow, color, opacity;
+  transition-timing-function: ease-in, ease-in, ease-in, ease-in, ease-in;
+  position: absolute;
+  right: 0;
+  top: 0;
+  opacity: 0;
+}
+
+div.position > div.title {
+  color: #D18800;
+  font: bold 1.6em Arial;
+  text-align: center;
+}
+
+div.position > div.name {
+  color: #FFCF00;
+  font-size: 1.3em;
+  padding: 0.5em 0 0 0;
+  text-align: center;
+}
+
+div.position > div.picture {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
+}
+
+div.position > div.picture > img {
+  display: inline-block;
+  height: auto;
+  max-width: 100%;
+  width: 10em;
+}
+
+div.position > div.email {
+  text-align: center;
+}
+
+div.position > div.email > a {
+  color: #CCC;
+  margin-left: 0.5em;
+}
+
+div.position > div.email > a:hover {
+  color: #D69E00;
+}
+
+div.position > div.description {
+  padding-top: 1em;
+  padding-bottom: 3em;
+}
+
+div.position:hover > a.edit-button {
+  opacity: 1;
+}
+
+hr {
+  margin-top: -1em;
+}

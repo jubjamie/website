@@ -65,10 +65,11 @@
 				width: 50%;
 			}
 			@media (min-width: 768px) and (max-width: 992px) {
-				width: 33.333%;
+				width: (100%/3);
 			}
 			@media (min-width: 992px) {
-				width: #{100%/7};
+				width: (100%/7);
+
 			}
 		}
 		& > div.day-headers, & > div.calendar {
@@ -202,6 +203,10 @@
 			margin-left: 0.5em;
 			text-transform: lowercase;
 		}
+	}
+	div.crew-count {
+		color: #999;
+		margin: -0.5em 0 1em;
 	}
 
 	form div.form-group {
