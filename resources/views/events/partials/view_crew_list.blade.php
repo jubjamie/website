@@ -14,6 +14,7 @@
         <span class="crew-status">[{{ array_get([-1 => 'hidden', 0 => 'closed', 1 => 'open'], $event->crew_list_status) }}]</span>
     @endif
 </h2>
+@if($canEdit)
 <div class="crew-count">
     @if($event->isSocial())
         {{ ($crew_count['core'] + $crew_count['general']) }} members and {{ $crew_count['guest'] }} guests
@@ -23,6 +24,7 @@
         {{ $crew_count['core'] }} core crew and {{ $crew_count['general'] }} general crew
     @endif
 </div>
+@endif
 @if(count($event->crew) > 0)
     <div class="container-fluid crew-list">
         @foreach($event->crew_list as $role => $crew_list)
