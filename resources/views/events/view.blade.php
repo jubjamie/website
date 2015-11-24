@@ -113,6 +113,7 @@
                         </div>
                     </div>
                     {{-- Client --}}
+                    @if($event->isEvent())
                     <div class="form-group">
                         {!! Form::label('client', 'Client:', ['class' => 'col-md-4 control-label']) !!}
                         <div class="col-md-8">
@@ -130,6 +131,7 @@
                             @endif
                         </div>
                     </div>
+                    @endif
                     {{-- Venue --}}
                     <div class="form-group">
                         {!! Form::label('venue', 'Venue:', ['class' => 'col-md-4 control-label']) !!}
@@ -165,7 +167,7 @@
                     </div>
                     @endif
                     {{-- Public Description --}}
-                    @if(($event->public_description && !$isMember) || $canEdit)
+                    @if($event->isEvent() && (($event->public_description && !$isMember) || $canEdit))
                         <div class="form-group">
                             {!! Form::label('description', ($isMember || $canEdit) ? "Description:(Public)" : 'Description:', ['class' => 'col-md-4 control-label']) !!}
                             <div class="col-md-8">
@@ -185,7 +187,7 @@
                         </div>
                     @endif
                     {{-- Paperwork --}}
-                    @if($canEdit)
+                    @if($event->isEvent() && $canEdit)
                         <h2>Paperwork</h2>
                         @foreach(\App\Event::$Paperwork as $key => $name)
                             <div class="form-group">
@@ -247,6 +249,7 @@
         <div data-type="modal-template" data-id="event_crew">
             @include('events.modal.view_crew')
         </div>
+        @if($event->isSocial())
         <div data-type="modal-template" data-id="event_crew_guest">
             {!! Form::open() !!}
             <div class="modal-body">
@@ -290,6 +293,7 @@
             </div>
             {!! Form::close() !!}
         </div>
+        @endif
         <div data-type="modal-template" data-id="event_emails">
             {!! Form::open() !!}
             <div class="modal-body">
@@ -305,14 +309,16 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('events.email', $event->id) }}" type="button">
-                    <span class="fa fa-check"></span>
-                    <span>Send email</span>
-                </button>
-                <a class="btn btn-success" href="{!! $crew_emails !!}">
-                    <span class="fa fa-envelope"></span>
-                    <span>Use mail client</span>
-                </a>
+                <div class="btn-group">
+                    <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('events.email', $event->id) }}" type="button">
+                        <span class="fa fa-check"></span>
+                        <span>Send email</span>
+                    </button>
+                    <a class="btn btn-success" href="{!! $crew_emails !!}">
+                        <span class="fa fa-envelope"></span>
+                        <span>Use mail client</span>
+                    </a>
+                </div>
             </div>
             {!! Form::close() !!}
         </div>
@@ -322,12 +328,15 @@
                 <div class="form-group">
                     {!! Form::text('name', null , ['class' => 'form-control']) !!}
                 </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-details']) }}" type="button">
-                        <span class="fa fa-check"></span>
-                        <span>Save</span>
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success"
+                        data-type="submit-modal"
+                        data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-details']) }}"
+                        type="button">
+                    <span class="fa fa-check"></span>
+                    <span>Save</span>
+                </button>
             </div>
             {!! Form::close() !!}
         </div>
@@ -337,29 +346,34 @@
                 <div class="form-group">
                     {!! Form::select('crew_list_status', [-1 => 'Hidden', 0 => 'Closed', 1 => 'Open'], null, ['class' => 'form-control']) !!}
                 </div>
-                <div class="form-group text-right">
-                    <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-details']) }}" type="button">
-                        <span class="fa fa-check"></span>
-                        <span>Save</span>
-                    </button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success"
+                        data-type="submit-modal"
+                        data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-details']) }}"
+                        type="button">
+                    <span class="fa fa-check"></span>
+                    <span>Save</span>
+                </button>
             </div>
             {!! Form::close() !!}
         </div>
+        @if($event->isEvent())
         <div data-type="data-toggle-template" data-toggle-id="paperwork" data-value="false">
             @include('events.partials.view_paperwork_incomplete')
         </div>
         <div data-type="data-toggle-template" data-toggle-id="paperwork" data-value="true">
             @include('events.partials.view_paperwork_complete')
         </div>
+        <div data-type="data-select-source" data-select-name="client_type">
+            {!! Form::select('client_type', App\Event::$Clients, null, ['class' => 'form-control']) !!}
+        </div>
+        @endif
         <div data-type="data-select-source" data-select-name="em" data-config="{{ json_encode(['text' => ['' => '- not yet assigned -'] + array_map(function($value) { return substr($value, 0, stripos($value, '(') - 1);}, $users_em)]) }}">
             {!! Form::select('em_id', ['' => '- not yet assigned -'] + $users_em, null, ['class' => 'form-control']) !!}
         </div>
         <div data-type="data-select-source" data-select-name="type">
             {!! Form::select('type', App\Event::$Types, null, ['class' => 'form-control']) !!}
-        </div>
-        <div data-type="data-select-source" data-select-name="client_type">
-            {!! Form::select('client_type', App\Event::$Clients, null, ['class' => 'form-control']) !!}
         </div>
         <div data-type="data-text-format" data-name="type" data-config="{{ json_encode(['class' => \App\Event::$TypeClasses]) }}">
             <span class="event-entry tag upper #class">#text</span>

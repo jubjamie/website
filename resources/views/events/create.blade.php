@@ -7,6 +7,14 @@
         $('#eventDates').find('.date-hide').css('display', $(this).prop('checked') ? 'none' : 'block');
     });
     $('input[name="one_day"]').trigger('change');
+    var form = $('#createEvent');
+    $('select[name="type"]').on('change', function() {
+        if($(this).val() == {{ \App\Event::TYPE_EVENT }}) {
+            form.find('[data-filter="event_only"]').show();
+        } else {
+            form.find('[data-filter="event_only"]').hide();
+        }
+    });
 @endsection
 
 @section('content')
@@ -45,18 +53,8 @@
                 {!! Form::label('description', 'Description', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 4, 'placeholder' => 'Briefly describe what the event is about']) !!}
+                    <p class="help-block alt">This will be visible to the public</p>
                     @include('partials.form.input-error', ['name' => 'description'])
-                </div>
-            </div>
-            <div class="form-group" style="margin-bottom:25px;margin-top:-10px;">
-                <div class="col-md-3"></div>
-                <div class="col-md-9">
-                    <div class="checkbox">
-                        <label>
-                            {!! Form::checkbox('desc_public', 1, null) !!}
-                            Make this visible to the public too
-                        </label>
-                    </div>
                 </div>
             </div>
 
@@ -70,7 +68,7 @@
             </div>
 
             {{-- Venue type --}}
-            <div class="form-group @include('partials.form.error-class', ['name' => 'venue_type'])">
+            <div class="form-group @include('partials.form.error-class', ['name' => 'venue_type'])" data-filter="event_only">
                 {!! Form::label('venue_type', 'Venue Type', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::select('venue_type', \App\Event::$VenueTypes, null, ['class' => 'form-control']) !!}
@@ -79,7 +77,7 @@
             </div>
 
             {{-- Client type --}}
-            <div class="form-group @include('partials.form.error-class', ['name' => 'client_type'])">
+            <div class="form-group @include('partials.form.error-class', ['name' => 'client_type'])" data-filter="event_only">
                 {!! Form::label('client_type', 'Client Type', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::select('client_type', \App\Event::$Clients, null, ['class' => 'form-control']) !!}

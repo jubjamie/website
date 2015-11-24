@@ -179,9 +179,11 @@ class EventsController extends Controller
 	public function store(EventRequest $request)
 	{
 		// Create the event
-		$event = Event::create($request->stripped('name', 'venue', 'description', 'type', 'client_type', 'venue_type') + [
+		$event = Event::create($request->stripped('name', 'venue', 'description', 'type') + [
+				'client_type'        => $request->stripped('type') == Event::TYPE_EVENT ? $request->stripped('client_type') : null,
+				'venue_type'         => $request->stripped('type') == Event::TYPE_EVENT ? $request->stripped('venue_type') : null,
 				'em_id'              => $request->get('em_id') ?: null,
-				'description_public' => $request->get('desc_public') ? $request->stripped('description') : '',
+				'description_public' => $request->stripped('description'),
 				'crew_list_status'   => 1,
 				'paperwork'          => [
 					'risk_assessment' => false,
@@ -196,7 +198,8 @@ class EventsController extends Controller
 		$start_time = explode(':', $request->get('time_start'));
 		$end_time   = explode(':', $request->get('time_end'));
 		$date_start = Carbon::createFromFormat('d/m/Y H:i:s', $request->get('date_start') . ' 00:00:00', env('SERVER_TIMEZONE', 'UTC'));
-		$date_end   = Carbon::createFromFormat('d/m/Y H:i:s', $request->get($request->has('one_day') ? 'date_start' : 'date_end') . ' 23:59:59', env('SERVER_TIMEZONE', 'UTC'));
+		$date_end   = Carbon::createFromFormat('d/m/Y H:i:s', $request->get($request->has('one_day') ? 'date_start' : 'date_end') . ' 23:59:59',
+			env('SERVER_TIMEZONE', 'UTC'));
 
 		// Create each event time
 		$date = $date_start->copy();
@@ -682,6 +685,11 @@ class EventsController extends Controller
 			return $this->ajaxError('You need to be an admin to change the EM');
 		}
 
+		// Perform some checks on the value based on the event type
+		if(!$event->isEvent() && in_array($field, ['client_type', 'venue_type'])) {
+			$value = null;
+		}
+
 		// Validate
 		$validator = Validator::make([$field => $value], Event::getValidationRules($field), Event::getValidationMessages($field));
 		if($validator->fails()) {
@@ -724,6 +732,11 @@ class EventsController extends Controller
 	 */
 	private function update_Paperwork(GenericRequest $request, Event $event)
 	{
+		// Check the event type is event
+		if(!$event->isEvent()) {
+			return $this->ajaxError('Paperwork is only applicable to events');
+		}
+
 		// Check the paperwork type is valid
 		$type = $request->get('field');
 		if(!isset(Event::$Paperwork[$type])) {

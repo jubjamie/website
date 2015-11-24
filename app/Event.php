@@ -420,6 +420,15 @@ class Event extends Model
 	}
 
 	/**
+	 * Check if the entry is an event.
+	 * @return bool
+	 */
+	public function isEvent()
+	{
+		return $this->type == self::TYPE_EVENT;
+	}
+
+	/**
 	 * Check if the event is a training session.
 	 * @return bool
 	 */

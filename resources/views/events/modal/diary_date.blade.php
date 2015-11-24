@@ -17,9 +17,5 @@
         <span class="fa fa-check"></span>
         <span>Change date</span>
     </button>
-    <button class="btn btn-danger" data-toggle="modal" data-target="#modal" type="button">
-        <span class="fa fa-undo"></span>
-        <span>Cancel</span>
-    </button>
 </div>
 {!! Form::close() !!}

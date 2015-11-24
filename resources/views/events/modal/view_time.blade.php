@@ -30,18 +30,20 @@
     {!! Form::input('hidden', 'id', null) !!}
 </div>
 <div class="modal-footer">
-    <button class="btn btn-success" data-type="submit-modal" id="submitTimeModal" type="button">
-        <span class="fa fa-check"></span>
-        <span>Add Time</span>
-    </button>
-    <button class="btn btn-danger"
-            data-type="submit-modal"
-            data-submit-confirm="Are you sure you wish to delete this event time?"
-            data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'delete-time']) }}"
-            id="deleteTime"
-            type="button">
-        <span class="fa fa-remove"></span>
-        <span>Delete</span>
-    </button>
+    <div class="btn-group">
+        <button class="btn btn-success" data-type="submit-modal" id="submitTimeModal" type="button">
+            <span class="fa fa-check"></span>
+            <span>Add Time</span>
+        </button>
+        <button class="btn btn-danger"
+                data-type="submit-modal"
+                data-submit-confirm="Are you sure you wish to delete this event time?"
+                data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'delete-time']) }}"
+                id="deleteTime"
+                type="button">
+            <span class="fa fa-remove"></span>
+            <span>Delete</span>
+        </button>
+    </div>
 </div>
 {!! Form::close() !!}
