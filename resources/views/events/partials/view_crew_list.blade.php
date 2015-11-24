@@ -17,9 +17,10 @@
 @if($canEdit)
 <div class="crew-count">
     @if($event->isSocial())
-        {{ ($crew_count['core'] + $crew_count['general']) }} members and {{ $crew_count['guest'] }} guests
+        {{ ($crew_count['core'] + $crew_count['general']) }} members and {{ $crew_count['guest'] }} guests ({{ $crew_count['confirmed'] }} paid)
     @elseif($event->isTraining())
         {{ $crew_count['em'] }} instructors and {{ ($crew_count['core'] - $crew_count['em'] + $crew_count['general']) }} attendees
+        ({{ $crew_count['confirmed'] }} attended)
     @else
         {{ $crew_count['core'] }} core crew and {{ $crew_count['general'] }} general crew
     @endif

@@ -344,8 +344,9 @@ class EventsController extends Controller
 
 		// Count the crew
 		$crew_list = EventCrew::where('event_id', $event->id)->get();
-		$crew_count = ['general' => 0, 'core' => 0, 'guest' => 0, 'em' => 0];
+		$crew_count = ['total' => 0, 'general' => 0, 'core' => 0, 'guest' => 0, 'em' => 0, 'confirmed' => 0];
 		foreach($crew_list as $crew) {
+			$crew_count['total']++;
 			if(is_null($crew['user_id'])) {
 				$crew_count['guest']++;
 			} else {
@@ -353,6 +354,9 @@ class EventsController extends Controller
 				if($crew->em) {
 					$crew_count['em']++;
 				}
+			}
+			if($crew->confirmed) {
+				$crew_count['confirmed']++;
 			}
 		}
 
