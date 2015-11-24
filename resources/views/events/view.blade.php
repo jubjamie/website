@@ -152,7 +152,7 @@
                     @if($isMember || $canEdit)
                     <div class="form-group">
                         {!! Form::label('description', 'Description:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8">
+                        <div class="col-md-8" style="max-height:200px;overflow-y:auto;">
                             @if($canEdit)
                                 <p class="form-control-static"
                                    data-editable="true"
@@ -170,7 +170,7 @@
                     @if($event->isEvent() && (($event->public_description && !$isMember) || $canEdit))
                         <div class="form-group">
                             {!! Form::label('description', ($isMember || $canEdit) ? "Description:(Public)" : 'Description:', ['class' => 'col-md-4 control-label']) !!}
-                            <div class="col-md-8">
+                            <div class="col-md-8" style="max-height:200px;overflow-y:auto;">
                                 @if($canEdit)
                                     <p class="form-control-static"
                                        data-editable="true"
