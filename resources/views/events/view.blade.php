@@ -52,6 +52,18 @@
         }
     });
     @endif
+    var eventEmailLinks = {
+        'all' : $('#emailCrewAll').attr('href'),
+        'core' : $('#emailCrewCore').attr('href'),
+    };
+    function setEmailLinkSubject(subject) {
+        $('#emailCrewAll').attr('href', eventEmailLinks['all'] + '?subject=[Backstage Website] ' + subject);
+        $('#emailCrewCore').attr('href', eventEmailLinks['core'] + '?subject=[Backstage Website] ' + subject);
+    }
+    setEmailLinkSubject("{{ $event->name }}");
+    $modal.on('keyup', 'input[name="subject"]', function() {
+        setEmailLinkSubject($(this).val());
+    });
 @endsection
 
 @section('content')
@@ -77,8 +89,8 @@
                     <h2>Event Info</h2>
                     {{-- EM --}}
                     <div class="form-group">
-                        {!! Form::label('em', 'Event Manager:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8">
+                        {!! Form::label('em', 'Event Manager:', ['class' => 'col-md-5 control-label']) !!}
+                        <div class="col-md-7">
                             @if($isAdmin)
                             <p class="form-control-static"
                                data-editable="true"
@@ -95,8 +107,8 @@
                     </div>
                     {{-- Type --}}
                     <div class="form-group">
-                        {!! Form::label('type', 'Type:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8">
+                        {!! Form::label('type', 'Type:', ['class' => 'col-md-5 control-label']) !!}
+                        <div class="col-md-7">
                             @if($canEdit)
                                 <p class="form-control-static"
                                    data-editable="true"
@@ -115,8 +127,8 @@
                     {{-- Client --}}
                     @if($event->isEvent())
                     <div class="form-group">
-                        {!! Form::label('client', 'Client:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8">
+                        {!! Form::label('client', 'Client:', ['class' => 'col-md-5 control-label']) !!}
+                        <div class="col-md-7">
                             @if($canEdit)
                                 <p class="form-control-static"
                                    data-editable="true"
@@ -134,8 +146,8 @@
                     @endif
                     {{-- Venue --}}
                     <div class="form-group">
-                        {!! Form::label('venue', 'Venue:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8">
+                        {!! Form::label('venue', 'Venue:', ['class' => 'col-md-5 control-label']) !!}
+                        <div class="col-md-7">
                             @if($canEdit)
                                 <p class="form-control-static"
                                    data-editable="true"
@@ -151,8 +163,8 @@
                     {{-- Description --}}
                     @if($isMember || $canEdit)
                     <div class="form-group">
-                        {!! Form::label('description', 'Description:', ['class' => 'col-md-4 control-label']) !!}
-                        <div class="col-md-8" style="max-height:200px;overflow-y:auto;">
+                        {!! Form::label('description', 'Description:', ['class' => 'col-md-5 control-label']) !!}
+                        <div class="col-md-7" style="max-height:200px;overflow-y:auto;">
                             @if($canEdit)
                                 <p class="form-control-static"
                                    data-editable="true"
@@ -169,8 +181,8 @@
                     {{-- Public Description --}}
                     @if($event->isEvent() && (($event->public_description && !$isMember) || $canEdit))
                         <div class="form-group">
-                            {!! Form::label('description', ($isMember || $canEdit) ? "Public Description:" : 'Description:', ['class' => 'col-md-4 control-label']) !!}
-                            <div class="col-md-8" style="max-height:200px;overflow-y:auto;">
+                            {!! Form::label('description', ($isMember || $canEdit) ? "Public Description:" : 'Description:', ['class' => 'col-md-5 control-label']) !!}
+                            <div class="col-md-7" style="max-height:200px;overflow-y:auto;">
                                 @if($canEdit)
                                     <p class="form-control-static"
                                        data-editable="true"
@@ -193,7 +205,6 @@
                             <div class="form-group">
                                 {!! Form::label('', $name . ':', ['class' => 'col-md-5 control-label']) !!}
                                 <div class="col-md-7">
-                                    @if($canEdit)
                                     <p class="form-control-static"
                                             data-editable="true"
                                             data-edit-type="toggle"
@@ -202,9 +213,6 @@
                                             data-toggle-template="paperwork"
                                             data-edit-url="{{ route('events.update', ['id' => $event->id, 'action' => 'paperwork']) }}"
                                             role="button">
-                                    @else
-                                        <p class="form-control-static">
-                                    @endif
                                         @if($event->paperwork[$key])
                                             @include('events.partials.view_paperwork_complete')
                                         @else
@@ -295,32 +303,39 @@
         </div>
         @endif
         <div data-type="modal-template" data-id="event_emails">
-            {!! Form::open() !!}
             <div class="modal-body">
-                {{-- Subject --}}
-                <div class="form-group">
-                    {!! Form::label('subject', 'Subject:', ['class' => 'control-label']) !!}
-                    {!! Form::text('subject', null, ['class' => 'form-control']) !!}
-                </div>
-                {{-- Message --}}
-                <div class="form-group">
-                    {!! Form::label('message', 'Message:', ['class' => 'control-label']) !!}
-                    {!! Form::textarea('message', null, ['class' => 'form-control', 'rows' => 6]) !!}
-                </div>
+                {!! Form::open(['class' => 'form-horizontal']) !!}
+                    {{-- Subject --}}
+                    <div class="form-group">
+                        {!! Form::label('subject', 'Subject:', ['class' => 'control-label col-xs-3']) !!}
+                        <div class="col-xs-9">
+                            {!! Form::text('subject', $event->name, ['class' => 'form-control']) !!}
+                        </div>
+                    </div>
+                    {{-- Buttons --}}
+                    <div class="form-group" style="margin-bottom:0;">
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-9">
+                            <div>
+                                <a class="btn btn-success"
+                                   href="mailto:{!! $event->crew->map(function($crew) { return $crew->user->email; })->implode(',') !!}"
+                                   id="emailCrewAll">
+                                    <span class="fa fa-users"></span>
+                                    <span>Send to all crew</span>
+                                </a>
+                            </div>
+                            <div>
+                                <a class="btn btn-success"
+                                   href="mailto:{!! $event->crew->filter(function($crew) { return $crew->name !== null; })->map(function($crew) { return $crew->user->email; })->implode(',') !!}"
+                                   id="emailCrewCore">
+                                    <span class="fa fa-user"></span>
+                                    <span>Send to core crew</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                {!! Form::close() !!}
             </div>
-            <div class="modal-footer">
-                <div class="btn-group">
-                    <button class="btn btn-success" data-type="submit-modal" data-form-action="{{ route('events.email', $event->id) }}" type="button">
-                        <span class="fa fa-check"></span>
-                        <span>Send email</span>
-                    </button>
-                    <a class="btn btn-success" href="{!! $crew_emails !!}">
-                        <span class="fa fa-envelope"></span>
-                        <span>Use mail client</span>
-                    </a>
-                </div>
-            </div>
-            {!! Form::close() !!}
         </div>
         <div data-type="modal-template" data-id="event_name">
             {!! Form::open() !!}

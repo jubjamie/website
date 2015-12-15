@@ -43,7 +43,7 @@
                 <tr>
                     <td class="id hidden-xs">{{ $page->id }}</td>
                     <td class="page-title">
-                        <div class="title">{!! link_to_route('page.show', $page->title, $page->slug) !!}</div>
+                        <div class="title">{!! link_to_route('page.edit', $page->title, $page->slug) !!}</div>
                         <div class="slug">{{ route('page.show', $page->slug, false) }}</div>
                     </td>
                     <td class="text-center page-author hidden-xs">{{ $page->author->name }}</td>

@@ -7,24 +7,22 @@
             {!! Form::text('name', null, ['class' => 'form-control']) !!}
         </div>
     </div>
-    {{-- Date --}}
+    {{-- Start --}}
     <div class="form-group">
-        {!! Form::label('date', 'Date:', ['class' => 'col-xs-3 control-label']) !!}
+        {!! Form::label('start', 'Start:', ['class' => 'control-label col-xs-3']) !!}
         <div class="col-xs-9">
-            {!! Form::text('date', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
+            {!! Form::selectDate('start') !!}<br>
+            {!! Form::selectTime('start') !!}
+            {!! Form::hidden('start') !!}
         </div>
     </div>
-    {{-- Time --}}
+    {{-- End --}}
     <div class="form-group">
-        {!! Form::label('start_time', 'Time:', ['class' => 'col-xs-3 control-label']) !!}
-        <div class="col-xs-4">
-            {!! Form::text('start_time', null, ['class' => 'form-control', 'placeholder' => 'hh:mm'])!!}
-        </div>
-        <div class="col-xs-1" style="padding: 0;">
-            <p class="form-control-static text-center" style="margin:3px 0 0;">to</p>
-        </div>
-        <div class="col-xs-4">
-            {!! Form::text('end_time', null, ['class' => 'form-control', 'placeholder' => 'hh:mm'])!!}
+        {!! Form::label('end', 'Finish:', ['class' => 'control-label col-xs-3']) !!}
+        <div class="col-xs-9">
+            {!! Form::selectDate('end') !!}<br>
+            {!! Form::selectTime('end') !!}
+            {!! Form::hidden('end') !!}
         </div>
     </div>
     {!! Form::input('hidden', 'id', null) !!}

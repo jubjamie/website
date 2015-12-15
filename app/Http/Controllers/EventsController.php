@@ -336,14 +336,8 @@ class EventsController extends Controller
 		$users_crew = User::active()->member()->nameOrder()->notCrewingEvent($event)->getSelect();
 		$users_em   = User::active()->member()->nameOrder()->getSelect();
 
-		// Create the 'mailto' link for sending event emails
-		$mailto_link = 'mailto:';
-		foreach($event->crew as $crew) {
-			$mailto_link .= $crew->user->email . ',';
-		}
-
 		// Count the crew
-		$crew_list = EventCrew::where('event_id', $event->id)->get();
+		$crew_list  = EventCrew::where('event_id', $event->id)->get();
 		$crew_count = ['total' => 0, 'general' => 0, 'core' => 0, 'guest' => 0, 'em' => 0, 'confirmed' => 0];
 		foreach($crew_list as $crew) {
 			$crew_count['total']++;
@@ -361,16 +355,15 @@ class EventsController extends Controller
 		}
 
 		return View::make('events.view')->with([
-			'event'       => $event,
-			'user'        => $this->user,
-			'users_crew'  => $users_crew,
-			'users_em'    => $users_em,
-			'isMember'    => $this->user->isMember(),
-			'isAdmin'     => $this->user->isAdmin(),
-			'isEM'        => $event->isEM($this->user),
-			'canEdit'     => $this->user->isAdmin() || $event->isEM($this->user, false),
-			'crew_emails' => $mailto_link,
-			'crew_count'  => $crew_count,
+			'event'      => $event,
+			'user'       => $this->user,
+			'users_crew' => $users_crew,
+			'users_em'   => $users_em,
+			'isMember'   => $this->user->isMember(),
+			'isAdmin'    => $this->user->isAdmin(),
+			'isEM'       => $event->isEM($this->user),
+			'canEdit'    => $this->user->isAdmin() || $event->isEM($this->user, false),
+			'crew_count' => $crew_count,
 		]);
 	}
 
@@ -505,9 +498,8 @@ class EventsController extends Controller
 		// Create the time
 		$event->times()->create([
 			'name'  => $request->get('name'),
-			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time'), env('SERVER_TIMEZONE', 'UTC'))
-			                 ->tz('UTC'),
-			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
+			'start' => Carbon::createFromFormat('Y-m-d H:i', $request->get('start'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
+			'end'   => Carbon::createFromFormat('Y-m-d H:i', $request->get('end'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
 		]);
 
 		Flash::success('Event time created');
@@ -535,9 +527,8 @@ class EventsController extends Controller
 		// Update
 		$time->update([
 			'name'  => $request->get('name'),
-			'start' => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('start_time'), env('SERVER_TIMEZONE', 'UTC'))
-			                 ->tz('UTC'),
-			'end'   => Carbon::createFromFormat('d/m/Y H:i', $request->get('date') . ' ' . $request->get('end_time'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
+			'start' => Carbon::createFromFormat('Y-m-d H:i', $request->get('start'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
+			'end'   => Carbon::createFromFormat('Y-m-d H:i', $request->get('end'), env('SERVER_TIMEZONE', 'UTC'))->tz('UTC'),
 		]);
 
 		Flash::success('Event time updated');
@@ -830,21 +821,21 @@ class EventsController extends Controller
 	 */
 	private function validateEventTime(GenericRequest $request)
 	{
+		$request->createDateTimeEntry('start');
+		$request->createDateTimeEntry('end');
+
 		$this->validate($request, [
-			'name'       => 'required',
-			'date'       => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
-			'start_time' => 'required|date_format:H:i',
-			'end_time'   => 'required|date_format:H:i|after:start_time',
+			'name'  => 'required',
+			'start' => 'required|date_format:Y-m-d H:i',
+			'end'   => 'required|date_format:Y-m-d H:i|after:start',
 		], [
-			'name.required'          => 'Please enter a title for the time',
-			'date.required'          => 'Please enter the date',
-			'date.date_format'       => 'Please enter a valid date',
-			'date.regex'             => 'Please enter a valid date',
-			'start_time.required'    => 'Please enter the start time',
-			'start_time.date_format' => 'Please enter a valid time',
-			'end_time.required'      => 'Please enter the end time',
-			'end_time.date_format'   => 'Please enter a valid time',
-			'end_time.after'         => 'It cannot end before it\'s begun!',
+			'name.required'     => 'Please enter a title for the time',
+			'date.required'     => 'Please enter the date',
+			'start.required'    => 'Please enter the start time',
+			'start.date_format' => 'Please enter a valid time',
+			'end.required'      => 'Please enter the end time',
+			'end.date_format'   => 'Please enter a valid time',
+			'end.after'         => 'It cannot end before it\'s begun!',
 		]);
 	}
 

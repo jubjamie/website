@@ -81,16 +81,18 @@
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-8">
-                    <button class="btn btn-success" disable-submit="Updating ..." name="action" value="update">
-                        <span class="fa fa-check"></span>
-                        <span>Update breakage</span>
-                    </button>
-                    @if(!$breakage->closed)
-                        <button class="btn btn-danger" disable-submit="Updating ..." name="action" value="close">
-                            <span class="fa fa-times"></span>
-                            <span>Mark as closed</span>
+                    <div class="btn-group">
+                        <button class="btn btn-success" disable-submit="Updating ..." name="action" value="update">
+                            <span class="fa fa-check"></span>
+                            <span>Update breakage</span>
                         </button>
-                    @endif
+                        @if(!$breakage->closed)
+                            <button class="btn btn-danger" disable-submit="Updating ..." name="action" value="close">
+                                <span class="fa fa-times"></span>
+                                <span>Mark as closed</span>
+                            </button>
+                        @endif
+                    </div>
                 </div>
             </div>
         @endif

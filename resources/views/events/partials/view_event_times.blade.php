@@ -12,7 +12,20 @@
                      data-modal-title="Edit Event Time"
                      data-modal-class="modal-sm"
                      data-form-action="{{ route('events.update', ['id' => $event->id, 'action' => 'update-time']) }}"
-                     data-form-data="{{ json_encode(['id' => $time->id, 'name' => $time->name, 'date' => $time->start->format('d/m/Y'), 'start_time' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i'), 'end_time' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('H:i')]) }}"
+                     data-form-data="{{ json_encode([
+                     'id' => $time->id,
+                     'name' => $time->name,
+                     'start_year' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y'),
+                     'start_month' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('n'),
+                     'start_day' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('j'),
+                     'start_hour' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('G'),
+                     'start_minute' => (int)$time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('i'),
+                     'end_year' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y'),
+                     'end_month' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('n'),
+                     'end_day' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('j'),
+                     'end_hour' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('G'),
+                     'end_minute' => (int)$time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('i'),
+                     ]) }}"
                      role="button">
                 @else
                     <div class="event-time">

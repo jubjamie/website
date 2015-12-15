@@ -188,9 +188,7 @@ class Event extends Model
 		return $this->hasMany('App\EventCrew')
 		            ->select('event_crew.*')
 		            ->whereNotNull('user_id')
-		            ->join('users', 'event_crew.user_id', '=', 'users.id')
-		            ->orderBy('surname', 'ASC')
-		            ->orderBy('forename', 'ASC');
+		            ->join('users', 'event_crew.user_id', '=', 'users.id');
 	}
 
 	/**
@@ -340,7 +338,7 @@ class Event extends Model
 		$guest   = [];
 
 		// Get the BTS crew
-		foreach($this->crew()->orderBy('event_crew.name')->get() as $crew) {
+		foreach($this->crew()->orderBy('event_crew.name', 'ASC')->orderBy('users.surname', 'ASC')->orderBy('users.forename', 'ASC')->get() as $crew) {
 			if($crew->name) {
 				@$core[$crew->name][] = $crew;
 			} else {
@@ -375,11 +373,19 @@ class Event extends Model
 		return $days;
 	}
 
+	/**
+	 * Get the event's start date.
+	 * @return mixed
+	 */
 	public function getStartDateAttribute()
 	{
 		return $this->times->first()->start->format('d/m/Y');
 	}
 
+	/**
+	 * Get the event's end date.
+	 * @return mixed
+	 */
 	public function getEndDateAttribute()
 	{
 		return $this->times->last()->end->format('d/m/Y');
@@ -467,14 +473,14 @@ class Event extends Model
 	/**
 	 * Test if a user is the EM.
 	 * @param \App\User $user
-	 * @param bool      $officialOnly
+	 * @param bool      $strict
 	 * @return bool
 	 */
-	public function isEM(User $user, $officialOnly = true)
+	public function isEM(User $user, $strict = true)
 	{
-		if($this->em_id && $this->em_id == $user->id) {
+		if($this->hasEM() && $this->em_id == $user->id) {
 			return true;
-		} else if(!$officialOnly) {
+		} else if(!$strict) {
 			foreach($this->crew as $crew) {
 				if($crew->user_id == $user->id && $crew->em) {
 					return true;

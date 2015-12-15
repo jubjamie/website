@@ -5,6 +5,17 @@ namespace App\Http\Requests;
 class ContactAccidentRequest extends Request
 {
 	/**
+	 * Before validating, form the date and time entries from the sub-entries.
+	 */
+	public function validate()
+	{
+		$this->createDateEntry('date');
+		$this->createTimeEntry('time');
+
+		return parent::validate();
+	}
+
+	/**
 	 * Store a list of personnel types
 	 * @var array
 	 */
@@ -53,7 +64,7 @@ class ContactAccidentRequest extends Request
 	{
 		return [
 			'location'          => 'required',
-			'date'              => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
+			'date'              => 'required|date_format:Y-m-d',
 			'time'              => 'required|date_format:H:i',
 			'severity'          => 'required|in:' . implode(',', array_keys(self::$Severities)),
 			'absence_details'   => 'required_if:severity,1,2,3',
@@ -76,8 +87,7 @@ class ContactAccidentRequest extends Request
 		return [
 			'location.required'             => 'Please provide the accident location',
 			'date.required'                 => 'Please provide the date of the accident',
-			'date.date_format'              => 'Please provide the date in the form \'dd/mm/YYY\'',
-			'date.regex'                    => 'Please provide the date in the form \'dd/mm/YYY\'',
+			'date.date_format'              => 'Please provide the date in the form \'dd/mm/YYYY\'',
 			'time.required'                 => 'Please provide the approximate time of the accident',
 			'time.date_format'              => 'Please provide the time in the form \'hh:mm\'',
 			'severity.required'             => 'Please select the accident severity',

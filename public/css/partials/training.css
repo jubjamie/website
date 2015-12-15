@@ -27,6 +27,11 @@ table tr td.skill-level {
   width: 5em;
 }
 
+table tr th.skill-level.long,
+table tr td.skill-level.long {
+  width: 7em;
+}
+
 table tr th.skill-proposal,
 table tr td.skill-proposal {
   text-align: center;

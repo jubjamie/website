@@ -10,7 +10,11 @@
         {{-- Equipment name --}}
         <div class="form-group @include('partials.form.error-class', ['name' => 'name'])">
             {!! Form::label('name', 'Equipment Name:', ['class' => 'control-label']) !!}
-            {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'What\'s broken?']) !!}
+            <div class="input-group">
+                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'What\'s broken?']) !!}
+            </div>
+
             @include('partials.form.input-error', ['name' => 'name'])
         </div>
 
@@ -28,7 +32,7 @@
         <div class="form-group @include('partials.form.error-class', ['name' => 'label'])">
             {!! Form::label('label', 'Labelling:', ['class' => 'control-label']) !!}
             <div class="input-group">
-                <span class="input-group-addon"><span class="fa fa-pencil"></span></span>
+                <span class="input-group-addon"><span class="fa fa-tag"></span></span>
                 {!! Form::text('label', null, ['class' => 'form-control', 'placeholder' => 'How is the item marked as broken?']) !!}
             </div>
             @include('partials.form.input-error', ['name' => 'label'])
@@ -46,14 +50,16 @@
 
         {{-- Buttons --}}
         <div class="form-group">
-            <button class="btn btn-success" disable-submit="Reporting breakage">
-                <span class="fa fa-check"></span>
-                <span>Add breakage</span>
-            </button>
-            <a class="btn btn-danger" href="{{ route('equipment.repairs') }}">
-                <span class="fa fa-undo"></span>
-                <span>Cancel</span>
-            </a>
+            <div class="btn-group">
+                <button class="btn btn-success" disable-submit="Reporting breakage">
+                    <span class="fa fa-check"></span>
+                    <span>Add breakage</span>
+                </button>
+                <a class="btn btn-danger" href="{{ route('equipment.repairs') }}">
+                    <span class="fa fa-long-arrow-left"></span>
+                    <span>Cancel</span>
+                </a>
+            </div>
         </div>
     {!! Form::close() !!}
 @endsection

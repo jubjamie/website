@@ -1,18 +1,17 @@
 <div class="modal-body">
     {!! Form::open() !!}
+    {{-- Text field for the date --}}
+    <div class="form-group">
+        {!! Form::selectDate('date') !!}<br>
+        {!! Form::selectTime('date') !!}
+        {!! Form::hidden('date') !!}
+    </div>
+
     {{-- Text field 'culprit' --}}
     <div class="form-group">
         <div class="input-group">
             <span class="input-group-addon"><span class="fa fa-user"></span></span>
             {!! Form::text('culprit', null, ['class' => 'form-control', 'placeholder' => 'Who said it?']) !!}
-        </div>
-    </div>
-
-    {{-- Text field for the date --}}
-    <div class="form-group">
-        <div class="input-group">
-            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-            {!! Form::text('date', null, ['class' => 'form-control', 'id' => 'newQuoteDate', 'placeholder' => 'When did they say it?']) !!}
         </div>
     </div>
 

@@ -7,6 +7,16 @@ use Carbon\Carbon;
 class QuoteRequest extends Request
 {
 	/**
+	 * Before validating, form the date and time entries from the sub-entries.
+	 */
+	public function validate()
+	{
+		$this->createDateTimeEntry('date');
+
+		return parent::validate();
+	}
+
+	/**
 	 * Determine if the user is authorized to make this request.
 	 * @return bool
 	 */

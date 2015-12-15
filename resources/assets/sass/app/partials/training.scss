@@ -31,6 +31,10 @@ table {
 			&.skill-level {
 				text-align: center;
 				width: 5em;
+
+				&.long {
+					width: 7em;
+				}
 			}
 			&.skill-proposal {
 				text-align: center;

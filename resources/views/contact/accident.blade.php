@@ -31,10 +31,7 @@
                 <div class="form-group @include('partials.form.error-class', ['name' => 'date'])">
                     {!! Form::label('date', 'Date:', ['class' => 'control-label col-sm-3']) !!}
                     <div class="col-sm-9">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
-                            {!! Form::text('date', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
-                        </div>
+                        {!! Form::selectDate('date') !!}
                         @include('partials.form.input-error', ['name' => 'date'])
                     </div>
                 </div>
@@ -43,10 +40,7 @@
                 <div class="form-group @include('partials.form.error-class', ['name' => 'time'])">
                     {!! Form::label('time', 'Time:', ['class' => 'control-label col-sm-3']) !!}
                     <div class="col-sm-9">
-                        <div class="input-group">
-                            <span class="input-group-addon"><span class="fa fa-clock-o"></span></span>
-                            {!! Form::text('time', null, ['class' => 'form-control', 'placeholder' => 'hh:mm (24h)']) !!}
-                        </div>
+                        {!! Form::selectTime('time') !!}
                         @include('partials.form.input-error', ['name' => 'time'])
                     </div>
                 </div>

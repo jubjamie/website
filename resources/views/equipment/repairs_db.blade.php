@@ -6,9 +6,19 @@
     @include('partials.tags.style', ['path' => 'partials/equipment'])
 @endsection
 
+@section('add_breakage_link')
+    <p>
+        <a class="btn btn-success" href="{{ route('equipment.repairs.add') }}">
+            <span class="fa fa-wrench"></span>
+            <span>Report a breakage</span>
+        </a>
+    </p>
+@endsection
+
 @section('content')
     <h1 class="page-header">@yield('title')</h1>
     <div id="repairsDb">
+        @yield('add_breakage_link')
         <table class="table table-striped">
             <thead>
                 <th class="item">Item</th>
@@ -40,11 +50,6 @@
             </tbody>
         </table>
         @include('partials.app.pagination', ['paginator' => $breakages])
-        <p>
-            <a class="btn btn-success" href="{{ route('equipment.repairs.add') }}">
-                <span class="fa fa-wrench"></span>
-                <span>Report a breakage</span>
-            </a>
-        </p>
+        @yield('add_breakage_link')
     </div>
 @endsection

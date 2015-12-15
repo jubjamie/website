@@ -9,7 +9,6 @@
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {
         var btn = $(event.relatedTarget);
-        $modal.find('form input[name=date]').val(new Date().format("Y-m-d H:i"));
         $modal.find('#addQuoteModal').data('formAction', btn.data('formAction'));
     });
 @endsection
@@ -29,8 +28,9 @@
 @endsection
 
 @section('content')
-    <h1 class="page-header">Quotesboard</h1>
+    <h1 class="page-header">Quotes Board</h1>
     @if(count($quotes) > 0)
+        @yield('add_quote_button')
         {!! Form::open(['route' => 'quotes.delete']) !!}
             @foreach($quotes as $i => $quote)
                 <div class="quote">
@@ -49,7 +49,7 @@
                             {{--<span class="fa fa-thumbs-up" title="Like this quote"></span>--}}
                             {{--<span class="fa fa-thumbs-down" title="Dislike this quote"></span>--}}
                             {{--<span class="fa fa-flag" title="Mark this as inappropriate"></span>--}}
-                                <button class="btn btn-link" name="deleteQuote" title="Delete this quote" value="{{ $quote->id }}">
+                                <button class="btn btn-link" name="deleteQuote" onclick="return confirm('Are you sure you want to delete this quote?')" title="Delete this quote" value="{{ $quote->id }}">
                                     <span class="fa fa-trash"></span>
                                 </button>
                             @endif

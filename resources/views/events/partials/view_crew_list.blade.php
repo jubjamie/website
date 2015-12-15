@@ -111,7 +111,7 @@
         </button>
         @endif
         @if(count($event->crew) > 0)
-        <button class="btn btn-success"
+        <a class="btn btn-success"
                 data-toggle="modal"
                 data-target="#modal"
                 data-modal-template="event_emails"
@@ -120,7 +120,7 @@
                 type="button">
             <span class="fa fa-envelope"></span>
             <span>Email Crew</span>
-        </button>
+        </a>
         @endif
     @endif
 </div>

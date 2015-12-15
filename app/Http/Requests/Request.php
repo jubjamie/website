@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 abstract class Request extends FormRequest
@@ -25,5 +26,45 @@ abstract class Request extends FormRequest
 		}
 
 		return count($inputs_stripped) == 1 ? array_shift($inputs_stripped) : $inputs_stripped;
+	}
+
+	/**
+	 * Convert date and time sub-entries into a single entry.
+	 * @param        $baseName
+	 * @param string $format
+	 */
+	public function createDateTimeEntry($baseName, $format = 'Y-m-d H:i')
+	{
+		$date = Carbon::create($this->get($baseName . '_year') ?: 1,
+			$this->get($baseName . '_month') ?: 1,
+			$this->get($baseName . '_day') ?: 1,
+			$this->get($baseName . '_hour') ?: 0,
+			$this->get($baseName . '_minute') ?: 0,
+			$this->get($baseName . '_second') ?: 0,
+			env("SERVER_TIMEZONE", "UTC"));
+
+		$this->merge([
+			$baseName => $date->format($format),
+		]);
+	}
+
+	/**
+	 * Convert date sub entries into a single entry.
+	 * @param        $baseName
+	 * @param string $format
+	 */
+	public function createDateEntry($baseName, $format = 'Y-m-d')
+	{
+		$this->createDateTimeEntry($baseName, $format);
+	}
+
+	/**
+	 * Convert time sub entries into a single entry.
+	 * @param        $baseName
+	 * @param string $format
+	 */
+	public function createTimeEntry($baseName, $format = 'H:i')
+	{
+		$this->createDateTimeEntry($baseName, $format);
 	}
 }

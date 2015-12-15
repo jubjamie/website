@@ -40,10 +40,10 @@
                             <em>n/a</em>
                         @endif
                     </td>
-                    <td class="awarded-user">
+                    <td class="skill-user">
                         @if($proposal->isAwarded())
                             <div class="name">{{ $proposal->awarder->name }}</div>
-                            <div class="username">({{ $proposal->awarder->username }})</div>
+                            <div class="username">{{ $proposal->awarder->username }}</div>
                         @else
                             <em>n/a</em>
                         @endif

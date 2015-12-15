@@ -15,7 +15,7 @@
                     <th class="skill-date text-center">Date</th>
                     <th class="skill-name">Skill</th>
                     <th class="skill-user">Member</th>
-                    <th class="skill-level text-center">Skill Level</th>
+                    <th class="skill-level long text-center">Skill Level</th>
                     <th class="skill-user">Awarded By</th>
                 </tr>
             </thead>
