@@ -13,7 +13,7 @@ return [
 	|
 	*/
 
-	'debug'           => env('APP_DEBUG', false),
+	'debug' => env('APP_DEBUG', false),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ return [
 	|
 	*/
 
-	'url'             => env('APP_URL', 'http://localhost'),
+	'url' => env('APP_URL', 'http://localhost'),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -39,7 +39,7 @@ return [
 	|
 	*/
 
-	'timezone'        => 'UTC',
+	'timezone' => 'UTC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -52,7 +52,7 @@ return [
 	|
 	*/
 
-	'locale'          => 'en',
+	'locale' => 'en',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -78,9 +78,9 @@ return [
 	|
 	*/
 
-	'key'             => env('APP_KEY', 'SomeRandomString'),
+	'key' => env('APP_KEY', 'SomeRandomString'),
 
-	'cipher'          => 'AES-256-CBC',
+	'cipher' => 'AES-256-CBC',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -95,7 +95,7 @@ return [
 	|
 	*/
 
-	'log'             => 'single',
+	'log' => 'daily',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -108,7 +108,7 @@ return [
 	|
 	*/
 
-	'providers'       => [
+	'providers' => [
 
 		/*
 		 * Laravel Framework Service Providers...
@@ -154,8 +154,9 @@ return [
 		Menu\MenuServiceProvider::class,
 		Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
 		Ktquez\Tinymce\TinymceServiceProvider::class,
-		\Intervention\Image\ImageServiceProvider::class,
-		SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class
+		Intervention\Image\ImageServiceProvider::class,
+		SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+		GrahamCampbell\Markdown\MarkdownServiceProvider::class,
 	],
 
 	/*
@@ -169,7 +170,7 @@ return [
 	|
 	*/
 
-	'aliases'         => [
+	'aliases' => [
 
 		'App'       => Illuminate\Support\Facades\App::class,
 		'Artisan'   => Illuminate\Support\Facades\Artisan::class,
@@ -209,7 +210,8 @@ return [
 		'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
 		'Menu'      => Menu\Menu::class,
 		'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-		'Image'     => \Intervention\Image\Facades\Image::class,
+		'Image'     => Intervention\Image\Facades\Image::class,
+		'Markdown'  => GrahamCampbell\Markdown\Facades\Markdown::class,
 	],
 
 ];

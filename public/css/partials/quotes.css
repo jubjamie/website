@@ -48,6 +48,10 @@ div.quote > div.quote-details > div.quote-content:before {
   left: 0;
 }
 
+div.quote > div.quote-details > div.quote-content p {
+  margin: 0;
+}
+
 div.quote > div.quote-details > div.quote-date {
   color: #999;
   font-size: 13px;

@@ -37,7 +37,7 @@
                     <div class="quote-number">#{{ ($quotes->currentPage() - 1) * $quotes->perPage() + $i + 1 }}</div>
                     <div class="quote-details">
                         <div class="quote-content">
-                            {!! nl2br($quote->quote) !!}
+                            {!! str_replace(PHP_EOL, '</p><p>', \GrahamCampbell\Markdown\Facades\Markdown::convertToHtml($quote->quote)) !!}
                         </div>
                         @if(!is_null($quote->added_by))
                             <div class="quote-date">
