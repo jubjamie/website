@@ -1,5 +1,5 @@
 <?php
 
 return [
-	'failed' => 'An account with the supplied credentials could not be found, or your account is disabled.'
+	'failed' => 'Sorry, the username/email and password you entered do not match.'
 ];

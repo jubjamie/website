@@ -27,14 +27,16 @@
         </div>
 
     <div class="form-group">
-        <button class="btn btn-success" disable-submit="Sending email ..." type="submit">
-            <span class="fa fa-send"></span>
-            <span>Send Reset Link</span>
-        </button>
-        <a class="btn btn-danger" href="{{ route('auth.login') }}">
-            <span class="fa fa-undo"></span>
-            <span>Cancel</span>
-        </a>
+        <div class="btn-group">
+            <button class="btn btn-success" disable-submit="Sending email ..." type="submit">
+                <span class="fa fa-send"></span>
+                <span>Send Reset Link</span>
+            </button>
+            <a class="btn btn-danger" href="{{ route('auth.login') }}">
+                <span class="fa fa-long-arrow-left"></span>
+                <span>Cancel</span>
+            </a>
+        </div>
     </div>
     {!! Form::close() !!}
 @endsection

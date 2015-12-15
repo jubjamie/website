@@ -44,14 +44,16 @@
         </div>
 
         <div class="form-group">
-            <button class="btn btn-success" disable-submit="Resetting password ..." type="submit">
-                <span class="fa fa-check"></span>
-                <span>Reset Password</span>
-            </button>
-            <a class="btn btn-danger" href="{{ route('auth.login') }}">
-                <span class="fa fa-undo"></span>
-                <span>Cancel</span>
-            </a>
+            <div class="btn-group">
+                <button class="btn btn-success" disable-submit="Resetting password ..." type="submit">
+                    <span class="fa fa-check"></span>
+                    <span>Reset Password</span>
+                </button>
+                <a class="btn btn-danger" href="{{ route('auth.login') }}">
+                    <span class="fa fa-long-arrow-left"></span>
+                    <span>Cancel</span>
+                </a>
+            </div>
         </div>
     {!! Form::close() !!}
 @endsection
