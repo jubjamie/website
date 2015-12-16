@@ -261,7 +261,7 @@ class Event extends Model
 	{
 		$query->select('events.*')
 		      ->join('event_times', 'events.id', '=', 'event_times.event_id')
-		      ->whereNotIn('events.id', self::activeAndFuture()->lists('id'))
+		      ->where('event_times.end', '<', Carbon::now()->setTime(0, 0, 0)->toDateTimeString())
 		      ->distinct();
 	}
 

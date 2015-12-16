@@ -26,11 +26,8 @@ class Kernel extends ConsoleKernel
 	{
 		// Automatically close crew lists
 		$schedule->call(function () {
-			$events = Event::select('events.*')
-			               ->leftJoin('event_times', 'events.id', '=', 'event_times.event_id')
+			$events = Event::past()
 			               ->where('events.crew_list_status', 1)
-			               ->where('event_times.end', '<', date('Y-m-d H:i:s', mktime(0, 0, 0)))
-			               ->distinct()
 			               ->get();
 
 			foreach($events as $event) {
