@@ -43,7 +43,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
 		return sprintf("%s / %s / %s",
 				$this->select($name . '_day', $days, $this->getValueAttribute($name . '_day', Carbon::now()->day), $options),
 				$this->selectMonth($name . '_month', $this->getValueAttribute($name . '_month', Carbon::now()->month), $options),
-				$this->selectYear($name . '_year', date('Y') - 1, date('Y'), $this->getValueAttribute($name . '_year', Carbon::now()->year), $options));
+				$this->selectYear($name . '_year', date('Y') - 1, date('Y') + 1, $this->getValueAttribute($name . '_year', Carbon::now()->year), $options));
 	}
 
 	/**
