@@ -14,7 +14,7 @@
 
 @section('content')
     <h1 class="page-header">My Profile</h1>
-    <div id="viewProfile">
+    <div id="myProfile">
         @if($user->isMember())
             <div class="tabpanel" id="profileTab">
                 {!! $menu !!}

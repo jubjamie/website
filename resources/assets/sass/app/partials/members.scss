@@ -1,5 +1,12 @@
 @import "../vars";
 
+#myProfile {
+	fieldset img {
+		max-width: 300px;
+		width: 100%;
+	}
+}
+
 #viewProfile {
 	margin-top: 2em;
 
