@@ -2,10 +2,10 @@
 <div class="modal-body">
     <div class="row">
         <div class="col-xs-8">
-            {!! Form::selectMonth('month', date('m'), ['class' => 'form-control']) !!}
+            {!! Form::selectMonth('month', $date->month, ['class' => 'form-control']) !!}
         </div>
         <div class="col-xs-4">
-            {!! Form::selectRange('year', date('Y') - 5, date('Y') + 5, date('Y'), ['class' => 'form-control']) !!}
+            {!! Form::selectRange('year', $date->year - 5, $date->year + 5, $date->year, ['class' => 'form-control']) !!}
         </div>
     </div>
 </div>
