@@ -16,7 +16,7 @@
 @section('tab')
     <p>Please use the following form if you wish to request a quote or enquire about booking Backstage. You will receive an acknowledgement of your request but please note that this is not a confirmation that Backstage will crew your event. The Production Manager will get back to you with a definite answer as soon as possible.</p>
 
-    {!! Form::open(['class' => 'formhorizontal']) !!}
+    {!! Form::open() !!}
         @include('partials.form.summary-errors')
 
         <div class="row">

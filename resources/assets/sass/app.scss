@@ -1,0 +1,577 @@
+@import "vars";
+@import "mixins";
+
+// Some generic styling
+em, .em, .italic {
+	font-style: italic;
+
+	&.bts {
+		font-style: inherit;
+		color: $btsyellow;
+	}
+}
+
+strong, .strong, .bold {
+	font-weight: 700;
+}
+
+.success {
+	color: #3e8f3e;
+}
+
+.warning {
+	color: darken(#fcf8e3, 25%);
+}
+
+.danger {
+	color: #b92c28;
+}
+
+// Anchors
+a, a:visited {
+	color: $btsyellow;
+	text-decoration: none;
+
+	&:hover {
+		color: $btsyellow;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	&:active {
+		color: $btsgold;
+		text-decoration: underline;
+	}
+	&:focus {
+		outline: 1px dotted $btsyellow;
+	}
+	&.grey {
+		color: $colour_text;
+
+		&:hover {
+			color: $btsyellow;
+		}
+		&:focus, &:active {
+			outline-color: $colour_text;
+		}
+	}
+	&.label {
+		font-weight: normal;
+
+		&:visited {
+			color: #FFF;
+		}
+		&:focus {
+			outline-color: #FFF;
+		}
+	}
+}
+
+// Abbreviations
+abbr {
+	border-bottom: 1px dotted $btsyellow;
+
+	&:hover {
+		cursor: default;
+	}
+}
+
+// Some form overrides
+@import "forms";
+
+// Headers
+@import "headers";
+
+// Horizontal rules
+hr {
+	border: none;
+	background: $btsyellow;
+	height: 1px;
+	margin: 1.5em 0;
+
+	& + * {
+		margin-top: 0;
+	}
+}
+
+// Labels
+.label {
+	& > span.fa {
+		margin-right: 0.3em;
+	}
+}
+
+// List
+@import "lists";
+
+// Navbar
+@import "nav";
+
+// Pagination
+@import "pagination";
+
+// Modal popup
+@import "modal";
+
+// Panels
+@import "panels";
+
+// Paragraphs
+p {
+	font-size: 1em;
+	line-height: 1.667em; // 1.667*15 = 25px
+	margin: 0 0 1.6em 0; // 1.6*15 = 24px
+	@media (min-width: 1000px) {
+		text-align: justify;
+	}
+
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+// Tables
+@import "tables";
+
+// Tool colours
+span.tool-colours {
+	display: inline-block;
+	overflow: hidden;
+	text-align: center;
+	padding: 0 0.25em;
+
+	& > span.tool-colour {
+		float: left;
+		margin: 0 -0.1em;
+
+		&.striped {
+			overflow: hidden;
+			clear: right;
+
+			& > span.fa {
+				float: right;
+
+				&:not(:last-child) {
+					margin-left: -0.65em;
+				}
+			}
+		}
+
+		& > span.fa {
+			&.red {
+				color: #FF0000;
+
+				&.light {
+					color: lighten(#FF0000, 20%);
+				}
+			}
+			&.blue {
+				color: #007BFF;
+
+				&.light {
+					color: lighten(#007BFF, 15%);
+				}
+			}
+			&.green {
+				color: #008000;
+
+				&.light {
+					color: lighten(#008000, 25%);
+				}
+			}
+			&.yellow {
+				color: #FFFF00;
+			}
+			&.white {
+				color: #FFF;
+			}
+			&.black {
+				color: #000;
+				margin-left: 0.2em;
+				text-shadow: -1px -1px 0 #FFF,
+				1px -1px 0 #FFF,
+				-1px 1px 0 #FFF,
+				1px 1px 0 #FFF;
+			}
+			&.brown {
+				color: #5e3415;
+
+				&.light {
+					color: lighten(#5e3415, 20%);
+				}
+			}
+			&.purple {
+				color: #973fff;
+
+				&.light {
+					color: lighten(#973fff, 12%);
+				}
+			}
+			&.grey {
+				color: #888;
+			}
+			&.orange {
+				color: #F60;
+
+				&.light {
+					color: lighten(#F60, 15%);
+				}
+			}
+			&.pink {
+				color: #ff36b8;
+
+				&.light {
+					color: lighten(#ff36b8, 10%);
+				}
+			}
+			&.turquoise {
+				color: #34ffb3;
+			}
+		}
+	}
+	& > span.initials {
+		color: #666;
+		display: block;
+		font-size: 14px;
+		margin-top: 2em;
+		text-transform: uppercase;
+	}
+}
+
+// Event colours
+.event-entry {
+	$event: #A00;
+	$training: #05F;
+	$social: rgb(255, 198, 203);
+	$meeting: #0A0;
+	$hidden: #999;
+	$booking: #F80;
+
+	$event_bg: rgb(255, 170, 170);
+	$training_bg: lighten($training, 30%);
+	$social_bg: $social;
+	$meeting_bg: lighten($meeting, 55%);
+	$hidden_bg: darken($hidden, 20%);
+	$booking_bg: $hidden;
+
+	color: $event !important;
+
+	&.training {
+		color: $training !important;
+	}
+	&.social {
+		color: $social !important;
+	}
+	&.meeting {
+		color: $meeting !important;
+	}
+	&.bts {
+		color: $hidden !important;
+		font-style: italic;
+	}
+	&.booking {
+		color: $booking !important;
+	}
+
+	a {
+		color: inherit !important;
+	}
+
+	&.tag {
+		@include user_select_none();
+		$height: 1.6em;
+		background-color: $event_bg;
+		border-radius: 5px;
+		border-right-color: $event_bg;
+		color: #000 !important;
+		display: inline-block;
+		font-weight: 400;
+		height: $height;
+		line-height: $height;
+		margin: 0 0 0 $height / 2;
+		padding: 0 0.6em;
+		position: relative;
+		text-align: center;
+		text-transform: lowercase;
+
+		&:hover {
+			cursor: default;
+		}
+		&.training {
+			background-color: $training_bg;
+			border-right-color: $training_bg;
+		}
+		&.social {
+			background-color: $social_bg;
+			border-right-color: $social_bg;
+		}
+		&.meeting {
+			background-color: $meeting_bg;
+			border-right-color: $meeting_bg;
+		}
+		&.bts {
+			background-color: $hidden_bg;
+			border-right-color: $hidden_bg;
+		}
+		&.booking {
+			background-color: $booking_bg;
+			border-right-color: $booking_bg;
+		}
+		&.success {
+			background-color: $colour_success;
+		}
+		&.danger {
+			background-color: $colour_danger;
+		}
+	}
+}
+
+ul.event-list {
+	$font-size: 12px;
+	font-size: $font-size;
+
+	li {
+		font-size: #{18px / $font-size}em;
+		line-height: 0;
+		list-style: square inside;
+		margin: 0;
+		padding: 0;
+
+		&:not(:last-child) {
+			margin-bottom: 0.5em;
+		}
+		a, span {
+			color: #CCC !important;
+			display: inline;
+			font-size: $font-size;
+			line-height: 1.2;
+		}
+		a:focus {
+			outline-color: #CCC !important;
+		}
+	}
+}
+
+div.event-key {
+	background: #191919;
+	border-radius: 3px;
+	font-size: 13px;
+	margin: 2em 0;
+	padding: 1em;
+
+	h1 {
+		color: #666;
+		font-size: 18px;
+		margin: 0 0 0.75em 0.2em;
+		text-align: left;
+		text-transform: uppercase;
+
+		@media (min-width: 768px) {
+			margin-left: 0.5em;
+		}
+	}
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			list-style-type: none;
+			white-space: nowrap;
+
+			@media (min-width: 768px) {
+				display: inline-block;
+				margin: 0 0.5em 0;
+			}
+
+			&:before {
+				content: "\2014";
+				font-size: #{18em/13};
+				line-height: 1em;
+				padding-right: 0.3em;
+
+				vertical-align: middle;
+			}
+		}
+	}
+}
+
+span.skill-proficiency {
+	display: inline-block;
+
+	span.fa-star-o {
+		color: #555;
+	}
+}
+
+span.toggle {
+	display: inline-block;
+	font-size: 0;
+	margin: -1em 0;
+	padding: 0;
+
+	&:hover {
+		background: inherit;
+	}
+	span.fa {
+		font-size: 20px;
+	}
+}
+
+input, textarea {
+	& + span.toggle {
+		margin-top: 0;
+	}
+}
+
+// reCAPTCHA fix
+div.g-recaptcha-center {
+	& > div.g-recaptcha {
+		display: block;
+		text-align: center;
+		width: 100%;
+
+		& > div {
+			display: inline-block;
+			margin: 0 auto;
+		}
+	}
+	& > p.help-block {
+		text-align: center;
+	}
+}
+
+// Structure
+@import "structure";
+
+// Special styling
+div[data-type="modal-template"], [data-type="data-editable-source"], [data-type="data-toggle-template"] {
+	display: none !important;
+}
+
+[data-editable] {
+	border-radius: 2px;
+	padding: 7px 0.75em;
+	margin-right: -0.75em;
+	margin-left: -0.75em;
+
+	&:hover {
+		background: rgba(255, 255, 255, 0.1);
+		cursor: pointer;
+	}
+}
+
+table [data-editable] {
+	margin: -0.5em 0;
+}
+
+.dropdown-menu {
+	font-size: 1em;
+	min-width: 10em;
+	padding: 0;
+
+	& > li {
+		margin: 0.3em 0;
+
+		& > a {
+			padding: 0.5em 1em;
+
+			&, &:visited, &:hover {
+				color: #000;
+			}
+			&:focus {
+				outline-color: #000;
+			}
+		}
+	}
+
+	span.fa {
+		margin: 0 0.6em 0 0;
+	}
+}
+
+div.tools {
+	@include clearfix();
+}
+
+div.form-group + div.tools {
+	font-size: 0.8em;
+	margin-top: -0.7em;
+}
+
+div.admin-tools {
+	& > .dropdown, & > .dropup {
+		& > .btn span:not(.fa) + .fa {
+			margin-left: 0.5em;
+		}
+	}
+	&.admin-tools-slim > .dropdown, &.admin-tools-slim > .dropup {
+		& > .btn {
+			padding: 0.3em 0.8em;
+		}
+	}
+}
+
+.date-group {
+	display: inline-block;
+
+	& > .date, & > .time, & > .separator {
+		display: block;
+	}
+	&.date-group-inline {
+		& > .date, & > .time, & > .separator {
+			display: inline-block;
+		}
+	}
+}
+
+div.bootstrap-datetimepicker-widget {
+	color: #000;
+	font-size: 12px;
+	z-index: 9000;
+
+	div.datepicker {
+		z-index: 9500;
+		table {
+			thead {
+				font-weight: bold;
+			}
+		}
+	}
+
+	a, a:hover, a:focus, a:active {
+		color: #000;
+	}
+}
+
+body[page-section*="committee"] {
+	@import "partials/committee";
+}
+body[page-section*="elections"] {
+	@import "partials/elections";
+}
+body[page-section*="equipment"] {
+	@import "partials/equipment";
+}
+body[page-section*="events"] {
+	@import "partials/events";
+}
+body[page-section*="gallery"] {
+	@import "partials/gallery";
+}
+body[page-section*="members"] {
+	@import "partials/members";
+}
+body[page-section*="polls"] {
+	@import "partials/polls";
+}
+body[page-section*="quotes"] {
+	@import "partials/quotes";
+}
+body[page-section*="resources"] {
+	@import "partials/resources";
+}
+body[page-section*="training"] {
+	@import "partials/training";
+}
+body[page-section*="users"] {
+	@import "partials/users";
+}

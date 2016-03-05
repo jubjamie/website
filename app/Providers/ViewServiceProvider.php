@@ -95,18 +95,9 @@ class ViewServiceProvider extends ServiceProvider
 					        ->add(route('quotes.index'), 'Quotes Board')
 					        ->add(route('equipment.dash'), 'Equipment', Menu::items('members.equipment'), [], ['class' => 'equipment'])
 					        ->add(route('training.dash'), 'Training', Menu::items('members.training'), [], ['class' => 'training'])
-					        ->add(route('polls.index'), 'Polls')->activePattern('\/polls')
-						//->raw('', null, ['class' => 'divider'])
-						//->add('#', 'Elections Home')
-						//->add('#', 'BTS Awards')
-						    ->raw('', null, ['class' => 'divider']);
-					if($isAdmin) {
-						$members->add('#', 'Miscellaneous', Menu::items('members.misc'), [], ['class' => 'misc'])
-						        ->raw('', null, ['class' => 'divider'])
-						        ->add(route('su.dash'), 'View SU Area')
-						        ->raw('', null, ['class' => 'divider']);
-					}
-					$members->add(route('contact.accident'), 'Report an Accident')
+					        ->add('#', 'Other', Menu::items('members.misc'), [], ['class' => 'misc'])
+					        ->raw('', null, ['class' => 'divider'])
+					        ->add(route('contact.accident'), 'Report an Accident')
 					        ->raw('', null, ['class' => 'divider']);
 
 					// Build the profile sub-menu
@@ -117,8 +108,8 @@ class ViewServiceProvider extends ServiceProvider
 					// Build the events sub-menu
 					$events = $menu->find('members.events');
 					$events->add(route('events.mydiary'), 'My diary')->activePattern('\/events\/my-diary')
-					       ->add(route('events.signup'), 'Event sign-up')->activePattern('\/events\/signup');
-					//->add('#', 'Submit event report');
+					       ->add(route('events.signup'), 'Event sign-up')->activePattern('\/events\/signup')
+					       ->add('https://docs.google.com/forms/d/1KdSfZYT5pOOVPgq_pRqpGtCoY-OWbvpuNzfGPRqnsx4/viewform', 'Submit event report');
 					if($isAdmin) {
 						//$events->add('#', 'View booking requests')
 						$events->add(route('events.index'), 'View all events')
@@ -148,9 +139,14 @@ class ViewServiceProvider extends ServiceProvider
 					}
 
 					// Build the misc sub-menu
+					$misc = $menu->find('members.misc');
+					$misc
+						->add(route('polls.index'), 'Polls')->activePattern('\/polls')
+						->add(route('elections.index'), 'Committee elections')->activePattern('\/elections');
+					//->add('#', 'BTS Awards')
 					if($isAdmin) {
-						$misc = $menu->find('members.misc');
-						$misc->add(route('page.index'), 'Manage webpages');
+						$misc->add(route('page.index'), 'Manage webpages')
+						     ->add(route('su.dash'), 'View SU Area');
 					}
 
 				}
@@ -254,7 +250,7 @@ class ViewServiceProvider extends ServiceProvider
 			'events.create',
 		], function ($view) {
 			$users = User::active()->nameOrder()->getSelect();
-			$view->with('users', $users);
+			$view->with('users', ['' => '-- Select --'] + $users);
 		});
 	}
 
@@ -262,9 +258,10 @@ class ViewServiceProvider extends ServiceProvider
 	{
 		View::composer([
 			'training.skills.modal.*',
+			'elections.view',
 		], function ($view) {
 			$members = User::member()->active()->nameOrder()->getSelect();
-			$view->with('members', $members);
+			$view->with('members', ['' => '-- Select --'] + $members);
 		});
 	}
 

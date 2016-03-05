@@ -10,7 +10,8 @@ function processAjaxErrors(data, form) {
 				var group = input.parents('.form-group');
 				if(input.attr('name') in errors) {
 					group.addClass('has-error');
-					$('<p class="help-block errormsg">' + errors[input.attr('name')][0] + '</p>').insertAfter(input.parent().hasClass('input-group') ? input.parent() : input);
+					$('<p class="help-block errormsg">' + errors[input.attr('name')][0] + '</p>').insertAfter(
+						input.parent().hasClass('input-group') ? input.parent() : input);
 				} else {
 					group.addClass('has-success');
 				}
@@ -21,6 +22,34 @@ function processAjaxErrors(data, form) {
 
 	alert("Oops, an unknown error has occurred");
 	console.log(data.responseText);
+}
+function datetimepicker(input, options) {
+	var format = input.data('dateFormat') ? input.data('dateFormat') : 'YYYY-MM-DD';
+	var parent = input.parent();
+	var datetimepickerOptions = {
+		format: format,
+		icons : {
+			time    : 'fa fa-clock-o',
+			date    : 'fa fa-calendar',
+			up      : 'fa fa-chevron-up',
+			down    : 'fa fa-chevron-down',
+			previous: 'fa fa-chevron-left',
+			next    : 'fa fa-chevron-right',
+			today   : 'fa fa-bullseye',
+			clear   : 'fa fa-trash',
+			close   : 'fa fa-remove'
+		},
+	};
+	if(typeof(options) == 'object') {
+		datetimepickerOptions = $.extend({}, datetimepickerOptions, options);
+	}
+
+	if(parent.hasClass('input-group')) {
+		parent.addClass('date')
+			.datetimepicker(datetimepickerOptions);
+	} else {
+		input.datetimepicker(datetimepickerOptions);
+	}
 }
 $.ajaxSetup({
 	headers : {
@@ -42,4 +71,7 @@ $('[data-type="search-input"]').on('keypress', function (event) {
 		var value = encodeURI(input.val()).trim();
 		window.location = input.data('urlBase') + (value ? '/search/' + value : '');
 	}
+});
+$('input[data-input-type="datetimepicker"]').each(function (i, obj) {
+	datetimepicker($(obj));
 });

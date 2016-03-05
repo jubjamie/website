@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'users')
 @section('title', 'User Manager')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/users'])
-@endsection
 
 @section('content')
     <h1 class="page-header">User Manager</h1>

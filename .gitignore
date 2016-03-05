@@ -9,3 +9,5 @@ Homestead.yaml
 /storage/logs/*
 /vendor
 /public/images/*
+/resources/elections
+/components

@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'training')
 @section('title', 'Training Skills')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/training'])
-@endsection
 
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {

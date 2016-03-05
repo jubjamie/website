@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'members')
 @section('title', 'The Membership')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/members'])
-@endsection
 
 @section('content')
     <h1 class="page-header">The Membership</h1>

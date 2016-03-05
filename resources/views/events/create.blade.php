@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('page-section', 'events')
 @section('title', 'Add an Event')
 
 @section('scripts')
@@ -91,13 +91,13 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <div class="col-xs-5">
-                            {!! Form::text('date_start', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
+                            {!! Form::date('date_start', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
                         </div>
                         <div class="col-xs-2 date-hide">
                             <p class="form-control-static text-center">to</p>
                         </div>
                         <div class="col-xs-5 date-hide">
-                            {!! Form::text('date_end', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
+                            {!! Form::date('date_end', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
                         </div>
                     </div>
                     <div class="form-group" style="margin-top:-15px;">
@@ -128,13 +128,13 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <div class="col-xs-5">
-                            {!! Form::text('time_start', '19:00', ['class' => 'form-control', 'placeholder' => 'hh:mm']) !!}
+                            {!! Form::time('time_start', '19:00', ['class' => 'form-control', 'placeholder' => 'hh:mm', 'data-date-format' => 'HH:mm']) !!}
                         </div>
                         <div class="col-xs-2">
                             <p class="form-control-static text-center">to</p>
                         </div>
                         <div class="col-xs-5">
-                            {!! Form::text('time_end', '22:30', ['class' => 'form-control', 'placeholder' => 'hh:mm']) !!}
+                            {!! Form::time('time_end', '22:30', ['class' => 'form-control', 'placeholder' => 'hh:mm', 'data-date-format' => 'HH:mm']) !!}
                         </div>
                     </div>
                     <div class="form-group" style="margin-top:-15px;">

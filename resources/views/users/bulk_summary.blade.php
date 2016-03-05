@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'users')
 @section('title', 'Create User Summary')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/users'])
-@endsection
 
 @section('content')
     <h1 class="page-header">@yield('title')</h1>

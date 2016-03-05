@@ -11,18 +11,20 @@
     <div class="form-group">
         {!! Form::label('start', 'Start:', ['class' => 'control-label col-xs-3']) !!}
         <div class="col-xs-9">
-            {!! Form::selectDate('start') !!}<br>
-            {!! Form::selectTime('start') !!}
-            {!! Form::hidden('start') !!}
+            <div class="input-group">
+                {!! Form::datetime('start',  null, ['class' => 'form-control', 'data-date-format' => 'YYYY-MM-DD HH:mm']) !!}
+                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+            </div>
         </div>
     </div>
     {{-- End --}}
     <div class="form-group">
         {!! Form::label('end', 'Finish:', ['class' => 'control-label col-xs-3']) !!}
         <div class="col-xs-9">
-            {!! Form::selectDate('end') !!}<br>
-            {!! Form::selectTime('end') !!}
-            {!! Form::hidden('end') !!}
+            <div class="input-group">
+                {!! Form::datetime('end', null, ['class' => 'form-control', 'data-date-format' => 'YYYY-MM-DD HH:mm']) !!}
+                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+            </div>
         </div>
     </div>
     {!! Form::input('hidden', 'id', null) !!}

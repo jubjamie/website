@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'training')
 @section('title', 'Awarded Skills Log')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/training'])
-@endsection
 
 @section('content')
     <h1 class="page-header">@yield('title')</h1>

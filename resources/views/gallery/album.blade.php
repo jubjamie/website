@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'gallery')
 @section('title', 'Gallery: ' . $album['name'])
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/gallery'])
-@endsection
 
 @section('content')
     <h1>{{ $album['name'] }}</h1>

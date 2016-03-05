@@ -18,10 +18,17 @@
 		"greggilbert/recaptcha"             : "2.*",
 		"intervention/image"                : "^2.3",
 		"sammyk/laravel-facebook-sdk"       : "~3.0",
-		"guzzlehttp/guzzle": "~5.3",
-		"eluceo/ical": "^0.8.0",
-		"laravelcollective/html": "^5.1",
-		"graham-campbell/markdown": "^5.3"
+		"components/jquery"                 : "^2.2",
+		"twbs/bootstrap"                    : "^3.3",
+		"moment/moment"                     : "^2.11",
+		"guzzlehttp/guzzle"                 : "~5.3",
+		"eluceo/ical"                       : "^0.8.0",
+		"laravelcollective/html"            : "^5.1",
+		"graham-campbell/markdown"          : "^5.3",
+		"Eonasdan/bootstrap-datetimepicker" : "^4.17",
+		"select2/select2"                   : "^4.0",
+		"fortawesome/font-awesome": "^4.5"
+
 	},
 	"require-dev" : {
 		"fzaninotto/faker": "~1.4",

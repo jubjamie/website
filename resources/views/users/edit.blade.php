@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'users')
 @section('title', 'Edit User')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/users'])
-@endsection
 
 @if($ownAccount)
 @section('messages')

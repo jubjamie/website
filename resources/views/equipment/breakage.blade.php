@@ -1,5 +1,5 @@
 @extends('app')
-
+@section('page-section', 'equipment')
 @section('title', 'Breakage Details')
 
 @section('content')

@@ -1,12 +1,6 @@
 @extends('app')
-
+@section('page-section', 'members events training')
 @section('title', $user->getPossessiveName("Profile"))
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/members'])
-    @include('partials.tags.style', ['path' => 'partials/events'])
-    @include('partials.tags.style', ['path' => 'partials/training'])
-@endsection
 
 @section('scripts')
     $('#profileTab').tabify();

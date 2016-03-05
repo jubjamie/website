@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'events')
 @section('title', 'Event Details')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/events'])
-@endsection
 
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {

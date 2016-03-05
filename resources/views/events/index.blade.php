@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'events')
 @section('title', 'Event List')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/events'])
-@endsection
 
 @section('content')
     <h1 class="page-header">@yield('title')</h1>

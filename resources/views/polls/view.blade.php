@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'polls')
 @section('title', 'Poll')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/polls'])
-@endsection
 
 @section('content')
     <h1 class="page-header">Poll</h1>

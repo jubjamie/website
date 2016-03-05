@@ -13,38 +13,46 @@ var elixir = require('laravel-elixir');
 
 elixir.config.sourcemaps = false;
 elixir(function (mix) {
-	mix.sass('app/app.scss', 'resources/assets/css/app.css')
-		.sass('app/partials/committee.scss', 'public/css/partials/committee.css')
-		.sass('app/partials/equipment.scss', 'public/css/partials/equipment.css')
-		.sass('app/partials/events.scss', 'public/css/partials/events.css')
-		.sass('app/partials/gallery.scss', 'public/css/partials/gallery.css')
-		.sass('app/partials/members.scss', 'public/css/partials/members.css')
-		.sass('app/partials/quotes.scss', 'public/css/partials/quotes.css')
-		.sass('app/partials/polls.scss', 'public/css/partials/polls.css')
-		.sass('app/partials/training.scss', 'public/css/partials/training.css')
-		.sass('app/partials/users.scss', 'public/css/partials/users.css')
-		.sass('tinymce/tinymce.scss', 'public/css/tinymce.css')
-		.sass('font-awesome/font-awesome.scss', 'resources/assets/css/font-awesome.css')
-		.styles([
-			'reset.css',
-			'bootstrap.min.css',
-			'bootstrap-theme.min.css',
-			'select2.min.css',
-			'font-awesome.css',
-			'app.css'
-		], 'public/css/app.css')
+	mix
+	// Copy vendor files
+		.copy('vendor/components/jquery/jquery.min.js', 'resources/assets/js/vendors/jquery.js')
+		.copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 'resources/assets/js/vendors/bootstrap.js')
+		.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 'resources/assets/css/vendors/bootstrap.css')
+		.copy('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css', 'resources/assets/css/vendors/bootstrap-theme.css')
+		.copy('vendor/moment/moment/min/moment.min.js', 'resources/assets/js/vendors/moment.js')
+		.copy('vendor/select2/select2/dist/js/select2.min.js', 'resources/assets/js/vendors/select2.js')
+		.copy('vendor/select2/select2/dist/css/select2.min.css', 'resources/assets/css/vendors/select2.css')
+		.copy('vendor/eonasdan/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js', 'resources/assets/js/vendors/datetimepicker.js')
+		.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'resources/assets/css/vendors/datetimepicker.css')
+
+		// Combine vendors files
+		.sass('vendors/font-awesome/font-awesome.scss', 'resources/assets/css/vendors/font-awesome.css')
 		.scripts([
-			'date.format.js',
-			'jquery.js',
+			'vendors/jquery.js',
+			'vendors/moment.js',
+			'vendors/bootstrap.js',
+			'vendors/select2.js',
+			'vendors/datetimepicker.js'
+		], 'public/js/vendors.js')
+		.styles([
+			'vendors/reset.css',
+			'vendors/bootstrap.css',
+			'vendors/bootstrap-theme.css',
+			'vendors/select2.css',
+			'vendors/font-awesome.css',
+			'vendors/datetimepicker.css'
+		], 'public/css/vendors.css')
+
+		// Create app files
+		.sass('app.scss', 'public/css/app.css')
+		.sass('tinymce.scss', 'public/css/tinymce.css')
+		.scripts([
 			'plugins/tabify.js',
 			'plugins/CloseMessages.js',
 			'plugins/DisableButtons.js',
 			'plugins/modal.js',
 			'plugins/EditableFields.js',
-			'bootstrap.min.js',
-			'select2.min.js',
 			'app.js',
 		], 'public/js/app.js')
-		.copy('resources/assets/js/tinymce', 'public/js/tinymce')
-		.copy('resources/assets/js/partials', 'public/js/partials');
+	//.copy('resources/assets/js/tinymce', 'public/js/tinymce')
 });

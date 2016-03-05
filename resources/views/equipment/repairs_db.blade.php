@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'equipment')
 @section('title', 'Breakages and Repairs')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/equipment'])
-@endsection
 
 @section('add_breakage_link')
     <p>

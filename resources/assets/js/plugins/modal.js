@@ -20,7 +20,9 @@ var $btns;
 		if(template.length > 0) {
 			// Set the modal content
 			$modalContent.html(template.html());
-			if(target.data('modalClass')) $modalDialog.addClass(target.data('modalClass'));
+			if(target.data('modalClass')) {
+				$modalDialog.addClass(target.data('modalClass'));
+			}
 			if(target.data('modalTitle')) {
 				if($modalContent.children('div.modal-header').length == 0) {
 					$modalContent.prepend('<div class="modal-header"></div>');
@@ -42,6 +44,12 @@ var $btns;
 					}
 				}
 			}
+
+			// Reload widgets
+			$form = form();
+			$form.find('input[data-input-type="datetimepicker"]').each(function (i, obj) {
+				datetimepicker($(obj));
+			});
 		} else {
 			$modal.one('shown.bs.modal', function () {
 				$modal.modal('hide');
@@ -72,24 +80,28 @@ var $btns;
 		$form.attr('action', $btn.data('formAction'));
 		$btns.attr('disabled', 'disabled');
 		$.ajax({
-			data      : $form.serialize(),
-			url       : $form.attr('action'),
-			type      : "post",
-			success   : function () {
+			cache      : false,
+			contentType: false,
+			data       : typeof(FormData) == 'undefined' ? $form.serialize() : new FormData($form[0]),
+			processData: false,
+			mimeType   : "multipart/form-data",
+			url        : $form.attr('action'),
+			type       : "post",
+			success    : function () {
 				$btn.off('click');
 				location.reload();
 			},
-			error     : function (data) {
+			error      : function (data) {
 				$modal.trigger('clearform');
 				$btns.attr('disabled', false);
 				processAjaxErrors(data, $form);
 			},
-			beforeSend: function () {
+			beforeSend : function () {
 				$modal.trigger('clearform');
 			}
 		});
 	});
-	$modal.on('submit', 'form', function(event) {
+	$modal.on('submit', 'form', function (event) {
 		var btn = $(this).find('button,input[type="button"],input[type="submit"]').first();
 		if(btn.data('type') == 'submit-modal') {
 			event.preventDefault();

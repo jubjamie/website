@@ -85,8 +85,8 @@ class Event extends Model
 		'description_public' => 'required',
 		'venue'              => 'required',
 		'crew_list_status'   => 'in:-1,0,1',
-		'date_start'         => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
-		'date_end'           => 'required|date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/|after:date_start',
+		'date_start'         => 'required|date',
+		'date_end'           => 'required|date|after:date_start',
 		'time_start'         => 'required|date_format:H:i',
 		'time_end'           => 'required|date_format:H:i|after:time_start',
 	];
@@ -109,11 +109,9 @@ class Event extends Model
 		'client_type.in'              => 'Please select a valid client type',
 		'crew_list_status.in'         => 'Please select a status for the crew list',
 		'date_start.required'         => 'Please enter when this event starts',
-		'date_start.date_format'      => 'Please enter a valid date',
-		'date_start.regex'            => 'Please enter a valid date',
+		'date_start.date'             => 'Please enter a valid date',
 		'date_end.required'           => 'Please enter when this event ends',
-		'date_end.date_format'        => 'Please enter a valid date',
-		'date_end.regex'              => 'Please enter a valid date',
+		'date_end.date'               => 'Please enter a valid date',
 		'date_end.after'              => 'This must be after the start date',
 		'time_start.required'         => 'Please enter the start time',
 		'time_start.date_format'      => 'Please enter a valid time',
@@ -189,6 +187,11 @@ class Event extends Model
 		            ->select('event_crew.*')
 		            ->whereNotNull('user_id')
 		            ->join('users', 'event_crew.user_id', '=', 'users.id');
+	}
+
+	public function resources()
+	{
+		return $this->hasMany('App\Resource');
 	}
 
 	/**

@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'committee')
 @section('title', 'The Committee')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/committee'])
-@endsection
 
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {

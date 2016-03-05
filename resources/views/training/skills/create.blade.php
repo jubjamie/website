@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'training')
 @section('title', 'Add Skill')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/training'])
-@endsection
 
 @section('content')
     <h1 class="page-header">Add Training Skill</h1>

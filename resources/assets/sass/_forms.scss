@@ -1,0 +1,233 @@
+form {
+	margin-left: auto;
+	margin-right: auto;
+
+	.input-group.textarea > span.input-group-addon {
+		padding-top: 0.75em;
+		vertical-align: top;
+	}
+	span.input-group-addon > span.fa {
+		text-align: center;
+		width: 1em;
+	}
+	div.form-error {
+		font-size: 14px;
+		padding-top: 0.5em;
+		padding-bottom: 0.5em;
+		& > span.fa {
+			margin: 0.3em 0.7em 0 -0.1em;
+		}
+	}
+
+	&:not(.form-horizontal) .control-label {
+		font-weight: normal;
+	}
+}
+
+.form-control-static {
+	line-height: 1.4 !important;
+	min-height: 0 !important;
+	margin-top: 0 !important;
+	margin-bottom: 0 !important;
+}
+
+.btn, a.btn {
+	color: #000;
+	display: inline-block;
+	font-size: 1em;
+	font-weight: 300;
+	margin-bottom: 0.5em;
+
+	&.btn-bts {
+		$btsyellow_darken: darken($btsyellow, 20%);
+		background-color: $btsyellow;
+		background-image: -webkit-linear-gradient(top, $btsyellow 0%, $btsyellow_darken 100%);
+		background-image: -o-linear-gradient(top, $btsyellow 0%, $btsyellow_darken 100%);
+		background-image: -webkit-gradient(linear, left top, left bottom, from($btsyellow), to($btsyellow_darken));
+		background-image: linear-gradient(to bottom, $btsyellow 0%, $btsyellow_darken 100%);
+		filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=$btsyellow, endColorstr=$btsyellow_darken, GradientType=0);
+		filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+		background-repeat: repeat-x;
+		background-position: 0 1px;
+
+		&:hover, &:focus {
+			background-color: $btsyellow_darken;
+			background-position: 0 -15px;
+		}
+	}
+	&.btn-success, &.btn-danger, &.btn-warning, &.btn-primary, &.btn-info {
+		color: #FFF;
+	}
+
+	& > span.fa:not(:last-child) {
+		margin: 0 0.5em 0 0;
+	}
+
+	&[disabled], &[disabled]:hover {
+		background: #888;
+		border-color: #333;
+	}
+	&.btn-lg {
+		font-size: 1.125em;
+	}
+	&.btn-sm {
+		font-size: 0.75em;
+		padding: 0.25em 0.6em;
+	}
+	&.btn-xs {
+		font-size: 0.75em;
+	}
+}
+
+.btn-group .btn {
+	margin-bottom: 0;
+}
+
+&.form-control {
+	color: #000;
+	font-size: 1em;
+
+	&:not(textarea) {
+		height: 2.533em;
+	}
+	&.input-sm {
+		font-size: 12px;
+	}
+	&.input-lg {
+		font-size: 18px;
+	}
+	&.search-input {
+		display: inline-block;
+		height: 2em;
+		width: 10em;
+	}
+}
+
+.form-control[disabled], .form-control[readonly], fieldset[disabled] .form-control {
+	background-color: #BBB;
+}
+
+textarea.form-control {
+	&.resize-y {
+		resize: vertical;
+	}
+	&.no-resize {
+		resize: none;
+	}
+}
+
+.form-control.form-control-inline {
+	display: inline-block;
+	width: auto !important;
+}
+
+.help-block {
+	font-size: 14px;
+	&.small {
+		font-size: 12px;
+	}
+	&.large {
+		font-size: 16px;
+	}
+	color: $btsyellow;
+	font-style: normal;
+	text-align: left;
+
+	&.alt {
+		color: #CCC;
+		font-style: italic;
+	}
+	a {
+		color: $colour_primary !important;
+
+		&:focus {
+			outline-color: $colour_primary !important;
+		}
+	}
+}
+
+.form-group {
+	&.center-block {
+		display: inline-block;
+		width: auto;
+
+		&:after {
+			content: "";
+			display: block;
+		}
+	}
+	&.has-error {
+		.form-control {
+			color: #a94442;
+		}
+	}
+	&.has-success {
+		.form-control {
+			color: #3c763d;
+		}
+	}
+
+	&.has-error, &.has-success {
+		label {
+			a {
+				color: inherit;
+			}
+		}
+		.checkbox label {
+			color: inherit;
+		}
+		&.no-highlight .checkbox label {
+			color: #CCC;
+		}
+	}
+	.form-group {
+		margin-bottom: 0;
+	}
+}
+
+.text-center {
+	.has-error, .has-success {
+		p {
+			text-align: center;
+		}
+	}
+}
+
+.checkbox {
+	@include user_select_none();
+
+	label {
+		font-weight: 300;
+	}
+}
+
+fieldset, div.fieldset {
+	border: 1px solid $btsyellow;
+	border-radius: $dim_bdr_radius;
+	margin: 1em 0;
+	padding: 0.5em 1.5em;
+	position: relative;
+
+	legend, & > h1 {
+		background: transparent;
+		border: none;
+		color: $btsyellow;
+		font-weight: 300;
+		font-size: 16px;
+		line-height: 1em;
+		margin-left: -0.5em;
+		padding: 0 0.5em;
+		text-align: left;
+		width: auto;
+
+		& + p {
+			margin-top: 0;
+		}
+	}
+	& > h1 {
+		background: #000;
+		margin-top: -0.65em;
+		position: absolute;
+		top: 0;
+	}
+}

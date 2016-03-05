@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'events')
 @section('title', $title)
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/events'])
-@endsection
 
 @section('javascripts')
     @include('partials.tags.script', ['path' => 'partials/diary'])

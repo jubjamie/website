@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'quotes')
 @section('title', 'Quotesboard')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/quotes'])
-@endsection
 
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {

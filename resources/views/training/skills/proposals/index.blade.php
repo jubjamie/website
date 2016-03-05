@@ -1,10 +1,6 @@
 @extends('app')
-
+@section('page-section', 'training')
 @section('title', 'Skill Proposals')
-
-@section('stylesheets')
-    @include('partials.tags.style', ['path' => 'partials/training'])
-@endsection
 
 @section('scripts')
     $('#proposalTab').tabify();
