@@ -3,12 +3,16 @@
 @section('title', 'Breakages and Repairs')
 
 @section('add_breakage_link')
-    <p>
+    <div class="btn-group">
         <a class="btn btn-success" href="{{ route('equipment.repairs.add') }}">
             <span class="fa fa-wrench"></span>
             <span>Report a breakage</span>
         </a>
-    </p>
+        <a class="btn btn-primary" href="https://docs.google.com/forms/d/1iEeYXmItGGWwjsqbv1w1yRXKsvnfwBMdhAujCC5VKfI/viewform" target="_blank">
+            <span class="fa fa-exclamation-circle"></span>
+            <span>Report issue with SU kit</span>
+        </a>
+    </div>
 @endsection
 
 @section('content')

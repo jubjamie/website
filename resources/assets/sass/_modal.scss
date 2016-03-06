@@ -54,7 +54,9 @@ div.modal {
 			font-size: 14px;
 		}
 		a {
-			color: $colour_primary;
+			&:not(.btn) {
+				color: $colour_primary;
+			}
 		}
 		hr {
 			background: #000;

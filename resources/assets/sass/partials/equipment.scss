@@ -29,3 +29,11 @@
 		}
 	}
 }
+&[page-id="add_breakage"] {
+	div#addBreakage {
+		@media(min-width: 768px) {
+			margin: 0 auto;
+			width: 550px;
+		}
+	}
+}
