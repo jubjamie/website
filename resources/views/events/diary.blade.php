@@ -2,8 +2,14 @@
 @section('page-section', 'events')
 @section('title', $title)
 
-@section('javascripts')
-    @include('partials.tags.script', ['path' => 'partials/diary'])
+@section('scripts')
+    $modal.on('click', '#submitDateModal', function () {
+        $modal.find('button').attr('disabled', 'disabled');
+        var form = $modal.find('form');
+        window.location = $(this).data('url')
+                                .replace('%year', form.find('select[name="year"]').val())
+                                .replace('%month', form.find('select[name="month"]').val());
+    });
 @endsection
 
 @section('styles')
@@ -99,37 +105,38 @@
         @include('events.modal.diary_date')
     </div>
     @if($activeUser->isMember())
-    <div data-type="modal-template" data-id="google_calendar">
-        <div class="modal-header"><h1>Add to Google Calendar</h1></div>
-        <div class="modal-body">
-            <p>To add the events diary to your Google Calendar:</p>
-            <ol>
-                <li>Go to <a href="http://calendar.google.com/" target="_blank">Google Calendar</a></li>
-                <li>Go to the <strong>Other Calendars</strong> menu on the left-hand side, click the down arrow and choose <strong>Add by URL</strong>.</li>
-                <li>Enter this URL:</li>
-                <kbd style="font-size:12px;">
-                    {{ route('events.export') }}
-                </kbd>
-                <li>Customise the calendar with a name, notifications, etc., as you would any other calendar.</li>
-            </ol>
-            <h4>Please note</h4>
-            <ul>
-                <li>We currently cannot guarantee how quickly the events diary in Google Calendar will update. This depends on how often Google requests for
-                    updates, which can't be configured.</li>
-                <li>This currently only contains events - training, socials and meetings may be added in the future.</li>
-            </ul>
+        <div data-type="modal-template" data-id="google_calendar">
+            <div class="modal-header"><h1>Add to Google Calendar</h1></div>
+            <div class="modal-body">
+                <p>To add the events diary to your Google Calendar:</p>
+                <ol>
+                    <li>Go to <a href="http://calendar.google.com/" target="_blank">Google Calendar</a></li>
+                    <li>Go to the <strong>Other Calendars</strong> menu on the left-hand side, click the down arrow and choose <strong>Add by URL</strong>.</li>
+                    <li>Enter this URL:</li>
+                    <kbd style="font-size:12px;">
+                        {{ route('events.export') }}
+                    </kbd>
+                    <li>Customise the calendar with a name, notifications, etc., as you would any other calendar.</li>
+                </ol>
+                <h4>Please note</h4>
+                <ul>
+                    <li>We currently cannot guarantee how quickly the events diary in Google Calendar will update. This depends on how often Google requests for
+                        updates, which can't be configured.
+                    </li>
+                    <li>This currently only contains events - training, socials and meetings may be added in the future.</li>
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success" data-toggle="modal" data-target="#modal" type="button">
+                    <span class="fa fa-thumbs-up"></span>
+                    <span>Ok, got it</span>
+                </button>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn btn-success" data-toggle="modal" data-target="#modal" type="button">
-                <span class="fa fa-thumbs-up"></span>
-                <span>Ok, got it</span>
-            </button>
+        <div data-type="modal-template" data-id="date_gantt">
+            <div class="modal-header">
+                <h1>Monday 21st September 2015</h1>
+            </div>
         </div>
-    </div>
-    <div data-type="modal-template" data-id="date_gantt">
-        <div class="modal-header">
-            <h1>Monday 21st September 2015</h1>
-        </div>
-    </div>
     @endif
 @endsection
