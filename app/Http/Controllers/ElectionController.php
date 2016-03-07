@@ -22,18 +22,18 @@ class ElectionController extends Controller
 	 */
 	public function __construct()
 	{
-		$this->middleware('auth.permission:member', [
+		$this->middleware('auth.permission:admin', [
 			'except' => [
-				'create',
-				'store',
-				'delete',
+				'index',
+				'view',
+				'manifesto',
 			],
 		]);
-		$this->middleware('auth.permission:admin', [
+		$this->middleware('auth.permission:member', [
 			'only' => [
-				'create',
-				'store',
-				'delete',
+				'index',
+				'view',
+				'manifesto',
 			],
 		]);
 	}
@@ -66,10 +66,9 @@ class ElectionController extends Controller
 
 	/**
 	 * View the form to create a new election.
-	 * @param $request
 	 * @return mixed
 	 */
-	public function create(GenericRequest $request)
+	public function create()
 	{
 		// Determine the positions
 		$positions = CommitteeRole::orderBy('order', 'ASC')->lists('name', 'id');
