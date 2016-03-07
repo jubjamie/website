@@ -15,16 +15,8 @@
                      data-form-data="{{ json_encode([
                      'id' => $time->id,
                      'name' => $time->name,
-                     'start_year' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y'),
-                     'start_month' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('n'),
-                     'start_day' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('j'),
-                     'start_hour' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('G'),
-                     'start_minute' => (int)$time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('i'),
-                     'end_year' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y'),
-                     'end_month' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('n'),
-                     'end_day' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('j'),
-                     'end_hour' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('G'),
-                     'end_minute' => (int)$time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('i'),
+                     'start' => $time->start->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y-m-d H:i'),
+                     'end' => $time->end->tz(env('SERVER_TIMEZONE', 'UTC'))->format('Y-m-d H:i'),
                      ]) }}"
                      role="button">
                 @else

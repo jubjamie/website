@@ -821,9 +821,6 @@ class EventsController extends Controller
 	 */
 	private function validateEventTime(GenericRequest $request)
 	{
-		$request->createDateTimeEntry('start');
-		$request->createDateTimeEntry('end');
-
 		$this->validate($request, [
 			'name'  => 'required',
 			'start' => 'required|date_format:Y-m-d H:i',
