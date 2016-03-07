@@ -197,8 +197,8 @@ class EventsController extends Controller
 		// Set the event time limits
 		$start_time = explode(':', $request->get('time_start'));
 		$end_time   = explode(':', $request->get('time_end'));
-		$date_start = Carbon::createFromFormat('d/m/Y H:i:s', $request->get('date_start') . ' 00:00:00', env('SERVER_TIMEZONE', 'UTC'));
-		$date_end   = Carbon::createFromFormat('d/m/Y H:i:s', $request->get($request->has('one_day') ? 'date_start' : 'date_end') . ' 23:59:59',
+		$date_start = Carbon::createFromFormat('Y-m-d H:i:s', $request->get('date_start') . ' 00:00:00', env('SERVER_TIMEZONE', 'UTC'));
+		$date_end   = Carbon::createFromFormat('Y-m-d H:i:s', $request->get($request->has('one_day') ? 'date_start' : 'date_end') . ' 23:59:59',
 			env('SERVER_TIMEZONE', 'UTC'));
 
 		// Create each event time
