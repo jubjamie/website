@@ -21,6 +21,10 @@ class Election extends Model
 	 */
 	protected $table = 'elections';
 
+	/**
+	 * Define the attributes that should be Carbon instances.
+	 * @var array
+	 */
 	protected $dates = [
 		'nominations_start',
 		'nominations_end',
@@ -29,8 +33,13 @@ class Election extends Model
 		'hustings_time',
 	];
 
+	/**
+	 * Define the attributes that are mass-assignable.
+	 * @var array
+	 */
 	public $fillable = [
 		'type',
+		'bathstudent_id',
 		'positions',
 		'nominations_start',
 		'nominations_end',
