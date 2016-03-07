@@ -120,6 +120,15 @@ Route::group([
 			'as'   => 'elections.view',
 			'uses' => 'ElectionController@view',
 		]);
+		// Edit
+		Route::get('edit', [
+			'as'   => 'elections.edit',
+			'uses' => 'ElectionController@edit',
+		]);
+		Route::post('edit', [
+			'as'   => 'elections.update',
+			'uses' => 'ElectionController@update',
+		]);
 		// Delete
 		Route::post('delete', [
 			'as'   => 'elections.delete',

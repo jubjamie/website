@@ -40,13 +40,26 @@
                                 </ul>
                             @endif
                         </td>
-                        <td class="admin-tools">
+                        <td class="admin-tools admin-tools-icon">
                             @if($activeUser->isAdmin())
-                                <a class="btn btn-danger"
-                                   data-submit-ajax="{{ route('elections.delete', ['id' => $election->id]) }}"
-                                   data-submit-confirm="Are you sure you want to delete this election?">
-                                    <span class="fa fa-trash"></span>
-                                </a>
+                                <div class="dropdown admin-tools">
+                                    <button class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                                        <span class="fa fa-cog"></span>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-right">
+                                        <li>
+                                            <a href="{{ route('elections.edit', ['id' => $election->id]) }}">
+                                                <span class="fa fa-pencil"></span> Edit
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a data-submit-ajax="{{ route('elections.delete', ['id' => $election->id]) }}" data-submit-confirm="Are you sure you want to delete this election?">
+                                                <span class="fa fa-trash"></span> Delete
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             @endif
                         </td>
                     </tr>

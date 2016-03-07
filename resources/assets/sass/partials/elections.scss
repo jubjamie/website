@@ -32,7 +32,7 @@
 }
 
 // Create form
-&[page-id="create"] {
+&[page-id="create"], &[page-id="edit"] {
 	form {
 		@media(min-width: 768px) {
 			width: 35em;
@@ -45,6 +45,12 @@
 	#electionDates {
 		div.row {
 			margin-bottom: 0.75em;
+
+			& > div.heading {
+				@media(min-width: 768px) {
+					text-align: right;
+				}
+			}
 		}
 		div.btn-group {
 			margin-top: 1em;
@@ -66,8 +72,7 @@
 			}
 			& > div.nominations {
 				div.row {
-					height: 2.5em;
-
+					min-height: 2.5em;
 					padding-left: 1.75em;
 					padding-right: 8.5em;
 					position: relative;

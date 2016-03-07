@@ -11,7 +11,7 @@
     <div class="container-fluid" id="electionDates">
         {{-- Nominations --}}
         <div class="row">
-            <div class="col-sm-4 text-right">Nominations:</div>
+            <div class="col-sm-4 heading">Nominations:</div>
             <div class="col-sm-8">
                 @include('elections._date', ['date' => $election->nominations_start])
                 &mdash;
@@ -21,7 +21,7 @@
 
         {{-- Hustings --}}
         <div class="row">
-            <div class="col-sm-4 text-right">Hustings:</div>
+            <div class="col-sm-4 heading">Hustings:</div>
             <div class="col-sm-8">
                 @include('elections._date', ['date' => $election->hustings_time])
                 in
@@ -31,7 +31,7 @@
 
         {{-- Voting --}}
         <div class="row">
-            <div class="col-sm-4 text-right">Voting:</div>
+            <div class="col-sm-4 heading">Voting:</div>
             <div class="col-sm-8">
                 <div>
                     @include('elections._date', ['date' => $election->voting_start])
@@ -41,7 +41,7 @@
                 <div>
                     <div class="btn-group btn-group-sm">
                         @if($election->isVotingOpen())
-                            <a class="btn btn-success" href="http://www.bathstudent.com/elections/" target="_blank">
+                            <a class="btn btn-success" href="http://www.bathstudent.com/elections/{{ $election->bathstudent_id ?: '' }}" target="_blank">
                                 <span class="fa fa-check"></span>
                                 <span>Vote now</span>
                             </a>
@@ -65,8 +65,8 @@
         <div class="container-fluid">
             @foreach($election->positions as $index => $position)
                 <div class="row position">
-                    <div class="col-md-5 name">{{ $position }}:</div>
-                    <div class="col-md-7 nominations">
+                    <div class="col-sm-5 name">{{ $position }}:</div>
+                    <div class="col-sm-7 nominations">
                         <div class="container-fluid">
                             @forelse($election->getNominations($index) as $nominee)
                                 <div class="row">
@@ -77,9 +77,7 @@
                                         {!! link_to_route('members.profile', $nominee->user->name, ['username' => $nominee->user->username], ['class' => 'grey', 'target' => '_blank']) !!}
                                     </div>
                                     <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-primary"
-                                           href="{{ route('elections.manifesto', ['id' => $election->id, 'nomineeId' => $nominee->id]) }}"
-                                           target="_blank">
+                                        <a class="btn btn-primary" href="{{ route('elections.manifesto', ['id' => $election->id, 'nomineeId' => $nominee->id]) }}" target="_blank">
                                             <span class="fa fa-file-pdf-o"></span>
                                             <span>Manifesto</span>
                                         </a>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\CommitteeRole;
 use App\Election;
 use App\Http\Requests;
+use App\Http\Requests\ElectionRequest;
 use App\Http\Requests\GenericRequest;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
@@ -60,7 +61,7 @@ class ElectionController extends Controller
 		$election = Election::findOrFail($id);
 
 		return View::make('elections.view')
-		           ->with(compact('election'));
+		           ->with('election', $election);
 	}
 
 	/**
@@ -71,13 +72,12 @@ class ElectionController extends Controller
 	public function create(GenericRequest $request)
 	{
 		// Determine the positions
-		$positions = $request->old('positions');
-		if(!is_array($positions) || empty($positions)) {
-			$positions = CommitteeRole::orderBy('order', 'ASC')->lists('name', 'id');
-		}
+		$positions = CommitteeRole::orderBy('order', 'ASC')->lists('name', 'id');
 
 		return View::make('elections.create')
-		           ->with(compact('positions'));
+		           ->with('positions', $positions)
+		           ->with('election', new Election(['type' => 1]))
+		           ->with('route', route('elections.create.do'));
 	}
 
 	/**
@@ -85,55 +85,17 @@ class ElectionController extends Controller
 	 * @param $request
 	 * @return mixed
 	 */
-	public function store(GenericRequest $request)
+	public function store(ElectionRequest $request)
 	{
-		// Validate the form submission
-		$this->validate($request, [
-			'type'              => 'required|in:' . implode(',', array_keys(Election::$Types)),
-			'hustings_date'     => 'required|datetime',
-			'hustings_location' => 'required',
-			'nominations_start' => 'required|datetime',
-			'nominations_end'   => 'required|datetime|after:nominations_start',
-			'voting_start'      => 'required|datetime',
-			'voting_end'        => 'required|datetime|after:voting_start',
-			'positions_checked' => 'required_if:type,2|array',
-			'positions'         => 'required_if:type,2|array|each:required',
-		], [
-			'type.required'              => 'Please select an election type.',
-			'type.in'                    => 'Please select a valid election type.',
-			'hustings_date.required'     => 'Please enter the date of the hustings',
-			'hustings_date.datetime'     => 'Please enter a valid date',
-			'hustings_location.required' => 'Please enter the hustings location',
-			'nominations_start.required' => 'Please enter when the nominations open',
-			'nominations_end.required'   => 'Please enter when the nominations close',
-			'nominations_start.datetime' => 'Please enter a valid date for when the nominations open',
-			'nominations_end.datetime'   => 'Please enter a valid date for when the nominations close',
-			'nominations_end.after'      => 'The nominations have to close after they\'ve started!',
-			'voting_start.required'      => 'Please enter when voting opens',
-			'voting_end.required'        => 'Please enter when voting closes',
-			'voting_start.datetime'      => 'Please enter a valid date for when voting opens',
-			'voting_end.datetime'        => 'Please enter a valid date for when voting closes',
-			'voting_end.after'           => 'Voting has to close after it\'s opened!',
-			'positions_checked.required' => 'Please select at least 1 position',
-			'positions_checked.array'    => 'Please select at least 1 position',
-			'positions.each.required'    => 'Please enter a position title',
-		]);
-
 		// Determine the positions
-		if($request->get('type') == 2) {
-			$positions_checked = $request->get('positions_checked');
-			$positions         = array_values(array_filter($request->get('positions'), function ($index) use ($positions_checked) {
-				return in_array($index, $positions_checked);
-			}, ARRAY_FILTER_USE_KEY));
-		} else {
-			$positions = CommitteeRole::orderBy('order', 'ASC')->lists('name', 'id')->toArray();
-		}
+		$positions = $this->determineElectionPositions($request);
 
 
 		// Create the election
 		$election = Election::create([
 			'type'              => $request->get('type'),
-			'hustings_time'     => $request->get('hustings_date'),
+			'bathstudent_id'    => $request->get('bathstudent_id'),
+			'hustings_time'     => $request->get('hustings_time'),
 			'hustings_location' => $request->stripped('hustings_location'),
 			'nominations_start' => $request->get('nominations_start'),
 			'nominations_end'   => $request->get('nominations_end'),
@@ -145,6 +107,46 @@ class ElectionController extends Controller
 		Flash::success('Election created');
 
 		return redirect()->route('elections.view', ['id' => $election->id]);
+	}
+
+	/**
+	 * View the form to edit an election.
+	 * @param $id
+	 */
+	public function edit($id)
+	{
+		$election  = Election::findOrFail($id);
+		$positions = $election->positions;
+
+		return View::make('elections.edit')
+		           ->with('positions', $positions)
+		           ->with('election', $election);
+	}
+
+	/**
+	 * Process the form submission and update the election.
+	 * @param                                    $id
+	 * @param \App\Http\Requests\ElectionRequest $request
+	 * @return \Illuminate\Http\RedirectResponse
+	 */
+	public function update($id, ElectionRequest $request)
+	{
+		$election  = Election::findOrFail($id);
+		$positions = $this->determineElectionPositions($request);
+		$election->update([
+			'type'              => $request->get('type'),
+			'bathstudent_id'    => $request->get('bathstudent_id'),
+			'hustings_time'     => $request->get('hustings_time'),
+			'hustings_location' => $request->stripped('hustings_location'),
+			'nominations_start' => $request->get('nominations_start'),
+			'nominations_end'   => $request->get('nominations_end'),
+			'voting_start'      => $request->get('voting_start'),
+			'voting_end'        => $request->get('voting_end'),
+			'positions'         => $positions,
+		]);
+		Flash::success('Updated');
+
+		return redirect()->route('elections.view', ['id' => $id]);
 	}
 
 	/**
@@ -316,5 +318,24 @@ class ElectionController extends Controller
 			'Content-Disposition' => 'inline; filename="' . $nomination->getManifestoName() . '"',
 			'Content-Length'      => filesize($path),
 		]);
+	}
+
+	/**
+	 * Determine the positions available in an election.
+	 * @param \App\Http\Requests\ElectionRequest $request
+	 * @return array
+	 */
+	private function determineElectionPositions(ElectionRequest $request)
+	{
+		if($request->get('type') == 2) {
+			$positions_checked = $request->get('positions_checked');
+			$positions         = array_values(array_filter($request->get('positions'), function ($index) use ($positions_checked) {
+				return in_array($index, $positions_checked);
+			}, ARRAY_FILTER_USE_KEY));
+		} else {
+			$positions = CommitteeRole::orderBy('order', 'ASC')->lists('name', 'id')->toArray();
+		}
+
+		return $positions;
 	}
 }

@@ -17,7 +17,7 @@
 	background-image: -ms-linear-gradient(top, $top, $bottom); // IE 10+
 	background-image: -o-linear-gradient(top, $top, $bottom); // Opera 11.10+
 	background-image: linear-gradient(to bottom, $top, $bottom);
-	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr=$top, EndColorStr=$bottom);
+	filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0, StartColorStr='#{$top}', EndColorStr='#{$bottom}');
 }
 
 @mixin transition() {
@@ -78,11 +78,11 @@
 }
 
 @mixin bg_gradient_yellow() {
-	@include bg_gradient($btsyellow, #9E7E00);
+	@include bg_gradient(#{$btsyellow}, #9E7E00);
 }
 
 @mixin bg_gradient_yellow_inv() {
-	@include bg_gradient(#9E7E00, $btsyellow);
+	@include bg_gradient(#9E7E00, #{$btsyellow});
 }
 
 @mixin clearfix() {
