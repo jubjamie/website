@@ -33,7 +33,7 @@ class QuoteRequest extends Request
 	{
 		return [
 			'culprit' => 'required',
-			'date'    => 'required|date|before:' . Carbon::now()->tz(env('SERVER_TIMEZONE', 'UTC'))->addMinutes(1)->format("Y-m-d H:i"),
+			'date'    => 'required|datetime:Y-m-d H:i|before:' . Carbon::now()->tz(env('SERVER_TIMEZONE', 'UTC'))->addMinutes(1)->format("Y-m-d H:i"),
 			'quote'   => 'required',
 		];
 	}
@@ -47,7 +47,7 @@ class QuoteRequest extends Request
 		return [
 			'culprit.required' => 'Please enter the culprit',
 			'date.required'    => 'Please specify when it was said',
-			'date.date'        => 'Please enter a valid date',
+			'date.datetime'    => 'Please enter a valid date',
 			'date.before'      => 'Try not to predict the future!',
 			'quote.required'   => 'Please enter what was said',
 		];

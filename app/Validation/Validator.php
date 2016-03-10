@@ -71,8 +71,7 @@ class Validator extends BaseValidator
 	 */
 	public function validateDate($attribute, $value)
 	{
-		return $this->validateDateFormat($attribute, $value, ['Y-m-d'])
-		       && $this->validateRegex($attribute, $value, ["/^[\d]{4}\-[\d]{2}\-[\d]{2}$/"]);
+		return $this->validateDatetime($attribute, $value, ['Y-m-d']);
 	}
 
 	/**
@@ -83,19 +82,25 @@ class Validator extends BaseValidator
 	 */
 	public function validateTime($attribute, $value)
 	{
-		return $this->validateDateFormat($attribute, $value, ['H:i:s'])
-		       && $this->validateRegex($attribute, $value, ["/^[\d]{2}:[\d]{2}:[\d]{2}$/"]);
+		return $this->validateDatetime($attribute, $value, ['H:i:s']);
 	}
 
 	/**
 	 * Custom validation for datetimes that use the date/time picker.
-	 * @param $attribute
-	 * @param $value
+	 * @param       $attribute
+	 * @param       $value
+	 * @param array $parameters
 	 * @return bool
 	 */
-	public function validateDatetime($attribute, $value)
+	public function validateDatetime($attribute, $value, array $parameters = [])
 	{
-		return $this->validateDateFormat($attribute, $value, ['Y-m-d H:i:s'])
-		       && $this->validateRegex($attribute, $value, ["/^[\d]{4}\-[\d]{2}\-[\d]{2}\s[\d]{2}:[\d]{2}:[\d]{2}$/"]);
+		$format = isset($parameters[0]) ? $parameters[0] : 'Y-m-d H:i:s';
+		$regex  = $format;
+		$regex  = str_replace(['Y', 'm', 'd', 'H', 'i', 's'], ["[0-9]{4}", "[0-9]{2}", "[0-9]{2}", "[0-9]{2}", "[0-9]{2}", "[0-9]{2}"], $regex);
+		$regex = str_replace(['[0-9]', '-', ' '], ['[\d]', '\-', '\s'], $regex);
+		$regex = "/^".$regex."$/";
+
+		return $this->validateDateFormat($attribute, $value, [$format])
+		       && $this->validateRegex($attribute, $value, [$regex]);
 	}
 }
