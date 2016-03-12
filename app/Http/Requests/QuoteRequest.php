@@ -7,16 +7,6 @@ use Carbon\Carbon;
 class QuoteRequest extends Request
 {
 	/**
-	 * Before validating, form the date and time entries from the sub-entries.
-	 */
-	public function validate()
-	{
-		$this->createDateTimeEntry('date');
-
-		return parent::validate();
-	}
-
-	/**
 	 * Determine if the user is authorized to make this request.
 	 * @return bool
 	 */
@@ -33,7 +23,7 @@ class QuoteRequest extends Request
 	{
 		return [
 			'culprit' => 'required',
-			'date'    => 'required|datetime:Y-m-d H:i|before:' . Carbon::now()->tz(env('SERVER_TIMEZONE', 'UTC'))->addMinutes(1)->format("Y-m-d H:i"),
+			'date'    => 'required|datetime|before:' . Carbon::now()->tz(env('SERVER_TIMEZONE', 'UTC'))->addMinutes(1)->format("Y-m-d H:i"),
 			'quote'   => 'required',
 		];
 	}

@@ -3,7 +3,7 @@
     {{-- Text field for the date --}}
     <div class="form-group">
         <div class="input-group">
-            {!! Form::datetime('date', new \Carbon\Carbon(), ['class' => 'form-control', 'data-date-format' => 'YYYY-MM-DD HH:mm']) !!}
+            {!! Form::datetime('date', new \Carbon\Carbon(), ['class' => 'form-control']) !!}
             <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
         </div>
     </div>
