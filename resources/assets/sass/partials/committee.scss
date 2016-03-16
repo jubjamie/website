@@ -10,60 +10,73 @@ h4 {
 	}
 }
 
-div.position {
-	position:relative;
 
-	& > a.edit-button {
-		@include transition();
-		position:absolute;
-		right: 0;
-		top: 0;
-		opacity:0;
-	}
-	& > div.title {
-		color: $btsorange;
-		font: bold 1.6em Arial;
-		text-align: center;
-	}
-	& > div.name {
-		color: $btsyellow;
-		font-size: 1.3em;
-		padding: 0.5em 0 0 0;
-		text-align: center;
-	}
-	& > div.picture {
-		padding-top: 1em;
-		padding-bottom: 1em;
-		text-align: center;
+div#viewCommittee {
+	overflow: hidden;
 
-		& > img {
-			display: inline-block;
-			height: auto;
-			max-width: 100%;
-			width: 10em;
+	div.position {
+		margin: 1em 0;
+		position: relative;
+
+		@media(min-width: 768px) {
+			box-sizing: border-box;
+			float: left;
+			padding: 0 1.5em;
+			width: 50%;
 		}
-	}
-	& > div.email {
-		text-align: center;
 
-		& > a {
-			color: $colour_text;
-			margin-left: 0.5em;
+		& > a.edit-button {
+			@include transition();
+			position: absolute;
+			right: 0;
+			top: 0;
+			opacity: 0;
+		}
+		& > div.title {
+			color: $btsorange;
+			font: bold 1.6em Arial;
+			text-align: center;
+		}
+		& > div.name {
+			color: $btsyellow;
+			font-size: 1.3em;
+			padding: 0.5em 0 0 0;
+			text-align: center;
+		}
+		& > div.picture {
+			padding-top: 1em;
+			padding-bottom: 1em;
+			text-align: center;
 
-			&:hover {
-				color: $btsgold;
+			& > img {
+				display: inline-block;
+				height: auto;
+				max-width: 100%;
+				width: 10em;
 			}
 		}
-	}
-	& > div.description {
-		padding-top: 1em;
-		padding-bottom: 3em;
-	}
-	&:hover > a.edit-button {
-		opacity: 1;
+		& > div.email {
+			text-align: center;
+
+			& > a {
+				color: $colour_text;
+				margin-left: 0.5em;
+
+				&:hover {
+					color: $btsgold;
+				}
+			}
+		}
+		& > div.description {
+			padding-top: 1em;
+			padding-bottom: 3em;
+		}
+		&:hover > a.edit-button {
+			opacity: 1;
+		}
 	}
 }
 
 hr {
-	margin-top: -1em;
+	margin-top: -2em;
 }

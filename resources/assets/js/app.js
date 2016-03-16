@@ -59,7 +59,10 @@ $.ajaxSetup({
 	dataType: "json"
 });
 $('select[select2]').each(function () {
-	$(this).select2({placeholder: $(this).attr('select2') || ''})
+	$(this).select2({
+		placeholder: $(this).attr('select2') || '',
+		theme: 'bootstrap'
+	})
 });
 $('[data-type="filter-select"]').on('change', function () {
 	var select = $(this);
@@ -74,4 +77,9 @@ $('[data-type="search-input"]').on('keypress', function (event) {
 });
 $('input[data-input-type="datetimepicker"]').each(function (i, obj) {
 	datetimepicker($(obj));
+});
+$('[data-type="toggle-visibility"]').on('change', function() {
+	var form = $(this.form);
+	form.find('[data-visibility-id]').addClass('hidden');
+	form.find('[data-visibility-id="' + $(this).val() + '"]').removeClass('hidden');
 });

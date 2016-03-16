@@ -168,9 +168,7 @@ class TrainingController extends Controller
 	public function storeSkill(TrainingSkillRequest $request)
 	{
 		// Create the skill
-		TrainingSkill::create($request->stripped('name', 'description', 'requirements_level1', 'requirements_level2', 'requirements_level3') + [
-				'category_id' => null,
-			]);
+		TrainingSkill::create($request->stripped('name', 'category_id', 'description', 'requirements_level1', 'requirements_level2', 'requirements_level3'));
 		Flash::success('Skill created');
 
 		return redirect(route('training.skills.index'));
@@ -482,6 +480,7 @@ class TrainingController extends Controller
 		// Check the user isn't trying to review their own proposal
 		if($proposal->user_id == $this->user->id) {
 			Flash::warning('You can\'t review your own proposal');
+
 			return redirect(route('training.skills.proposal.index'));
 		}
 

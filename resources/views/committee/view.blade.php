@@ -26,34 +26,27 @@
 @section('content')
     <h1 class="page-header">The Committee</h1>
     <div id="viewCommittee">
-        @if(count($roles))
-            <div class="container-fluid">
-                @for($i = 0; $i < ceil(count($roles) / 2); $i++)
-                    <div class="row">
-                        @include('committee._position', ['role' => $roles[2 * $i]])
-                        @include('committee._position', ['role' => isset($roles[2 * $i + 1]) ? $roles[2 * $i + 1] : null])
-                    </div>
-                @endfor
-            </div>
-        @else
+        @forelse($roles as $role)
+            @include('committee._position', ['role' => $role])
+        @empty
             <h4 class="no-committee">We don't seem to have any committee roles ...</h4>
-        @endif
-        @if(Auth::check() && Auth::user()->can('admin'))
-            <hr>
-            <a class="btn btn-success"
-               data-toggle="modal"
-               data-target="#modal"
-               data-modal-template="committee_add"
-               data-modal-title="Add Committee Position"
-               data-modal-class="modal-sm"
-               data-form-action="{{ route('committee.add') }}"
-               data-mode="add"
-               href="#">
-                <span class="fa fa-plus"></span>
-                <span>Add a new role</span>
-            </a>
-        @endif
+        @endforelse
     </div>
+    @if(Auth::check() && Auth::user()->can('admin'))
+        <hr>
+        <a class="btn btn-success"
+           data-toggle="modal"
+           data-target="#modal"
+           data-modal-template="committee_add"
+           data-modal-title="Add Committee Position"
+           data-modal-class="modal-sm"
+           data-form-action="{{ route('committee.add') }}"
+           data-mode="add"
+           href="#">
+            <span class="fa fa-plus"></span>
+            <span>Add a new role</span>
+        </a>
+    @endif
 @endsection
 
 @section('modal')

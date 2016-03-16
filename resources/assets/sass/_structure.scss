@@ -279,7 +279,7 @@ div#nav-wrapper {
 					}
 
 					& > li {
-						background: none;
+						background: transparent;
 						display: block;
 
 						@media (min-width: 768px) {
@@ -302,7 +302,7 @@ div#nav-wrapper {
 						}
 
 						& > a {
-							background: none;
+							background: transparent;
 							border-bottom: 0.214em solid transparent; // 3px
 							box-sizing: content-box;
 							color: #000;
@@ -342,7 +342,7 @@ div#nav-wrapper {
 							& > ul {
 								& > li {
 									& > a {
-										background: none;
+										//background: none;
 										color: #000;
 										font: bold 12px Arial;
 										display: block;
@@ -350,7 +350,7 @@ div#nav-wrapper {
 									}
 									&.divider {
 										@media (max-width: 768px) {
-											background: none;
+											//background: none;
 										}
 										padding: 0.5em 0;
 										position: static;
@@ -369,7 +369,7 @@ div#nav-wrapper {
 											padding: 0 0 0.5em 0;
 
 											& > li {
-												background: transparent;
+												//background: transparent;
 
 												& > a {
 													background: inherit;
@@ -395,7 +395,7 @@ div#nav-wrapper {
 									display: block;
 								}
 								& > ul {
-									background: none;
+									//background: none;
 									display: none;
 									padding-top: 0.5em;
 									position: absolute;
@@ -404,7 +404,7 @@ div#nav-wrapper {
 										background: $btsyellow;
 
 										&:hover > a, &.active > a {
-											background: rgba(0, 0, 0, 0.2);
+											background: darken($btsyellow, 10%);
 											text-decoration: none;
 										}
 

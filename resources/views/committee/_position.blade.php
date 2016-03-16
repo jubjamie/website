@@ -1,4 +1,4 @@
-<div class="col-sm-6 position">
+<div class="position">
     @if($role && Auth::check() && Auth::user()->can('admin'))
         <a class="btn btn-warning btn-sm edit-button"
            data-toggle="modal"
