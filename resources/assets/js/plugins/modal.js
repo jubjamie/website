@@ -3,6 +3,10 @@ var $modalDialog = $modal.children('div.modal-dialog');
 var $modalContent = $modalDialog.children('div.modal-content');
 var $form;
 var $btns;
+var $xhttp2 = typeof(FormData) != 'undefined';
+if(!$xhttp2) {
+	console.log('ALERT: Your browser does not support XMLHttpRequest2. AJAX forms will work but you will be unable to upload files by AJAX.');
+}
 
 (function ($) {
 	function form() {
@@ -79,27 +83,32 @@ var $btns;
 
 		$form.attr('action', $btn.data('formAction'));
 		$btns.attr('disabled', 'disabled');
-		$.ajax({
-			cache      : false,
-			contentType: false,
-			data       : typeof(FormData) == 'undefined' ? $form.serialize() : new FormData($form[0]),
-			processData: false,
-			mimeType   : "multipart/form-data",
-			url        : $form.attr('action'),
-			type       : "post",
-			success    : function () {
+
+		var settings = {
+			data      : $xhttp2 ? new FormData($form[0]) : $form.serialize(),
+			url       : $form.attr('action'),
+			type      : "post",
+			success   : function () {
 				$btn.off('click');
 				location.reload();
 			},
-			error      : function (data) {
+			error     : function (data) {
 				$modal.trigger('clearform');
 				$btns.attr('disabled', false);
 				processAjaxErrors(data, $form);
 			},
-			beforeSend : function () {
+			beforeSend: function () {
 				$modal.trigger('clearform');
 			}
-		});
+		}
+		if($xhttp2) {
+			settings.cache = false;
+			settings.contentType = false;
+			settings.processData = false;
+			settings.mimeType = "multipart/form-data";
+		}
+
+		$.ajax(settings);
 	});
 	$modal.on('submit', 'form', function (event) {
 		var btn = $(this).find('button,input[type="button"],input[type="submit"]').first();

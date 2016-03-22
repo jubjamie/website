@@ -41,7 +41,7 @@
                 <div>
                     <div class="btn-group btn-group-sm">
                         @if($election->isVotingOpen())
-                            <a class="btn btn-success" href="http://www.bathstudent.com/elections/{{ $election->bathstudent_id ?: '' }}" target="_blank">
+                            <a class="btn btn-success" href="http://www.bathstudent.com/elections/vote/{{ $election->bathstudent_id ?: '' }}" target="_blank">
                                 <span class="fa fa-check"></span>
                                 <span>Vote now</span>
                             </a>

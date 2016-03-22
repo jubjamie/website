@@ -156,7 +156,7 @@ class Election extends Model
 		$now = Carbon::now();
 
 		return $now->gte($this->nominations_start)
-		       && $now->lte($this->nominations_end);
+		       && $now->lt($this->voting_start);
 	}
 
 	/**

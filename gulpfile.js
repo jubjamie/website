@@ -39,6 +39,7 @@ elixir(function (mix) {
 			'vendors/bootstrap.css',
 			'vendors/bootstrap-theme.css',
 			'vendors/select2.css',
+			'vendors/select2-bootstrap.css',
 			'vendors/font-awesome.css',
 			'vendors/datetimepicker.css'
 		], 'public/css/vendors.css')

@@ -146,7 +146,7 @@ div#header {
 		height: auto;
 		max-width: 100%;
 	}
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		padding-right: 3em;
 
 		& > img {
@@ -161,25 +161,24 @@ div#header {
 
 // Navigation bar
 div#nav-wrapper {
-	@media (min-width: 768px) {
-		@include bg_gradient_yellow();
-	}
-	@media (max-width: 768px) {
+	padding: 0;
+
+	@media(max-width: 767px) {
 		left: 0;
 		position: absolute;
 		top: 0;
 		width: 100%;
-
-		@media (max-width: 480px) {
-			top: 50px;
-		}
 	}
-	padding: 0;
+	@media(max-width: 479px) {
+		top: 50px;
+	}
+	@media(min-width: 768px) {
+		@include bg_gradient_yellow();
+	}
 
-	& > nav.navbar {
-		background: #000;
+	& > nav {
 		@include wrapper();
-		background: none;
+		background: transparent;
 		box-shadow: none;
 		border-radius: 0;
 		border: none;
@@ -193,7 +192,7 @@ div#nav-wrapper {
 			margin: 0;
 			padding: 0;
 
-			@media (min-width: 768px) {
+			@media(min-width: 768px) {
 				min-width: 1000px;
 			}
 
@@ -202,7 +201,7 @@ div#nav-wrapper {
 				margin: 0;
 				padding: 0;
 
-				@media (max-width: 768px) {
+				@media (max-width: 767px) {
 					margin-right: 5px;
 					margin-top: 5px;
 				}
@@ -234,7 +233,7 @@ div#nav-wrapper {
 				padding: 0;
 				width: 100%;
 
-				@media (max-width: 768px) {
+				@media (max-width: 767px) {
 					background: $btsyellow;
 					border-radius: 3px;
 					margin-top: 0.5em;
@@ -244,13 +243,13 @@ div#nav-wrapper {
 				}
 
 				ul {
-					background: none;
+					background: transparent;
 					border: none;
 					border-radius: 0;
 					box-shadow: none;
+					list-style-type: none;
 					margin: 0;
 					padding: 0;
-					list-style-type: none;
 
 					& > li {
 						box-shadow: none;
@@ -258,10 +257,12 @@ div#nav-wrapper {
 						padding: 0;
 
 						&.active > a {
+							background: transparent;
 							filter: none !important;
 						}
 					}
 				}
+				// SECTION: Main nav bar
 				& > ul.nav {
 					box-sizing: border-box;
 					display: block;
@@ -275,14 +276,14 @@ div#nav-wrapper {
 						}
 					}
 					a:hover, a:focus, li.open a {
-						background: none;
-					}
-
-					& > li {
 						background: transparent;
+					}
+					// SECTION: Main nav items
+					& > li {
+						//background: transparent;
 						display: block;
 
-						@media (min-width: 768px) {
+						@media(min-width: 768px) {
 							& > a:before, &:last-of-type > a:after {
 								background: #000;
 								box-sizing: border-box;
@@ -302,7 +303,7 @@ div#nav-wrapper {
 						}
 
 						& > a {
-							background: transparent;
+							//background: transparent;
 							border-bottom: 0.214em solid transparent; // 3px
 							box-sizing: content-box;
 							color: #000;
@@ -329,7 +330,7 @@ div#nav-wrapper {
 								border-color: rgba(0, 0, 0, 0.7);
 							}
 						}
-						@media (max-width: 768px) {
+						@media (max-width: 767px) {
 							border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 
 							&.active {
@@ -338,7 +339,9 @@ div#nav-wrapper {
 								}
 							}
 						}
+
 						&.dropdown {
+							// SECTION: Sub nav bar
 							& > ul {
 								& > li {
 									& > a {
@@ -349,9 +352,7 @@ div#nav-wrapper {
 										padding: 0.6em 2em 0.6em 1em;
 									}
 									&.divider {
-										@media (max-width: 768px) {
-											//background: none;
-										}
+										//background: transparent;
 										padding: 0.5em 0;
 										position: static;
 
@@ -364,12 +365,13 @@ div#nav-wrapper {
 										}
 									}
 									&.dropdown {
+										// SECTION: Sub-sub nav bar
 										& > ul {
 											background: rgba(0, 0, 0, 0.1);
 											padding: 0 0 0.5em 0;
 
 											& > li {
-												//background: transparent;
+												background: transparent;
 
 												& > a {
 													background: inherit;
@@ -389,17 +391,53 @@ div#nav-wrapper {
 										}
 									}
 								}
+
+							}
+							@media (max-width: 767px) {
+								@include clearfix();
+
+								& > ul {
+									background: rgba(0, 0, 0, 0.1);
+									border-top: 1px solid rgba(0, 0, 0, 0.075);
+									box-shadow: none;
+									display: block;
+									float: none;
+									padding: 0.25em 0 0.25em 0.5em;
+									position: inherit;
+									width: 100%;
+
+									& > li {
+										& > a {
+											padding-bottom: 0.75em;
+											padding-top: 0.75em;
+											padding-left: 1.5em;
+										}
+										&.dropdown {
+											& > ul {
+												background: none;
+												display: block;
+												margin: 0 0.5em;
+												position: inherit;
+												width: 100%;
+											}
+										}
+										&.divider {
+											display: none;
+										}
+									}
+								}
 							}
 							@media (min-width: 768px) {
 								&:hover > ul {
 									display: block;
 								}
+								// SECTION: Sub nav bar
 								& > ul {
-									//background: none;
 									display: none;
 									padding-top: 0.5em;
 									position: absolute;
 
+									// SECTION: Sub nav bar items
 									& > li {
 										background: $btsyellow;
 
@@ -407,7 +445,6 @@ div#nav-wrapper {
 											background: darken($btsyellow, 10%);
 											text-decoration: none;
 										}
-
 										&:first-child {
 											border-top-left-radius: $dim_bdr_radius;
 											border-top-right-radius: $dim_bdr_radius;
@@ -418,9 +455,11 @@ div#nav-wrapper {
 											border-bottom-right-radius: $dim_bdr_radius;
 											padding-bottom: 0.5em;
 										}
+
 										&.dropdown {
 											position: relative;
 
+											// SECTION: Sub-sub nav bar
 											& > ul {
 												background: darken($btsyellow, 10%);
 												border-radius: 0 $dim_bdr_radius $dim_bdr_radius 0;
@@ -433,6 +472,7 @@ div#nav-wrapper {
 												left: 100%;
 												top: 0;
 
+												// SECTION: Sub-sub nav bar items
 												& > li {
 													display: block;
 
@@ -462,64 +502,32 @@ div#nav-wrapper {
 													}
 												}
 											}
-
-											&:first-child > ul {
-												top: 0.5em;
-											}
-											&.profile > ul {
-												width: 9em;
-											}
-											&.events > ul {
-												width: 12em;
-											}
-											&.equipment > ul {
-												width: 12em;
-											}
-											&.training > ul {
-												width: 10em;
-											}
-											&.resources > ul {
-												width: 12.5em;
-											}
-											&.misc > ul {
-												width: 11em;
-											}
-											&.admin-users > ul {
-												width: 11em;
-											}
 										}
-									}
-								}
-							}
-							@media (max-width: 768px) {
-								@include clearfix();
-
-								& > ul {
-									//background: rgba(0, 0, 0, 0.1);
-									border-top: 1px solid rgba(0, 0, 0, 0.075);
-									box-shadow: none;
-									display: block;
-									padding: 0.25em 0 0.25em 0.5em;
-									position: static;
-									width: 100%;
-
-									& > li {
-										& > a {
-											padding-bottom: 0.75em;
-											padding-top: 0.75em;
-											padding-left: 1.5em;
+										&:first-child > ul {
+											top: 0.5em;
 										}
-										&.dropdown {
-											& > ul {
-												background: none;
-												display: block;
-												margin: 0 0.5em;
-												position: static;
-												width: 100%;
-											}
+
+										// SECTION: Sub-sub nav bar widths
+										&.profile > ul {
+											width: 9em;
 										}
-										&.divider {
-											display: none;
+										&.events > ul {
+											width: 12em;
+										}
+										&.equipment > ul {
+											width: 12em;
+										}
+										&.training > ul {
+											width: 10em;
+										}
+										&.resources > ul {
+											width: 12.5em;
+										}
+										&.misc > ul {
+											width: 11em;
+										}
+										&.admin-users > ul {
+											width: 11em;
 										}
 									}
 								}
@@ -540,7 +548,7 @@ div#content {
 	font-weight: 300;
 	padding: 2em 1.5em 3em;
 
-	@media (max-width: 768px) {
+	@media (max-width: 767px) {
 		padding: 0 1.5em 3em;
 		& > h1 {
 			margin-top: 0;
@@ -610,7 +618,7 @@ div#content {
 					font-size: 20px;
 				}
 			}
-			@media(max-width: 768px) and (min-width: 400px) {
+			@media(max-width: 767px) and (min-width: 400px) {
 				div.num {
 					width: auto;
 				}
@@ -711,7 +719,7 @@ div#footer {
 			}
 		}
 
-		@media(max-width: 768px) {
+		@media(max-width: 767px) {
 			div.container > div:not(:first-child) h1 {
 				margin-top: 1.8em;
 			}

@@ -7,14 +7,14 @@
         $('#eventDates').find('.date-hide').css('display', $(this).prop('checked') ? 'none' : 'block');
     });
     $('input[name="one_day"]').trigger('change');
-    var form = $('#createEvent');
-    $('select[name="type"]').on('change', function() {
-        if($(this).val() == {{ \App\Event::TYPE_EVENT }}) {
-            form.find('[data-filter="event_only"]').show();
-        } else {
-            form.find('[data-filter="event_only"]').hide();
-        }
-    });
+    {{--var form = $('#createEvent');--}}
+    {{--$('select[name="type"]').on('change', function() {--}}
+        {{--if($(this).val() == {{ \App\Event::TYPE_EVENT }}) {--}}
+            {{--form.find('[data-filter="event_only"]').show();--}}
+        {{--} else {--}}
+            {{--form.find('[data-filter="event_only"]').hide();--}}
+        {{--}--}}
+    {{--});--}}
 @endsection
 
 @section('content')
@@ -23,7 +23,7 @@
         {!! Form::model(new \App\Event(), ['class' => 'form-horizontal', 'style' => 'max-width: 550px']) !!}
             {{-- Event name --}}
             <div class="form-group @include('partials.form.error-class', ['name' => 'name'])">
-                {!! Form::label('name', 'Event Name', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('name', 'Event Name:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::text('name', null, ['class' => 'form-control', 'placeholder' => 'What is the event called?']) !!}
                     @include('partials.form.input-error', ['name' => 'name'])
@@ -32,7 +32,7 @@
 
             {{-- Event manager --}}
             <div class="form-group @include('partials.form.error-class', ['name' => 'em_id'])">
-                {!! Form::label('em_id', 'Event Manager', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('em_id', 'Event Manager:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::select('em_id', [null => '-- No EM --'] + $users, null, ['class' => 'form-control']) !!}
                     @include('partials.form.input-error', ['name' => 'em_id'])
@@ -41,16 +41,16 @@
 
             {{-- Event type --}}
             <div class="form-group @include('partials.form.error-class', ['name' => 'type'])">
-                {!! Form::label('type', 'Event Type', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('type', 'Event Type:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
-                    {!! Form::select('type', \App\Event::$Types, null, ['class' => 'form-control']) !!}
+                    {!! Form::select('type', \App\Event::$Types, null, ['class' => 'form-control', 'data-type' => 'toggle-visibility']) !!}
                     @include('partials.form.input-error', ['name' => 'type'])
                 </div>
             </div>
 
             {{-- Description --}}
             <div class="form-group @include('partials.form.error-class', ['name' => 'description'])">
-                {!! Form::label('description', 'Description', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('description', 'Description:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::textarea('description', null, ['class' => 'form-control', 'rows' => 4, 'placeholder' => 'Briefly describe what the event is about']) !!}
                     <p class="help-block alt">This will be visible to the public</p>
@@ -60,7 +60,7 @@
 
             {{-- Venue --}}
             <div class="form-group @include('partials.form.error-class', ['name' => 'venue'])">
-                {!! Form::label('venue', 'Venue', ['class' => 'col-md-3 control-label']) !!}
+                {!! Form::label('venue', 'Venue:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::text('venue', null, ['class' => 'form-control', 'placeholder' => 'Where is it?']) !!}
                     @include('partials.form.input-error', ['name' => 'venue'])
@@ -68,8 +68,8 @@
             </div>
 
             {{-- Venue type --}}
-            <div class="form-group @include('partials.form.error-class', ['name' => 'venue_type'])" data-filter="event_only">
-                {!! Form::label('venue_type', 'Venue Type', ['class' => 'col-md-3 control-label']) !!}
+            <div class="form-group @include('partials.form.error-class', ['name' => 'venue_type'])" data-visibility-id="{{ \App\Event::TYPE_EVENT }}">
+                {!! Form::label('venue_type', 'Venue Type:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::select('venue_type', \App\Event::$VenueTypes, null, ['class' => 'form-control']) !!}
                     @include('partials.form.input-error', ['name' => 'venue_type'])
@@ -77,8 +77,8 @@
             </div>
 
             {{-- Client type --}}
-            <div class="form-group @include('partials.form.error-class', ['name' => 'client_type'])" data-filter="event_only">
-                {!! Form::label('client_type', 'Client Type', ['class' => 'col-md-3 control-label']) !!}
+            <div class="form-group @include('partials.form.error-class', ['name' => 'client_type'])" data-visibility-id="{{ \App\Event::TYPE_EVENT }}">
+                {!! Form::label('client_type', 'Client Type:', ['class' => 'col-md-3 control-label']) !!}
                 <div class="col-md-9">
                     {!! Form::select('client_type', \App\Event::$Clients, null, ['class' => 'form-control']) !!}
                     @include('partials.form.input-error', ['name' => 'client_type'])
@@ -91,13 +91,13 @@
                 <div class="col-md-9">
                     <div class="form-group">
                         <div class="col-xs-5">
-                            {!! Form::date('date_start', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
+                            {!! Form::date('date_start', null, ['class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']) !!}
                         </div>
                         <div class="col-xs-2 date-hide">
                             <p class="form-control-static text-center">to</p>
                         </div>
                         <div class="col-xs-5 date-hide">
-                            {!! Form::date('date_end', null, ['class' => 'form-control', 'placeholder' => 'dd/mm/yyyy']) !!}
+                            {!! Form::date('date_end', null, ['class' => 'form-control', 'placeholder' => 'yyyy-mm-dd']) !!}
                         </div>
                     </div>
                     <div class="form-group" style="margin-top:-15px;">
