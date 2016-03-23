@@ -256,9 +256,11 @@ div#nav-wrapper {
 						margin: 0;
 						padding: 0;
 
-						&.active > a {
-							background: transparent;
-							filter: none !important;
+						&:hover, &:focus, &:active, &.active {
+							& > a {
+								background: transparent;
+								filter: none !important;
+							}
 						}
 					}
 				}

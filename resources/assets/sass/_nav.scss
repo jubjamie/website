@@ -1,11 +1,15 @@
 div[role='tabpanel'], div.tabpanel {
+	background: transparent;
+	border-radius: 5px;
 	text-align: center;
 	position: relative;
 	z-index: 1900;
 
 	& > ul.nav.nav-tabs {
 		@include clearfix();
+		background: transparent;
 		border: none;
+		border-radius: 5px;
 		display: inline-block;
 		margin: 0 auto;
 		padding: 0;
