@@ -109,7 +109,7 @@ class ViewServiceProvider extends ServiceProvider
 					$events = $menu->find('members.events');
 					$events->add(route('events.mydiary'), 'My diary')->activePattern('\/events\/my-diary')
 					       ->add(route('events.signup'), 'Event sign-up')->activePattern('\/events\/signup')
-					       ->add('https://docs.google.com/forms/d/1KdSfZYT5pOOVPgq_pRqpGtCoY-OWbvpuNzfGPRqnsx4/viewform', 'Submit event report');
+					       ->add('https://docs.google.com/forms/d/1kSY107KrDb-ZGpiRCppeSK9lA8kCA8Kgz5TFd9nEVXo/viewform', 'Submit event report');
 					if($isAdmin) {
 						//$events->add('#', 'View booking requests')
 						$events->add(route('events.index'), 'View all events')
