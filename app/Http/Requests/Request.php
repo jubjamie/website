@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\App;
 
 abstract class Request extends FormRequest
 {
@@ -26,6 +27,16 @@ abstract class Request extends FormRequest
 		}
 
 		return count($inputs_stripped) == 1 ? array_shift($inputs_stripped) : $inputs_stripped;
+	}
+
+	/**
+	 * Require that the request is made by AJAX,
+	 */
+	public function requireAjax()
+	{
+		if(!$this->ajax()) {
+			App::abort(Response::HTTP_NOT_FOUND);
+		}
 	}
 
 	/**

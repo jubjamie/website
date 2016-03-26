@@ -4,8 +4,8 @@
         <th class="proposal-skill">Skill</th>
         <th class="proposal-user">User</th>
         <th class="proposal-level">Proposed</th>
-        <th class="awarded-level">Awarded</th>
-        <th class="awarded-user">Awarded by</th>
+        <th class="awarded-level">{{ $isListOfReviewed ? 'Awarded' : '' }}</th>
+        <th class="awarded-user">{{ $isListOfReviewed ? 'Awarded by' : '' }}</th>
     </thead>
     <tbody>
         @if(count($proposals) > 0)
@@ -22,13 +22,13 @@
                             @endif
                         @endif
                     </td>
-                    <td class="skill-name">
-                        <div class="name">{{ $proposal->skill->name }}</div>
-                        <div class="category">{{ $proposal->skill->category_id ? $proposal->skill->category->name : "Uncategorised" }}</div>
+                    <td class="dual-layer">
+                        <div class="upper">{{ $proposal->skill->name }}</div>
+                        <div class="lower">{{ $proposal->skill->category_id ? $proposal->skill->category->name : "Uncategorised" }}</div>
                     </td>
-                    <td class="skill-user">
-                        <div class="name">{{ $proposal->user->name }}</div>
-                        <div class="username">{{ $proposal->user->username }}</div>
+                    <td class="dual-layer">
+                        <div class="upper">{{ $proposal->user->name }}</div>
+                        <div class="lower">{{ $proposal->user->username }}</div>
                     </td>
                     <td class="skill-level">
                         {!! \App\TrainingSkill::getProficiencyHtml($proposal->proposed_level) !!}
@@ -36,16 +36,12 @@
                     <td class="skill-level">
                         @if($proposal->isAwarded())
                             {!! $proposal->awarded_level === 0 ? '<em>none</em>' : \App\TrainingSkill::getProficiencyHtml($proposal->awarded_level) !!}
-                        @else
-                            <em>n/a</em>
                         @endif
                     </td>
-                    <td class="skill-user">
+                    <td class="dual-layer">
                         @if($proposal->isAwarded())
-                            <div class="name">{{ $proposal->awarder->name }}</div>
-                            <div class="username">{{ $proposal->awarder->username }}</div>
-                        @else
-                            <em>n/a</em>
+                            <div class="upper">{{ $proposal->awarder->name }}</div>
+                            <div class="lower">{{ $proposal->awarder->username }}</div>
                         @endif
                     </td>
                 </tr>

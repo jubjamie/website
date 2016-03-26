@@ -4,7 +4,7 @@ var $modalContent = $modalDialog.children('div.modal-content');
 var $form;
 var $btns;
 var $xhttp2 = typeof(FormData) != 'undefined';
-if(!$xhttp2) {
+if(!$xhttp2 && !!console) {
 	console.log('ALERT: Your browser does not support XMLHttpRequest2. AJAX forms will work but you will be unable to upload files by AJAX.');
 }
 

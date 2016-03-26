@@ -83,7 +83,7 @@
             <h1>Creating Users</h1>
         </div>
         <div class="modal-body">
-            @helpDoc('users.create')
+            @HelpDoc('users.create')
         </div>
         <div class="modal-footer text-center">
             <button class="btn btn-success" data-toggle="modal" data-target="#modal">

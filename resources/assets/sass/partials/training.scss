@@ -16,18 +16,6 @@ table.level-requirements {
 table {
 	tr {
 		th, td {
-			&.skill-name {
-				& > .category {
-					color: #666;
-					font-size: 13px;
-				}
-			}
-			&.skill-user {
-				& > .username {
-					color: #666;
-					font-size: 13px;
-				}
-			}
 			&.skill-level {
 				text-align: center;
 				width: 5em;

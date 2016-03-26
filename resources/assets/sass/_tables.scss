@@ -47,10 +47,15 @@
 	}
 	.id {
 		text-align: center;
-		width: 5em;
+		width: 4em;
+
+		@media(max-width: 767px) {
+			display: none;
+		}
 	}
 	tbody .id, div.tbody .id {
 		color: #666;
+		font-size: 0.867em;
 	}
 	td.admin-tools {
 		font-size: 0.8em;
@@ -59,6 +64,16 @@
 
 		&.admin-tools-icon {
 			width: 3em;
+		}
+	}
+	td.dual-layer {
+		& > .upper {
+			display: block;
+		}
+		& > .lower {
+			color: #666;
+			display: block;
+			font-size: 0.867em;
 		}
 	}
 	.slug {

@@ -143,6 +143,7 @@ return [
 		 * Application Service Providers...
 		 */
 		App\Providers\AppServiceProvider::class,
+		App\Providers\BladeServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 		App\Providers\ValidationServiceProvider::class,
@@ -150,6 +151,7 @@ return [
 		Szykra\Notifications\NotificationServiceProvider::class,
 		App\Providers\ViewServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
+		App\Providers\MenuServiceProvider::class,
 		Zizaco\Entrust\EntrustServiceProvider::class,
 		Menu\MenuServiceProvider::class,
 		Greggilbert\Recaptcha\RecaptchaServiceProvider::class,

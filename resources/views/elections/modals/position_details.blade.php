@@ -3,7 +3,7 @@
         <h1>Position Details</h1>
     </div>
     <div class="modal-body">
-        @helpDoc('elections.positions')
+        @HelpDoc('elections.positions')
     </div>
     <div class="modal-footer">
         <button class="btn btn-success" data-toggle="modal" data-target="#modal">

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\GenericRequest;
 use App\User;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -41,7 +42,7 @@ abstract class Controller extends BaseController
 	protected function checkPagination(LengthAwarePaginator $paginator)
 	{
 		if($paginator->count() == 0 && !is_null(Input::get('page')) && (int) Input::get('page') != 1) {
-			App::abort(Response::HTTP_TEMPORARY_REDIRECT, '', ['Location' => route(Route::current()->getName(), ['page' => 1])]);
+			App::abort(Response::HTTP_TEMPORARY_REDIRECT, '', ['Location' => route(Route::current()->getName(), Input::except('page') + ['page' => 1])]);
 		}
 	}
 
@@ -51,9 +52,7 @@ abstract class Controller extends BaseController
 	 */
 	protected function requireAjax(Request $request)
 	{
-		if(!$request->ajax()) {
-			App::abort(Response::HTTP_NOT_FOUND);
-		}
+		$request->requireAjax();
 	}
 
 	/**
@@ -93,5 +92,19 @@ abstract class Controller extends BaseController
 			trim($request->route()->parameter('term'))
 			:
 			null;
+	}
+
+	/**
+	 * Common function for setting the slug in the request.
+	 * This checks if a slug was manually set before
+	 * defaulting to "slugifying" the name.
+	 * @param \App\Http\Requests\GenericRequest $request
+	 * @param string                            $slugName
+	 * @param string                            $defaultName
+	 * @return string
+	 */
+	protected function createSlug(GenericRequest $request, $slugName = 'slug', $defaultName = 'name')
+	{
+		return $request->get($slugName) ? strtolower($request->get($slugName)) : str_slug($request->get($defaultName));
 	}
 }

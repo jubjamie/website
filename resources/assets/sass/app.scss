@@ -566,9 +566,9 @@ body[page-section*="polls"] {
 body[page-section*="quotes"] {
 	@import "partials/quotes";
 }
-//body[page-section*="resources"] {
-//	@import "partials/resources";
-//}
+body[page-section*="resources"] {
+	@import "partials/resources";
+}
 body[page-section*="training"] {
 	@import "partials/training";
 }
