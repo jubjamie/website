@@ -36,7 +36,12 @@
             <div class="form-group">
                 {!! Form::label('current_level', 'Current Level:', ['class' => 'col-sm-4 control-label']) !!}
                 <div class="col-sm-8">
-                    <p class="form-control-static">{!! \App\TrainingSkill::getProficiencyHtml($proposal->user->getSkill($proposal->skill)->level) !!}</p>
+                    <p class="form-control-static">
+                        @if($proposal->user->hasSkill($proposal->skill))
+                            {!! \App\TrainingSkill::getProficiencyHtml($proposal->user->getSkill($proposal->skill)->level) !!}
+                        @else
+                            <em>- none -</em>
+                        @endif
                 </div>
             </div>
         @endif
