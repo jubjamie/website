@@ -4,7 +4,7 @@
 @section('title', $resource->title . ' :: Resources')
 
 @section('content')
-    <h1 class="page-header">@yield('title')</h1>
+    <h1 class="page-header">Resources</h1>
     <div id="resourceWrapper">
         <h2>{{ $resource->title }}</h2>
         <h4 class="category">{{ $resource->category_name }}</h4>
