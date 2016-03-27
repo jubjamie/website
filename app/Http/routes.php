@@ -26,6 +26,7 @@ require app_path('Http/routes/members.php');
 require app_path('Http/routes/pages.php');
 require app_path('Http/routes/polls.php');
 require app_path('Http/routes/quotesboard.php');
+require app_path('Http/routes/resources.php');
 require app_path('Http/routes/training.php');
 require app_path('Http/routes/users.php');
 

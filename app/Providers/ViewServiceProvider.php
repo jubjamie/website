@@ -28,6 +28,7 @@ class ViewServiceProvider extends ServiceProvider
 		$this->attachMemberEvents();
 		$this->attachMemberSkills();
 		$this->attachActiveUser();
+		$this->attachResourceFields();
 	}
 
 	/**
@@ -162,6 +163,35 @@ class ViewServiceProvider extends ServiceProvider
 	{
 		View::composer('*', function ($view) {
 			$view->with('activeUser', Auth::user() ?: new User());
+		});
+	}
+
+	/**
+	 * Attach the resource categories, tags and misc
+	 * variables to the necessary views.
+	 */
+	private function attachResourceFields()
+	{
+		View::composer('resources._form', function ($view) {
+			$view->with([
+				'categories' => ResourceCategory::orderBy('name', 'ASC')->lists('name', 'id'),
+				'tags'       => ResourceTag::orderBy('name', 'ASC')->lists('name', 'id'),
+				'access'     => Resource::getAccessList(),
+			]);
+		});
+
+		View::composer([
+			'resources.index',
+			'resources.list',
+			'resources.partials.search_inputs',
+		], function ($view) {
+			$categories = ResourceCategory::orderBy('name', 'ASC')->get();
+			$tags       = ResourceTag::orderBy('name', 'ASC')->get();
+
+			$view->with([
+				'all_categories' => $categories,
+				'all_tags'       => $tags,
+			]);
 		});
 	}
 }
