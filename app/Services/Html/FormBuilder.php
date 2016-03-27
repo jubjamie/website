@@ -104,7 +104,7 @@ class FormBuilder extends \Collective\Html\FormBuilder
 	 * @param array  $options
 	 * @return string
 	 */
-	function datetime($name, $value = null, $options = [])
+	public function datetime($name, $value = null, $options = [])
 	{
 		$options = array_merge([
 			'data-input-type'  => 'datetimepicker',
@@ -113,5 +113,36 @@ class FormBuilder extends \Collective\Html\FormBuilder
 		], $options);
 
 		return $this->text($name, $value, $options);
+	}
+
+	/**
+	 * Easily create a group of radio buttons.
+	 * @param       $name
+	 * @param array $list
+	 * @param null  $selected
+	 * @param array $options
+	 * @return array
+	 */
+	public function radioGroup($name, $list = [], $selected = null, $options = [])
+	{
+		$selected      = $this->getValueAttribute($name, $selected);
+		$options['id'] = $this->getIdAttribute($name, $options);
+		if(!isset($options['name'])) {
+			$options['name'] = $name;
+		}
+
+		$class = 'radio';
+		if(isset($options['class'])) {
+			$class .= ' ' . $options['class'];
+			unset($options['class']);
+		}
+
+		$html = [];
+		foreach($list as $value => $text) {
+			$html[] = "<div class=\"{$class}\"><label>" . $this->radio($name, $value, $selected == $value, $options) . $text . "</label></div>";
+		}
+
+		$list = implode('', $html);
+		return $list;
 	}
 }
