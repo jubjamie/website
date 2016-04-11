@@ -215,7 +215,7 @@
                                             @include('events.partials.view_paperwork_incomplete')
                                         @endif
                                     </p>
-                                    @if($event->paperwork[$key])
+                                    @if(!$event->paperwork[$key])
                                         @if($key == "risk_assessment")
                                             <p class="paperwork-link">
                                                 <span class="fa fa-link"></span>
