@@ -83,3 +83,8 @@ $('[data-type="toggle-visibility"]').on('change', function() {
 	form.find('[data-visibility-id]').addClass('hidden');
 	form.find('[data-visibility-id="' + $(this).val() + '"]').removeClass('hidden');
 });
+if(typeof(window.console) == 'undefined') {
+	var console = {
+		log: function(str) {}
+	}
+}

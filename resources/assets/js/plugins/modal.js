@@ -4,7 +4,7 @@ var $modalContent = $modalDialog.children('div.modal-content');
 var $form;
 var $btns;
 var $xhttp2 = typeof(FormData) != 'undefined';
-if(!$xhttp2 && !!console) {
+if(!$xhttp2) {
 	console.log('ALERT: Your browser does not support XMLHttpRequest2. AJAX forms will work but you will be unable to upload files by AJAX.');
 }
 
@@ -12,11 +12,11 @@ if(!$xhttp2 && !!console) {
 	function form() {
 		return $modal.find('form');
 	}
-
+	
 	function btns() {
 		return $modal.find('button');
 	}
-
+	
 	$modal.on('show.bs.modal', function (e) {
 		// Get the modal template
 		var target = $(e.relatedTarget);
@@ -33,7 +33,7 @@ if(!$xhttp2 && !!console) {
 				}
 				$modalContent.children('div.modal-header').html('<h1>' + target.data('modalTitle') + '</h1>');
 			}
-
+			
 			// Set any default form values
 			var formData = target.data('formData');
 			if(typeof(formData) == 'object') {
@@ -48,7 +48,7 @@ if(!$xhttp2 && !!console) {
 					}
 				}
 			}
-
+			
 			// Reload widgets
 			$form = form();
 			$form.find('input[data-input-type="datetimepicker"]').each(function (i, obj) {
@@ -80,10 +80,10 @@ if(!$xhttp2 && !!console) {
 		var $btn = data.btn;
 		$form = form();
 		$btns = btns();
-
+		
 		$form.attr('action', $btn.data('formAction'));
 		$btns.attr('disabled', 'disabled');
-
+		
 		var settings = {
 			data      : $xhttp2 ? new FormData($form[0]) : $form.serialize(),
 			url       : $form.attr('action'),
@@ -107,7 +107,7 @@ if(!$xhttp2 && !!console) {
 			settings.processData = false;
 			settings.mimeType = "multipart/form-data";
 		}
-
+		
 		$.ajax(settings);
 	});
 	$modal.on('submit', 'form', function (event) {
@@ -118,5 +118,5 @@ if(!$xhttp2 && !!console) {
 			btn.trigger('click');
 		}
 	});
-
+	
 })(jQuery);
