@@ -45,6 +45,8 @@ class Handler extends ExceptionHandler
 		//   BadMethodCallException
 		if($e instanceof ModelNotFoundException || $e instanceof ReflectionException || $e instanceof BadMethodCallException) {
 			return Response::view('errors.404', ['exception' => $e], 404);
+		} else if($e->getStatusCode() == 503) {
+			return Response::view('errors.503', ['exception' => $e], 503);
 		} else {
 			return Response::view('errors.500', ['exception' => $e], 500);
 		}
