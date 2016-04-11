@@ -215,16 +215,22 @@
                                             @include('events.partials.view_paperwork_incomplete')
                                         @endif
                                     </p>
-                                    @if($key == "risk_assessment")
-                                        <p class="paperwork-link">
-                                            <span class="fa fa-link"></span>
-                                            <a class="grey" href="https://docs.google.com/forms/d/1t355cXGFiw0LtwD2IIEFPGjEwFRzV0wQxh7uUzH39iI/viewform" target="_blank">Risk assessment form</a>
-                                        </p>
-                                    @elseif($key == "event_report")
-                                        <p class="paperwork-link">
-                                            <span class="fa fa-link"></span>
-                                            <a class="grey" href="https://docs.google.com/forms/d/1KdSfZYT5pOOVPgq_pRqpGtCoY-OWbvpuNzfGPRqnsx4/viewform" target="_blank">Event report form</a>
-                                        </p>
+                                    @if($event->paperwork[$key])
+                                        @if($key == "risk_assessment")
+                                            <p class="paperwork-link">
+                                                <span class="fa fa-link"></span>
+                                                <a class="grey"
+                                                   href="https://docs.google.com/forms/d/1t355cXGFiw0LtwD2IIEFPGjEwFRzV0wQxh7uUzH39iI/viewform"
+                                                   target="_blank">Risk assessment form</a>
+                                            </p>
+                                        @elseif($key == "event_report")
+                                            <p class="paperwork-link">
+                                                <span class="fa fa-link"></span>
+                                                <a class="grey"
+                                                   href="https://docs.google.com/forms/d/1KdSfZYT5pOOVPgq_pRqpGtCoY-OWbvpuNzfGPRqnsx4/viewform"
+                                                   target="_blank">Event report form</a>
+                                            </p>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
