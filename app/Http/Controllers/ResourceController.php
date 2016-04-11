@@ -208,8 +208,6 @@ class ResourceController extends Controller
 
 		Flash::success('Resource created');
 
-		return redirect(route('resources.create'));
-
 		return redirect(route('resources.view', ['id' => $resource->id]));
 	}
 
