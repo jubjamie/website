@@ -162,14 +162,14 @@ class UsersController extends Controller
 		// Define the validation rules and messages
 		$rules    = [
 			'name'     => 'required|name',
-			'username' => 'required|alpha_num|unique:users',
+			'username' => 'required|regex:/[a-zA-Z0-9_\.]+/|unique:users',
 			'type'     => 'required|in:' . implode(',', array_keys(User::$CreateAccountTypes)),
 		];
 		$messages = [
 			'name.required'      => 'Please enter the new user\'s name',
 			'name.name'          => 'Please enter their forename and surname',
 			'username.required'  => 'Please enter the new user\'s BUCS username',
-			'username.alpha_num' => 'Please enter their username using just letters and numbers',
+			'username.regex'     => 'Please enter their username using just letters and numbers',
 			'username.unique'    => 'A user with that username already exists',
 			'type.required'      => 'Please select an account type',
 			'type.in'            => 'Please select one of the provided account types',
@@ -203,7 +203,7 @@ class UsersController extends Controller
 			// Validate initially
 			$validator = Validator::make($request->only('users', 'type'), [
 				'type'  => $rules['type'],
-				'users' => 'required|regex:/^[a-z]+\s[a-z]+[,][a-z0-9]+$/im',
+				'users' => 'required|regex:/^[a-z]+\s[a-z]+[,][a-z0-9_\.]+$/im',
 			], $messages + [
 					'users.required' => 'Please enter the list of users to add',
 					'users.regex'    => 'Please enter each user in the format specified in the <a href="#" data-toggle="modal" data-target="#helpModal">help</a>.',
