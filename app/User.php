@@ -57,7 +57,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected static $ValidationRules = [
 		'name'         => 'required|name',
 		'nickname'     => 'regex:/[a-zA-Z]+/',
-		'username'     => 'required|regex:/[a-zA-Z0-9_]+/|unique:users,username',
+		'username'     => 'required|regex:/[a-zA-Z0-9_\.]+/|unique:users,username',
 		'email'        => 'required|email|unique:users,email',
 		'phone'        => 'phone',
 		'dob'          => 'date_format:d/m/Y|regex:/[0-9]{2}\/[0-9]{2}\/[0-9]{4}/',
