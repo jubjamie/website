@@ -227,7 +227,7 @@
                                             <p class="paperwork-link">
                                                 <span class="fa fa-link"></span>
                                                 <a class="grey"
-                                                   href="https://docs.google.com/forms/d/1KdSfZYT5pOOVPgq_pRqpGtCoY-OWbvpuNzfGPRqnsx4/viewform"
+                                                   href="https://docs.google.com/forms/d/1kSY107KrDb-ZGpiRCppeSK9lA8kCA8Kgz5TFd9nEVXo/viewform"
                                                    target="_blank">Event report form</a>
                                             </p>
                                         @endif
