@@ -220,14 +220,14 @@
                                             <p class="paperwork-link">
                                                 <span class="fa fa-link"></span>
                                                 <a class="grey"
-                                                   href="https://docs.google.com/forms/d/1t355cXGFiw0LtwD2IIEFPGjEwFRzV0wQxh7uUzH39iI/viewform"
+                                                   href="https://docs.google.com/forms/d/e/1FAIpQLSdvaBOleqmMPlVjoKsMpIcwzyJHWUNiNoI_a5d0PT_mLF_xyQ/viewform"
                                                    target="_blank">Risk assessment form</a>
                                             </p>
                                         @elseif($key == "event_report")
                                             <p class="paperwork-link">
                                                 <span class="fa fa-link"></span>
                                                 <a class="grey"
-                                                   href="https://docs.google.com/forms/d/1kSY107KrDb-ZGpiRCppeSK9lA8kCA8Kgz5TFd9nEVXo/viewform"
+                                                   href="https://docs.google.com/a/bts-crew.com/forms/d/e/1FAIpQLSekw6oEojBdD1REd2krli3U-4BYWNG9zfThCmTJKc1A1OaR3g/viewform"
                                                    target="_blank">Event report form</a>
                                             </p>
                                         @endif
