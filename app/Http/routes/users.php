@@ -43,11 +43,11 @@ Route::group([
 	Route::get('{username}/edit', [
 		'as'   => 'user.edit',
 		'uses' => 'UsersController@edit',
-	])->where('username', '[\w]+');
+	])->where('username', '[\w\.]+');
 	Route::post('{username}/edit', [
 		'as'   => 'user.edit.do',
 		'uses' => 'UsersController@update',
-	])->where('username', '[\w]+');
+	])->where('username', '[\w\.]+');
 });
 
 // Authentication

@@ -27,7 +27,7 @@ Route::group([
 	Route::get('profile/{username}/{tab?}', [
 		'as'   => 'members.profile',
 		'uses' => 'MembersController@profile',
-	])->where('username', '[\w]+')
+	])->where('username', '[\w\.]+')
 	     ->where('tab', 'profile|events|training');
 	// My profile
 	Route::get('my-profile/{tab?}', [
