@@ -4,15 +4,15 @@
 
 @section('scripts')
     $modal.on('show.bs.modal', function(event) {
-        if($(event.relatedTarget).data('modalTemplate') == 'new_category') {
-            var btn = $modal.find('#submitCategory');
-            var formAction = $(event.relatedTarget).data('formAction');
-            btn.data('formAction', formAction);
+    if($(event.relatedTarget).data('modalTemplate') == 'new_category') {
+    var btn = $modal.find('#submitCategory');
+    var formAction = $(event.relatedTarget).data('formAction');
+    btn.data('formAction', formAction);
 
-            if(formAction.indexOf('update') > -1) {
-                btn.find('span').eq(1).text('Update');
-            }
-        }
+    if(formAction.indexOf('update') > -1) {
+    btn.find('span').eq(1).text('Update');
+    }
+    }
     });
 @endsection
 
@@ -25,7 +25,9 @@
                     <ul class="nav nav-pills nav-stacked category-list" role="tablist">
                         @foreach($skillCategories as $category)
                             <li>
-                                <a data-toggle="tab" href="#{{ $category->id ? "category_{$category->id}" : "uncategorised" }}" role="button">{{ $category->name }}</a>
+                                <a data-toggle="tab"
+                                   href="#{{ $category->id ? "category_{$category->id}" : "uncategorised" }}"
+                                   role="button">{{ $category->name }}</a>
                                 @if($activeUser->isAdmin() && $category->id)
                                     <div class="btn-group btn-group-sm">
                                         <button class="btn btn-warning btn-sm"
@@ -96,15 +98,17 @@
                             <span>Propose skill level</span>
                         </a>
                     @endif
-                    <a class="btn btn-success"
-                       data-toggle="modal"
-                       data-target="#modal"
-                       data-modal-class="modal-sm"
-                       data-modal-template="award_skill"
-                       data-modal-title="Award Skill">
-                        <span class="fa fa-user-plus"></span>
-                        <span>Award skill</span>
-                    </a>
+                    @if($activeUser->isMember() || $activeUser->isAdmin())
+                        <a class="btn btn-success"
+                           data-toggle="modal"
+                           data-target="#modal"
+                           data-modal-class="modal-sm"
+                           data-modal-template="award_skill"
+                           data-modal-title="Award Skill">
+                            <span class="fa fa-user-plus"></span>
+                            <span>Award skill</span>
+                        </a>
+                    @endif
                     @if($activeUser->isAdmin())
                         <a class="btn btn-danger"
                            data-toggle="modal"
