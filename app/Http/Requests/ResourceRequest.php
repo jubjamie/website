@@ -25,7 +25,7 @@ class ResourceRequest extends Request
 		return [
 			'title'       => 'required',
 			'type'        => 'required|in:' . implode(',', array_keys(Resource::TYPES)),
-			'file'        => ($this->route()->getName() == 'resources.store' ? ('required_if:type,' . Resource::TYPE_FILE . '|') : '') . 'mimes:pdf|max:5000',
+			'file'        => ($this->route()->getName() == 'resources.store' ? ('required_if:type,' . Resource::TYPE_FILE . '|') : '') . 'mimes:pdf|max:20000',
 			'drive_id'    => 'required_if:type,' . Resource::TYPE_GDOC,
 			'category_id' => 'exists:resource_categories,id',
 			'tags'        => 'array',
@@ -47,7 +47,7 @@ class ResourceRequest extends Request
 			'type.in'              => 'Select a valid resource type',
 			'file.required_if'     => 'Select a file to upload',
 			'file.mimes'           => 'Only PDFs are currently supported',
-			'file.max'             => 'Maximum file size is 5MB',
+			'file.max'             => 'Maximum file size is 20MB',
 			'drive_id.required_if' => 'Enter the document ID',
 			'category_id.exists'   => 'Select a valid category',
 			'tags.array'           => 'Select some tags',
