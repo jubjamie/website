@@ -71,7 +71,7 @@
                     }
                     
                     if($isMember || $isAdmin) {
-                        $menu->add('#', 'Other', Menu::items('members.misc'), [], ['class' => 'misc'])
+                        $members->add('#', 'Other', Menu::items('members.misc'), [], ['class' => 'misc'])
                              ->raw('', null, ['class' => 'divider'])
                              ->add(route('contact.accident'), 'Report an Accident')
                              ->raw('', null, ['class' => 'divider']);
