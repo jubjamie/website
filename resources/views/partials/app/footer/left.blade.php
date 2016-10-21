@@ -9,7 +9,7 @@
 </div>
 <div class="row">
     <span class="fa fa-home pull-left"></span>
-    <span class="pull-left">1E 3.17</span>
+    <span class="pull-left">1E 3.4</span>
 </div>
 <div class="row">
     <span class="fa fa-map-marker pull-left"></span>
