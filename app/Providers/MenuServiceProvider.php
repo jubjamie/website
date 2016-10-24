@@ -106,6 +106,7 @@
                              ->add(route('equipment.repairs.add'), 'Report broken kit');
                         
                         
+                        
                         // Build the training sub-menu
                         $training = $menu->find('members.training');
                         $training->add(route('training.skills.index'), 'View skills');
@@ -133,7 +134,7 @@
                 $resources = $menu->find('resources');
                 if($isMember || $isAdmin) {
                     $resources->add(route('resources.search', ['category' => 'event-reports']), 'Event Reports')
-                              ->add(route('resources.search', ['category' => 'risk-assessments']), 'Risk Assessments')
+                              ->add(route('resources.search', ['category' => 'event-risk-assessments']), 'Event Risk Assessments')
                               ->add(route('resources.search', ['category' => 'meeting-minutes']), 'Meeting Minutes')
                               ->add(route('resources.search', ['category' => 'meeting-agendas']), 'Meeting Agendas');
                 }
