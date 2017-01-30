@@ -74,10 +74,7 @@ While any database storage solution supported by Laravel 5 can be used it is rec
 
 **Node.js**
 
-This is used to process the public assets using Laravel Elixir which uses gulp. You do not need to know how to use Node.js but do make sure you know how to run gulp. You can install gulp using 
-```sh
-$ npm install --global gulp
-```
+This is used to process the public assets using Laravel Mix which uses Webpack. You do not need to know how to use Node.js but do make sure you know how to run Mix.
 
 ## Installation
 Ensure your web and MySQL servers are functioning correctly and create the database and user before installing the repository.
@@ -92,7 +89,7 @@ Ensure your web and MySQL servers are functioning correctly and create the datab
     ```sh
     $ composer install
     ```
-3. Install Laravel Elixir
+3. Install Laravel Mix
 
     ```sh
     $ npm install
@@ -116,8 +113,7 @@ Ensure your web and MySQL servers are functioning correctly and create the datab
     ```
 7. Populate the database
 
-    > It is recommended you use a recent backup to ensure you have the most representative version of the website; speak to one of the development team.
-    > If you do not need a recent backup, you can use `$ php artisan db:seed` to insert some default data.
+    > You can no longer use `$ php artisan db:seed` to insert some default data; please speak to one of the development team to get a copy of the most recent database backup.
     
 ## Approval
 Any approved member of the development team will be able to push changes to the "development" branch at any time - members of the development team are encouraged to keep their local copy updated.
