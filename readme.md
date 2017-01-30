@@ -23,7 +23,7 @@ Version 4 does not introduce much additional functionality; instead it involved 
 
 Version 4 also led the move of the server to a VPS, full use of the Backstage domain ([bts-crew.com](http://www.bts-crew.com)) and the use of git and GitHub to manage version control.
 
-This development is led by Ben Jones ([bnjns](http://github.com/bnjns)) and is built on PHP 5.6, MySQL 5 and Laravel 5 and uses HTML5 and CSS3.
+This development is led by Ben Jones ([bnjns](http://github.com/bnjns)) and is built on PHP 7.1, MySQL 5.6 and Laravel 5.4 and uses HTML5 and CSS3.
 
 # Development
 While the development is led by Ben Jones the use of git and GitHub allows any interested party to easily become involved in the development process.
