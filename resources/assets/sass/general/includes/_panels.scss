@@ -1,0 +1,68 @@
+div#content {
+	div.panel {
+		h1.panel-heading {
+			font-size: 15px;
+			margin: 0;
+			position: relative;
+			text-align: left;
+
+			a[data-toggle="collapse"] {
+				color: inherit;
+				display: block;
+				margin: -10px -15px;
+				padding: 10px 15px;
+
+				&:hover, &:active, &:focus {
+					text-decoration: none;
+				}
+				&:focus {
+					outline: none;
+				}
+			}
+			.btn-group {
+				position: absolute;
+				right: 0.5em;
+				top: 0.3em;
+			}
+		}
+
+		&.panel-default {
+			$border_colour: darken($btsorange, 20%);
+			background: #000;
+			border-color: $border_colour;
+
+			& > .panel-heading {
+				background: inherit;
+				border: none;
+				border-radius: 3px;
+				color: $btsorange;
+				font-size: 15px;
+			}
+			& > div.panel-body, & > div.panel-collapse.in, & > div.panel-collapse.collapsing {
+				border-top: 1px solid $border_colour;
+			}
+			input.form-control {
+				font-size: 14px;
+				height: auto;
+				padding: 0.25em 0.5em;
+			}
+		}
+		table.table {
+			margin: 0;
+
+			tbody {
+				tr {
+					td {
+						border-bottom: 1px solid;
+						border-top-style: none;
+						border-color: #333;
+						padding: 0.6em 1em;
+					}
+					&:last-child td {
+						border-bottom: none;
+					}
+				}
+			}
+		}
+	}
+}

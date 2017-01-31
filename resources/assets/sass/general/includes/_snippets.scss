@@ -1,0 +1,49 @@
+@import "snippets/admintools";
+@import "snippets/events";
+@import "snippets/toolcolours";
+
+em, .em, .italic {
+    font-style: italic;
+    
+    &.bts {
+        font-style: inherit;
+        color: $btsyellow;
+    }
+}
+
+strong, .strong, .bold {
+    font-weight: 700;
+}
+
+.success {
+    color: #3e8f3e;
+}
+
+.warning {
+    color: darken(#fcf8e3, 25%);
+}
+
+.danger {
+    color: #b92c28;
+}
+
+span.skill-proficiency {
+    display: inline-block;
+    
+    span.fa-star-o {
+        color: #555;
+    }
+}
+
+.date-group {
+    display: inline-block;
+    
+    & > .date, & > .time, & > .separator {
+        display: block;
+    }
+    &.date-group-inline {
+        & > .date, & > .time, & > .separator {
+            display: inline-block;
+        }
+    }
+}

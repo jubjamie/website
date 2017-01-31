@@ -1,0 +1,76 @@
+form {
+    margin-left: auto;
+    margin-right: auto;
+    
+    &:not(.form-horizontal) .control-label {
+        font-weight: normal;
+    }
+    span.input-group {
+        span.input-group-addon {
+            & > span.fa {
+                text-align: center;
+                width: 1em;
+            }
+        }
+        &.textarea {
+            & > span.input-group-addon {
+                padding-top: 0.75em;
+                vertical-align: top;
+            }
+        }
+    }
+    div.form-error {
+        font-size: 14px;
+        padding-top: 0.5em;
+        padding-bottom: 0.5em;
+        
+        & > span.fa {
+            margin: 0.3em 0.7em 0 -0.1em;
+        }
+    }
+}
+
+@import "forms/buttons";
+@import "forms/checkboxes";
+@import "forms/controls";
+@import "forms/editables";
+@import "forms/fieldsets";
+@import "forms/groups";
+@import "forms/helpblocks";
+@import "forms/selects";
+@import "forms/static";
+
+div.bootstrap-datetimepicker-widget {
+    color: #000;
+    font-size: 12px;
+    z-index: 9000;
+    
+    div.datepicker {
+        z-index: 9500;
+        table {
+            thead {
+                font-weight: bold;
+            }
+        }
+    }
+    
+    a, a:hover, a:focus, a:active {
+        color: #000;
+    }
+}
+
+div.g-recaptcha-center {
+    & > div.g-recaptcha {
+        display: block;
+        text-align: center;
+        width: 100%;
+        
+        & > div {
+            display: inline-block;
+            margin: 0 auto;
+        }
+    }
+    & > p.help-block {
+        text-align: center;
+    }
+}
