@@ -1,4 +1,4 @@
-const { mix } = require('laravel-mix');
+const {mix} = require('laravel-mix');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,5 +11,39 @@ const { mix } = require('laravel-mix');
  |
  */
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+mix
+	// Copy vendor files
+	.copy('vendor/components/jquery/jquery.min.js', 'resources/assets/js/vendors/jquery.js')
+	.copy('vendor/twbs/bootstrap/dist/js/bootstrap.min.js', 'resources/assets/js/vendors/bootstrap.js')
+	.copy('vendor/twbs/bootstrap/dist/css/bootstrap.min.css', 'resources/assets/css/vendors/bootstrap.css')
+	.copy('vendor/twbs/bootstrap/dist/css/bootstrap-theme.min.css', 'resources/assets/css/vendors/bootstrap-theme.css')
+	.copy('vendor/moment/moment/min/moment.min.js', 'resources/assets/js/vendors/moment.js')
+	.copy('vendor/select2/select2/dist/js/select2.min.js', 'resources/assets/js/vendors/select2.js')
+	.copy('vendor/select2/select2/dist/css/select2.min.css', 'resources/assets/css/vendors/select2.css')
+	.copy('vendor/eonasdan/bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js', 'resources/assets/js/vendors/datetimepicker.js')
+	.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'resources/assets/css/vendors/datetimepicker.css')
+	// .copy('vendor/fortawesome/font-awesome/scss', 'resources/assets/sass/vendors/font-awesome')
+	// .sass('resources/assets/sass/vendors/font-awesome/font-awesome.scss', '../resources/assets/css/vendors/font-awesome.css')
+	
+	// Combine the vendor files
+	.combine([
+		'resources/assets/js/vendors/jquery.js',
+		'resources/assets/js/vendors/moment.js',
+		'resources/assets/js/vendors/bootstrap.js',
+		'resources/assets/js/vendors/select2.js',
+		'resources/assets/js/vendors/datetimepicker.js'
+	], 'public/js/vendors.js')
+	.combine([
+		'resources/assets/css/reset.css',
+		'resources/assets/css/vendors/bootstrap.css',
+		'resources/assets/css/vendors/bootstrap-theme.css',
+		'resources/assets/css/vendors/select2.css',
+		// 'resources/assets/css/vendors/select2-bootstrap.css',
+		'resources/assets/css/vendors/font-awesome.css',
+		'resources/assets/css/vendors/datetimepicker.css'
+	], 'public/css/vendors.css')
+	
+	// Process SCSS files
+	.sass('resources/assets/sass/structure/current.scss', 'public/css/structure.css')
+	.sass('resources/assets/sass/general/general.scss', 'public/css/general.css')
+	.sass('resources/assets/sass/partials/partials.scss', 'public/css/content.css');
