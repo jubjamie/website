@@ -6,10 +6,12 @@
         'perm' => true
     ])
 </noscript>
-@include('app.messages.message', [
-    'level' => 'info',
-    'title' => 'Cookie policy',
-    'message' => 'Some rubbish about our cookie policy with a <a href="#">link to the policy</a>.',
-    'perm' => true,
-    'id' => 'cookie-policy-msg'
-])
+@if(!Session::has('CookiePolicyAccepted'))
+    @include('app.messages.message', [
+        'level' => 'info',
+        'title' => 'Cookie policy',
+        'message' => 'Some rubbish about our cookie policy with a <a href="#">link to the policy</a>.',
+        'perm' => true,
+        'id' => 'cookie-policy-msg'
+    ])
+@endif

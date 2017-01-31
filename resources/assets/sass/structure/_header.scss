@@ -1,13 +1,10 @@
 div#header-wrapper {
 	background: #000;
-	margin-top: -10px;
-	padding-bottom: 1em;
-    padding-right: 3em;
+    padding: 0.5em 3em 0.5em 0;
 	text-align: center;
 	
 	& > img {
 		height: auto;
-        margin-top: 10px;
         max-width: 500px;
         
         @media (max-width: 480px) {
@@ -15,10 +12,6 @@ div#header-wrapper {
         }
 	}
 	@media (min-width: 768px) {
-        padding: 0;
-        
-        & > img {
-            margin-top: 0;
-        }
+        padding-right: 0;
     }
 }

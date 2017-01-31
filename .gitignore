@@ -7,3 +7,6 @@
 Homestead.json
 Homestead.yaml
 .env
+/components
+npm-debug.log
+/public/mix-manifest.json
