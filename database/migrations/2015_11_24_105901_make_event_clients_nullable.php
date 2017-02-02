@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordResetsTable extends Migration
+class MakeEventClientsNullable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,9 @@ class CreatePasswordResetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('password_resets', function (Blueprint $table) {
-            $table->string('email')->index();
-            $table->string('token')->index();
-            $table->timestamp('created_at');
+        Schema::table('events', function (Blueprint $table) {
+            $table->unsignedInteger('client_type')->nullable()->change();
+            $table->unsignedInteger('venue_type')->nullable()->change();
         });
     }
 
@@ -26,6 +25,8 @@ class CreatePasswordResetsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('password_resets');
+        Schema::table('events', function (Blueprint $table) {
+
+        });
     }
 }
