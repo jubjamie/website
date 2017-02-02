@@ -167,6 +167,13 @@
              * Package Service Providers...
              */
             Laravel\Tinker\TinkerServiceProvider::class,
+            Szykra\Notifications\NotificationServiceProvider::class,
+            Menu\MenuServiceProvider::class,
+            Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+            Intervention\Image\ImageServiceProvider::class,
+            SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+            GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+            Magyarjeti\LaravelLipsum\LipsumServiceProvider::class,
             
             /*
              * Application Service Providers...
@@ -176,7 +183,7 @@
             // App\Providers\BroadcastServiceProvider::class,
             App\Providers\EventServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-            \Magyarjeti\LaravelLipsum\LipsumServiceProvider::class,
+        
         
         ],
         
@@ -227,7 +234,12 @@
             'Validator'    => Illuminate\Support\Facades\Validator::class,
             'View'         => Illuminate\Support\Facades\View::class,
             
-            'Lipsum' => \Magyarjeti\LaravelLipsum\LipsumFacade::class,
+            'Lipsum'    => \Magyarjeti\LaravelLipsum\LipsumFacade::class,
+            'Flash'     => Szykra\Notifications\Flash::class,
+            'Menu'      => Menu\Menu::class,
+            'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+            'Image'     => Intervention\Image\Facades\Image::class,
+            'Markdown'  => GrahamCampbell\Markdown\Facades\Markdown::class,
         ],
     
     ];
