@@ -167,6 +167,7 @@
              * Package Service Providers...
              */
             Laravel\Tinker\TinkerServiceProvider::class,
+            Collective\Html\HtmlServiceProvider::class,
             Szykra\Notifications\NotificationServiceProvider::class,
             Menu\MenuServiceProvider::class,
             Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
@@ -180,11 +181,13 @@
              */
             App\Providers\AppServiceProvider::class,
             App\Providers\AuthServiceProvider::class,
-            // App\Providers\BroadcastServiceProvider::class,
+            App\Providers\BladeServiceProvider::class,
             App\Providers\EventServiceProvider::class,
+            //App\Providers\HtmlServiceProvider::class,
+            App\Providers\MenuServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-        
-        
+            //App\Providers\ValidationServiceProvider::class,
+            App\Providers\ViewServiceProvider::class,
         ],
         
         /*
@@ -233,13 +236,15 @@
             'URL'          => Illuminate\Support\Facades\URL::class,
             'Validator'    => Illuminate\Support\Facades\Validator::class,
             'View'         => Illuminate\Support\Facades\View::class,
-            
-            'Lipsum'    => \Magyarjeti\LaravelLipsum\LipsumFacade::class,
-            'Flash'     => Szykra\Notifications\Flash::class,
-            'Menu'      => Menu\Menu::class,
-            'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
-            'Image'     => Intervention\Image\Facades\Image::class,
-            'Markdown'  => GrahamCampbell\Markdown\Facades\Markdown::class,
+            // Additional packages
+            'Lipsum'       => \Magyarjeti\LaravelLipsum\LipsumFacade::class,
+            'Flash'        => Szykra\Notifications\Flash::class,
+            'Menu'         => Menu\Menu::class,
+            'Recaptcha'    => Greggilbert\Recaptcha\Facades\Recaptcha::class,
+            'Image'        => Intervention\Image\Facades\Image::class,
+            'Markdown'     => GrahamCampbell\Markdown\Facades\Markdown::class,
+            'Form'         => Collective\Html\FormFacade::class,
+            'HTML'         => Collective\Html\HtmlFacade::class,
         ],
     
     ];
