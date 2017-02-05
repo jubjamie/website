@@ -6,7 +6,7 @@
         'perm' => true
     ])
 </noscript>
-@if(!Session::has('CookiePolicyAccepted'))
+@if(!isset($_COOKIE['CookiePolicyAccepted']))
     @include('app.messages.message', [
         'level' => 'info',
         'title' => 'Cookie policy',

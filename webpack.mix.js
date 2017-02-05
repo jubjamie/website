@@ -31,7 +31,8 @@ mix
 		'resources/assets/js/vendors/moment.js',
 		'resources/assets/js/vendors/bootstrap.js',
 		'resources/assets/js/vendors/select2.js',
-		'resources/assets/js/vendors/datetimepicker.js'
+		'resources/assets/js/vendors/datetimepicker.js',
+		'node_modules/js-cookie/src/js.cookie.js'
 	], 'public/js/vendors.js')
 	.combine([
 		'resources/assets/css/reset.css',
@@ -46,4 +47,13 @@ mix
 	// Process SCSS files
 	.sass('resources/assets/sass/structure/current.scss', 'public/css/structure.css')
 	.sass('resources/assets/sass/general/general.scss', 'public/css/general.css')
-	.sass('resources/assets/sass/partials/partials.scss', 'public/css/content.css');
+	.sass('resources/assets/sass/partials/partials.scss', 'public/css/content.css')
+
+	// Process JS files
+	.combine([
+		'resources/assets/js/plugins/CloseMessages.js',
+		'resources/assets/js/plugins/CookieAcceptance.js',
+		'resources/assets/js/plugins/DisableButtons.js',
+		'resources/assets/js/plugins/tabify.js',
+		'resources/assets/js/app.js'
+	], 'public/js/app.js');
