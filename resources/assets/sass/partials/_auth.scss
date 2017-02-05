@@ -1,0 +1,13 @@
+&[page-id="login"] {
+    div#content {
+        margin-top: 2.5em;
+        @media(min-width: 768px) {
+            max-width: 400px;
+        }
+    }
+}
+&[page-id="password-email"], &[page-id="password-reset"] {
+    div#content {
+        max-width: 500px;
+    }
+}

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ResetsPasswords;
+use Szykra\Notifications\Flash;
 
 class ResetPasswordController extends Controller
 {
@@ -18,22 +19,33 @@ class ResetPasswordController extends Controller
     |
     */
 
-    use ResetsPasswords;
+    use ResetsPasswords {
+        sendResetResponse as sendResetResponseTrait;
+    }
 
     /**
      * Where to redirect users after resetting their password.
      *
      * @var string
      */
-    protected $redirectTo = '/home';
-
+    protected $redirectTo = '/';
+    
     /**
      * Create a new controller instance.
-     *
-     * @return void
      */
     public function __construct()
     {
         $this->middleware('guest');
+    }
+    
+    /**
+     * Overriwde the default response to include a message.
+     * @param  string $response
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    protected function sendResetResponse($response)
+    {
+        Flash::success('Password reset');
+        return $this->sendResetResponseTrait($response);
     }
 }
