@@ -5,7 +5,7 @@ form {
     &:not(.form-horizontal) .control-label {
         font-weight: normal;
     }
-    span.input-group {
+    .input-group {
         span.input-group-addon {
             & > span.fa {
                 text-align: center;
@@ -26,6 +26,19 @@ form {
         
         & > span.fa {
             margin: 0.3em 0.7em 0 -0.1em;
+        }
+    }
+    a.form-link {
+        
+        
+    }
+    span.form-link {
+        display: inline-block;
+        font-size: 0.8em;
+        margin: 0 0.75em;
+        
+        & > a {
+            margin: 0 0.25em;
         }
     }
 }

@@ -1,12 +1,12 @@
 h1 {
 	color: $btsyellow;
-	font-size: 38px;
+    font-size: 2em;
 	font-weight: 300;
 	margin: 0.6em 0 1em 0;
 	text-align: center;
 
-	@media (max-width: 76px) {
-		font-size: 2em;
+	@media (min-width: 768px) {
+        font-size: 38px;
 	}
 
 	&.page-header {

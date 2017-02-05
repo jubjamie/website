@@ -29,6 +29,12 @@
                         @include('app.messages.flash')
                     </ul>
                 </div>
+                @hasSection('header-main')
+                    <h1 class="page-header">@yield('header-main')</h1>
+                @endif
+                @hasSection('header-sub')
+                    <h2 class="page-header">@yield('header-sub')</h2>
+                @endif
                 <div id="content">
                     @yield('content')
                 </div>

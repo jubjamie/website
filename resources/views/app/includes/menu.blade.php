@@ -6,7 +6,7 @@
                 <span class="fa fa-bars"></span>
             </button>
         </div>
-        <div class="collapse navbar-collapse" id="main-menu">
+        <div class="collapse navbar-collapse" id="menu-main">
             {!! $mainMenu !!}
         </div>
     </div>
