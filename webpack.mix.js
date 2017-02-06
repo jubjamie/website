@@ -24,20 +24,23 @@ mix
 	.copy('vendor/eonasdan/bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css', 'resources/assets/css/vendors/datetimepicker.css')
 	// .copy('vendor/fortawesome/font-awesome/scss', 'resources/assets/sass/vendors/font-awesome')
 	// .sass('resources/assets/sass/vendors/font-awesome/font-awesome.scss', '../resources/assets/css/vendors/font-awesome.css')
-	
+		
 	// Combine the vendor files
 	.combine([
 		'resources/assets/js/vendors/jquery.js',
 		'resources/assets/js/vendors/moment.js',
 		'resources/assets/js/vendors/bootstrap.js',
+		'resources/assets/js/vendors/bootstrap-markdown.js',
 		'resources/assets/js/vendors/select2.js',
 		'resources/assets/js/vendors/datetimepicker.js',
+		'node_modules/simplemde/dist/simplemde.min.js',
 		'node_modules/js-cookie/src/js.cookie.js'
 	], 'public/js/vendors.js')
 	.combine([
 		'resources/assets/css/reset.css',
 		'resources/assets/css/vendors/bootstrap.css',
 		'resources/assets/css/vendors/bootstrap-theme.css',
+		'node_modules/simplemde/dist/simplemde.min.css',
 		'resources/assets/css/vendors/select2.css',
 		// 'resources/assets/css/vendors/select2-bootstrap.css',
 		'resources/assets/css/vendors/font-awesome.css',
@@ -54,6 +57,7 @@ mix
 		'resources/assets/js/plugins/CloseMessages.js',
 		'resources/assets/js/plugins/CookieAcceptance.js',
 		'resources/assets/js/plugins/DisableButtons.js',
+		'resources/assets/js/plugins/SimpleMDE.js',
 		'resources/assets/js/plugins/tabify.js',
 		'resources/assets/js/app.js'
 	], 'public/js/app.js');
