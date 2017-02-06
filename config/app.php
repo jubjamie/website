@@ -175,6 +175,7 @@
             SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
             GrahamCampbell\Markdown\MarkdownServiceProvider::class,
             Magyarjeti\LaravelLipsum\LipsumServiceProvider::class,
+            Mews\Purifier\PurifierServiceProvider::class,
             
             /*
              * Application Service Providers...
@@ -245,6 +246,7 @@
             'Markdown'     => GrahamCampbell\Markdown\Facades\Markdown::class,
             'Form'         => Collective\Html\FormFacade::class,
             'HTML'         => Collective\Html\HtmlFacade::class,
+            'Purifier'     => Mews\Purifier\Facades\Purifier::class,
         ],
     
     ];
