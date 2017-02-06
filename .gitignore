@@ -10,3 +10,4 @@ Homestead.yaml
 /components
 npm-debug.log
 /public/mix-manifest.json
+/public/app.js
