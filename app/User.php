@@ -81,6 +81,15 @@
         {
             return $this->belongsTo('App\UserGroup', 'user_group_id', 'id');
         }
+    
+        /**
+         * Define the pages foreign key link.
+         * @return \Illuminate\Database\Eloquent\Relations\HasMany
+         */
+        public function pages()
+        {
+            return $this->hasMany('App\Page');
+        }
         
         /**
          * Add a scope for only getting active accounts.

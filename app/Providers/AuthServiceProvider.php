@@ -3,6 +3,8 @@
     namespace App\Providers;
     
     use App\Auth\UserProvider;
+    use App\Page;
+    use App\Policies\PagePolicy;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Gate;
     use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -14,6 +16,7 @@
          * @var array
          */
         protected $policies = [
+            Page::class => PagePolicy::class,
         ];
         
         /**

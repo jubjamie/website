@@ -37,8 +37,8 @@
             <li><a href="#">Contact Us</a></li>
             <li><a href="#">Book Us</a></li>
             <li><a href="#">Terms and Conditions</a></li>
-            <li><a href="#">Frequently Asked Questions</a></li>
-            <li><a href="#">Useful Links</a></li>
+            <li><a href="{{ route('page.show', ['slug' => 'faq']) }}">Frequently Asked Questions</a></li>
+            <li><a href="{{ route('page.show', ['slug' => 'links']) }}">Useful Links</a></li>
         </ul>
     </div>
 </div>

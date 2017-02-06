@@ -43,8 +43,8 @@
                 $menu = Menu::handler('mainMenu');
                 
                 // Parent menu
-                $menu->add('#', 'Home')->activePattern('\/page\/home');
-                $menu->add('#', 'About Us');
+                $menu->add(route('home'), 'Home');
+                $menu->add(route('page.show', ['slug' => 'about']), 'About Us');
                 $menu->add('#', 'Media', Menu::items('media'));
                 $menu->add('#', 'The Committee');
                 $menu->add('#', 'Events Diary', Menu::items('events'))->activePattern('\/events');
@@ -108,7 +108,7 @@
                          ->add('#', 'Polls')->activePattern('\/polls')
                          ->add('#', 'Committee elections')->activePattern('\/elections')
                          ->add('#', 'BTS Awards')
-                         ->add('#', 'Manage webpages')
+                         ->add(route('page.index'), 'Manage webpages')
                          ->add('#', 'View SU Area');
                 }
                 
@@ -120,8 +120,8 @@
                               ->add('#', 'Meeting Minutes')
                               ->add('#', 'Meeting Agendas');
                 }
-                $resources->add('#', 'Links')
-                          ->add('#', 'FAQ');
+                $resources->add(route('page.show', ['slug' => 'links']), 'Links')
+                          ->add(route('page.show', ['slug' => 'faq']), 'FAQ');
                 
                 // Add the necessary classes
                 $menu->addClass('nav navbar-nav')

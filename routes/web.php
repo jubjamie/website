@@ -11,11 +11,16 @@
     |
     */
     
-    require base_path('routes/web/auth.php');
-    
+    Route::get('/', [
+        'as'   => 'home',
+        'uses' => function () {
+            return view('home');
+        },
+    ]);
     Route::get('/random', function () {
-        return view('pages.random');
+        return view('random');
     });
-    Route::get('/', function() {
-       return "home";
-    });
+    
+    require base_path('routes/web/auth.php');
+    require base_path('routes/web/page.php');
+    
