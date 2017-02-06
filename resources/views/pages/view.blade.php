@@ -6,5 +6,5 @@
 @section('header-main', $page->title)
 
 @section('content')
-    {!! $page->content !!}
+    {!! Markdown::convertToHtml($page->content) !!}
 @endsection
