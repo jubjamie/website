@@ -41,7 +41,6 @@
 
 	jQuery(document).ready(function () {
 		$('#cookie-policy-msg').CookieAcceptance();
-		console.log(Cookies.getJSON());
 	});
 })(jQuery);
 (function ($) {
@@ -60,6 +59,20 @@
 
 	jQuery(document).ready(function () {
 		$('button[disable-submit]').DisableButtons();
+	});
+})(jQuery);
+(function ($) {
+	$.fn.SimpleMDE = function () {
+		this.each(function() {
+			var simplemde = new SimpleMDE({
+				element: this,
+				status: false
+			});
+		});
+	};
+	
+	jQuery(document).ready(function () {
+		$('[data-type="simplemde"]').SimpleMDE();
 	});
 })(jQuery);
 (function($) {

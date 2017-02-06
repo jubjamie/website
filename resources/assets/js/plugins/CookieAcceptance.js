@@ -7,6 +7,5 @@
 
 	jQuery(document).ready(function () {
 		$('#cookie-policy-msg').CookieAcceptance();
-		console.log(Cookies.getJSON());
 	});
 })(jQuery);

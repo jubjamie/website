@@ -87,3 +87,29 @@ div.g-recaptcha-center {
         text-align: center;
     }
 }
+div.simplemde {
+    div.editor-toolbar {
+        background: #fff;
+        opacity: 1;
+        
+        a:focus {
+            outline: none;
+        }
+        &.fullscreen {
+            z-index: 3000;
+        }
+    }
+    div.CodeMirror {
+        height: 300px;
+    }
+    div.CodeMirror-fullscreen {
+        z-index: 3100;
+    }
+    div.editor-preview, div.editor-preview-side {
+        background: #000;
+        font-size: 15px;
+    }
+    div.editor-preview-side {
+        z-index: 3200;
+    }
+}
