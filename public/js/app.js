@@ -193,7 +193,6 @@ if(!$xhttp2) {
 				$modal.trigger('clearform');
 				$btns.attr('disabled', false);
 				error = processAjaxErrors(data, $form);
-				console.log(error);
 				
 				if(error.list) {
 					$form.find('input,textarea,select').each(function () {
@@ -308,8 +307,8 @@ function datetimepicker(input, options) {
 	var format = input.data('dateFormat') ? input.data('dateFormat') : 'YYYY-MM-DD';
 	var parent = input.parent();
 	var datetimepickerOptions = {
-		format: format,
-		icons : {
+		format         : format,
+		icons          : {
 			time    : 'fa fa-clock-o',
 			date    : 'fa fa-calendar',
 			up      : 'fa fa-chevron-up',
@@ -320,6 +319,7 @@ function datetimepicker(input, options) {
 			clear   : 'fa fa-trash',
 			close   : 'fa fa-remove'
 		},
+		showTodayButton: true,
 	};
 	if(typeof(options) == 'object') {
 		datetimepickerOptions = $.extend({}, datetimepickerOptions, options);
