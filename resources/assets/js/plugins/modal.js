@@ -116,7 +116,6 @@ if(!$xhttp2) {
 				$modal.trigger('clearform');
 				$btns.attr('disabled', false);
 				error = processAjaxErrors(data, $form);
-				console.log(error);
 				
 				if(error.list) {
 					$form.find('input,textarea,select').each(function () {
