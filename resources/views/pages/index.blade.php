@@ -68,5 +68,5 @@
         </a>
     </p>
 
-{{--    @include('partials.app.pagination', ['paginator' => $pages])--}}
+    {{ $pages }}
 @endsection
