@@ -72,7 +72,7 @@
                     $menu->find('members')
                          ->add('#', 'My Profile', Menu::items('members.profile'), [], ['class' => 'profile'])
                          ->add('#', 'The Membership', Menu::items('members.users'), [], ['class' => 'admin-users'])
-                         ->add('#', 'Quotes Board')
+                         ->add(route('quotes.index'), 'Quotes Board')
                          ->add('#', 'Equipment', Menu::items('members.equipment'), [], ['class' => 'equipment'])
                          ->add('#', 'Training', Menu::items('members.training'), [], ['class' => 'training'])
                          ->add('#', 'Other', Menu::items('members.misc'), [], ['class' => 'misc'])

@@ -1,3 +1,6 @@
+@import "../vars";
+@import "../mixins";
+
 body[page-section*="auth"] {
     @import "auth";
 }
@@ -35,7 +38,7 @@ body[page-section*="polls"] {
 }
 
 body[page-section*="quotes"] {
-    //@import "quotes";
+    @import "quotes";
 }
 
 body[page-section*="resources"] {

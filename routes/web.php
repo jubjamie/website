@@ -22,5 +22,6 @@
     });
     
     require base_path('routes/web/auth.php');
+    require base_path('routes/web/quotes.php');
     require base_path('routes/web/page.php');
     

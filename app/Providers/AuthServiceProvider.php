@@ -5,6 +5,8 @@
     use App\Auth\UserProvider;
     use App\Page;
     use App\Policies\PagePolicy;
+    use App\Policies\QuotePolicy;
+    use App\Quote;
     use Illuminate\Support\Facades\Auth;
     use Illuminate\Support\Facades\Gate;
     use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -16,7 +18,8 @@
          * @var array
          */
         protected $policies = [
-            Page::class => PagePolicy::class,
+            Page::class  => PagePolicy::class,
+            Quote::class => QuotePolicy::class,
         ];
         
         /**
