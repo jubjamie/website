@@ -12,16 +12,15 @@
          */
         public function authorize()
         {
-            $page = Page::findBySlug($this->route('slug'));
-            
-            switch($this->route) {
-                case 'page.store':
-                    return $this->user()->can('create', Page::class);
-                case 'page.update':
-                    return $this->user()->can('update', $page);
+            if($this->route == 'page.store') {
+                return $this->user()->can('create', Page::class);
+            } else if($this->route == 'page.update') {
+                $page = Page::findBySlug($this->route('slug'));
+                
+                return $this->user()->can('update', $page);
+            } else {
+                return false;
             }
-            
-            return false;
         }
         
         /**

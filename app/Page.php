@@ -68,13 +68,4 @@
         {
             $query->where('published', 1);
         }
-    
-        /**
-         * Fix Taylor Otwell's shite programming.
-         * @return string
-         */
-        public function getSlugAttribute()
-        {
-            return isset($this->attributes['slug']) ? $this->attributes['slug'] : '';
-        }
     }
