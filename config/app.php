@@ -167,7 +167,7 @@
              * Package Service Providers...
              */
             Laravel\Tinker\TinkerServiceProvider::class,
-            Collective\Html\HtmlServiceProvider::class,
+            //Collective\Html\HtmlServiceProvider::class,
             Szykra\Notifications\NotificationServiceProvider::class,
             Menu\MenuServiceProvider::class,
             Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
@@ -184,10 +184,10 @@
             App\Providers\AuthServiceProvider::class,
             App\Providers\BladeServiceProvider::class,
             App\Providers\EventServiceProvider::class,
-            //App\Providers\HtmlServiceProvider::class,
+            App\Providers\HtmlServiceProvider::class,
             App\Providers\MenuServiceProvider::class,
             App\Providers\RouteServiceProvider::class,
-            //App\Providers\ValidationServiceProvider::class,
+            App\Providers\ValidationServiceProvider::class,
             App\Providers\ViewServiceProvider::class,
         ],
         
