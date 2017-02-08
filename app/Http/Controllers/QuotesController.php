@@ -52,11 +52,12 @@
         
         /**
          * Remove the specified resource from storage.
-         * @param  \App\Quote $quote
+         * @param \Illuminate\Http\Request $request
          * @return \Illuminate\Http\Response
          */
-        public function destroy(Quote $quote)
+        public function destroy(Request $request)
         {
+            $quote = Quote::findOrFail($request->get('deleteQuote'));
             $this->authorize('delete', $quote);
             $quote->delete();
             Flash::success('Quote deleted');
