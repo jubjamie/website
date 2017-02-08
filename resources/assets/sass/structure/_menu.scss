@@ -69,7 +69,7 @@ div#menu-wrapper {
     }
     
     & > nav {
-        z-index: 2000;
+        z-index: 5000;
         
         & > div.container-fluid {
             @media(min-width: 768px) {

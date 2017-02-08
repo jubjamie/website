@@ -6,7 +6,7 @@ div#sub-navbar {
     left: 0;
     top: 0;
     width: 100%;
-    z-index: 5000;
+    z-index: 4000;
     
     @media (min-width: 768px) {
         position: fixed;
@@ -51,14 +51,14 @@ div#sub-navbar {
                 }
                 &#submenu_members {
                     float: left;
-                    z-index: 5100;
+                    z-index: 4100;
                 }
                 &#submenu_profile {
                     float: right;
-                    z-index: 5900;
+                    z-index: 4500;
                     
                     & > li.dropdown > ul.dropdown-menu {
-                        z-index: 5950;
+                        z-index: 4700;
                     }
                 }
             }

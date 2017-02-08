@@ -1,6 +1,6 @@
 div.modal {
 	color: #000;
-	z-index: 3100;
+	z-index: 8100;
 
 	div.modal-dialog {
 		margin: 0 auto;
@@ -89,7 +89,7 @@ div.modal {
 }
 
 div.modal-backdrop {
-	z-index: 3000;
+	z-index: 8000;
 
 	&.in {
 		opacity: 0.8;

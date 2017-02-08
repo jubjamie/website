@@ -3,7 +3,7 @@ div[role='tabpanel'], div.tabpanel {
     border-radius: 5px;
     text-align: center;
     position: relative;
-    z-index: 1900;
+    z-index: 3000;
     
     ul.nav.nav-tabs {
         @include clearfix();
@@ -15,7 +15,7 @@ div[role='tabpanel'], div.tabpanel {
         padding: 0;
         position: inherit;
         text-align: center;
-        z-index: 1980;
+        z-index: 3500;
         white-space: nowrap;
         
         &:before {
@@ -91,7 +91,7 @@ div[role='tabpanel'], div.tabpanel {
             padding: 2.5em 0 0 0;
             position: relative;
             text-align: left;
-            z-index: 1910;
+            z-index: 3100;
             
             @media (max-width: 768px) {
                 border: none;

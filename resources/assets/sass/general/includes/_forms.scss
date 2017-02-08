@@ -21,16 +21,7 @@ form {
     }
     div.form-error {
         font-size: 14px;
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-        
-        & > span.fa {
-            margin: 0.3em 0.7em 0 -0.1em;
-        }
-    }
-    a.form-link {
-        
-        
+        margin: 0 0 1em;
     }
     span.form-link {
         display: inline-block;
@@ -57,10 +48,14 @@ form {
 div.bootstrap-datetimepicker-widget {
     color: #000;
     font-size: 12px;
+    position: absolute;
+    left: auto;
+    top: auto;
+    float: none;
     z-index: 9000;
     
     div.datepicker {
-        z-index: 9500;
+        z-index: 9200;
         table {
             thead {
                 font-weight: bold;
