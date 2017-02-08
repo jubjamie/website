@@ -24,7 +24,7 @@
         {
             return [
                 'culprit' => 'required',
-                'date'    => 'required|datetime|before:' . Carbon::now()->subMinutes($this->header('TZ_OFFSET'))->addSecond()->format("Y-m-d H:i"),
+                'date'    => 'required|datetime|before:' . Carbon::now()->subMinutes($this->header('TZ-OFFSET'))->addMinute()->format("Y-m-d H:i"),
                 'quote'   => 'required',
             ];
         }
