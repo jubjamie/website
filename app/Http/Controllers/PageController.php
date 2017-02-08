@@ -4,12 +4,20 @@
     
     use App\Http\Requests\PageRequest;
     use App\Page;
-    use Illuminate\Http\Request;
     use Illuminate\Support\Facades\Auth;
     use Szykra\Notifications\Flash;
     
     class PageController extends Controller
     {
+        /**
+         * PageController constructor.
+         */
+        public function __construct()
+        {
+            $this->middleware('auth')
+                 ->except('show');
+        }
+        
         /**
          * Display a listing of the resource.
          * @return \Illuminate\Http\Response
@@ -31,6 +39,8 @@
          */
         public function create()
         {
+            $this->authorize('create', Page::class);
+            
             $page = new Page([
                 'user_id'   => Auth::user()->id,
                 'published' => 1,
@@ -60,10 +70,20 @@
         public function show($slug)
         {
             $page = Page::findBySlugOrFail($slug);
-            $this->authorize('view', $page);
+            
+            // Check if the page is published. This is a bit of a
+            // hack as authorisation doesn't support guest users.
+            if(!$page->published) {
+                if(Auth::check() && Auth::user()->isAdmin()) {
+                    Flash::warning('Page not published', 'This page will not be viewable by non-admins until it is published.');
+                } elseif(!Auth::check()) {
+                    return redirect()->guest('login');
+                } else {
+                    app()->abort(404);
+                }
+            }
             
             return view('pages.view')->with('page', $page);
-            
         }
         
         /**
