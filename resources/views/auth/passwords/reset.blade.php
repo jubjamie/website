@@ -35,16 +35,13 @@
         </div>
 
         <div class="form-group">
-            <div class="btn-group">
-                <button class="btn btn-success" disable-submit="Resetting password ..." type="submit">
-                    <span class="fa fa-check"></span>
-                    <span>Reset Password</span>
-                </button>
-                <a class="btn btn-danger" href="{{ route('auth.login') }}">
-                    <span class="fa fa-long-arrow-left"></span>
-                    <span>Cancel</span>
-                </a>
-            </div>
+            <button class="btn btn-success" disable-submit="Resetting password ..." type="submit">
+                <span class="fa fa-check"></span>
+                <span>Reset Password</span>
+            </button>
+            <span class="form-link">
+                or <a href="{{ route('auth.login') }}">Cancel</a>
+            </span>
         </div>
     {!! Form::close() !!}
 @endsection
