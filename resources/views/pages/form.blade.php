@@ -32,6 +32,6 @@
 <!-- Select field for 'user_id' -->
 <div class="form-group @InputClass('user_id')">
     {!! Form::label('user_id', 'Author:', ['class' => 'control-label']) !!}
-    {!! Form::select('user_id', ['' => '-- Select --'] + $ActiveUsers, null, ['class' => 'form-control']) !!}
+    {!! Form::memberList('user_id', null, ['class' => 'form-control', 'include_blank' => true]) !!}
     @InputError('user_id')
 </div>
