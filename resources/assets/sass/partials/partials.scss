@@ -6,7 +6,7 @@ body[page-section*="auth"] {
 }
 
 body[page-section*="committee"] {
-    //@import "committee";
+    @import "committee";
 }
 
 body[page-section*="elections"] {

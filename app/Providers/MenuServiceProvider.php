@@ -46,7 +46,7 @@
                 $menu->add(route('home'), 'Home');
                 $menu->add(route('page.show', ['slug' => 'about']), 'About Us');
                 $menu->add('#', 'Media', Menu::items('media'));
-                $menu->add('#', 'The Committee');
+                $menu->add(route('committee.view'), 'The Committee');
                 $menu->add('#', 'Events Diary', Menu::items('events'))->activePattern('\/events');
                 $menu->add(route('auth.login'), 'Members\' Area', Menu::items('members'))->activePattern('\/members');
                 $menu->add('#', 'Resources', Menu::items('resources'))->activePattern('\/resources');

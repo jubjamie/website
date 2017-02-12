@@ -3,7 +3,9 @@
     namespace App\Providers;
     
     use App\Auth\UserProvider;
+    use App\CommitteeRole;
     use App\Page;
+    use App\Policies\CommitteePolicy;
     use App\Policies\PagePolicy;
     use App\Policies\QuotePolicy;
     use App\Quote;
@@ -18,8 +20,9 @@
          * @var array
          */
         protected $policies = [
-            Page::class  => PagePolicy::class,
-            Quote::class => QuotePolicy::class,
+            CommitteeRole::class => CommitteePolicy::class,
+            Page::class          => PagePolicy::class,
+            Quote::class         => QuotePolicy::class,
         ];
         
         /**

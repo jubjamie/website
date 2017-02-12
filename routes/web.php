@@ -21,7 +21,7 @@
         return view('random');
     });
     
-    require base_path('routes/web/auth.php');
-    require base_path('routes/web/quotes.php');
-    require base_path('routes/web/page.php');
-    
+    include base_path('routes/web/auth.php');
+    include base_path('routes/web/committee.php');
+    include base_path('routes/web/quotes.php');
+    include base_path('routes/web/page.php');

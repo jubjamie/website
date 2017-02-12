@@ -6,6 +6,7 @@
     use Illuminate\Notifications\Notifiable;
     use Illuminate\Foundation\Auth\User as Authenticatable;
     use Illuminate\Support\Facades\Auth;
+    use Intervention\Image\Facades\Image;
     use Szykra\Notifications\Flash;
     
     class User extends Authenticatable
@@ -81,7 +82,7 @@
         {
             return $this->belongsTo('App\UserGroup', 'user_group_id', 'id');
         }
-    
+        
         /**
          * Define the pages foreign key link.
          * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -99,7 +100,7 @@
         {
             $query->where('status', true);
         }
-    
+        
         /**
          * Send the password reset notification.
          * @param  string $token
@@ -328,20 +329,21 @@
         }
         
         /**
+         * Make the user a normal member.
+         * @return bool
+         */
+        public function makeMember()
+        {
+            return $this->setMembershipType('member');
+        }
+        
+        /**
          * Make the user a committee member.
          * @return bool
          */
         public function makeCommittee()
         {
-            if($this->id == Auth::user()->id) {
-                Flash::warning('You cannot make yourself a committee member');
-                
-                return false;
-            }
-            
-            $this->user_group_id = UserGroup::where('name', 'committee')->first()->id;
-            
-            return true;
+            return $this->setMembershipType('committee');
         }
         
         /**
@@ -350,15 +352,26 @@
          */
         public function makeAssociate()
         {
+            return $this->setMembershipType('associate');
+        }
+        
+        /**
+         * General function for changing a user's membership type.
+         * @param string $type
+         * @return bool
+         */
+        private function setMembershipType($type = 'member')
+        {
             if($this->id == Auth::user()->id) {
-                Flash::warning('You cannot make yourself an associate');
+                Flash::warning('You cannot change your own membership type');
                 
                 return false;
             }
             
-            $this->user_group_id = UserGroup::where('name', 'associate')->first()->id;
             
-            return true;
+            return $this->update([
+                'user_group_id' => UserGroup::where('name', $type)->first()->id,
+            ]);
         }
         
         /**
@@ -371,7 +384,7 @@
         }
         
         /**
-         * Check if the user has a custom avatar image.
+         * Check if the user has a custom profile picture.
          * @return bool
          */
         public function hasAvatar()
@@ -380,7 +393,7 @@
         }
         
         /**
-         * Get the URL or path of the user's avatar.
+         * Get the URL or path of the user's profile picture.
          * @param bool $absolute
          * @param bool $checkExists
          * @return string
@@ -391,12 +404,12 @@
             $imgPath  = $basePath . $this->username . '.jpg';
             $path     = !$checkExists || $this->hasAvatar() ? $imgPath : ($basePath . 'blank.jpg');
             
-            return ($absolute ? base_path('public') : '') . $path;
+            return $absolute ? base_path('public/' . $path) : $path;
             
         }
         
         /**
-         * Change the user's avatar and resize to 500x500.
+         * Change the user's profile picture and resize to 500x500.
          * @param UploadedFile $image
          * @return $this
          */

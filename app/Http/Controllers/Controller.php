@@ -10,6 +10,7 @@
     use Illuminate\Foundation\Validation\ValidatesRequests;
     use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
     use Illuminate\Support\Facades\Input;
+    use Illuminate\Support\Facades\Request as RequestFacade;
     use Illuminate\Support\Facades\Route;
     
     class Controller extends BaseController
@@ -58,5 +59,15 @@
             $text = $errorText ?: trans('errors.' . $errorCode);
             
             return $this->ajaxResponse($text, $status, $data);
+        }
+    
+        /**
+         * Require that the request is made over AJAX.
+         */
+        protected function requireAjax()
+        {
+            if(!RequestFacade::ajax()) {
+                app()->abort(404);
+            }
         }
     }
