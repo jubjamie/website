@@ -17,6 +17,7 @@
         public function boot()
         {
             $this->composeMainMenu();
+            $this->composeContactMenu();
         }
         
         /**
@@ -27,7 +28,10 @@
         {
             //
         }
-        
+    
+        /**
+         * Make the main menu.
+         */
         private function composeMainMenu()
         {
             // TODO: Correct access once gates/policies are implemented
@@ -50,7 +54,7 @@
                 $menu->add('#', 'Events Diary', Menu::items('events'))->activePattern('\/events');
                 $menu->add(route('auth.login'), 'Members\' Area', Menu::items('members'))->activePattern('\/members');
                 $menu->add('#', 'Resources', Menu::items('resources'))->activePattern('\/resources');
-                $menu->add('#', 'Enquiries & Book Us')->activePattern('\/contact\/book');
+                $menu->add(route('contact.book'), 'Enquiries & Book Us')->activePattern('\/contact\/book');
                 
                 // Media sub-menu
                 $media = $menu->find('media');
@@ -77,7 +81,7 @@
                          ->add('#', 'Training', Menu::items('members.training'), [], ['class' => 'training'])
                          ->add('#', 'Other', Menu::items('members.misc'), [], ['class' => 'misc'])
                          ->raw('', null, ['class' => 'divider'])
-                         ->add('#', 'Report an Accident')
+                         ->add(route('contact.accident'), 'Report an Accident')
                          ->raw('', null, ['class' => 'divider'])
                          ->add(route('auth.logout'), 'Log out');
                     
@@ -145,6 +149,21 @@
                 
                 // Render
                 $view->with('mainMenu', $menu->render());
+            });
+        }
+    
+        /**
+         * Make the sub menu for the contact section.
+         */
+        private function composeContactMenu()
+        {
+            View::composer('contact.shared', function ($view) {
+                $menu = Menu::handler('contactMenu');
+                $menu->add(route('contact.enquiries'), 'General Enquiries')
+                     ->add(route('contact.book'), 'Book Us')->activePattern('\/contact\/book')
+                     ->add(route('contact.feedback'), 'Provide Feedback');
+                $menu->addClass('nav nav-tabs');
+                $view->with('menu', $menu->render());
             });
         }
     }

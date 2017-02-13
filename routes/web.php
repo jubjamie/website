@@ -23,5 +23,6 @@
     
     include base_path('routes/web/auth.php');
     include base_path('routes/web/committee.php');
+    include base_path('routes/web/contact.php');
     include base_path('routes/web/quotes.php');
     include base_path('routes/web/page.php');

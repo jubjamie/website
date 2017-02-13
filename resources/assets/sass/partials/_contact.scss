@@ -1,0 +1,13 @@
+&[page-id="enquiries"], &[page-id="feedback"] {
+    div#content {
+        max-width: 600px;
+    }
+}
+&[page-id="book"] {
+    @media (min-width: 992px) {
+        div.col-md-6:nth-child(even) {
+            margin-left: 9px;
+            width: 49%;
+        }
+    }
+}
