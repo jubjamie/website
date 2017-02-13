@@ -85,6 +85,7 @@ Ensure your web and MySQL servers are functioning correctly and create the datab
     $ git clone https://github.com/backstagetechnicalservices/website.git
     ```
 2. Switch to the `v4-dev` branch
+
 	```sh
 	$ git checkout v4-dev
 	```
