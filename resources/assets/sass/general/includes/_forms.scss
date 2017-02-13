@@ -32,6 +32,10 @@ form {
             margin: 0 0.25em;
         }
     }
+    input.input-other {
+        display: none;
+        margin-top: 0.5em;
+    }
 }
 
 @import "forms/buttons";

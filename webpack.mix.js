@@ -59,6 +59,7 @@ mix
 		'resources/assets/js/plugins/DisableButtons.js',
 		'resources/assets/js/plugins/SimpleMDE.js',
 		'resources/assets/js/plugins/modal.js',
+		'resources/assets/js/plugins/OtherInputs.js',
 		'resources/assets/js/plugins/tabify.js',
 		'resources/assets/js/app.js'
 	], 'public/js/app.js');
