@@ -84,34 +84,38 @@ Ensure your web and MySQL servers are functioning correctly and create the datab
     ```sh
     $ git clone https://github.com/backstagetechnicalservices/website.git
     ```
-2. Install the dependencies
+2. Switch to the `v4-dev` branch
+	```sh
+	$ git checkout v4-dev
+	```
+3. Install the dependencies
 
     ```sh
     $ composer install
     ```
-3. Install Laravel Mix
+4. Install Laravel Mix
 
     ```sh
     $ npm install
     ```
-4. Create the environment file
+5. Create the environment file
 
     ```sh
     $ php -r "copy('.env.example', '.env');"
     ```
-5. Populate the environment file
+6. Populate the environment file
 
     ```sh
     $ php artisan key:generate
     ```
     > You will need to manually provide the other values; speak to one of the development team
 
-6. Set up the database
+7. Set up the database
 
     ```sh
     $ php artisan migrate
     ```
-7. Populate the database
+8. Populate the database
 
     > You can no longer use `$ php artisan db:seed` to insert some default data; please speak to one of the development team to get a copy of the most recent database backup.
     
