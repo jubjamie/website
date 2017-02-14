@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="row text-center copyright">
+    <div class="text-center copyright">
         <p>&copy; Backstage Technical Services {{ date('Y') }}. All rights reserved.</p>
 
         <p class="extra">Generously supported by the University of Bath Alumni Fund.</p>
