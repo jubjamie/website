@@ -25,8 +25,8 @@ body[page-section*="events"] {
     //@import "events";
 }
 
-body[page-section*="gallery"] {
-    //@import "gallery";
+body[page-section*="media"] {
+    @import "media";
 }
 
 body[page-section*="members"] {

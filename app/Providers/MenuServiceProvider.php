@@ -49,7 +49,7 @@
                 // Parent menu
                 $menu->add(route('home'), 'Home');
                 $menu->add(route('page.show', ['slug' => 'about']), 'About Us');
-                $menu->add('#', 'Media', Menu::items('media'));
+                $menu->add(route('media.images.index'), 'Media', Menu::items('media'))->activePattern('\/media');
                 $menu->add(route('committee.view'), 'The Committee');
                 $menu->add('#', 'Events Diary', Menu::items('events'))->activePattern('\/events');
                 $menu->add(route('auth.login'), 'Members\' Area', Menu::items('members'))->activePattern('\/members');
@@ -57,9 +57,9 @@
                 $menu->add(route('contact.book'), 'Enquiries & Book Us')->activePattern('\/contact\/book');
                 
                 // Media sub-menu
-                $media = $menu->find('media');
-                $media->add('#', 'Image Gallery')
-                      ->add('#', 'Videos');
+                //$media = $menu->find('media');
+                //$media->add(route('media.images.index'), 'Image Gallery')
+                      //->add('#', 'Videos');
                 
                 if($isRegistered) {
                     // Events sub-menu
