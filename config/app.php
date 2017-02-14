@@ -176,6 +176,7 @@
             GrahamCampbell\Markdown\MarkdownServiceProvider::class,
             Magyarjeti\LaravelLipsum\LipsumServiceProvider::class,
             Mews\Purifier\PurifierServiceProvider::class,
+            \Alaouy\Youtube\YoutubeServiceProvider::class,
             
             /*
              * Application Service Providers...
@@ -247,6 +248,7 @@
             'Form'         => Collective\Html\FormFacade::class,
             'HTML'         => Collective\Html\HtmlFacade::class,
             'Purifier'     => Mews\Purifier\Facades\Purifier::class,
+            'Youtube'      => \Alaouy\Youtube\Facades\Youtube::class,
         ],
     
     ];
