@@ -109,7 +109,7 @@
                     
                     // Other sub-menu
                     $menu->find('members.misc')
-                         ->add('#', 'Committee elections')->activePattern('\/elections')
+                         ->add(route('election.index'), 'Committee elections')->activePattern('\/elections')
                          ->add('#', 'BTS Awards')
                          ->add(route('page.index'), 'Manage webpages')
                          ->add('#', 'View SU Area');

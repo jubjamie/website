@@ -14,7 +14,7 @@ body[page-section*="contact"] {
 }
 
 body[page-section*="elections"] {
-    //@import "elections";
+    @import "elections";
 }
 
 body[page-section*="equipment"] {
