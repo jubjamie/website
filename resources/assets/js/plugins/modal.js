@@ -131,7 +131,7 @@ if(!$xhttp2) {
 					});
 				} else {
 					$('<div class="alert alert-warning form-error"><span class="fa fa-exclamation"></span><span>' + error.message
-					  + '</span></div>').insertBefore($form.children().first());
+					  + '</span></div>').insertBefore($modal.find('.modal-body').children().first());
 				}
 			},
 			beforeSend: function () {
