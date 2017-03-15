@@ -27,7 +27,8 @@
 		"graham-campbell/markdown"          : "^5.3",
 		"Eonasdan/bootstrap-datetimepicker" : "^4.17",
 		"select2/select2"                   : "^4.0",
-		"fortawesome/font-awesome"          : "^4.5"
+		"fortawesome/font-awesome"          : "^4.5",
+		"bugsnag/bugsnag-laravel"           : "^2.0"
 	},
 	"require-dev" : {
 		"fzaninotto/faker": "~1.4",

@@ -159,6 +159,7 @@ return [
 		Intervention\Image\ImageServiceProvider::class,
 		SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
 		GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 	],
 
 	/*
@@ -214,6 +215,7 @@ return [
 		'Recaptcha' => Greggilbert\Recaptcha\Facades\Recaptcha::class,
 		'Image'     => Intervention\Image\Facades\Image::class,
 		'Markdown'  => GrahamCampbell\Markdown\Facades\Markdown::class,
+        'Bugsnag' => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
 	],
 
 ];
