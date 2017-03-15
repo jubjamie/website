@@ -142,24 +142,25 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
+        Szykra\Notifications\NotificationServiceProvider::class,
+        Zizaco\Entrust\EntrustServiceProvider::class,
+        Menu\MenuServiceProvider::class,
+        Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
+        Ktquez\Tinymce\TinymceServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class,
+        SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
+        GrahamCampbell\Markdown\MarkdownServiceProvider::class,
+        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
+        
 		App\Providers\AppServiceProvider::class,
 		App\Providers\BladeServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 		App\Providers\ValidationServiceProvider::class,
 		App\Providers\HtmlServiceProvider::class,
-		Szykra\Notifications\NotificationServiceProvider::class,
 		App\Providers\ViewServiceProvider::class,
 		App\Providers\AuthServiceProvider::class,
 		App\Providers\MenuServiceProvider::class,
-		Zizaco\Entrust\EntrustServiceProvider::class,
-		Menu\MenuServiceProvider::class,
-		Greggilbert\Recaptcha\RecaptchaServiceProvider::class,
-		Ktquez\Tinymce\TinymceServiceProvider::class,
-		Intervention\Image\ImageServiceProvider::class,
-		SammyK\LaravelFacebookSdk\LaravelFacebookSdkServiceProvider::class,
-		GrahamCampbell\Markdown\MarkdownServiceProvider::class,
-        Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
 	],
 
 	/*
