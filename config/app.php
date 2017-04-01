@@ -177,6 +177,7 @@
             Magyarjeti\LaravelLipsum\LipsumServiceProvider::class,
             Mews\Purifier\PurifierServiceProvider::class,
             \Alaouy\Youtube\YoutubeServiceProvider::class,
+            Bugsnag\BugsnagLaravel\BugsnagServiceProvider::class,
             
             /*
              * Application Service Providers...
@@ -249,6 +250,7 @@
             'HTML'         => Collective\Html\HtmlFacade::class,
             'Purifier'     => Mews\Purifier\Facades\Purifier::class,
             'Youtube'      => \Alaouy\Youtube\Facades\Youtube::class,
+            'Bugsnag'      => Bugsnag\BugsnagLaravel\Facades\Bugsnag::class,
         ],
     
     ];
