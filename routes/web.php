@@ -25,6 +25,7 @@
     include base_path('routes/web/committee.php');
     include base_path('routes/web/contact.php');
     include base_path('routes/web/election.php');
+    include base_path('routes/web/equipment.php');
     include base_path('routes/web/media.php');
     include base_path('routes/web/page.php');
     include base_path('routes/web/quotes.php');
