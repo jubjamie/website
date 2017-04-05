@@ -98,8 +98,8 @@
                     // Equipment sub-menu
                     $menu->find('members.equipment')
                          ->add(route('equipment.assets'), 'Asset register')
-                         ->add('#', 'View repairs db')
-                         ->add('#', 'Report broken kit');
+                         ->add(route('equipment.repairs.index'), 'View repairs db')
+                         ->add(route('equipment.repairs.create'), 'Report broken kit');
                     
                     // Training sub-menu
                     $menu->find('members.training')
