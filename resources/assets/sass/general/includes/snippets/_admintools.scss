@@ -18,4 +18,11 @@ div.admin-tools {
             padding: 0.3em 0.8em;
         }
     }
+    &.admin-tools-sm {
+        & > .dropdown, & > .dropup {
+            & > .dropdown-menu {
+                font-size: 0.867em;
+            }
+        }
+    }
 }
