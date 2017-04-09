@@ -62,6 +62,7 @@ mix
 		'resources/assets/js/plugins/CookieAcceptance.js',
 		'resources/assets/js/plugins/DisableButtons.js',
 		'resources/assets/js/plugins/EditableFields.js',
+		'resources/assets/js/plugins/FilterSearch.js',
 		'resources/assets/js/plugins/SimpleMDE.js',
 		'resources/assets/js/plugins/modal.js',
 		'resources/assets/js/plugins/OtherInputs.js',
