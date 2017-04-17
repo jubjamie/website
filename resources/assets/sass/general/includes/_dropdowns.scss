@@ -1,0 +1,48 @@
+.dropdown-menu {
+    & > li {
+        & > a, & > button {
+            background-color: transparent;
+            border: none;
+            display: block;
+            padding: 0.5em 1em;
+            clear: both;
+            font-weight: normal;
+            line-height: 1.4em;
+            color: #000;
+            text-align: left;
+            white-space: nowrap;
+            width: 100%;
+            
+            &:hover, &:focus {
+                text-decoration: none;
+                color: #000;
+                background-color: #e8e8e8;
+            }
+            &:focus {
+                outline: 1px dotted #000;
+            }
+        }
+        
+        &.active > a, &.active > button {
+            &, &:hover, &:focus {
+                color: #000;
+                text-decoration: none;
+                outline: 0;
+                background-color: $colour_primary;
+            }
+        }
+        &.disabled > a, &.disabled > button {
+            &, &:hover, &:focus {
+                color: #777;
+            }
+            
+            // Nuke hover/focus effects
+            &:hover, &:focus {
+                text-decoration: none;
+                background-color: transparent;
+                background-image: none; // Remove CSS gradient
+                cursor: not-allowed;
+            }
+        }
+    }
+}
