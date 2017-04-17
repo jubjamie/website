@@ -17,6 +17,7 @@
                 & > li {
                     margin: 0;
                     padding: 0.3em;
+                    position: relative;
     
                     input.form-control {
                         box-sizing: border-box;
@@ -24,6 +25,24 @@
                         font-size: 0.8em;
                         margin: 0;
                         width: 100%;
+                    }
+                    a.clear-search {
+                        @include transition();
+                        color: #000;
+                        display: inline-block;
+                        opacity: 0.5;
+                        padding: 0.05em 0.3em;
+                        position: absolute;
+                        right: 0.6em;
+                        top: 0.55em;
+                        
+                        span.fa {
+                            margin: 0;
+                        }
+                        &:hover {
+                            background: none;
+                            opacity: 1;
+                        }
                     }
                 }
             }

@@ -24,6 +24,13 @@
             <ul class="dropdown-menu">
                 <li>
                     <input class="form-control" type="text" value="{{ $searchValue or '' }}">
+                    @if(isset($searchValue) && $searchValue)
+                        <a class="clear-search"
+                           href="{{ $filterBaseUrl . (!empty($filterBaseQuery) ? ('?'.http_build_query($filterBaseQuery)) : '') }}"
+                           title="Clear search">
+                            <span class="fa fa-remove"></span>
+                        </a>
+                    @endif
                 </li>
             </ul>
         </div>
