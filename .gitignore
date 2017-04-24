@@ -14,3 +14,5 @@ npm-debug.log
 /public/images/profiles/*
 !/public/images/profiles/blank.jpg
 /resources/elections/*
+/public/js/*
+/public/css/*
