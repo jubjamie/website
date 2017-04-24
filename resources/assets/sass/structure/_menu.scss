@@ -131,6 +131,7 @@ div#menu-wrapper {
                         &:focus {
                             outline-color: #000;
                         }
+                        width: auto;
                     }
                     a:hover, a:focus, li.open a {
                         background: transparent;
