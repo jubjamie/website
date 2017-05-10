@@ -18,7 +18,7 @@
         {
             // Make the request for all the albums
             $token    = $fb->getApp()->getAccessToken()->getValue();
-            $response = $fb->get('/BackstageTechnicalServices/albums?fields=id,count,name,type&limit=500', $token);
+            $response = $fb->get('/BackstageTechnicalServices/albums?fields=id,count,name,type,created_time&limit=500', $token);
             
             // Get the list of albums
             $albums = $response->getDecodedBody()['data'];
@@ -30,6 +30,11 @@
                 }
             }
             array_filter($albums);
+            
+            // Sort the results
+            usort($albums, function($a, $b) {
+               return strcmp($b['created_time'], $a['created_time']);
+            });
             
             // Render
             return view('media.images.index')->with('albums', $albums);
