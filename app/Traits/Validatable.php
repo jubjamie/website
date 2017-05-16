@@ -8,7 +8,7 @@ trait Validatable
      * Get an array of validation rules for the model.
      * @return array
      */
-    public function getValidationRules()
+    public static function getValidationRules()
     {
         if(!isset(static::$ValidationRules)) {
             return [];
@@ -33,7 +33,7 @@ trait Validatable
      * Get an array of validation messages.
      * @return array
      */
-    public function getValidationMessages()
+    public static function getValidationMessages()
     {
         if(!isset(static::$ValidationMessages)) {
             return [];
