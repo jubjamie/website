@@ -31,28 +31,15 @@
             ]) !!}
         </div>
         @InputError('password')
+        <p class="help-block small">
+            {!! link_to_route('auth.pwd.email', 'Forgotten your password?') !!}
+        </p>
     </div>
 
     <div class="form-group">
-        <div class="checkbox">
-            <label>
-                <input name="remember" type="checkbox" value="1">
-                Remember me
-            </label>
-        </div>
-    </div>
-
-    <div class="form-group">
-        <div class="btn-group">
-            <button class="btn btn-success" disable-submit="Logging in ..." type="submit">
-                <span class="fa fa-sign-in"></span>
-                <span>Log in</span>
-            </button>
-            <a class="btn btn-primary" href="{{ route('auth.pwd.email') }}">
-                <span class="fa fa-unlock-alt"></span>
-                <span>Reset your password</span>
-            </a>
-        </div>
+        <button class="btn btn-success" data-disable="click"type="submit">
+            <span>Log in</span>
+        </button>
     </div>
     {!! Form::close() !!}
 @endsection
