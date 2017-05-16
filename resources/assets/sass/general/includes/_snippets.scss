@@ -48,10 +48,21 @@ span.skill-proficiency {
         }
     }
 }
+
 .lightbox {
     a {
         &, &:focus, &:active {
             outline: none !important;
         }
+    }
+}
+
+span.form-link {
+    display: inline-block;
+    font-size: 0.8em;
+    margin: 0 0.75em;
+    
+    & > a {
+        margin: 0 0.25em;
     }
 }
