@@ -27,12 +27,10 @@
             html += '<span>' + text + '</span>';
         }
         
-        btn.addClass('disabled')
-            .on('click', function (e) {
-                e.preventDefault();
-            })
-            .html(html);
-        
-        return true;
+        setTimeout(function() {
+            btn.attr('disabled', true)
+                .off('click')
+                .html(html);
+        }, 0);
     });
 })(jQuery);
