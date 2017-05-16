@@ -24,9 +24,11 @@
             var text = btn.attr('data-disable-text') || null;
             var icon = btn.attr('data-disable-icon') || 'spinner';
             var html = '<span class="fa fa-' + icon + ' fa-spin"></span>';
-            if(text) html += '<span>' + text + '</span>';
+            if(text) {
+                html += '<span>' + text + '</span>';
+            }
             
-            btn.on('click', function () {
+            btn.on('click', function (e) {
                 btn.addClass('disabled')
                     .off('click')
                     .on('click', function () {
