@@ -18,28 +18,21 @@
     });
 })(jQuery);
 (function ($) {
-    $.fn.DisableButtonsNew = function () {
-        this.each(function () {
-            var btn = $(this);
-            var text = btn.attr('data-disable-text') || null;
-            var icon = btn.attr('data-disable-icon') || 'spinner';
-            var html = '<span class="fa fa-' + icon + ' fa-spin"></span>';
-            if(text) {
-                html += '<span>' + text + '</span>';
-            }
-            
-            btn.on('click', function (e) {
-                btn.addClass('disabled')
-                    .off('click')
-                    .on('click', function () {
-                        return false;
-                    })
-                    .html(html);
-            });
-        });
-    }
-    
-    jQuery(document).ready(function () {
-        $('button[data-disable="click"]').DisableButtonsNew();
+    $('body').on('click', 'button[data-disable="click"]', function (e) {
+        var btn = $(this);
+        var text = btn.attr('data-disable-text') || null;
+        var icon = btn.attr('data-disable-icon') || 'spinner';
+        var html = '<span class="fa fa-' + icon + ' fa-spin"></span>';
+        if(text) {
+            html += '<span>' + text + '</span>';
+        }
+        
+        btn.addClass('disabled')
+            .on('click', function (e) {
+                e.preventDefault();
+            })
+            .html(html);
+        
+        return true;
     });
 })(jQuery);
