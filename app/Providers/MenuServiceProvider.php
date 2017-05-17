@@ -172,20 +172,18 @@ class MenuServiceProvider extends ServiceProvider
      */
     private function composeMemberMenus()
     {
-        View::composer('members.view', function ($view) {
-            $username = $view->getData()['user']->username;
-            $menu     = Menu::handler('profileMenu');
-            $menu->add(route('member.view', ['username' => $username]), 'Details')
-                 ->add(route('member.view', ['username' => $username, 'tab' => 'events']), 'Events')
-                 ->add(route('member.view', ['username' => $username, 'tab' => 'training']), 'Training');
-            $menu->addClass('nav nav-tabs');
-            $view->with('menu', $menu->render());
-        });
-        View::composer('members.profile', function ($view) {
+        view()->composer('members.view', function ($view) {
+            $user = $view->getData()['user'];
             $menu = Menu::handler('profileMenu');
-            $menu->add(route('member.profile'), 'My Details')
-                 ->add(route('member.profile', ['tab' => 'events']), 'Events')
-                 ->add(route('member.profile', ['tab' => 'training']), 'Training');
+            if($user->isActiveUser()) {
+                $menu->add(route('member.profile', ['tab' => 'profile']), 'My Details')
+                     ->add(route('member.profile', ['tab' => 'events']), 'Events')
+                     ->add(route('member.profile', ['tab' => 'training']), 'Training');
+            } else {
+                $menu->add(route('member.view', ['username' => $user->username, 'tab' => 'profile']), 'Details')
+                     ->add(route('member.view', ['username' => $user->username, 'tab' => 'events']), 'Events')
+                     ->add(route('member.view', ['username' => $user->username, 'tab' => 'training']), 'Training');
+            }
             $menu->addClass('nav nav-tabs');
             $view->with('menu', $menu->render());
         });
