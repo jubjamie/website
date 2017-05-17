@@ -70,7 +70,7 @@ div[role='tabpanel'], div.tabpanel {
                 border-bottom-right-radius: $dim_bdr_radius;
             }
             
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 border-radius: $dim_bdr_radius;
                 display: block;
                 float: none;
@@ -78,7 +78,7 @@ div[role='tabpanel'], div.tabpanel {
                 width: 100%;
             }
         }
-        @media (max-width: 768px) {
+        @media (max-width: 767px) {
             display: block;
             width: 100%;
         }
@@ -93,7 +93,7 @@ div[role='tabpanel'], div.tabpanel {
             text-align: left;
             z-index: 3100;
             
-            @media (max-width: 768px) {
+            @media (max-width: 767px) {
                 border: none;
                 margin-top: 2em;
                 padding-top: 0;
@@ -116,7 +116,7 @@ div[role='tabpanel'], div.tabpanel {
                 width: 3.5em;
             }
             
-            @media(max-width: 768px) {
+            @media(max-width: 767px) {
                 display: none;
             }
             
@@ -179,7 +179,7 @@ div[role='tabpanel'], div.tabpanel {
         & > div.tab-content {
             display: table-cell;
             
-            @media(min-width: 769px) {
+            @media(min-width: 768px) {
                 padding-left: 1.5em;
                 padding-right: 1.5em;
             }
@@ -189,7 +189,7 @@ div[role='tabpanel'], div.tabpanel {
                 margin-top: 0;
                 padding-top: 0;
                 
-                @media(max-width: 768px) {
+                @media(max-width: 767px) {
                     background: #161616;
                     border-radius: 5px;
                     display: block !important;
