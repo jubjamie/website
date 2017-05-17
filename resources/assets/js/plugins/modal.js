@@ -103,11 +103,20 @@ if(!$xhttp2) {
 			$form.attr('action', $btn.data('formAction'));
 		}
 		$btns.attr('disabled', 'disabled');
+        
+        if($btn.attr('name')) {
+            $form.append('<input name="' + $btn.attr('name') + '" type="hidden" value="' + $btn.attr('value') + '">');
+        }
 		
 		var settings = {
 			data      : $xhttp2 ? new FormData($form[0]) : $form.serialize(),
 			url       : $form.attr('action'),
 			type      : "post",
+			complete : function() {
+                if($btn.attr('name')) {
+                    $form.find('input[name="'+$btn.attr('name')+'"]').remove();
+                }
+            },
 			success   : function () {
 				$btn.off('click');
 				location.reload();
