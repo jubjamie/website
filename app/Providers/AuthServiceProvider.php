@@ -12,9 +12,11 @@ use App\Policies\CommitteePolicy;
 use App\Policies\Elections\NominationPolicy;
 use App\Policies\Elections\ElectionPolicy;
 use App\Policies\Equipment\RepairPolicy;
+use App\Policies\Members\UserPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\QuotePolicy;
 use App\Quote;
+use App\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -32,6 +34,7 @@ class AuthServiceProvider extends ServiceProvider
         ElectionNomination::class => NominationPolicy::class,
         Page::class               => PagePolicy::class,
         Quote::class              => QuotePolicy::class,
+        User::class               => UserPolicy::class,
     ];
     
     /**
@@ -54,10 +57,10 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function registerAuthGates()
     {
-        Gate::define('global.write', function ($user) {
+        Gate::define('admin', function ($user) {
             return $user->isAdmin();
         });
-        Gate::define('members.strict', function ($user) {
+        Gate::define('member', function ($user) {
             return $user->isMember();
         });
     }

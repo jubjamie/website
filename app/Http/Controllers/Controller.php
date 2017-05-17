@@ -2,6 +2,7 @@
     
     namespace App\Http\Controllers;
     
+    use Illuminate\Auth\Access\AuthorizationException;
     use Illuminate\Contracts\Auth\Factory;
     use Illuminate\Foundation\Bus\DispatchesJobs;
     use Illuminate\Http\Request;
@@ -9,6 +10,7 @@
     use Illuminate\Routing\Controller as BaseController;
     use Illuminate\Foundation\Validation\ValidatesRequests;
     use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+    use Illuminate\Support\Facades\Gate;
     use Illuminate\Support\Facades\Input;
     use Illuminate\Support\Facades\Request as RequestFacade;
     use Illuminate\Support\Facades\Route;
@@ -68,6 +70,18 @@
         {
             if(!RequestFacade::ajax()) {
                 app()->abort(404);
+            }
+        }
+    
+        /**
+         * Create a method similar to authorize() for use with Gates.
+         * @param $action
+         * @throws \Illuminate\Auth\Access\AuthorizationException
+         */
+        protected function authorizeGate($action)
+        {
+            if(Gate::denies($action)) {
+                throw new AuthorizationException();
             }
         }
     }

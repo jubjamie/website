@@ -15,10 +15,7 @@ class AssetController extends Controller
      */
     public function view()
     {
-        if(!Gate::allows('members.strict')) {
-            throw new AuthorizationException();
-        }
-        
+        $this->authorizeGate('member');
         return view('equipment.assets.view');
     }
 }
