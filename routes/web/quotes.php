@@ -1,13 +1,4 @@
 <?php
-    /*
-    |--------------------------------------------------------------------------
-    | Committee routes
-    |--------------------------------------------------------------------------
-    |
-    | This file registers all of the routes for the quotesboard.
-    |
-    */
-    
     Route::group([
         'prefix' => 'quotesboard',
     ], function () {

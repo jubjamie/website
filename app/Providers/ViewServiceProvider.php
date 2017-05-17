@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
@@ -17,6 +16,8 @@ class ViewServiceProvider extends ServiceProvider
     {
         $this->attachMessageStyles();
         $this->attachSearchFilter();
+        $this->attachMemberEvents();
+        $this->attachMemberSkills();
     }
     
     /**
@@ -33,7 +34,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     private function attachMessageStyles()
     {
-        View::composer('app.messages.message', function ($view) {
+        view()->composer('app.messages.message', function ($view) {
             $view->with('MessageIcons', [
                 'success' => 'check',
                 'info'    => 'info',
@@ -48,7 +49,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     private function attachSearchFilter()
     {
-        View::composer('*', function ($view) {
+        view()->composer('*', function ($view) {
             $filterValue = Request::has('filter') ? Request::get('filter') : null;
             $searchValue = Request::has('search') ? Request::get('search') : null;
             $route       = route(Route::currentRouteName(), Route::current()->parameters, true);
@@ -65,6 +66,31 @@ class ViewServiceProvider extends ServiceProvider
                  ->with('searchValue', $searchValue)
                  ->with('filterBaseUrl', $route)
                  ->with('filterBaseQuery', $query);
+        });
+    }
+    
+    /**
+     * Attach the list of events for the given member.
+     */
+    private function attachMemberEvents()
+    {
+        view()->composer('members.profile.events', function ($view) {
+            $view->with([
+                'events_past'   => [],
+                'events_active' => [],
+            ]);
+        });
+    }
+    
+    /**
+     * Attach the list of skills.
+     */
+    private function attachMemberSkills()
+    {
+        view()->composer('members.profile.training', function ($view) {
+            $view->with([
+                'skill_categories' => [],
+            ]);
         });
     }
 }
