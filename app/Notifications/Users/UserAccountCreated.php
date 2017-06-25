@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Users;
 
-use App\Notifications\Messages\MailMessage;
+use App\Notifications\MailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -46,9 +46,9 @@ class UserAccountCreated extends Notification
         return (new MailMessage)
             ->subject('Your new Backstage account')
             ->replyTo('sec@bts-crew.com', 'Backstage Secretary')
-            ->greeting('Hi ' . $notifiable->forename . ',')
-            ->line('This email is just to let you know that an account has just been created for you on the [Backstage Website]('.route('home').').')
-            ->line('Your password has been set to "'.$this->password.'", although we recommend you set it to something more memorable.')
+            ->greeting($notifiable->greeting())
+            ->line('This email is just to let you know that an account has just been created for you on the [Backstage Website](' . route('home') . ').')
+            ->line('Your password has been set to "' . $this->password . '", although we recommend you set it to something more memorable.')
             ->action('Log in', route('auth.login'))
             ->line('If you have any questions you can get in contact with the Secretary by replying to this email.');
     }

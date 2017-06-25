@@ -1,29 +1,29 @@
 <?php
 
-namespace App\Notifications;
+namespace App\Notifications\Auth;
 
-use App\Notifications\Messages\MailMessage;
 use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use App\Notifications\MailMessage;
 
-class ResetPasswordAdmin extends Notification
+class ResetPassword extends Notification
 {
     use Queueable;
     
     /**
-     * Variable to store the user's password.
+     * The password reset token.
      * @var string
      */
-    private $password;
+    public $token;
     
     /**
      * Create a new notification instance.
-     * @param $password
+     * @param $token
      */
-    public function __construct($password)
+    public function __construct($token)
     {
-        $this->password = $password;
+        $this->token = $token;
     }
     
     /**
@@ -44,11 +44,10 @@ class ResetPasswordAdmin extends Notification
     public function toMail($notifiable)
     {
         return (new MailMessage)
-            ->subject('Your new password')
-            ->line('Your password has been reset by an administrator to: ')
-            ->line($this->password)
-            ->line('We recommend that you change it to something more memorable')
-            ->action('Log in', route('auth.login'));
+            ->subject('Reset your password')
+            ->line('You are receiving this email because you we recently received a request to reset your password. Click the link below to get started.')
+            ->action('Reset Password', route('auth.pwd.reset', ['token' => $this->token]))
+            ->line('If you did not request a password reset, you can ignore this email.');
     }
     
     /**
@@ -59,7 +58,7 @@ class ResetPasswordAdmin extends Notification
     public function toArray($notifiable)
     {
         return [
-            //
+        
         ];
     }
 }
