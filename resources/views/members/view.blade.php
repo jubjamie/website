@@ -4,10 +4,6 @@
 @section('page-id', 'view-profile')
 @section('title', $user->isActiveUser() ? 'My Profile' : $user->getPossessiveName('Profile'))
 
-@section('scripts')
-    $('#profileTab').tabify();
-@endsection
-
 @section('content')
     @if($user->isActiveUser())
         <div class="btn-group" id="edit-tools">

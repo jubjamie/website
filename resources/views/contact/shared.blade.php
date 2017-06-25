@@ -4,7 +4,7 @@
 @section('header-main', 'Contact Us')
 
 @section('content')
-    <div class="tabpanel">
+    <div class="tabpanel tab-group-perm">
         {!! $menu !!}
         <div class="tab-content">
             <div class="tab-pane active">
