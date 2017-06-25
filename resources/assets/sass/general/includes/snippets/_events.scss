@@ -1,41 +1,98 @@
-.event-entry {
-    $event: #A00;
-    $training: #05F;
-    $social: rgb(255, 198, 203);
-    $meeting: #0A0;
-    $hidden: #999;
-    $booking: #F80;
-    
-    $event_bg: rgb(255, 170, 170);
-    $training_bg: lighten($training, 30%);
-    $social_bg: $social;
-    $meeting_bg: lighten($meeting, 55%);
-    $hidden_bg: darken($hidden, 20%);
-    $booking_bg: $hidden;
-    
-    color: $event !important;
-    
-    &.training {
-        color: $training !important;
+$event: #A00;
+$training: #05F;
+$social: rgb(255, 198, 203);
+$meeting: #0A0;
+$hidden: #999;
+$booking: #F80;
+
+$event_bg: rgb(255, 170, 170);
+$training_bg: lighten($training, 30%);
+$social_bg: $social;
+$meeting_bg: lighten($meeting, 55%);
+$hidden_bg: darken($hidden, 20%);
+$booking_bg: $hidden;
+
+.event-style {
+    &.text {
+        &, &.event {
+            color: $event !important;
+        }
+        &.training {
+            color: $training !important;
+        }
+        &.social {
+            color: $social !important;
+        }
+        &.meeting {
+            color: $meeting !important;
+        }
+        &.bts {
+            color: $hidden !important;
+            font-style: italic;
+        }
+        &.booking {
+            color: $booking !important;
+        }
     }
-    &.social {
-        color: $social !important;
+    &.fill {
+        &, &.event {
+            background-color: $event;
+            border-color: $event;
+        }
+        &.training {
+            background-color: $training;
+            border-color: $training;
+        }
+        &.social {
+            background-color: $social;
+            border-color: $social;
+        }
+        &.meeting {
+            background-color: $meeting;
+            border-color: $meeting;
+        }
+        &.bts {
+            background-color: $hidden;
+            border-color: $hidden;
+        }
+        &.booking {
+            background-color: $booking;
+            border-color: $booking;
+        }
     }
-    &.meeting {
-        color: $meeting !important;
+    &.fill-light {
+        &, &.event {
+            background-color: $event_bg;
+            border-color: $event_bg;
+        }
+        &.training {
+            background-color: $training_bg;
+            border-color: $training_bg;
+        }
+        &.social {
+            background-color: $social_bg;
+            border-color: $social_bg;
+        }
+        &.meeting {
+            background-color: $meeting_bg;
+            border-color: $meeting_bg;
+        }
+        &.bts {
+            background-color: $hidden_bg;
+            border-color: $hidden_bg;
+        }
+        &.booking {
+            background-color: $booking_bg;
+            border-color: $booking_bg;
+        }
     }
-    &.bts {
-        color: $hidden !important;
-        font-style: italic;
-    }
-    &.booking {
-        color: $booking !important;
-    }
-    
     a {
         color: inherit !important;
     }
     
+}
+
+.event-entry {
     &.tag {
         @include user_select_none();
         $height: 1.6em;
@@ -85,70 +142,20 @@
     }
 }
 
-ul.event-list {
-    $font-size: 12px;
-    font-size: $font-size;
-    
-    li {
-        font-size: #{18px / $font-size}em;
-        line-height: 0;
-        list-style: square inside;
-        margin: 0;
-        padding: 0;
-        
-        &:not(:last-child) {
-            margin-bottom: 0.5em;
+table.event-list {
+    td, th {
+        &[col="event-type"] {
+            padding: 0;
+            width: 5px;
         }
-        a, span {
-            color: #CCC !important;
-            display: inline;
-            font-size: $font-size;
-            line-height: 1.2;
+        &[col="event"] {
+            padding-left: 1em;
         }
-        a:focus {
-            outline-color: #CCC !important;
-        }
-    }
-}
-
-div.event-key {
-    background: #191919;
-    border-radius: 3px;
-    font-size: 13px;
-    margin: 2em 0;
-    padding: 1em;
-    
-    h1 {
-        color: #666;
-        font-size: 18px;
-        margin: 0 0 0.75em 0.2em;
-        text-align: left;
-        text-transform: uppercase;
-        
-        @media (min-width: 768px) {
-            margin-left: 0.5em;
-        }
-    }
-    ul {
-        margin: 0;
-        padding: 0;
-        
-        li {
-            list-style-type: none;
-            white-space: nowrap;
+        &[col="role"] {
+            width: 15em;
             
-            @media (min-width: 768px) {
-                display: inline-block;
-                margin: 0 0.5em 0;
-            }
-            
-            &:before {
-                content: "\2014";
-                font-size: #{18em/13};
-                line-height: 1em;
-                padding-right: 0.3em;
-                
-                vertical-align: middle;
+            @media (max-width: 767px) {
+                display: none;
             }
         }
     }

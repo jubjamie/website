@@ -37,3 +37,13 @@ fieldset, div.fieldset {
         border-width: 2px;
     }
 }
+
+#modal {
+    fieldset, div.fieldset {
+        border-color: #000;
+        
+        legend, & > h1.legend {
+            color: #000;
+        }
+    }
+}

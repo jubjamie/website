@@ -1,5 +1,5 @@
 .dropdown-toggle {
-    & > span.fa {
+    & > span.fa:not(:first-child) {
         display: inline-block;
         margin: 0 0 0 0.2em !important;
     }

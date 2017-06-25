@@ -194,7 +194,7 @@ div[role='tabpanel'], div.tabpanel {
                     border-radius: 5px;
                     display: block !important;
                     margin: 1em 0;
-                    padding: 1.5em;
+                    padding: 1em;
                 }
                 
                 h2, h3 {
@@ -213,3 +213,23 @@ div[role='tabpanel'], div.tabpanel {
     }
 }
 
+div#modal {
+    div[role='tabpanel'], div.tabpanel {
+        margin: 1em 0;
+        
+        ul.nav.nav-tabs {
+            & > li {
+                @include bg_gradient_grey();
+                
+                &.active {
+                    @include bg_gradient_grey_inv();
+                }
+            }
+        }
+        div.tab-content {
+            & > div.tab-pane {
+                border-top-color: #000;
+            }
+        }
+    }
+}

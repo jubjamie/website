@@ -70,11 +70,11 @@
 }
 
 @mixin bg_gradient_grey() {
-	@include bg_gradient(#CCC, #777);
+	@include bg_gradient(#EEE, #BBB);
 }
 
 @mixin bg_gradient_grey_inv() {
-	@include bg_gradient(#777, #CCC);
+	@include bg_gradient(#BBB, #EEE);
 }
 
 @mixin bg_gradient_yellow() {

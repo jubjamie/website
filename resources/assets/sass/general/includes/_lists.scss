@@ -1,11 +1,12 @@
 ol, ul {
-	margin: 2em 0 2em 3em;
+	margin: 2em;
 
 	h2 {
 		margin-left: -2.2em;
 	}
 
 	li {
+		list-style-position: inside;
 		margin: 0.5em 0;
 	}
 	ol, ul {
