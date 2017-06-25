@@ -7,7 +7,7 @@
 Homestead.json
 Homestead.yaml
 .env
-#/components
+/components
 npm-debug.log
 /public/mix-manifest.json
 /public/app.js
@@ -15,5 +15,5 @@ npm-debug.log
 /public/images/profiles/*
 !/public/images/profiles/blank.jpg
 /resources/elections/*
-#/public/js/*
-#/public/css/*
+/public/js/*
+/public/css/*
