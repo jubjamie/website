@@ -218,7 +218,7 @@ class MemberController extends Controller
         
         // Update
         $request->user()
-                ->update(clean($request->only($fields)));
+                ->update($data);
     
         Flash::success('Privacy settings updated');
         return $this->ajaxResponse('Privacy settings updated');
@@ -245,9 +245,6 @@ class MemberController extends Controller
      */
     private function updateMemberFields(Request $request, array $fields)
     {
-        // Get the data
-        $data = $request->only($fields);
-        
         // Set up the validation
         $rules    = User::getValidationRules($fields);
         $messages = User::getValidationMessages($fields);
