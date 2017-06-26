@@ -22,7 +22,7 @@ body[page-section*="equipment"] {
 }
 
 body[page-section*="events"] {
-    //@import "events";
+    @import "events";
 }
 
 body[page-section*="media"] {

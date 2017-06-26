@@ -70,4 +70,6 @@ mix
         'node_modules/js-tabify/dist/tabify.min.js',
         'resources/assets/js/plugins/ToggleVisibility.js',
         'resources/assets/js/app.js'
-    ], 'public/js/app.js');
+    ], 'public/js/app.js')
+    .js('resources/assets/js/partials/events.view.js', 'public/js/partials/events.view.js')
+    .js('resources/assets/js/partials/events.diary.js', 'public/js/partials/events.diary.js');

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Members;
 
 use App\Http\Controllers\Controller;
-use App\Notifications\ResetPasswordAdmin;
+use App\Notifications\Users\ResetPasswordAdmin;
 use App\User;
 use Illuminate\Http\Request;
 use Szykra\Notifications\Flash;

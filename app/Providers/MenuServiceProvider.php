@@ -52,7 +52,7 @@ class MenuServiceProvider extends ServiceProvider
             $menu->add(route('page.show', ['slug' => 'about']), 'About Us');
             $menu->add('#', 'Media', Menu::items('media'))->activePattern('^\/media');
             $menu->add(route('committee.view'), 'The Committee');
-            $menu->add('#', 'Events Diary', Menu::items('events'))->activePattern('^\/events');
+            $menu->add(route('event.diary'), 'Events Diary', Menu::items('events'))->activePattern('^\/events');
             $menu->add(route('auth.login'), 'Members\' Area', Menu::items('members'))->activePattern('^\/members');
             $menu->add('#', 'Resources', Menu::items('resources'))->activePattern('^\/resources');
             $menu->add(route('contact.book'), 'Enquiries & Book Us')->activePattern('^\/contact\/book');
@@ -65,13 +65,11 @@ class MenuServiceProvider extends ServiceProvider
             if($isRegistered) {
                 // Events sub-menu
                 $menu->find('events')
-                     ->add('#', 'My diary')->activePattern('^\/events\/my-diary')
-                     ->add('#', 'Event sign-up')->activePattern('^\/events\/signup')
                      ->add('https://docs.google.com/a/bts-crew.com/forms/d/e/1FAIpQLSekw6oEojBdD1REd2krli3U-4BYWNG9zfThCmTJKc1A1OaR3g/viewform',
                          'Submit event report')
-                     ->add('#', 'View booking requests')
-                     ->add('#', 'View all events')
-                     ->add('#', 'Add event');
+                     //->add('#', 'View booking requests')
+                     ->add(route('event.index'), 'View all events')
+                     ->add(route('event.create'), 'Create a new event');
                 
                 // Members' area sub-menu
                 $menu->find('members')

@@ -2,19 +2,21 @@
 
 namespace App;
 
-use App\Notifications\ResetPassword;
-use App\Notifications\UserAccountCreated;
+use App\Notifications\Auth\ResetPassword;
+use App\Notifications\Users\UserAccountCreated;
+use App\Traits\DistinctPaginate;
 use App\Traits\Validatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
-use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
 use Szykra\Notifications\Flash;
 
 class User extends Authenticatable
 {
-    use Notifiable, Validatable;
+    use Notifiable, Validatable, DistinctPaginate;
     
     /**
      * Define the user account types.
@@ -120,10 +122,11 @@ class User extends Authenticatable
      * @var array
      */
     protected $casts = [
-        'show_email'   => 'boolean',
-        'show_phone'   => 'boolean',
-        'show_address' => 'boolean',
-        'show_age'     => 'boolean',
+        'show_email'        => 'boolean',
+        'show_phone'        => 'boolean',
+        'show_address'      => 'boolean',
+        'show_age'          => 'boolean',
+        'diary_preferences' => 'array',
     ];
     
     /**
@@ -167,6 +170,30 @@ class User extends Authenticatable
     public function pages()
     {
         return $this->hasMany('App\Page');
+    }
+    
+    /**
+     * Define the relationship with the events.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function events()
+    {
+        $relation = $this->hasMany('App\Event', 'id', 'id');
+        
+        $query = DB::table('events')
+                   ->select('events.*')
+                   ->join('event_crew', 'events.id', '=', 'event_crew.event_id')
+                   ->join('event_times', 'events.id', '=', 'event_times.event_id')
+                   ->where('events.em_id', $this->id)
+                   ->orWhere(function ($query) {
+                       $query->where('event_crew.user_id', $this->id);
+                   })
+                   ->distinct()
+                   ->orderBy('event_times.end', 'DESC');
+        
+        $relation->getQuery()->setQuery($query);
+        
+        return $relation;
     }
     
     /**
@@ -572,6 +599,15 @@ class User extends Authenticatable
     }
     
     /**
+     * Create the greeting string.
+     * @return string
+     */
+    public function greeting()
+    {
+        return 'Hi ' . $this->forename . ',';
+    }
+    
+    /**
      * Get the URL of the user's profile picture to be used in img tags.
      * @return string
      */
@@ -618,5 +654,138 @@ class User extends Authenticatable
              ->save($this->getAvatarPath(true));
         
         return $this;
+    }
+    
+    /**
+     * Check if the user is an event's TEM.
+     * @param \App\Event $event
+     * @return bool
+     */
+    public function isTEM(Event $event)
+    {
+        return $event->isTEM($this);
+    }
+    
+    /**
+     * Test if a user is a member of crew for a given event.
+     * @param \App\Event $event
+     * @return bool
+     */
+    public function isCrew(Event $event)
+    {
+        if($event->isTEM($this)) {
+            return true;
+        } else {
+            return $event->crew()
+                         ->forUser($this)
+                         ->count() > 0;
+        }
+    }
+    
+    /**
+     * Test if a user has an EM role for a given event.
+     * @param \App\Event $event
+     * @return bool
+     */
+    public function hasEMRole(Event $event)
+    {
+        if($this->isTEM($event)) {
+            return true;
+        } else {
+            return $event->crew()
+                         ->forUser($this)
+                         ->where('em', true)
+                         ->count() > 0;
+        }
+    }
+    
+    /**
+     * Get a list of a member's crew roles for an event.
+     * @param \App\Event $event
+     * @return null|string
+     */
+    public function getCrewRoles(Event $event)
+    {
+        if(!$this->isCrew($event)) {
+            return null;
+        }
+        
+        // Check if TEM
+        $roles = $this->isTEM($event) ? ['TEM'] : [];
+        
+        // Get any core roles
+        $roles = array_merge($roles, $event->crew()
+                                           ->core()
+                                           ->forUser($this)
+                                           ->pluck('name')
+                                           ->toArray());
+        
+        // Check if general
+        if($event->crew()->general()->forUser($this)->count()) {
+            $roles = array_merge($roles, ['General Crew']);
+        }
+        
+        return implode(', ', $roles);
+    }
+    
+    /**
+     * Alias for getting a list of a member's crew roles for an event.
+     * @param \App\Event $event
+     * @return null|string
+     */
+    public function getCrewRole(Event $event)
+    {
+        return $this->getCrewRoles($event);
+    }
+    
+    /**
+     * Check if the user has an event export token.
+     * @return bool
+     */
+    public function hasExportToken()
+    {
+        return $this->isMember() && !is_null($this->export_token);
+    }
+    
+    /**
+     * Get the user's encrypted event export token.
+     * @return null|string
+     */
+    public function getExportToken()
+    {
+        return $this->hasExportToken() ? encrypt($this->export_token) : null;
+    }
+    
+    /**
+     * Get the value of a diary preference.
+     * @param $preference
+     * @return null
+     */
+    public function getDiaryPreference($preference)
+    {
+        if($preference == 'event_types') {
+            return isset($this->diary_preferences['event_types']) ? $this->diary_preferences['event_types'] : null;
+        } else if($preference == 'crewing') {
+            return isset($this->diary_preferences['crewing']) ? $this->diary_preferences['crewing'] : null;
+        } else {
+            return null;
+        }
+    }
+    
+    /**
+     * Check that a diary preference value is correct.
+     * @param $preference
+     * @param $value
+     * @return bool
+     */
+    public function isDiaryPreference($preference, $value)
+    {
+        if($preference == 'event_types') {
+            return isset($this->diary_preferences['event_types']) && in_array($value, $this->diary_preferences['event_types']);
+        } else if($preference == 'crewing') {
+            return isset($this->diary_preferences['crewing']) && $this->diary_preferences['crewing'] == $value;
+        } else {
+            return false;
+        }
     }
 }

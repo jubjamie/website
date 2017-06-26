@@ -61,6 +61,9 @@ class ViewServiceProvider extends ServiceProvider
             if(!is_null($searchValue)) {
                 unset($query['search']);
             }
+            if(Request::has('page')) {
+                unset($query['page']);
+            }
             
             $view->with('filterValue', $filterValue)
                  ->with('searchValue', $searchValue)
@@ -75,9 +78,14 @@ class ViewServiceProvider extends ServiceProvider
     private function attachMemberEvents()
     {
         view()->composer('members.profile.events', function ($view) {
+            $user = $view->getData()['user'];
+            
+            $events = $user->events()
+                           ->distinctPaginate(20)
+                           ->withPath(route(Route::currentRouteName(), Route::current()->parameters + ['tab' => 'events']));
+            
             $view->with([
-                'events_past'   => [],
-                'events_active' => [],
+                'events' => $events,
             ]);
         });
     }

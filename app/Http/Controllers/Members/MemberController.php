@@ -84,6 +84,8 @@ class MemberController extends Controller
             return $this->updatePrivacy($request);
         } else if($update_action == 'other') {
             return $this->updateOther($request);
+        } else if($update_action == 'diary-preferences') {
+            return $this->updateDiaryPreferences($request);
         } else {
             return $this->ajaxError(404, 404, 'Unknown action');
         }
@@ -219,9 +221,37 @@ class MemberController extends Controller
         // Update
         $request->user()
                 ->update($data);
-    
+        
         Flash::success('Privacy settings updated');
         return $this->ajaxResponse('Privacy settings updated');
+    }
+    
+    /**
+     * Update the member's diary preferences.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function updateDiaryPreferences(Request $request)
+    {
+        // Authorise
+        $this->authorizeGate('member');
+        
+        // Validate the request
+        $event_types = $request->get('event_types');
+        $crewing     = $request->get('crewing');
+        
+        if(!is_array($event_types) || count($event_types) == 0 || !in_array($crewing, ['*', 'true'])) {
+            return $this->ajaxError(422, 422, 'Your preferences could not be saved.');
+        }
+        
+        // Update
+        $user                             = $request->user();
+        $diary_preferences                = $user->diary_preferences;
+        $diary_preferences['event_types'] = $request->get('event_types');
+        $diary_preferences['crewing']     = $request->get('crewing');
+        $user->diary_preferences          = $diary_preferences;
+        
+        return $user->save() ? $this->ajaxResponse('Saved.') : $this->ajaxError(500, 500, 'An unknown error occurred.');
     }
     
     /**
@@ -231,8 +261,17 @@ class MemberController extends Controller
      */
     private function updateOther(Request $request)
     {
+        // Update the default fields
         $this->authorizeGate('member');
         $this->updateMemberFields($request, ['tool_colours']);
+        
+        // Process the event export settings
+        if($request->has('event_export') != $request->user()->hasExportToken()) {
+            $request->user()->export_token = $request->has('event_export') ? str_random(100) : null;
+            $request->user()->save();
+        }
+        
+        // Messages
         Flash::success('Changes saved');
         return $this->ajaxResponse('Changes saved');
     }

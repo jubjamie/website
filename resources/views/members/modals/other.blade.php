@@ -5,6 +5,15 @@
     </div>
     <div class="modal-body">
         <div class="form-group">
+            {!! Form::label('event_export', 'Exporting events:') !!}
+            <div class="checkbox">
+                <label>
+                    {!! Form::checkbox('event_export', '1', $user->hasExportToken()) !!}
+                    Allow customisation of events to export
+                </label>
+            </div>
+        </div>
+        <div class="form-group">
             {!! Form::label('tool_colours', 'Tool Colours:', ['class' => 'control-label']) !!}
             <div class="input-group">
                 <span class="input-group-addon">

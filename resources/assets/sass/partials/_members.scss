@@ -94,6 +94,12 @@
                     }
                 }
             }
+            div#events {
+                @media(min-width: 768px) {
+                    margin: 0 auto;
+                    width: 750px;
+                }
+            }
         }
     }
     div#modal {
