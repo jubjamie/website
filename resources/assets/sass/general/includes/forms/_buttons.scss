@@ -45,3 +45,13 @@
 .btn-group .btn {
     margin-bottom: 0;
 }
+
+.input-group-btn {
+    font-size: 1em;
+    height: 100%;
+    
+    .btn {
+        height: 100%;
+        margin-bottom: 0;
+    }
+}

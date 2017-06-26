@@ -142,6 +142,16 @@ $booking_bg: $hidden;
     }
 }
 
+.event-key {
+    overflow: hidden;
+    width: 100%;
+    
+    & > .event {
+        float: left;
+        width: 50%;
+    }
+}
+
 table.event-list {
     td, th {
         &[col="event-type"] {
