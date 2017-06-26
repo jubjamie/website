@@ -37,7 +37,8 @@ mix
         'resources/assets/js/vendors/datetimepicker.js',
         'node_modules/simplemde/dist/simplemde.min.js',
         'node_modules/js-cookie/src/js.cookie.js',
-        'node_modules/lightbox2/dist/js/lightbox.min.js'
+        'node_modules/lightbox2/dist/js/lightbox.min.js',
+        'node_modules/clipboard/dist/clipboard.min.js'
     ], 'public/js/vendors.js')
     .combine([
         'resources/assets/css/reset.css',
