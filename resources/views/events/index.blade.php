@@ -59,7 +59,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4">We don't have any events :/</td>
+                    <td colspan="6">We don't have any events :/</td>
                 </tr>
             @endif
         </tbody>
