@@ -4,7 +4,9 @@
 if(history.pushState) {
     $('ul.nav li').on('click', function () {
         var url = $(this).children('a').attr('href');
-        history.pushState({}, '', url);
+        if(window.location.href != url) {
+            history.pushState({}, '', url);
+        }
     });
 }
 

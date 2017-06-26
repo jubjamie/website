@@ -21,7 +21,7 @@
             <nav>
                 <ul class="nav nav-pills nav-stacked" role="tablist">
                     <li {{ $tab == 'details' ? ' class=active' : '' }} title="Event Details">
-                        <a href="{{ route('event.view', ['id' => $event->id, 'tab' => 'details']) }}">
+                        <a href="{{ route('event.view', ['id' => $event->id]) }}">
                             <span class="fa fa-info"></span>
                         </a>
                     </li>
