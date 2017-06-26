@@ -38,7 +38,8 @@ mix
         'node_modules/simplemde/dist/simplemde.min.js',
         'node_modules/js-cookie/src/js.cookie.js',
         'node_modules/lightbox2/dist/js/lightbox.min.js',
-        'node_modules/clipboard/dist/clipboard.min.js'
+        'node_modules/clipboard/dist/clipboard.min.js',
+        'vendor/bnjns/laravel-searchtools/src/resources/assets/js/search_tools.min.js'
     ], 'public/js/vendors.js')
     .combine([
         'resources/assets/css/reset.css',
@@ -63,7 +64,6 @@ mix
         'resources/assets/js/plugins/CookieAcceptance.js',
         'resources/assets/js/plugins/DisableButtons.js',
         'resources/assets/js/plugins/EditableFields.js',
-        'resources/assets/js/plugins/FilterSearch.js',
         'resources/assets/js/plugins/SimpleMDE.js',
         'resources/assets/js/plugins/modal.js',
         'resources/assets/js/plugins/OtherInputs.js',

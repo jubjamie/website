@@ -11,7 +11,7 @@
             <span class="fa fa-plus"></span>
             <span>Create event</span>
         </a>
-        @include('app.snippets.filter_search')
+        {!! SearchTools::render() !!}
     </div>
     <table class="table table-striped event-list">
         <thead>

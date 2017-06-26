@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Members;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use bnjns\SearchTools\SearchTools;
 use Illuminate\Http\Request;
 use Szykra\Notifications\Flash;
 
@@ -303,10 +304,10 @@ class MemberController extends Controller
     
     /**
      * View the membership
-     * @param \Illuminate\Http\Request $request
+     * @param \bnjns\SearchTools\SearchTools $searchTools
      * @return $this
      */
-    public function membership(Request $request)
+    public function membership(SearchTools $searchTools)
     {
         // Begin the query
         $members = User::active()
@@ -315,8 +316,8 @@ class MemberController extends Controller
                        ->orderBy('forename', 'ASC');
         
         // Apply the search, if exists
-        if($request->has('search')) {
-            $members->search($request->get('search'));
+        if($searchTools->search()) {
+            $members->search($searchTools->search());
         }
         
         return view('members.membership')->with('members', $members->get());

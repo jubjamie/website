@@ -21,7 +21,7 @@
                 </a>
             @endcan
         </div>
-        @include('app.snippets.filter_search')
+        {!! SearchTools::render() !!}
     </div>
     <table class="table">
         <thead class="hidden-xs hidden-sm">

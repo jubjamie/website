@@ -13,7 +13,7 @@
             <span class="fa fa-user-plus"></span>
             <span>Create a New User</span>
         </a>
-        @include('app.snippets.filter_search')
+        {!! SearchTools::render() !!}
     </div>
     {!! Form::open(['route' => 'user.update.bulk']) !!}
     <table class="table table-condensed">

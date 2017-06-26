@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Members;
 use App\Http\Controllers\Controller;
 use App\Notifications\Users\ResetPasswordAdmin;
 use App\User;
+use bnjns\SearchTools\SearchTools;
 use Illuminate\Http\Request;
 use Szykra\Notifications\Flash;
 
@@ -32,16 +33,16 @@ class UsersController extends Controller
     
     /**
      * View the list of user accounts
-     * @param \Illuminate\Http\Request $request
+     * @param \bnjns\SearchTools\SearchTools $searchTools
      * @return $this
      */
-    public function index(Request $request)
+    public function index(SearchTools $searchTools)
     {
         $this->authorize('index', User::class);
         
         // Get the search or filter request
-        $search = $request->has('search') ? $request->get('search') : null;
-        $filter = $request->has('filter') ? $request->get('filter') : null;
+        $search = $searchTools->search();
+        $filter = $searchTools->filter();
         
         // Start the query
         $users = User::nameOrder();
@@ -68,17 +69,19 @@ class UsersController extends Controller
             $this->checkPagination($users);
         }
         
+        // Set the filter options
+        $searchTools->setFilterOptions([
+            'all'       => 'All users',
+            'archived'  => 'Archived',
+            'active'    => 'Active',
+            'member'    => 'Member',
+            'committee' => 'Committee',
+            'associate' => 'Associate',
+            'staff'     => 'Staff',
+        ]);
+        
         return view('users.index')->with('users', $users)
-                                  ->with('bulkActions', self::$BulkActions)
-                                  ->with('filterOptions', [
-                                      'all'       => 'All users',
-                                      'archived'  => 'Archived',
-                                      'active'    => 'Active',
-                                      'member'    => 'Member',
-                                      'committee' => 'Committee',
-                                      'associate' => 'Associate',
-                                      'staff'     => 'Staff',
-                                  ]);
+                                  ->with('bulkActions', self::$BulkActions);
     }
     
     /**
@@ -303,7 +306,7 @@ class UsersController extends Controller
         $data['show_age']     = $request->has('show_age');
         
         // Make the validator
-        $rules = User::getValidationRules($fields);
+        $rules          = User::getValidationRules($fields);
         $rules['email'] .= ',' . $user->id;
         if(!$user->isActiveUser()) {
             $rules['username'] .= ',' . $user->id;

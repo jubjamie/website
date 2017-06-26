@@ -15,7 +15,6 @@ class ViewServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->attachMessageStyles();
-        $this->attachSearchFilter();
         $this->attachMemberEvents();
         $this->attachMemberSkills();
     }
@@ -41,34 +40,6 @@ class ViewServiceProvider extends ServiceProvider
                 'warning' => 'exclamation',
                 'danger'  => 'remove',
             ]);
-        });
-    }
-    
-    /**
-     * Attach the search and filter values to all views.
-     */
-    private function attachSearchFilter()
-    {
-        view()->composer('*', function ($view) {
-            $filterValue = Request::has('filter') ? Request::get('filter') : null;
-            $searchValue = Request::has('search') ? Request::get('search') : null;
-            $route       = route(Route::currentRouteName(), Route::current()->parameters, true);
-            $query       = Request::query();
-            
-            if(!is_null($filterValue)) {
-                unset($query['filter']);
-            }
-            if(!is_null($searchValue)) {
-                unset($query['search']);
-            }
-            if(Request::has('page')) {
-                unset($query['page']);
-            }
-            
-            $view->with('filterValue', $filterValue)
-                 ->with('searchValue', $searchValue)
-                 ->with('filterBaseUrl', $route)
-                 ->with('filterBaseQuery', $query);
         });
     }
     

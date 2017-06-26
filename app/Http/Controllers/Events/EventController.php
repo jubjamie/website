@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Events\EventRequest;
 use App\Mail\Events\AcceptedExternal;
 use App\Traits\CorrectsTimezone;
+use bnjns\SearchTools\SearchTools;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
@@ -29,10 +30,10 @@ class EventController extends Controller
     
     /**
      * View a list of events.
-     * @param \Illuminate\Http\Request $request
+     * @param \bnjns\SearchTools\SearchTools $searchTools
      * @return $this
      */
-    public function index(Request $request)
+    public function index(SearchTools $searchTools)
     {
         $this->authorize('index', Event::class);
         
@@ -40,7 +41,7 @@ class EventController extends Controller
         $events = Event::newestFirst();
         
         // Add the search requirement
-        $search = $request->has('search') ? $request->get('search') : null;
+        $search = $searchTools->search();
         if(!is_null($search) && $search) {
             $events = $events->where(function ($query) use ($search) {
                 $query->where('events.name', 'LIKE', '%' . $search . '%')
