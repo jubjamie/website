@@ -61,9 +61,6 @@ div#menu-wrapper {
         top: 0;
         width: 100%;
     }
-    @media(max-width: 479px) {
-        top: 50px;
-    }
     @media(min-width: 768px) {
         @include bg_gradient_yellow();
     }
@@ -86,7 +83,7 @@ div#menu-wrapper {
                     margin-top: 5px;
                 }
                 
-                & > button {
+                & > button.navbar-toggle {
                     @include bg_gradient_yellow();
                     border-color: #000;
                     color: #000;

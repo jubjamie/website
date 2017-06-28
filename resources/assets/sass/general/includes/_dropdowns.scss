@@ -35,14 +35,21 @@
             }
         }
         
-        &.active > a, &.active > button {
-            &, &:hover, &:focus {
-                color: #000;
-                text-decoration: none;
-                outline: 0;
-                background-color: $colour_primary;
+        &.active, &.current {
+            & > a, & > button {
+                &, &:hover, &:focus {
+                    background: transparent;
+                    color: #000;
+                    font-weight: bold;
+                    text-decoration: none;
+                    outline: 0;
+                }
+                &:hover {
+                    background-color: #e8e8e8;
+                }
             }
         }
+        
         &.disabled > a, &.disabled > button {
             &, &:hover, &:focus {
                 color: #777;
@@ -56,5 +63,12 @@
                 cursor: not-allowed;
             }
         }
+    }
+    &.dropdown-sm {
+        font-size: 13px;
+    }
+    &.dropdown-scroll {
+        max-height: 250px;
+        overflow-y: auto;
     }
 }
