@@ -8,6 +8,10 @@ div.form-group + div.tools {
 }
 
 .admin-tools {
+    .btn {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
     & > .dropdown, & > .dropup {
         & > .btn span:not(.fa) + .fa {
             margin-left: 0.5em;

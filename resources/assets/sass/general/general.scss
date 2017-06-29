@@ -23,6 +23,9 @@ hr {
 	height: 1px;
 	margin: 1.5em 0;
 	
+	&.grey {
+		background: #666;
+	}
 	& + * {
 		margin-top: 0;
 	}

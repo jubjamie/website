@@ -68,7 +68,7 @@ $.ajaxSetup({
 $('select[select2]').each(function () {
     $(this).select2({
         placeholder: $(this).attr('select2') || '',
-        theme      : 'bootstrap'
+        theme      : 'bootstrap',
     })
 });
 $('input[data-input-type="datetimepicker"]').each(function (i, obj) {
@@ -80,7 +80,7 @@ if(typeof(window.console) == 'undefined') {
         }
     }
 }
-$('body').on('submit', 'form', function(event) {
+$('body').on('submit', 'form', function (event) {
     var form = $(event.target);
     form.append('<input type="hidden" name="TZ-OFFSET" value="' + (new Date).getTimezoneOffset() + '">');
 });
