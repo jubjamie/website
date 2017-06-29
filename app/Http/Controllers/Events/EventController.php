@@ -294,4 +294,38 @@ class EventController extends Controller
         Flash::success('Event deleted.');
         return $this->ajaxResponse('Event deleted.');
     }
+    
+    /**
+     * Allow for simple searching through the events for using in select2 inputs.
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function search(Request $request)
+    {
+        // Authorise
+        $this->requireAjax();
+        $this->authorizeGate('member');
+        
+        // Start the query
+        $events = Event::select('events.*');
+        
+        // Search the name
+        if($request->has('name')) {
+            $events = $events->where('name', 'LIKE', '%' . $request->get('name') . '%');
+        }
+        
+        // Get and sort the results
+        $events = $events->get()
+                         ->sortByDesc('end')
+                         ->map(function ($event) {
+                             return (object) [
+                                 'id'   => $event->id,
+                                 'name' => $event->name,
+                                 'date' => $event->end->format('M Y'),
+                             ];
+                         })
+                         ->toArray();
+        
+        return $this->ajaxResponse($events);
+    }
 }

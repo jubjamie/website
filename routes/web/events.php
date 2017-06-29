@@ -23,6 +23,10 @@ Route::group([
         'as'   => 'event.export',
         'uses' => 'Events\DiaryController@export',
     ]);
+    Route::post('search', [
+        'as'   => 'event.search',
+        'uses' => 'Events\EventController@search',
+    ]);
     Route::group([
         'prefix' => '{id}',
         'where'  => ['id' => '[\d]+'],
