@@ -146,16 +146,16 @@
         },
         {
             "name": "bnjns/laravel-searchtools",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/bnjns/laravel-searchtools.git",
-                "reference": "7e02847757f9ff4dc07e7e43f3ba00ceeb0dd6d8"
+                "reference": "b55ba44d4cc592a0720342e5d67469f45208cdd0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/bnjns/laravel-searchtools/zipball/7e02847757f9ff4dc07e7e43f3ba00ceeb0dd6d8",
-                "reference": "7e02847757f9ff4dc07e7e43f3ba00ceeb0dd6d8",
+                "url": "https://api.github.com/repos/bnjns/laravel-searchtools/zipball/b55ba44d4cc592a0720342e5d67469f45208cdd0",
+                "reference": "b55ba44d4cc592a0720342e5d67469f45208cdd0",
                 "shasum": ""
             },
             "require": {
@@ -198,7 +198,7 @@
                 "jquery",
                 "search"
             ],
-            "time": "2017-06-26T22:03:43+00:00"
+            "time": "2017-06-28T18:24:32+00:00"
         },
         {
             "name": "bugsnag/bugsnag",

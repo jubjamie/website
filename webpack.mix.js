@@ -47,7 +47,7 @@ mix
         'resources/assets/css/vendors/bootstrap-theme.css',
         'node_modules/simplemde/dist/simplemde.min.css',
         'resources/assets/css/vendors/select2.css',
-        // 'resources/assets/css/vendors/select2-bootstrap.css',
+        'node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
         'resources/assets/css/vendors/font-awesome.css',
         'resources/assets/css/vendors/datetimepicker.css',
         'resources/assets/css/vendors/lightbox.css'
