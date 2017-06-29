@@ -285,6 +285,17 @@ class Event extends Model
     }
     
     /**
+     * Get events that are in the past.
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     */
+    public function scopePast(Builder $query)
+    {
+        $this->joinEventTimes($query)
+             ->where('event_times.end', '<', Carbon::now()->setTime(0, 0, 0)->toDateTimeString())
+             ->distinct();
+    }
+    
+    /**
      * Join a query with the event_times table.
      * @param \Illuminate\Database\Eloquent\Builder $query
      * @return \Illuminate\Database\Eloquent\Builder
