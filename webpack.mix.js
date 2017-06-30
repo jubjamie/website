@@ -72,4 +72,6 @@ mix
         'resources/assets/js/app.js'
     ], 'public/js/app.js')
     .js('resources/assets/js/partials/events.view.js', 'public/js/partials/events.view.js')
-    .js('resources/assets/js/partials/events.diary.js', 'public/js/partials/events.diary.js');
+    .js('resources/assets/js/partials/events.diary.js', 'public/js/partials/events.diary.js')
+    .js('resources/assets/js/partials/resources.index.js', 'public/js/partials/resources.index.js')
+    .js('resources/assets/js/partials/resources.form.js', 'public/js/partials/resources.form.js');

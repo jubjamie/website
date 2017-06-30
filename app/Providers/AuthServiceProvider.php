@@ -21,7 +21,13 @@ use App\Policies\Events\EventTimePolicy;
 use App\Policies\Members\UserPolicy;
 use App\Policies\PagePolicy;
 use App\Policies\QuotePolicy;
+use App\Policies\Resources\CategoryPolicy;
+use App\Policies\Resources\ResourcePolicy;
+use App\Policies\Resources\TagPolicy;
 use App\Quote;
+use App\Resource;
+use App\ResourceCategory;
+use App\ResourceTag;
 use App\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Auth;
@@ -43,6 +49,9 @@ class AuthServiceProvider extends ServiceProvider
         EventTime::class          => EventTimePolicy::class,
         Page::class               => PagePolicy::class,
         Quote::class              => QuotePolicy::class,
+        Resource::class           => ResourcePolicy::class,
+        ResourceCategory::class   => CategoryPolicy::class,
+        ResourceTag::class        => TagPolicy::class,
         User::class               => UserPolicy::class,
     ];
     

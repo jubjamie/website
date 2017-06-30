@@ -54,7 +54,7 @@ class MenuServiceProvider extends ServiceProvider
             $menu->add(route('committee.view'), 'The Committee');
             $menu->add(route('event.diary'), 'Events Diary', Menu::items('events'))->activePattern('^\/events');
             $menu->add(route('auth.login'), 'Members\' Area', Menu::items('members'))->activePattern('^\/members');
-            $menu->add('#', 'Resources', Menu::items('resources'))->activePattern('^\/resources');
+            $menu->add(route('resource.search'), 'Resources', Menu::items('resources'))->activePattern('^\/resources');
             $menu->add(route('contact.book'), 'Enquiries & Book Us')->activePattern('^\/contact\/book');
             
             // Media sub-menu
@@ -67,7 +67,6 @@ class MenuServiceProvider extends ServiceProvider
                 $menu->find('events')
                      ->add('https://docs.google.com/a/bts-crew.com/forms/d/e/1FAIpQLSekw6oEojBdD1REd2krli3U-4BYWNG9zfThCmTJKc1A1OaR3g/viewform',
                          'Submit event report')
-                     //->add('#', 'View booking requests')
                      ->add(route('event.index'), 'View all events')
                      ->add(route('event.create'), 'Create a new event');
                 
@@ -117,10 +116,10 @@ class MenuServiceProvider extends ServiceProvider
             // Resources sub-menu
             $resources = $menu->find('resources');
             if($isRegistered) {
-                $resources->add('#', 'Event Reports')
-                          ->add('#', 'Event Risk Assessments')
-                          ->add('#', 'Meeting Minutes')
-                          ->add('#', 'Meeting Agendas');
+                $resources->add(route('resource.search', ['category' => 'event-reports']), 'Event Reports')
+                          ->add(route('resource.search', ['category' => 'event-risk-assessments']), 'Event Risk Assessments')
+                          ->add(route('resource.search', ['category' => 'meeting-minutes']), 'Meeting Minutes')
+                          ->add(route('resource.search', ['category' => 'meeting-agendas']), 'Meeting Agendas');
             }
             $resources->add(route('page.show', ['slug' => 'links']), 'Links')
                       ->add(route('page.show', ['slug' => 'faq']), 'FAQ');

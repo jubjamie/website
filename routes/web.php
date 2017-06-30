@@ -31,4 +31,5 @@
     include base_path('routes/web/members.php');
     include base_path('routes/web/page.php');
     include base_path('routes/web/quotes.php');
+    include base_path('routes/web/resources.php');
     include base_path('routes/web/users.php');

@@ -37,16 +37,12 @@ body[page-section*="pages"] {
     @import "pages";
 }
 
-body[page-section*="polls"] {
-    //@import "polls";
-}
-
 body[page-section*="quotes"] {
     @import "quotes";
 }
 
 body[page-section*="resources"] {
-    //@import "resources";
+    @import "resources";
 }
 
 body[page-section*="training"] {

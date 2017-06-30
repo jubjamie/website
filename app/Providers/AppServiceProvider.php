@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Observers\Resources\ResourceObserver;
+use App\Resource;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        $this->registerObservers();
     }
 
     /**
@@ -25,5 +27,13 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->alias('bugsnag.logger', \Illuminate\Contracts\Logging\Log::class);
         $this->app->alias('bugsnag.logger', \Psr\Log\LoggerInterface::class);
+    }
+    
+    /**
+     * List any observers that should be registered.
+     */
+    public function registerObservers()
+    {
+        Resource::observe(ResourceObserver::class);
     }
 }
