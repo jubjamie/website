@@ -2,12 +2,13 @@
 
 namespace App\Providers;
 
-use Illuminate\Support\Facades\Request;
-use Illuminate\Support\Facades\Route;
+use App\Traits\CorrectsPaginatorPath;
 use Illuminate\Support\ServiceProvider;
 
 class ViewServiceProvider extends ServiceProvider
 {
+    use CorrectsPaginatorPath;
+    
     /**
      * Bootstrap the application services.
      * @return void
@@ -53,7 +54,7 @@ class ViewServiceProvider extends ServiceProvider
             
             $events = $user->events()
                            ->distinctPaginate(20)
-                           ->withPath(route(Route::currentRouteName(), Route::current()->parameters + ['tab' => 'events']));
+                           ->withPath($this->paginatorPath(['tab' => 'events']));
             
             $view->with([
                 'events' => $events,
