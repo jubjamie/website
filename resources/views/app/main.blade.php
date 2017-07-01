@@ -6,9 +6,7 @@
     <body page-section="@yield('page-section')" page-id="@yield('page-id')">
         <!-- Persistent messages -->
         <div class="message-centre" id="message-centre-upper">
-            <ul>
-                @include('app.messages.fixed')
-            </ul>
+            {!! Notifications::renderBag('permanent') !!}
         </div>
         <!-- Main site wrapper -->
         <div id="site-wrapper">
@@ -24,10 +22,10 @@
             <div id="content-wrapper">
                 <!-- Main messages -->
                 <div class="message-centre" id="message-centre-main">
-                    <ul>
+                    <div class="message-centre-inner">
                         @yield('messages')
-                        @include('app.messages.flash')
-                    </ul>
+                        {!! Notifications::renderBag() !!}
+                    </div>
                 </div>
                 @hasSection('header-main')
                     <h1 class="page-header">@yield('header-main')</h1>

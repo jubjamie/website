@@ -5,9 +5,9 @@ namespace App;
 use App\Mail\Events\CrewEmail;
 use App\Traits\CorrectsTimezone;
 use App\Traits\Validatable;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Mail;
-use Szykra\Notifications\Flash;
 
 class EventEmail extends Model
 {
@@ -92,7 +92,7 @@ class EventEmail extends Model
         
         if($crew_list->count() > 0) {
             Mail::to($crew_list)->send(new CrewEmail($this, $sentFrom));
-            Flash::success('Email sent');
+            Notifications::success('Email sent');
             return response()->json(['response' => 'Email sent']);
         } else {
             return response()->json(['error' => 'Email sent', '__error' => true], 422);

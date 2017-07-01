@@ -7,13 +7,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Events\EventRequest;
 use App\Mail\Events\AcceptedExternal;
 use App\Traits\CorrectsTimezone;
+use bnjns\FlashNotifications\Facades\Notifications;
 use bnjns\SearchTools\SearchTools;
 use Carbon\Carbon;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
-use Szykra\Notifications\Flash;
 
 class EventController extends Controller
 {
@@ -127,7 +127,7 @@ class EventController extends Controller
         
         
         // Create a flash message and redirect
-        Flash::success('Event created');
+        Notifications::success('Event created');
         
         if($request->get('action') == 'create-another') {
             return redirect()->back();
@@ -193,17 +193,17 @@ class EventController extends Controller
         if($mode == 'all') {
             $event->crew()
                   ->delete();
-            Flash::success('Crew list cleared');
+            Notifications::success('Crew list cleared');
         } else if($mode == 'core') {
             $event->crew()
                   ->core()
                   ->delete();
-            Flash::success('Core crew cleared');
+            Notifications::success('Core crew cleared');
         } else if($mode == 'guests' && $event->isSocial()) {
             $event->crew()
                   ->guest()
                   ->delete();
-            Flash::success('Guests cleared');
+            Notifications::success('Guests cleared');
         }
         
         return redirect()->route('event.view', ['id' => $event->id, 'tab' => 'crew']);
@@ -257,7 +257,7 @@ class EventController extends Controller
                   ->delete();
         }
         
-        Flash::success('Event updated');
+        Notifications::success('Event updated');
         return redirect()->route('event.view', ['id' => $event->id, 'tab' => 'settings']);
     }
     
@@ -291,7 +291,7 @@ class EventController extends Controller
         Event::findOrFail($eventId)
              ->delete();
         
-        Flash::success('Event deleted.');
+        Notifications::success('Event deleted.');
         return $this->ajaxResponse('Event deleted.');
     }
     

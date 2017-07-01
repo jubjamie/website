@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Members;
 
 use App\Http\Controllers\Controller;
 use App\User;
+use bnjns\FlashNotifications\Facades\Notifications;
 use bnjns\SearchTools\SearchTools;
 use Illuminate\Http\Request;
 use Szykra\Notifications\Flash;
@@ -100,7 +101,7 @@ class MemberController extends Controller
     private function updatePersonal(Request $request)
     {
         $this->updateMemberFields($request, ['name', 'nickname', 'dob']);
-        Flash::success('Changes saved');
+        Notifications::success('Changes saved');
         return $this->ajaxResponse('Changes saved');
     }
     
@@ -112,7 +113,7 @@ class MemberController extends Controller
     private function updateContact(Request $request)
     {
         $this->updateMemberFields($request, ['email', 'phone', 'address']);
-        Flash::success('Changes saved');
+        Notifications::success('Changes saved');
         return $this->ajaxResponse('Changes saved');
     }
     
@@ -133,7 +134,7 @@ class MemberController extends Controller
         ]);
         
         $request->user()->setAvatar($request->file('avatar'));
-        Flash::success('Profile picture changed');
+        Notifications::success('Profile picture changed');
         return $this->ajaxResponse('Profile picture changed');
     }
     
@@ -149,7 +150,7 @@ class MemberController extends Controller
             $path = base_path('public') . $user->getAvatarUrl();
             if(is_writeable($path)) {
                 unlink($path);
-                Flash::success('Profile picture removed');
+                Notifications::success('Profile picture removed');
                 return $this->ajaxResponse('Profile picture removed');
             } else {
                 return $this->ajaxError(0, 422, 'Could not remove your profile picture');
@@ -192,7 +193,7 @@ class MemberController extends Controller
         $request->user()->update([
             'password' => bcrypt($request->get('password_new')),
         ]);
-        Flash::success('Password updated');
+        Notifications::success('Password updated');
         return $this->ajaxResponse('Password updated');
     }
     
@@ -222,8 +223,8 @@ class MemberController extends Controller
         // Update
         $request->user()
                 ->update($data);
-        
-        Flash::success('Privacy settings updated');
+    
+        Notifications::success('Privacy settings updated');
         return $this->ajaxResponse('Privacy settings updated');
     }
     
@@ -273,7 +274,7 @@ class MemberController extends Controller
         }
         
         // Messages
-        Flash::success('Changes saved');
+        Notifications::success('Changes saved');
         return $this->ajaxResponse('Changes saved');
     }
     

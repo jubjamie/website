@@ -6,13 +6,13 @@ use App\Notifications\Auth\ResetPassword;
 use App\Notifications\Users\UserAccountCreated;
 use App\Traits\DistinctPaginate;
 use App\Traits\Validatable;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Intervention\Image\Facades\Image;
-use Szykra\Notifications\Flash;
 
 class User extends Authenticatable
 {
@@ -543,8 +543,7 @@ class User extends Authenticatable
     {
         // Check the selected user isn't the current user
         if(Auth::check() && $this->id == Auth::user()->id) {
-            Flash::warning('You cannot archive your own account');
-            
+            Notifications::warning('You cannot archive your own account');
             return false;
         }
         
@@ -587,8 +586,7 @@ class User extends Authenticatable
     private function setMembershipType($type = 'member')
     {
         if($this->id == Auth::user()->id) {
-            Flash::warning('You cannot change your own membership type');
-            
+            Notifications::warning('You cannot change your own membership type');
             return false;
         }
         

@@ -9,6 +9,7 @@ use App\Notifications\Events\HasBeenVolunteered;
 use App\Notifications\Events\UserHasVolunteered;
 use App\Notifications\Events\VolunteeredToCrew;
 use App\User;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Http\Request;
 use Szykra\Notifications\Flash;
 
@@ -60,7 +61,7 @@ class CrewController extends Controller
                   'guest_name' => clean($request->get('guest_name')),
               ]);
         
-        Flash::success('Guest added');
+        Notifications::success('Guest added');
         return $this->ajaxResponse('Guest added');
     }
     
@@ -94,8 +95,8 @@ class CrewController extends Controller
         
         // Send an email to the user
         User::find($request->get('user_id'))->notify(new HasBeenVolunteered($event));
-        
-        Flash::success('Member added to crew');
+    
+        Notifications::success('Member added to crew');
         return $this->ajaxResponse('Member added to crew');
     }
     
@@ -175,8 +176,8 @@ class CrewController extends Controller
             'confirmed'  => $request->has('confirmed'),
             'guest_name' => clean($request->get('guest_name')),
         ]);
-        
-        Flash::success('Guest updated');
+    
+        Notifications::success('Guest updated');
         return $this->ajaxResponse('Guest updated');
     }
     
@@ -198,8 +199,8 @@ class CrewController extends Controller
             'em'        => $request->get('core') ? $request->has('em') : false,
             'confirmed' => $crew->event->isTracked() ? $request->has('confirmed') : false,
         ]);
-        
-        Flash::success('Crew role updated');
+    
+        Notifications::success('Crew role updated');
         return $this->ajaxResponse('Crew role updated');
     }
     
@@ -219,7 +220,7 @@ class CrewController extends Controller
         
         // Delete
         $crew->delete();
-        Flash::success($crew->isGuest() ? 'Guest removed' : 'Crew role deleted');
+        Notifications::success($crew->isGuest() ? 'Guest removed' : 'Crew role deleted');
         return $this->ajaxResponse($crew->isGuest() ? 'Guest removed' : 'Crew role deleted');
     }
     
@@ -264,7 +265,7 @@ class CrewController extends Controller
         }
         
         // Message
-        Flash::success('You have volunteered');
+        Notifications::success('You have volunteered');
         return $this->ajaxResponse('Volunteered');
     }
     
@@ -285,8 +286,8 @@ class CrewController extends Controller
         $event->crew()
               ->where('user_id', $request->user()->id)
               ->delete();
-        
-        Flash::success('You have unvolunteered');
+    
+        Notifications::success('You have unvolunteered');
         return $this->ajaxResponse('Unvolunteered');
     }
     

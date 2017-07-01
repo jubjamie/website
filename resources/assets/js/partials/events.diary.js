@@ -113,20 +113,22 @@ $('#DiaryPreferences-save').on('click', function () {
     btn.html('<span class="fa fa-spinner fa-spin"></span>');
     
     $.ajax({
-        url     : btn.data('updateUrl'),
-        data    : $(this.form).serialize(),
-        type    : 'post',
-        error   : function (data) {
+        url    : btn.data('updateUrl'),
+        data   : $(this.form).serialize(),
+        type   : 'post',
+        error  : function (data) {
             btn.removeAttr('disabled');
             btn.html(text);
             alert(processAjaxErrors(data).message);
         },
-        success: function() {
-            btn.html('Saved!');
-            setTimeout(function() {
-                btn.removeAttr('disabled');
-                btn.html(text);
-            }, 2000);
+        success: function () {
+            $('#DiaryPreferences').toggle();
+            btn.removeAttr('disabled')
+                .html(text);
+            $.notification({
+                level  : 'success',
+                message: 'Preferences saved',
+            });
         }
     });
 });

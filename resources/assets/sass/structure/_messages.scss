@@ -2,32 +2,8 @@ div.alert {
     font-size: inherit;
     font-weight: 300;
     line-height: 1.2em;
-    margin: 0 auto 0.5em;
-    padding: 0.7em 1em 0.7em 2.1em;
-    position: relative;
     text-align: left;
     
-    &:after {
-        content: "";
-        clear: left;
-    }
-    h1, h2, h3, h4 {
-        color: inherit;
-        font-size: 1em;
-        font-weight: bold;
-        margin: 0 0 0.5em 0;
-        text-align: left;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
-    p {
-        line-height: 1.2em;
-        margin: 0 0 1em 0;
-        &:last-child {
-            margin-bottom: 0;
-        }
-    }
     a {
         color: #337ab7;
         
@@ -35,21 +11,8 @@ div.alert {
             outline-color: #337ab7;
         }
     }
-    & > button.close {
+    & > button.close-notification {
         @include transition();
-        font-size: 19px;
-        height: 1.5em;
-        line-height: 1.4em;
-        right: 0.4em;
-        opacity: 0.3;
-        position: absolute;
-        
-        &:focus {
-            outline: none;
-        }
-        &:hover {
-            opacity: 0.8;
-        }
     }
     & > span.fa {
         display: block;
@@ -76,21 +39,10 @@ div.alert {
         }
     }
 }
+
 div.message-centre {
     font-size: 14px;
     width: 100%;
-    
-    & > ul {
-        display: block;
-        margin: 0;
-        padding: 0;
-        
-        & > li {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-        }
-    }
 }
 
 div#message-centre-upper {
@@ -98,12 +50,6 @@ div#message-centre-upper {
     font-size: 13px;
     width: 100%;
     
-    & > ul {
-        & > li {
-            border-bottom: 1px solid #111;
-            padding: 0.15em 0 0.75em 0;
-        }
-    }
     div.alert {
         @include wrapper();
         background: none !important;
@@ -113,7 +59,7 @@ div#message-centre-upper {
         color: #fff !important;
         margin: 0;
         
-        & > button.close {
+        & > button.close-notification {
             color: #fff;
             top: 0;
         }
@@ -122,33 +68,21 @@ div#message-centre-upper {
         }
     }
 }
+
 div#message-centre-main {
     margin: 0 auto;
     padding: 0 1.5em;
     position: fixed;
     right: 0;
     bottom: 10px;
-    z-index: 6000;
+    z-index: 10000;
     
-    & > ul {
+    & > div.message-centre-inner {
         @include wrapper();
         text-align: left;
-        width: auto;
-        
-        & > li {
-            display: block;
-            text-align: left;
-            width: auto;
-        }
     }
     div.alert {
-        display: inline-block;
-        
-        &.alert-perm {
-            padding-right: 2em;
-        }
-        & > button.close {
-            top: 0.1em;
-        }
+        display: table;
+        margin-left: 0;
     }
 }

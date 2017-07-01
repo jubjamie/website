@@ -85,3 +85,9 @@ $('body').on('submit', 'form', function (event) {
     form.append('<input type="hidden" name="TZ-OFFSET" value="' + (new Date).getTimezoneOffset() + '">');
 });
 new Clipboard('[data-clipboard-target]');
+$('body').on('click', '[data-clipboard-target]', function () {
+    $.notification({
+        level  : 'info',
+        message: 'Copied to clipboard'
+    });
+});

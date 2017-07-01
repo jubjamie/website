@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class LoginController extends Controller
 {
@@ -84,7 +84,7 @@ class LoginController extends Controller
      */
     protected function authenticated(Request $request, $user)
     {
-        Flash::success('Logged in');
+        Notifications::success('Logged in');
     }
     
     /**
@@ -95,7 +95,7 @@ class LoginController extends Controller
     public function logout(Request $request)
     {
         $response = $this->logoutTrait($request);
-        Flash::success('Logged out');
+        Notifications::success('Logged out');
         
         return $response;
     }

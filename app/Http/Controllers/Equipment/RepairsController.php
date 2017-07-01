@@ -6,6 +6,7 @@ use App\EquipmentBreakage;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Equipment\RepairRequest;
 use App\Mail\Equipment\Breakage;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Szykra\Notifications\Flash;
@@ -65,7 +66,7 @@ class RepairsController extends Controller
                     'user_username' => $breakage->user->username,
                 ]));
         
-        Flash::success('Breakage reported');
+        Notifications::success('Breakage reported');
         return redirect()->route('equipment.repairs.index');
     }
     
@@ -93,12 +94,12 @@ class RepairsController extends Controller
             $breakage->update([
                 'closed' => true,
             ]);
-            Flash::success('Breakage closed');
+            Notifications::success('Breakage closed');
         } else if($request->get('action') == 'reopen') {
             $breakage->update([
                 'closed' => false,
             ]);
-            Flash::success('Breakage re-opened');
+            Notifications::success('Breakage re-opened');
         }
         
         return redirect()->route('equipment.repairs.view', ['id' => $id]);
@@ -125,6 +126,6 @@ class RepairsController extends Controller
             'status'  => clean($request->get('status')),
             'closed'  => (int) $request->get('status') === EquipmentBreakage::STATUS_RESOLVED,
         ]);
-        Flash::success('Breakage updated');
+        Notifications::success('Breakage updated');
     }
 }

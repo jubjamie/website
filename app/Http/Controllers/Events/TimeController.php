@@ -6,9 +6,9 @@ use App\Event;
 use App\EventTime;
 use App\Http\Controllers\Controller;
 use App\Traits\CorrectsTimezone;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class TimeController extends Controller
 {
@@ -46,7 +46,7 @@ class TimeController extends Controller
             'end'   => $this->correctTimezone(Carbon::createFromFormat('Y-m-d H:i', $request->get('end')), $request),
         ]);
         
-        Flash::success('Event time created');
+        Notifications::success('Event time created');
         return $this->ajaxResponse('Event time created');
     }
     
@@ -78,7 +78,7 @@ class TimeController extends Controller
             'end'   => $this->correctTimezone(Carbon::createFromFormat('Y-m-d H:i', $request->get('end')), $request),
         ]);
         
-        Flash::success('Event time updated');
+        Notifications::success('Event time updated');
         return $this->ajaxResponse('Event time updated');
     }
     
@@ -97,7 +97,7 @@ class TimeController extends Controller
                        ->where('id', $timeId)
                        ->firstOrFail();
         $this->authorize('delete', $time);
-    
+        
         // Check that it isn't the last event time
         if($event->times()->count() == 1) {
             return $this->ajaxError(0, 422, 'An event needs at least 1 event time.');
@@ -105,7 +105,7 @@ class TimeController extends Controller
         
         // Delete
         $time->delete();
-        Flash::success('Event time deleted');
+        Notifications::success('Event time deleted');
         return $this->ajaxResponse('Event time deleted');
     }
 }

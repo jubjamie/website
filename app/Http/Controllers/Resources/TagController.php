@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Resources;
 use App\Http\Controllers\Controller;
 use App\ResourceTag;
 use App\Traits\CreatesSlugs;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class TagController extends Controller
 {
@@ -52,7 +52,7 @@ class TagController extends Controller
         
         // Create
         ResourceTag::create(clean($request->only($fields)));
-        Flash::success('Tag created');
+        Notifications::success('Tag created');
         return $this->ajaxResponse('Tag created');
     }
     
@@ -84,7 +84,7 @@ class TagController extends Controller
         
         // Update
         $tag->update(clean($request->only($fields)));
-        Flash::success('Tag updated');
+        Notifications::success('Tag updated');
         return $this->ajaxResponse('Tag updated');
     }
     
@@ -102,7 +102,7 @@ class TagController extends Controller
         
         // Delete
         $tag->delete();
-        Flash::success('Tag deleted');
+        Notifications::success('Tag deleted');
         return $this->ajaxResponse('Tag deleted');
     }
     

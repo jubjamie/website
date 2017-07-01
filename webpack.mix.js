@@ -39,7 +39,8 @@ mix
         'node_modules/js-cookie/src/js.cookie.js',
         'node_modules/lightbox2/dist/js/lightbox.min.js',
         'node_modules/clipboard/dist/clipboard.min.js',
-        'vendor/bnjns/laravel-searchtools/src/resources/assets/js/search_tools.min.js'
+        'vendor/bnjns/laravel-searchtools/src/resources/assets/js/search_tools.min.js',
+        'vendor/bnjns/laravel-notifications/src/resources/assets/js/notifications.min.js'
     ], 'public/js/vendors.js')
     .combine([
         'resources/assets/css/reset.css',
@@ -50,7 +51,8 @@ mix
         'node_modules/select2-bootstrap-theme/dist/select2-bootstrap.min.css',
         'resources/assets/css/vendors/font-awesome.css',
         'resources/assets/css/vendors/datetimepicker.css',
-        'resources/assets/css/vendors/lightbox.css'
+        'resources/assets/css/vendors/lightbox.css',
+        'vendor/bnjns/laravel-notifications/src/resources/assets/css/notifications.min.css',
     ], 'public/css/vendors.css')
     
     // Process SCSS files
@@ -60,7 +62,6 @@ mix
     
     // Process JS files
     .combine([
-        'node_modules/js-alerts/dist/alerts.min.js',
         'resources/assets/js/plugins/CookieAcceptance.js',
         'resources/assets/js/plugins/DisableButtons.js',
         'resources/assets/js/plugins/EditableFields.js',

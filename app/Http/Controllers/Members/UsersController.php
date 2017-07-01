@@ -5,9 +5,9 @@ namespace App\Http\Controllers\Members;
 use App\Http\Controllers\Controller;
 use App\Notifications\Users\ResetPasswordAdmin;
 use App\User;
+use bnjns\FlashNotifications\Facades\Notifications;
 use bnjns\SearchTools\SearchTools;
 use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class UsersController extends Controller
 {
@@ -143,7 +143,7 @@ class UsersController extends Controller
         if(!$validator->fails()) {
             // Create the user
             User::create(clean($request->only($fields)));
-            Flash::success('User created');
+            Notifications::success('User created');
             return redirect()->route('user.index');
         } else {
             // Fail with the inputs and errors
@@ -320,10 +320,10 @@ class UsersController extends Controller
                              ->withInput($data)
                              ->withErrors($validator);
         } else if($user->update(clean($data))) {
-            Flash::success('User updated');
+            Notifications::success('User updated');
             return redirect()->route('user.index');
         } else {
-            Flash::error('An error occurred');
+            Notifications::error('An error occurred');
             return redirect()->route('user.edit', $user->username);
         }
     }
@@ -336,13 +336,13 @@ class UsersController extends Controller
     private function updateStatus(User $user, Request $request)
     {
         if($user->isActiveUser()) {
-            Flash::warning('You can\'t modify the status of your own account.');
+            Notifications::warning('You can\'t modify the status of your own account.');
         } else if($request->get('action') == 'archive' && $user->update(['status' => false])) {
-            Flash::success('User archived');
+            Notifications::success('User archived');
         } else if($request->get('action') == 'unarchive' && $user->update(['status' => true])) {
-            Flash::success('User unarchived');
+            Notifications::success('User unarchived');
         } else {
-            Flash::error('An error occurred');
+            Notifications::error('An error occurred');
         }
     }
     
@@ -355,10 +355,10 @@ class UsersController extends Controller
     {
         $file = $request->file('avatar');
         if(!$file) {
-            Flash::warning('Please select an image to use');
+            Notifications::warning('Please select an image to use');
         } else {
             $user->setAvatar($file);
-            Flash::success('Profile picture changed');
+            Notifications::success('Profile picture changed');
         }
     }
     
@@ -372,9 +372,9 @@ class UsersController extends Controller
             $path = base_path('public') . $user->getAvatarUrl();
             if(is_writeable($path)) {
                 unlink($path);
-                Flash::success('Profile picture removed');
+                Notifications::success('Profile picture removed');
             } else {
-                Flash::error('Could not remove the profile picture');
+                Notifications::error('Could not remove the profile picture');
             }
         }
     }
@@ -390,7 +390,7 @@ class UsersController extends Controller
         
         $user->notify(new ResetPasswordAdmin($password));
         
-        Flash::success('Password reset');
+        Notifications::success('Password reset');
     }
     
     /**
@@ -420,9 +420,9 @@ class UsersController extends Controller
     {
         $user = User::find($userId);
         if($user && $user->archive()) {
-            Flash::success('User successfully archived');
+            Notifications::success('User successfully archived');
         } else if(!$user) {
-            Flash::error('Could not find the user to archive');
+            Notifications::error('Could not find the user to archive');
         }
     }
     
@@ -438,11 +438,11 @@ class UsersController extends Controller
         
         // Validate
         if(!$action || !in_array($action, array_keys(self::$BulkActions))) {
-            Flash::warning('Select a valid action');
+            Notifications::warning('Select a valid action');
             return;
         }
         if(!$users || !is_array($users) || count($users) == 0) {
-            Flash::warning('Select some users');
+            Notifications::warning('Select some users');
             return;
         }
         
@@ -461,11 +461,11 @@ class UsersController extends Controller
         
         // Create the flash message
         if($success == count($users)) {
-            Flash::success(sprintf("All of the selected users were succesfully %s", self::$BulkActionMap[$action]));
+            Notifications::success(sprintf("All of the selected users were succesfully %s", self::$BulkActionMap[$action]));
         } else if($success > 0) {
-            Flash::warning(sprintf("%s of the %s users were successfully %s", $success, count($users), self::$BulkActionMap[$action]));
+            Notifications::warning(sprintf("%s of the %s users were successfully %s", $success, count($users), self::$BulkActionMap[$action]));
         } else {
-            Flash::error(sprintf("None of the selected users could be %s", self::$BulkActionMap[$action]));
+            Notifications::error(sprintf("None of the selected users could be %s", self::$BulkActionMap[$action]));
         }
     }
 }

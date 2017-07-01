@@ -5,8 +5,8 @@ namespace App\Http\Controllers\Resources;
 use App\Http\Controllers\Controller;
 use App\ResourceCategory;
 use App\Traits\CreatesSlugs;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class CategoryController extends Controller
 {
@@ -52,7 +52,7 @@ class CategoryController extends Controller
         
         // Create
         ResourceCategory::create(clean($request->only($fields)));
-        Flash::success('Category created');
+        Notifications::success('Category created');
         return $this->ajaxResponse('Category created');
     }
     
@@ -84,7 +84,7 @@ class CategoryController extends Controller
         
         // Update
         $category->update(clean($request->only($fields)));
-        Flash::success('Category updated');
+        Notifications::success('Category updated');
         return $this->ajaxResponse('Category updated');
     }
     
@@ -102,7 +102,7 @@ class CategoryController extends Controller
         
         // Delete
         $category->delete();
-        Flash::success('Category deleted');
+        Notifications::success('Category deleted');
         return $this->ajaxResponse('Category deleted');
     }
     

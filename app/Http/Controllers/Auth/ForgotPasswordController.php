@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
-use Illuminate\Http\Request;
-use Szykra\Notifications\Flash;
 
 class ForgotPasswordController extends Controller
 {
@@ -19,9 +18,9 @@ class ForgotPasswordController extends Controller
     | your application to your users. Feel free to explore this trait.
     |
     */
-
+    
     use SendsPasswordResetEmails;
-
+    
     /**
      * Create a new controller instance.
      */
@@ -38,7 +37,7 @@ class ForgotPasswordController extends Controller
      */
     protected function sendResetLinkResponse($response)
     {
-        Flash::success('A link to reset your password has been sent to the email address specified.');
+        Notifications::success('A link to reset your password has been sent to the email address specified.');
         return redirect()->route('auth.login');
     }
 }

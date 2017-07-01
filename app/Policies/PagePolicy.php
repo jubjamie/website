@@ -2,11 +2,11 @@
     
     namespace App\Policies;
     
-    use App\User;
     use App\Page;
+    use App\User;
+    use bnjns\FlashNotifications\Facades\Notifications;
     use Illuminate\Auth\Access\HandlesAuthorization;
-    use Szykra\Notifications\Flash;
-    
+
     class PagePolicy
     {
         use HandlesAuthorization;
@@ -32,8 +32,7 @@
             if($page->published == 1) {
                 return true;
             } else if($user->isAdmin()) {
-                Flash::warning('Page not published', 'This page will not be viewable by non-admins until it is published.');
-                
+                Notifications::warning('This page will not be viewable by non-admins until it is published.', 'Page not published');
                 return true;
             }
             

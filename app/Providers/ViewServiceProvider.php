@@ -6,6 +6,7 @@ use App\Resource;
 use App\ResourceCategory;
 use App\ResourceTag;
 use App\Traits\CorrectsPaginatorPath;
+use bnjns\FlashNotifications\Facades\Notifications;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
 
@@ -19,7 +20,7 @@ class ViewServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        $this->attachMessageStyles();
+        $this->attachNotifications();
         $this->attachMemberEvents();
         $this->attachMemberSkills();
         $this->attachResourceVariables();
@@ -36,18 +37,23 @@ class ViewServiceProvider extends ServiceProvider
     }
     
     /**
-     * Attach the icons for each type of flash message.
+     * Attach some default notifications.
      */
-    private function attachMessageStyles()
+    private function attachNotifications()
     {
-        view()->composer('app.messages.message', function ($view) {
-            $view->with('MessageIcons', [
-                'success' => 'check',
-                'info'    => 'info',
-                'warning' => 'exclamation',
-                'danger'  => 'remove',
-            ]);
-        });
+        // Javascript
+        Notifications::warning('We use javascript to improve the user experience and make things more interactive - things may not work if you have javascript turned off.')
+                     ->title('Uh oh! No javascript!')
+                     ->enclose('noscript')
+                     ->permanent();
+        
+        // Cookie policy
+        if(!isset($_COOKIE['CookiePolicyAccepted'])) {
+            Notifications::info('Some rubbish about our cookie policy with a [link to the policy](#).')
+                         ->title('Cookie policy')
+                         ->attribute('id', 'cookie-policy-msg')
+                         ->permanent();
+        }
     }
     
     /**

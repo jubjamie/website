@@ -6,10 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Resources\ResourceRequest;
 use App\Resource;
 use App\Traits\CorrectsPaginatorPath;
+use bnjns\FlashNotifications\Facades\Notifications;
 use bnjns\SearchTools\SearchTools;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Szykra\Notifications\Flash;
 
 class ResourceController extends Controller
 {
@@ -88,7 +88,7 @@ class ResourceController extends Controller
             ]);
         }
         
-        Flash::success('Resource created');
+        Notifications::success('Resource created');
         return redirect()->route('resource.view', ['id' => $resource->id]);
     }
     
@@ -162,7 +162,7 @@ class ResourceController extends Controller
         $resource->tags()
                  ->sync($request->has('tags') ? $request->get('tags') : []);
         
-        Flash::success('Resource saved');
+        Notifications::success('Resource saved');
         return redirect()->route('resource.view', ['id' => $resource->id]);
     }
     
@@ -211,7 +211,7 @@ class ResourceController extends Controller
         // Create the new issue
         $resource->reissue($request->file('file'), $request->get('reason'));
         
-        Flash::success('Issue submitted');
+        Notifications::success('Issue submitted');
         return redirect()->route('resource.view', ['id' => $id]);
     }
     
@@ -244,7 +244,7 @@ class ResourceController extends Controller
         $this->authorize('delete', $resource);
         
         $resource->delete();
-        Flash::success('Resource deleted');
+        Notifications::success('Resource deleted');
         return $this->ajaxResponse('Resource deleted');
     }
     
