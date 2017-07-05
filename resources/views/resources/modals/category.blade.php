@@ -17,9 +17,13 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" data-type="submit-modal" type="button">
+        <button class="btn btn-success"
+                data-action="save"
+                data-type="submit-modal"
+                data-redirect="true"
+                type="button">
             <span class="fa fa-check"></span>
-            <span></span>
+            <span>Add Category</span>
         </button>
     </div>
     {!! Form::close() !!}

@@ -68,7 +68,6 @@
                                     data-modal-title="Add Guest"
                                     data-form-action="{{ route('event.crew.store', ['id' => $event->id]) }}"
                                     data-mode="create"
-                                    data-mode="create"
                                     type="button">
                                 <span class="fa fa-user-secret"></span>
                                 <span>Add guest user</span>
@@ -97,7 +96,7 @@
                                          data-modal-template="{{ $crew->isGuest() ? 'event_guest' : 'event_crew' }}"
                                          data-modal-title="Edit Crew"
                                          data-modal-class="modal-sm"
-                                         data-form-action="{{ route('event.crew.update', ['id' => $event->id, 'crewId' => $crew->id]) }}"
+                                         data-save-action="{{ route('event.crew.update', ['id' => $event->id, 'crewId' => $crew->id]) }}"
                                          data-delete-action="{{ route('event.crew.destroy', ['id' => $event->id, 'crewId' => $crew->id]) }}"
                                          data-form-data="{{ json_encode($crew) }}"
                                          data-mode="edit"

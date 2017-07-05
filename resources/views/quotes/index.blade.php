@@ -6,13 +6,6 @@
 @section('header-main', 'Quotesboard')
 
 
-@section('scripts')
-    $modal.on('show.bs.modal', function(event) {
-        var btn = $(event.relatedTarget);
-        $modal.find('#addQuoteModal').data('formAction', btn.data('formAction'));
-    });
-@endsection
-
 @section('add_quote_button')
     <button class="btn btn-success"
             data-toggle="modal"

@@ -6,22 +6,6 @@
 @section('header-main', 'Resources')
 @section('header-sub', 'Manage Categories')
 
-@section('scripts')
-    $modal.on('show.bs.modal', function(event) {
-    var target = $(event.relatedTarget);
-    var mode = target.data('mode');
-    var btn = $modal.find('button');
-    var btn_span = btn.find('span').eq(1);
-
-    btn.data('formAction', target.data('formAction'));
-    if(mode == 'create') {
-    btn_span.text('Create Category');
-    } else if(mode == 'edit') {
-    btn_span.text('Save Changes');
-    }
-    });
-@endsection
-
 @section('content')
     <div>
         <button class="btn btn-success"

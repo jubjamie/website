@@ -44,15 +44,23 @@
 </div>
 <div class="modal-footer">
     <div class="btn-group">
-        <button class="btn btn-success" data-type="submit-modal" id="modalSubmit">
-            <span class="fa fa-plus"></span>
+        <button class="btn btn-success"
+                data-action="save"
+                data-type="submit-modal"
+                data-redirect="true"
+                name="action"
+                value="save">
+            <span class="fa fa-check"></span>
             <span>Add role</span>
         </button>
         <button class="btn btn-danger"
+                data-action="delete"
                 data-type="submit-modal"
                 data-submit-confirm="Are you sure you want to delete this committee role?"
                 data-form-action="{{ route('committee.delete') }}"
-                id="modalDelete">
+                data-redirect="true"
+                name="action"
+                value="delete">
             <span class="fa fa-trash"></span>
             <span>Delete</span>
         </button>

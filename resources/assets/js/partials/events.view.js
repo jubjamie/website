@@ -1,10 +1,10 @@
 /**
  * Use pushState for the tabs
  */
-if(history.pushState) {
+if (history.pushState) {
     $('ul.nav li').on('click', function () {
         var url = $(this).children('a').attr('href');
-        if(window.location.href != url) {
+        if (window.location.href != url) {
             history.pushState({}, '', url);
         }
     });
@@ -13,22 +13,12 @@ if(history.pushState) {
 /**
  * Attach events to the relevant modal elements when it's shown.
  */
-$modal.on('show.bs.modal', function (event) {
-    var btn = $(event.relatedTarget);
-    var mode = btn.data('mode');
-    var template = btn.data('modalTemplate');
-    var form = $modal.find('form');
-    
-    if(mode == 'edit') {
-        var select = form.find('[name="user_id"]');
+$modal.onShow(function () {
+    if ($modal.mode == 'edit') {
+        var select = $modal.form().find('[name="user_id"]');
         var member = select.find('option:selected').text();
         $('<p class="form-control-static">' + member + '</p>').insertAfter(select);
         select.remove();
-        
-        if(template == 'event_crew' || template == 'event_guest' || template == 'event_time') {
-            form.find('button[name="action"][value="delete"]')
-                .data('formAction', btn.data('deleteAction'));
-        }
     }
 });
 
@@ -50,20 +40,20 @@ $('body').on('toggle:success', 'div.paperwork-list [data-editable="toggle"]', fu
     // Show / hide any links
     var parent = element.parent();
     parent.find('[data-show]').addClass('hidden');
-    if(value) {
+    if (value) {
         parent.find('[data-show="complete"]').removeClass('hidden');
     } else {
         parent.find('[data-show="incomplete"]').removeClass('hidden');
     }
-    
+
     // Update the count
     var badge = $('ul.nav').find('[title="Event Resources"]').find('span.badge');
     var count = $('div.paperwork-list').find('.fa-remove').length;
-    
-    if(count == 0) {
+
+    if (count == 0) {
         badge.remove();
     } else {
-        if(badge.length < 1) {
+        if (badge.length < 1) {
             badge = $('<span class="badge"></span>');
             $('ul.nav').find('[title="Event Resources"]').append(badge);
         }

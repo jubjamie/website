@@ -26,7 +26,7 @@ mix
     // .sass('resources/assets/sass/vendors/font-awesome/font-awesome.scss', '../resources/assets/css/vendors/font-awesome.css')
     // .copy('node_modules/lightbox2/src/css/lightbox.css', 'resources/assets/css/vendors/lightbox.css')
     .copy('node_modules/lightbox2/dist/images', 'public/images/lightbox')
-    
+
     // Combine the vendor files
     .combine([
         'resources/assets/js/vendors/jquery.js',
@@ -39,6 +39,7 @@ mix
         'node_modules/js-cookie/src/js.cookie.js',
         'node_modules/lightbox2/dist/js/lightbox.min.js',
         'node_modules/clipboard/dist/clipboard.min.js',
+        'node_modules/js-modals/dist/modal.min.js',
         'vendor/bnjns/laravel-searchtools/src/resources/assets/js/search_tools.min.js',
         'vendor/bnjns/laravel-notifications/src/resources/assets/js/notifications.min.js'
     ], 'public/js/vendors.js')
@@ -54,19 +55,27 @@ mix
         'resources/assets/css/vendors/lightbox.css',
         'vendor/bnjns/laravel-notifications/src/resources/assets/css/notifications.min.css',
     ], 'public/css/vendors.css')
-    
+
     // Process SCSS files
     .sass('resources/assets/sass/structure/current.scss', 'public/css/structure.css')
     .sass('resources/assets/sass/general/general.scss', 'public/css/general.css')
     .sass('resources/assets/sass/partials/partials.scss', 'public/css/content.css')
-    
+
     // Process JS files
+    .combine([
+        'resources/assets/js/app/init.js',
+        'resources/assets/js/app/ajax.js',
+        'resources/assets/js/app/clipboard.js',
+        'resources/assets/js/app/datepicker.js',
+        'resources/assets/js/app/form.js',
+        'resources/assets/js/app/modals.js',
+        'resources/assets/js/app/select2.js',
+    ], 'resources/assets/js/app.js')
     .combine([
         'resources/assets/js/plugins/CookieAcceptance.js',
         'resources/assets/js/plugins/DisableButtons.js',
         'resources/assets/js/plugins/EditableFields.js',
         'resources/assets/js/plugins/SimpleMDE.js',
-        'resources/assets/js/plugins/modal.js',
         'resources/assets/js/plugins/OtherInputs.js',
         'node_modules/js-tabify/dist/tabify.min.js',
         'resources/assets/js/plugins/ToggleVisibility.js',

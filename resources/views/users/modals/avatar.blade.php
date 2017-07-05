@@ -11,7 +11,12 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" data-disable="click" data-disable-text="Changing profile picture" name="action" value="change-pic">
+        <button class="btn btn-success"
+                data-disable="click"
+                data-disable-text="Changing profile picture"
+                data-redirect="true"
+                name="action"
+                value="change-pic">
             <span class="fa fa-check"></span>
             <span>Set profile picture</span>
         </button>

@@ -23,7 +23,8 @@
         <button class="btn btn-success"
                 data-type="submit-modal"
                 data-form-action="{{ route('event.email.store', ['id' => $event->id]) }}"
-                data-success-redirect="{{ route('event.view', ['id' => $event->id, 'tab' => 'emails']) }}">
+                data-redirect="true"
+                data-redirect-location="{{ route('event.view', ['id' => $event->id, 'tab' => 'emails']) }}">
             <span class="fa fa-check"></span>
             <span>Send Email</span>
         </button>

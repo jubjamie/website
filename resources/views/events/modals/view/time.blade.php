@@ -31,16 +31,21 @@
     <div class="modal-footer">
         <div class="btn-group">
             <button class="btn btn-success"
+                    data-action="save"
                     data-type="submit-modal"
-                    data-success-redirect="{{ route('event.view', ['id' => $event->id, 'tab' => 'times']) }}"
+                    data-mode="create"
+                    data-redirect="true"
+                    data-redirect-location="{{ route('event.view', ['id' => $event->id, 'tab' => 'times']) }}"
                     type="button">
                 <span class="fa fa-check"></span>
                 <span>Add Time</span>
             </button>
             <button class="btn btn-danger"
+                    data-action="delete"
                     data-type="submit-modal"
                     data-submit-confirm="Are you sure you want to delete this event time?"
-                    data-success-redirect="{{ route('event.view', ['id' => $event->id, 'tab' => 'times']) }}"
+                    data-redirect="true"
+                    data-redirect-location="{{ route('event.view', ['id' => $event->id, 'tab' => 'times']) }}"
                     name="action"
                     type="button"
                     value="delete">

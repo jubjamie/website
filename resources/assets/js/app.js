@@ -18,7 +18,7 @@ function processAjaxErrors(data) {
         code: 500,
         key: '',
         message: 'Oops, an unknown error has occurred',
-        list: false,
+        isList: false,
     };
 
     // Check for a detailed error message
@@ -38,7 +38,7 @@ function processAjaxErrors(data) {
             error.message = response_error.error;
         } else {
             error.message = response_error;
-            error.list = true;
+            error.isList = true;
         }
     }
 
@@ -85,6 +85,27 @@ $('input[data-input-type="datetimepicker"]').each(function (i, obj) {
 $('body').on('submit', 'form', function (event) {
     var form = $(event.target);
     form.append('<input type="hidden" name="TZ-OFFSET" value="' + (new Date).getTimezoneOffset() + '">');
+});
+window.$modal = new Modal('#modal');
+$modal.errorProcessor = processAjaxErrors;
+
+$modal.onShow(function() {
+    // Reload datetimepicker widget
+    $modal.find('input[data-input-type="datetimepicker"]').each(function (i, obj) {
+        var el = datetimepicker($(obj), {
+            widgetParent: $('body'),
+        });
+
+        el.on('dp.show', function () {
+            $('.bootstrap-datetimepicker-widget').offset({
+                left: el.offset().left,
+                top: el.offset().top + el.outerHeight()
+            });
+        });
+    });
+
+    // Re-trigger any visibility toggles
+    $('[data-type="toggle-visibility"]').trigger('change');
 });
 $('select[select2]').each(function () {
     $(this).select2({

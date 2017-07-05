@@ -11,9 +11,13 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button class="btn btn-success" data-type="submit-modal" type="button">
+        <button class="btn btn-success"
+                data-action="save"
+                data-type="submit-modal"
+                data-redirect="true"
+                type="button">
             <span class="fa fa-check"></span>
-            <span>Save Changes</span>
+            <span>Create Tag</span>
         </button>
     </div>
     {!! Form::close() !!}

@@ -25,7 +25,7 @@
                      data-modal-template="event_time"
                      data-modal-title="Edit Event Time"
                      data-modal-class="modal-sm"
-                     data-form-action="{{ route('event.time.update', ['id' => $event->id, 'timeId' => $time->id]) }}"
+                     data-save-action="{{ route('event.time.update', ['id' => $event->id, 'timeId' => $time->id]) }}"
                      data-delete-action="{{ route('event.time.destroy', ['id' => $event->id, 'timeId' => $time->id]) }}"
                      data-form-data="{{ json_encode($time) }}"
                      data-mode="edit"

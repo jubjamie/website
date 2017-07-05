@@ -21,11 +21,19 @@
     </div>
     <div class="modal-footer">
         <div class="btn-group">
-            <button class="btn btn-success" data-type="submit-modal" name="update" value="avatar">
+            <button class="btn btn-success"
+                    data-type="submit-modal"
+                    data-redirect="true"
+                    name="update"
+                    value="avatar">
                 <span class="fa fa-check"></span>
                 <span>Change picture</span>
             </button>
-            <button class="btn btn-danger" data-type="submit-modal" name="remove" value="avatar">
+            <button class="btn btn-danger"
+                    data-type="submit-modal"
+                    data-redirect="true"
+                    name="remove"
+                    value="avatar">
                 <span class="fa fa-remove"></span>
                 <span>Remove picture</span>
             </button>

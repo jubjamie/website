@@ -1,21 +1,17 @@
 /**
  * Attach events to the relevant modal elements when it's shown.
  */
-$modal.on('show.bs.modal', function (event) {
-    var btn = $(event.relatedTarget);
-    var template = btn.data('modalTemplate');
-    var form = $modal.find('form');
-    
-    if(template == 'export') {
-        $modal.on('change', '[type="checkbox"],[type="radio"]', function () {
+$modal.onShow(function () {
+    if($modal.templateName == 'export') {
+        $modal.form().on('change', '[type="checkbox"],[type="radio"]', function () {
             rebuildExportUrl();
         });
-    } else if(template == 'select_date') {
-        $modal.find('button').on('click', function () {
+    } else if($modal.templateName == 'select_date') {
+        $modal.buttons().on('click', function () {
             var btn = $(this);
             var base_url = $modal.find('input[name="base_url"]').val();
-            $modal.find('button').attr('disabled', true);
-            
+            $modal.disableButtons();
+
             if(btn.is('[name="action"][value="select"]')) {
                 window.location = base_url + '/' + $modal.find('select[name="year"]').val() + '/' + $modal.find('select[name="month"]').val();
             } else {
@@ -32,7 +28,7 @@ $modal.on('show.bs.modal', function (event) {
 function rebuildExportUrl() {
     var $BaseUrl = $modal.find('input[name="export_url"]').data('baseUrl');
     var $Query = {};
-    
+
     // Build the list of event types to export
     var types = [];
     $modal.find('input[name="event_types"][type="checkbox"]').each(function () {
@@ -46,13 +42,13 @@ function rebuildExportUrl() {
     if(types.length > 1) {
         $Query.types = types.join(',');
     }
-    
+
     // Build the filter
     var crewing = $modal.find('input[name="crewing"][type="radio"]:checked').val();
     if(crewing != '*') {
         $Query.crewing = crewing;
     }
-    
+
     // Build the query
     if($.isEmptyObject($Query)) {
         $modal.find('input[name="export_url"]').val($BaseUrl);
@@ -90,10 +86,10 @@ function buildDiary() {
     $('#DiaryPreferences').find('[name^="event_types"]:checked').each(function () {
         event_types.push(this.value);
     });
-    
+
     // Get the crewing filter
     var crewing = $('#DiaryPreferences').find('[name="crewing"]:checked').val();
-    
+
     // Get the events
     var events = $('.diary').find('div.event-list > div.event');
     events.hide()
@@ -108,10 +104,10 @@ function buildDiary() {
 $('#DiaryPreferences-save').on('click', function () {
     var btn = $(this);
     var text = btn.html();
-    
+
     btn.attr('disabled', true);
     btn.html('<span class="fa fa-spinner fa-spin"></span>');
-    
+
     $.ajax({
         url    : btn.data('updateUrl'),
         data   : $(this.form).serialize(),

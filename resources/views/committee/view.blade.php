@@ -6,22 +6,9 @@
 @section('header-main', 'The Committee')
 
 @section('scripts')
-    $modal.on('show.bs.modal', function(event) {
-        var btn = $(event.relatedTarget);
-        var form = $modal.find('form');
-        var submitBtn = $modal.find('#modalSubmit');
-
-        form.find('select[name=order]').find('option').removeAttr('disabled');
-        submitBtn.data('formAction', btn.data('formAction'));
-        if(btn.data('mode') == 'edit') {
-            form.find('select[name=order]').find('option[value=' + (btn.data('formData')['order'] + 1) + ']').attr('disabled', 'disabled');
-            submitBtn.children('span:first').attr('class', 'fa fa-check');
-            submitBtn.children('span:last').text('Save changes');
-            $modal.find('#modalDelete').show();
-        } else {
-            submitBtn.children('span:first').attr('class', 'fa fa-plus');
-            submitBtn.children('span:last').text('Add role');
-            $modal.find('#modalDelete').hide();
+    $modal.onShow(function(event) {
+        if($modal.mode == 'edit') {
+            $modal.find('select[name=order]').find('option[value=' + ($modal.button.data('formData')['order'] + 1) + ']').attr('disabled', 'disabled');
         }
     });
 @endsection
@@ -41,7 +28,7 @@
            data-modal-title="Add Committee Position"
            data-modal-class="modal-sm"
            data-form-action="{{ route('committee.add') }}"
-           data-mode="add"
+           data-mode="create"
            href="#">
             <span class="fa fa-plus"></span>
             <span>Add a new role</span>

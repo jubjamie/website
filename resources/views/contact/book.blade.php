@@ -5,8 +5,8 @@
 @section('header-sub', 'Book Us')
 
 @section('scripts')
-    $modal.on('click', '#btnAcceptTerms', function() {
-        $modal.modal('hide');
+    $modal.modal.on('click', '#btnAcceptTerms', function() {
+        $modal.modal.modal('hide');
         $('input[name="terms"]').attr('checked', 'checked');
     });
 @endsection

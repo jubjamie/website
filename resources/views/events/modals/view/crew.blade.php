@@ -45,16 +45,20 @@
     <div class="modal-footer">
         <div class="btn-group">
             <button class="btn btn-success"
+                    data-action="save"
                     data-type="submit-modal"
-                    data-success-redirect="{{ route('event.view', ['id' => $event->id, 'tab' => 'crew']) }}"
+                    data-redirect="true"
+                    data-redirect-location="{{ route('event.view', ['id' => $event->id, 'tab' => 'crew']) }}"
                     type="button">
                 <span class="fa fa-check"></span>
                 <span>Add Crew</span>
             </button>
             <button class="btn btn-danger"
+                    data-action="delete"
                     data-type="submit-modal"
                     data-submit-confirm="Are you sure you want to delete this crew role?"
-                    data-success-redirect="{{ route('event.view', ['id' => $event->id, 'tab' => 'crew']) }}"
+                    data-redirect="true"
+                    data-redirect-location="{{ route('event.view', ['id' => $event->id, 'tab' => 'crew']) }}"
                     name="action"
                     type="button"
                     value="delete">

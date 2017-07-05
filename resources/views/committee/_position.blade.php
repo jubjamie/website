@@ -7,9 +7,9 @@
                data-modal-template="committee_add"
                data-modal-title="Edit Committee Role"
                data-modal-class="modal-sm"
-               data-form-action="{{ route('committee.edit') }}"
+               data-save-action="{{ route('committee.edit') }}"
                data-mode="edit"
-               data-form-data="{{ json_encode(['id' => $role->id, 'name' => $role->name, 'email' => $role->email, 'description' => $role->description, 'user_id' => $role->user_id, 'order' => $role->order]) }}"
+               data-form-data="{{ json_encode($role) }}"
                title="Edit this role">
                 <span class="fa fa-pencil"></span>
             </a>
