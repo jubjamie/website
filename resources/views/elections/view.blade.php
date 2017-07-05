@@ -41,15 +41,23 @@
                 <div>
                     <div class="btn-group btn-group-sm">
                         @if($election->isVotingOpen())
-                            <a class="btn btn-success" href="http://www.bathstudent.com/elections/vote/{{ $election->bathstudent_id ?: '' }}" target="_blank">
+                            <a class="btn btn-success"
+                               href="http://www.bathstudent.com/elections/vote/{{ $election->bathstudent_id ?: '' }}"
+                               target="_blank">
                                 <span class="fa fa-check"></span>
                                 <span>Vote now</span>
                             </a>
                         @endif
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal" data-modal-template="position_details">
+                        <button class="btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#modal"
+                                data-modal-template="position_details">
                             Position Details
                         </button>
-                        <button class="btn btn-primary" data-toggle="modal" data-target="#modal" data-modal-template="election_procedure">
+                        <button class="btn btn-primary"
+                                data-toggle="modal"
+                                data-target="#modal"
+                                data-modal-template="election_procedure">
                             Election Procedure
                         </button>
                     </div>
@@ -71,11 +79,11 @@
                             @forelse($election->getNominations($index) as $nominee)
                                 <div class="row">
                                     @if($nominee->elected)
-                                        <div class="elected-status" title="Elected"><span class="fa fa-check success "></span></div>
+                                        <div class="elected-status" title="Elected"><span
+                                                    class="fa fa-check success "></span></div>
                                     @endif
                                     <div class="name">
-                                        {{ $nominee->user->name }}
-                                        {{--                                        {!! link_to_route('members.profile', $nominee->user->name, ['username' => $nominee->user->username], ['class' => 'grey', 'target' => '_blank']) !!}--}}
+                                        {!! link_to_route('member.view', $nominee->user->name, ['username' => $nominee->user->username], ['class' => 'grey', 'target' => '_blank']) !!}
                                     </div>
                                     <div class="btn-group btn-group-sm">
                                         <a class="btn btn-primary"
@@ -109,7 +117,11 @@
         <p>
             @can('create', \App\ElectionNomination::class)
                 @if($election->isNominationsOpen())
-                    <button class="btn btn-success" data-toggle="modal" data-target="#modal" data-modal-class="modal-sm" data-modal-template="nominate">
+                    <button class="btn btn-success"
+                            data-toggle="modal"
+                            data-target="#modal"
+                            data-modal-class="modal-sm"
+                            data-modal-template="nominate">
                         <span class="fa fa-user-plus"></span>
                         <span>Add Nominee</span>
                     </button>
@@ -117,10 +129,14 @@
             @endcan
             @can('update', $election)
                 @if($election->hasVotingClosed())
-                        <button class="btn btn-success" data-toggle="modal" data-target="#modal" data-modal-class="modal-md" data-modal-template="elect">
-                            <span class="fa fa-group"></span>
-                            <span>Set committee</span>
-                        </button>
+                    <button class="btn btn-success"
+                            data-toggle="modal"
+                            data-target="#modal"
+                            data-modal-class="modal-md"
+                            data-modal-template="elect">
+                        <span class="fa fa-group"></span>
+                        <span>Set committee</span>
+                    </button>
                 @endif
             @endcan
         </p>
