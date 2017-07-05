@@ -1,0 +1,191 @@
+@import "../vars";
+@import "../mixins";
+
+table.level-requirements {
+	tr td {
+		border-color: #333;
+		padding: 1em 0.5em;
+		vertical-align: text-top;
+
+		&:first-child {
+			text-align: center;
+			width: 6em;
+		}
+	}
+}
+table {
+	tr {
+		th, td {
+			&.skill-level {
+				text-align: center;
+				width: 5em;
+
+				&.long {
+					width: 7em;
+				}
+			}
+			&.skill-proposal {
+				text-align: center;
+				width: 3em;
+			}
+		}
+	}
+}
+
+&[page-id="list"] {
+	div.tab-vertical {
+		div.tab-links {
+			width: 18em;
+			
+			ul.category-list {
+				font-size: 14px;
+				
+				li {
+					position: relative;
+					
+					.btn-group {
+						@include transition();
+						opacity: 0;
+						position: absolute;
+						top: 0.4em;
+						right: 0.4em;
+					}
+					&:hover .btn-group {
+						opacity: 1;
+					}
+				}
+			}
+		}
+		div.tab-content {
+			margin-bottom: 1em;
+			
+			div.tab-pane {
+				table {
+					margin: 0;
+					tbody {
+						tr {
+							td {
+								vertical-align: text-top;
+								
+								&.skill-buttons {
+									padding: 0 !important;
+									text-align: center;
+									width: 3.5em;
+								}
+							}
+						}
+					}
+					&.user-skills tr:not(.has-skill) td a {
+						color: #777;
+					}
+				}
+			}
+			& > div.btn-group {
+				display: block;
+			}
+		}
+	}
+}
+#listSkills {
+}
+#viewSkill {
+	margin: 0 auto;
+	@media (min-width: 768px) {
+		width: 750px;
+	}
+
+	h2 {
+		color: $btsorange;
+		font-size: 28px;
+		margin-bottom: 0;
+		text-align: left;
+	}
+	h3 {
+		color: $btsyellow;
+		font-size: 22px;
+		text-align: left;
+	}
+	h4.category {
+		font-size: 20px;
+		font-style: italic;
+		margin-top: 0.5em;
+	}
+	.description {
+		color: #AAA;
+		font-size: 18px;
+		margin-top: 1em;
+	}
+	div.table.member-list {
+		$border_colour: #333;
+
+		div.row {
+			& > div {
+				padding: 0.75em 1em;
+				width: 33.333%;
+
+				&:not(:last-child) {
+					border-right: 2px solid $border_colour;
+				}
+				a {
+					color: inherit;
+
+					&:hover {
+						color: $btsyellow;
+					}
+					&:focus {
+						outline-color: #999;
+					}
+				}
+			}
+		}
+		& > .thead {
+			& > div.row {
+				& > div {
+					border-bottom: 2px solid $border_colour;
+					color: inherit;
+					text-align: center;
+				}
+			}
+		}
+	}
+}
+#listProposals {
+	table {
+		tr {
+			th, td {
+				&.proposal-status {
+					font-size: 20px;
+					text-align: center;
+					width: 2em;
+				}
+				&.proposal-user, &.awarded-user {
+					width: 10em;
+				}
+			}
+		}
+	}
+}
+#viewProposal {
+	form {
+		width: 600px;
+
+		.skill-proficiency {
+			font-size: 18px;
+			margin-top: -2px;
+		}
+	}
+}
+#viewSkillsLog {
+	table {
+		tr {
+			td, th {
+				&.skill-date {
+					width: 7em;
+				}
+				&.skill-buttons {
+					width: 3.5em;
+				}
+			}
+		}
+	}
+}
