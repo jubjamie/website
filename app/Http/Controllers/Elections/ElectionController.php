@@ -6,12 +6,16 @@ use App\CommitteeRole;
 use App\Election;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ElectionRequest;
+use App\Traits\CorrectsTimezone;
 use bnjns\FlashNotifications\Facades\Notifications;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
 class ElectionController extends Controller
 {
+    use CorrectsTimezone;
+    
     /**
      * View the list of elections.
      * @return $this
@@ -71,7 +75,13 @@ class ElectionController extends Controller
         $positions = $this->determineElectionPositions($request);
         
         // Create the election
-        $request->merge(['positions' => $positions]);
+        $request->merge([
+            'positions'         => $positions,
+            'nominations_start' => $this->correctTzForStorage(Carbon::createFromFormat('Y-m-d H:i:s', $request->get('nominations_start')), $request),
+            'nominations_end'   => $this->correctTzForStorage(Carbon::createFromFormat('Y-m-d H:i:s', $request->get('nominations_end')), $request),
+            'voting_start'      => $this->correctTzForStorage(Carbon::createFromFormat('Y-m-d H:i:s', $request->get('voting_start')), $request),
+            'voting_end'        => $this->correctTzForStorage(Carbon::createFromFormat('Y-m-d H:i:s', $request->get('voting_end')), $request),
+        ]);
         $election = Election::create(clean($request->all()));
         File::makeDirectory($election->getManifestoPath(), 0775, true);
         Notifications::success('Election created');

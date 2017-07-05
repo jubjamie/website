@@ -2,11 +2,14 @@
 
 namespace App;
 
+use App\Traits\CorrectsTimezone;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Election extends Model
 {
+    use CorrectsTimezone;
+    
     /**
      * Define the types of elections.
      * @var array
@@ -15,13 +18,13 @@ class Election extends Model
         1 => 'Full',
         2 => 'By-Election',
     ];
-    
+
     /**
      * Define the database table name.
      * @var string
      */
     protected $table = 'elections';
-    
+
     /**
      * Define the attributes that should be Carbon instances.
      * @var array
@@ -33,7 +36,7 @@ class Election extends Model
         'voting_end',
         'hustings_time',
     ];
-    
+
     /**
      * Define the attributes that are mass-assignable.
      * @var array
@@ -51,6 +54,18 @@ class Election extends Model
     ];
     
     /**
+     * Define the attributes to correct the timezone for.
+     * @var array
+     */
+    protected $correct_tz = [
+        'nominations_start',
+        'nominations_end',
+        'voting_start',
+        'voting_end',
+        'hustings_time',
+    ];
+
+    /**
      * Define the relationship with the election's nominations.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
@@ -58,7 +73,7 @@ class Election extends Model
     {
         return $this->hasMany('App\ElectionNomination', 'election_id', 'id');
     }
-    
+
     /**
      * Create a string to use as the election's title.
      * @return string
@@ -67,7 +82,7 @@ class Election extends Model
     {
         return ($this->voting_end->format('Y') . ' ' . ($this->isFull() ? 'Election' : 'By-Election'));
     }
-    
+
     /**
      * Set the list of positions for the election,
      * allowing the parameter to be an array
@@ -80,7 +95,7 @@ class Election extends Model
         }
         $this->attributes['positions'] = $positions;
     }
-    
+
     /**
      * When getting the positions, convert to an array
      * @return array
@@ -89,7 +104,7 @@ class Election extends Model
     {
         return json_decode($this->attributes['positions'], true);
     }
-    
+
     /**
      * Get the base path for all manifestos for this election.
      * @return string
@@ -98,7 +113,7 @@ class Election extends Model
     {
         return base_path('resources/elections/' . $this->id);
     }
-    
+
     /**
      * Get the string name of a position
      * @param $index
@@ -107,10 +122,10 @@ class Election extends Model
     public function getPosition($index)
     {
         $positions = $this->positions;
-        
+
         return isset($positions[$index]) ? $positions[$index] : null;
     }
-    
+
     /**
      * Get a slugged string of an election position
      * @param $index
@@ -119,10 +134,10 @@ class Election extends Model
     public function getPositionSlug($index)
     {
         $position = $this->getPosition($index);
-        
+
         return $position ? str_slug(strtolower($position)) : null;
     }
-    
+
     /**
      * Get all of the nominations for a specified position.
      * @param $positionIndex
@@ -138,7 +153,7 @@ class Election extends Model
                     ->orderBy('users.forename', 'ASC')
                     ->get();
     }
-    
+
     /**
      * Test if this election is a full election.
      * @return bool
@@ -147,7 +162,7 @@ class Election extends Model
     {
         return $this->type == 1;
     }
-    
+
     /**
      * Test if nominations are currently open.
      * @return bool
@@ -155,11 +170,11 @@ class Election extends Model
     public function isNominationsOpen()
     {
         $now = Carbon::now();
-        
+
         return $now->gte($this->nominations_start)
                && $now->lt($this->voting_start);
     }
-    
+
     /**
      * Test if voting is currently open.
      * @return bool
@@ -167,11 +182,11 @@ class Election extends Model
     public function isVotingOpen()
     {
         $now = Carbon::now();
-        
+
         return $now->gte($this->voting_start)
                && $now->lte($this->voting_end);
     }
-    
+
     /**
      * Test if the voting has been closed.
      * This is different to negating isVotingOpen()
@@ -182,7 +197,7 @@ class Election extends Model
     public function hasVotingClosed()
     {
         $now = Carbon::now();
-        
+
         return $now->gt($this->voting_end);
     }
 }
